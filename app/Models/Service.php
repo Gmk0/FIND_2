@@ -27,6 +27,7 @@ class Service extends Model
         'premium_support',
         'premium_revision',
         'premium_delivery_time',
+        'sub_categorie',
         'extra_price',
         'extra_support',
         'extra_revision',
@@ -54,20 +55,13 @@ class Service extends Model
         'extra_price' => 'decimal:2',
         'view_count' => 'integer',
         'like' => 'integer',
+        'files'=>'array',
+        'Sub_categorie'=>'array',
         'freelance_id' => 'integer',
         'category_id' => 'integer',
     ];
 
-    public function freelance(): BelongsTo
-    {
-        return $this->belongsTo(Freelance::class);
-    }
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
-
+    
     public function favoris(): BelongsTo
     {
         return $this->belongsTo(Favoris::class);

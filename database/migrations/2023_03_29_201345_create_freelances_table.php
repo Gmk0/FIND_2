@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::disableForeignKeyConstraints();
-
         Schema::create('freelances', function (Blueprint $table) {
             $table->id();
             $table->string('nom');

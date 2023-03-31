@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Home;
+use App\Http\Controllers\ServiceController;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +16,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::controller(home::class)->group(function(){
+    Route::get('/', 'home')->name('home');
+   // Route::get('/category', 'category')->name('category');
+    //Route::get('/category/{category}', 'categoryRresult')->where('category', '(.*)')->name('category_result');
+
+     Route::view('/categorys', 'user.serviceView')->name('categoryOne');
+    
+   
 });
+
+Route::controller(ServiceController::class)->group(function(){
+
+       Route::get('/services', 'services')->name('services');
+       Route::get('/categories', 'categories')->name('categories');
+       
+});
+
+ 
+
+
 
 Route::middleware([
     'auth:sanctum',
@@ -25,4 +47,14 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    //Services
+   
+
+
+
 });
+
+ Route::get('/categories/{category}/{id}', App\Http\Livewire\User\Services\ServicesViewOne::class)->where('category', '(.*)')->name('ServicesViewOne');     
+
+Route::get('/categories/{category}', App\Http\Livewire\User\Services\ServiceByCategory::class)->where('category', '(.*)')->name('categoryByName');     

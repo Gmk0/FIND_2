@@ -59,16 +59,7 @@ class Freelance extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
+    
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);

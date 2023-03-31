@@ -1,3 +1,70 @@
+
+@import 'aos/dist/aos.css'; 
+
+@import '@splidejs/splide/css';
+
+
+
+
+
+@import '../../vendor/filament/forms/dist/module.esm.css';
+
+@import '../../vendor/filament/forms/dist/module.esm.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+@layer base {
+    :root {
+        --color-text-base: 255, 255, 255;
+        --color-text-muted: 199, 210, 254;
+        --color-text-inverted: 241, 127, 52;
+        --color-fill: 244, 117, 33;
+        --color-button-accent: 255, 255, 255;
+        --color-button-accent-hover: 238, 242, 255;
+        --color-button-muted: var(--color-fill);
+    }
+}
+
+.tab-content {
+    max-height: 0;
+    -webkit-transition: max-height 0.35s;
+    -o-transition: max-height 0.35s;
+    transition: max-height 0.35s;
+}
+
+/* :checked - resize to full height */
+.tab input:checked~.tab-content {
+    max-height: 100vh;
+}
+
+/* Label formatting when open */
+.tab input:checked+label {
+    border-left-width: 1px;
+    border-color: white;
+}
+
+/* Icon */
+.tab .label .icon {
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    transform-origin: center center;
+}
+
+/* Open Multiple Icon Formatting - Open */
+.tab input[type="checkbox"]:checked+.label .icon {
+    transform: rotate(180deg);
+}
+
+/* List Transition */
+ul a {
+    transition: color 0.5s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}

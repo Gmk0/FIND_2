@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId('receiver')->constrained('users', 'receiver');
             $table->foreignId('conversation_id')->constrained();
             $table->text('body');
-                  $table->timestamp('last_time_message');
             $table->enum('is_read', ["0","1"])->default('0');
             $table->string('type')->nullable();
             $table->timestamps();

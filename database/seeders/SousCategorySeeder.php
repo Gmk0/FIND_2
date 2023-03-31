@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\SousCategory;
+use App\Models\SubCategory;
 use Illuminate\Database\Seeder;
 
 class SousCategorySeeder extends Seeder
@@ -12,6 +12,6 @@ class SousCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        SousCategory::factory()->count(5)->create();
+        SubCategory::factory()->count(25)->create();
     }
 }

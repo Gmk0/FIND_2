@@ -29,6 +29,7 @@ class SubCategory extends Model
     protected $casts = [
         'id' => 'integer',
         'category_id' => 'integer',
+        
     ];
 
     public function category(): BelongsTo
@@ -36,8 +37,5 @@ class SubCategory extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
+  
 }

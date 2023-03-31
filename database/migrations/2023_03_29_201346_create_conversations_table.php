@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('freelancer_id')->constrained();
             $table->foreignId('user_id')->constrained();
-                  $table->timestamp('last_time_message');
+            $table->timestamp('last_time_message');
 
             $table->enum('status', ["pending","finished"]);
             $table->timestamps();

@@ -12,6 +12,6 @@ class FreelanceSeeder extends Seeder
      */
     public function run(): void
     {
-        Freelance::factory()->count(5)->create();
+        Freelance::factory()->count(25)->create();
     }
 }
