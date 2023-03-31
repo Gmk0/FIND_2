@@ -1,0 +1,50 @@
+created:
+    - database/factories/CategoryFactory.php
+    - database/factories/SubCategoryFactory.php
+    - database/factories/FreelanceFactory.php
+    - database/factories/ConversationFactory.php
+    - database/factories/MessageFactory.php
+    - database/factories/ServiceFactory.php
+    - database/factories/OrderFactory.php
+    - database/factories/TransactionFactory.php
+    - database/factories/ProjectFactory.php
+    - database/factories/ProjectResponseFactory.php
+    - database/factories/MessageProjectFactory.php
+    - database/migrations/2023_03_29_201343_create_categories_table.php
+    - database/migrations/2023_03_29_201344_create_sub_categories_table.php
+    - database/migrations/2023_03_29_201345_create_freelances_table.php
+    - database/migrations/2023_03_29_201346_create_conversations_table.php
+    - database/migrations/2023_03_29_201347_create_messages_table.php
+    - database/migrations/2023_03_29_201348_create_services_table.php
+    - database/migrations/2023_03_29_201349_create_orders_table.php
+    - database/migrations/2023_03_29_201350_create_transactions_table.php
+    - database/migrations/2023_03_29_201351_create_projects_table.php
+    - database/migrations/2023_03_29_201352_create_project_responses_table.php
+    - database/migrations/2023_03_29_201353_create_message_projects_table.php
+    - app/Models/Category.php
+    - app/Models/SubCategory.php
+    - app/Models/Freelance.php
+    - app/Models/Conversation.php
+    - app/Models/Message.php
+    - app/Models/Service.php
+    - app/Models/Order.php
+    - app/Models/Transaction.php
+    - app/Models/Project.php
+    - app/Models/ProjectResponse.php
+    - app/Models/MessageProject.php
+    - database/seeders/FreelanceSeeder.php
+    - database/seeders/ServiceSeeder.php
+    - database/seeders/CategorySeeder.php
+    - database/seeders/SousCategorySeeder.php
+models:
+    Category: { name: string, description: 'string nullable', illustration: 'string nullable', relationships: { HasMany: 'Freelance,SubCategory' } }
+    SubCategory: { name: string, category_id: 'id foreign', illustration: 'string nullable', relationships: { belongsTo: Category } }
+    Freelance: { nom: string, prenom: string, identifiant: 'string:15', description: text, langue: 'json nullable', diplome: 'json nullable', certificat: 'json nullable', site: 'string nullable', competences: 'json nullable', taux_journalier: 'decimal:8,2 nullable', comptes: 'json nullable', Sub_categorie: 'json nullable', localisation: 'json nullable', user_id: 'id foreign', category_id: 'id foreign', level: 'enum:basic,premium,extra', relationships: { BelongsTo: 'User,Category', HasMany: 'Service,Conversation,Message' } }
+    Conversation: { freelancer_id: 'id foreign', user_id: 'id foreign', status: 'enum:pending,finished', relationships: { belongsTo: 'User,Freelance', HasMany: Message } }
+    Message: { sender_id: 'id foreign:users', receiver: 'id foreign:users', conversation_id: 'id foreign', body: text, is_read: 'enum:0,1 default:0', type: 'string nullable', relationships: { belongsTo: 'User ,Freelance,Conversation' } }
+    Service: { title: string, description: text, basic_price: 'decimal:8,2', basic_support: string, basic_revision: integer, basic_delivery_time: integer, premium_price: 'decimal:8,2 nullable', premium_support: 'string nullable', premium_revision: 'integer nullable', premium_delivery_time: 'integer nullable', extra_price: 'decimal:8,2 nullable', extra_support: 'string nullable', extra_revision: 'integer nullable', extra_delivery_time: 'integer nullable', samples: 'string:500 nullable', files: 'string nullable', format: 'string nullable', video_url: 'string nullable', view_count: 'bigInteger default:0', like: 'bigInteger default:0', is_publish: 'enum:0,1 default:0', freelance_id: 'id foreign', category_id: 'id foreign', relationships: { BelongsTo: 'Freelance,Category,Favoris', HasMany: Order } }
+    Order: { user_id: 'id foreign', service_id: 'id foreign', status: 'enum:pending,completed,rejeted', total_amount: 'decimal:8,2', relationships: { hasOne: Transaction, BelongsTo: 'User,Service' } }
+    Transaction: { user_id: 'id foreign', order_id: 'id foreign', amount: 'decimal:8,2', payment_method: string, payment_token: 'string:40 nullable', status: 'enum:pending,successful,failed', relationships: { BelongsTo: 'Order,User' } }
+    Project: { title: string, user_id: 'id foreign', category_id: 'id foreign', sub_category: 'json nullale', description: 'text nullable', files: 'json nullable', bid_amount: 'decimal:8,2', delivery_time: 'integer nullable', status: 'enum:active,inactive,completed default:active', relationships: { BelongsTo: 'User,Category', HasMany: 'ProjectResponse,ConversationProject' } }
+    ProjectResponse: { freelance_id: 'id foreign', project_id: 'id foreign', content: text, bid_amount: 'decimal:8,2', status: 'enum:pending,approved,rejected default:pending', relationships: { BelongsTo: 'project,Freelance', Hasmany: MessageForProject } }
+    MessageProject: { sender_id: 'id foreign:users', receiver_id: 'id foreign:users', projectResponse_id: 'id foreign', body: text, is_read: 'enum:1,0 default:0', relationships: { BelongsTo: 'ProjectResponse,User,freelance' } }
