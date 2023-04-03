@@ -23,9 +23,15 @@ function data() {
             this.dark = !this.dark
             setThemeToLocalStorage(this.dark)
         },
+        notificationActive: false,
         isSideMenuOpen: false,
+
         toggleSideMenu() {
             this.isSideMenuOpen = !this.isSideMenuOpen
+        },
+        isSearch: false,
+        toggleSearch() {
+            this.isSearch = !this.isSearch
         },
         closeSideMenu() {
             this.isSideMenuOpen = false

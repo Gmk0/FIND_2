@@ -29,6 +29,12 @@
     }
 }
 
+
+.dark .text-gray-800{
+
+    --tw-text-opacity: 1;
+        color: rgb(243 244 246 / var(--tw-text-opacity));
+}
 .tab-content {
     max-height: 0;
     -webkit-transition: max-height 0.35s;

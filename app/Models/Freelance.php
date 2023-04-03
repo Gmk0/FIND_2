@@ -35,6 +35,13 @@ class Freelance extends Model
         'level',
     ];
 
+     public static function boot(){
+    parent::boot();
+    static::creating(function ($model) {
+        $model->user_id=auth()->user()->id;
+    });
+        }
+
     /**
      * The attributes that should be cast to native types.
      *

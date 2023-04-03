@@ -361,6 +361,94 @@
 
 </section>
 
+<section x-show="isLoading" x-cloak id="confiance" class="bg-white md:min-h-screen">
+    <div class="px-4 py-4 mx-auto sm:mx-2 max-w-7xl md:px-6">
+        <div class="container text-gray-600 dark:text-gray-300 ">
+            <div class="mb-10 text-center">
+                <span class="font-medium text-amber-600">{{__('Comentaire')}}</span>
+                <h1 class="text-2xl font-bold text-slate-700 sm:text-3xl">Ils avaient confiance en nous</h1>
+
+            </div>
+            <div data-aos="fade-in" data-aos-duration="800" class="m-4 swiper mySwiper">
+
+                <div class="pb-8 sm:pb-4 swiper-wrapper">
+
+
+                    <div class="swiper-slide !bg-transparent md:px-0">
+                        <div
+                            class="p-3 mx-auto space-y-6 text-center bg-gray-100 border rounded-lg dark:border-gray-100 dark:bg-gray-800 lg:w-10/12 xl:w-8/12">
+                            <img class="mx-auto !h-16 !w-16 rounded-full" src="images/avatars/first_user.webp"
+                                alt="user avatar" height="220" width="220" loading="lazy" />
+                            <p class="font-mono text-lg font-semibold leading-none dark:text-gray-100 ">
+                                <span class="font-serif text-md">"</span> Nous Avons utilisé FIND pour notre SEO, notre
+                                logo, Notre
+                                site
+                                web et son Contenu, ainsi que pour nos vidéos Quasiment
+                                pour tout! c'était comme travailler avec quelqu'un qui se trouve a cote de vous et non a
+                                l'autre bout
+                                du
+                                monde. <span class="font-serif">"</span>
+                            </p>
+                            <div>
+                                <h6 class="text-lg font-semibold leading-none">John Doe</h6>
+                                <span class="text-xs text-gray-500">Product Designer</span>
+                            </div>
+                            <img class="mx-auto !w-28" src="images/clients/client-8.png" alt="company logo" height="400"
+                                width="142" loading="lazy" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide !bg-transparent">
+                        <div
+                            class="p-3 mx-auto space-y-6 text-center bg-gray-100 border dark:border-gray-100 dark:bg-gray-800 rounded-lg lg:w-[500px] xl:w-8/12">
+                            <img class="mx-auto !h-16 !w-16 rounded-full" src="images/avatars/second_user.webp"
+                                alt="user avatar" height="220" width="220" loading="lazy" />
+                            <p class="font-mono text-lg font-semibold leading-none dark:text-gray-100">
+                                <span class="font-serfi">"</span> Si Vous voulez créer un business de grande envergure,
+                                vous aurez
+                                besoin
+                                d'aide. Et c'est ce que FIND fait. <span class="font-serif">"</span>
+                            </p>
+                            <div>
+                                <h6 class="text-lg font-semibold leading-none">Georges Mubemba</h6>
+                                <span class="text-xs text-gray-500">Développeur</span>
+                            </div>
+                            <img class="mx-auto !w-28" src="images/clients/client-8.png" alt="company logo" height="400"
+                                width="142" loading="lazy" />
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide !bg-transparent">
+                        <div
+                            class="p-3 mx-auto space-y-6 text-center bg-gray-100 border rounded-lg dark:border-gray-100 dark:bg-gray-800 lg:w-10/12 xl:w-8/12">
+                            <img class="mx-auto !h-16 !w-16 rounded-full" src="images/avatars/third_user.webp"
+                                alt="user avatar" height="220" width="220" loading="lazy" />
+                            <p class="font-mono text-lg font-semibold leading-none dark:text-gray-100">
+                                <span class="font-serif">"</span> Nous avons utilise FIND pour le développement web de
+                                notre Site, la
+                                conception graphique et le développement web
+                                Backend. Travailler Avec FIND Facilite mon travail tous les jours un peu plus <span
+                                    class="font-serif">"</span>
+                            </p>
+                            <div>
+                                <h6 class="text-lg font-semibold leading-none">John Doe</h6>
+                                <span class="text-xs text-gray-500">Product Designer</span>
+                            </div>
+                            <img class="mx-auto !w-28" src="images/clients/client-4.png" alt="company logo" height="400"
+                                width="142" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="swiper-pagination"></div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
 <section x-show="isLoading" x-cloak id="getStarted" class="min-h-screen bg-gray-800">
 
 

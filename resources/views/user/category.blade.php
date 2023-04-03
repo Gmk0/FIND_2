@@ -11,7 +11,7 @@
 
 
     <div class="grid grid-cols-2 gap-4 px-6 md:gap-6 md:grid-cols-4 xl:gap-8">
-        <a href="{{route('category_result',['programation'])}}"
+        <a href="{{route('categoryByName',['programation'])}}"
             class="flex flex-col items-center px-2 py-4 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
             <img src="/images/services/develloper.png" class="w-20 h-20 rounded-md" alt="">
             <h4

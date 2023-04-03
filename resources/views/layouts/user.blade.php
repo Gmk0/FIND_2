@@ -33,12 +33,14 @@
 <body class="flex flex-col justify-between overflow-x-hidden bg-gray-100 custom-scrollbar dark:bg-gray-900"
     x-data="{navOpen: false,notificationActive: false, isLoading:true, scrolledFromTop: false}" :class="{
             'overflow-hidden': navOpen,
-            'overflow-scroll': !navOpen,
-            'overflow-hidden': notificationActive,
-            'overflow-scroll': !notificationActive,
+            'overflow-scroll': !navOpen
+           
         }">
 
+
+
     @livewire('user.navigation.navigation')
+
 
 
 
@@ -61,6 +63,7 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="/js/intlTelInput.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

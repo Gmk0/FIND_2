@@ -27,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone'
     ];
 
     /**
@@ -58,4 +59,63 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function freelance()
+    {
+        return $this->hasOne(Freelance::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function conversationProjects()
+    {
+        return $this->hasMany(ConversationProject::class);
+    }
+
+    public function messageProjects()
+    {
+        return $this->hasMany(MessageProject::class);
+    }
+
+   
+
+     public function favorites()
+    {
+        return $this->belongsToMany(Freelance::class, 'favorites')->withTimestamps();
+    } 
+    public function receivers()
+    {
+        return $this->hasMany(Message::class,'receiver_id');
+    }
+     public function senders()
+    {
+        return $this->hasMany(Message::class,'sender_id');
+    }
+    public function CommentsService(){
+        return $this->hasOne(CommentsService::class);
+    }
+
+    public function conversations()
+    {
+    return $this->hasMany(conversation::class);
+}
+        public function notifcations()
+    {
+    return $this->hasMany(Notification::class);
+}
+
+
 }
