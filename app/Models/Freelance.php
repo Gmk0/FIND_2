@@ -20,6 +20,7 @@ class Freelance extends Model
         'nom',
         'prenom',
         'identifiant',
+       // 'experience',
         'description',
         'langue',
         'diplome',

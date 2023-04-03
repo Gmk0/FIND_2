@@ -24,10 +24,10 @@ class FreelanceExist
          // Récupérez l'utilisateur actuellement authentifié
         $user = Auth::user();
 
-          if ($user->freelance()->exists()) {
-            return redirect();
+            if ($user->freelance()->exists()) {
+            return redirect()->route('checkout');
         }
-       
         return $next($request);
+     
     }
 }

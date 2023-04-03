@@ -13,7 +13,8 @@
                 <div class="flex-shrink-0">
                     @if (!empty(Auth::user()->profile_photo_path))
                     <img class="w-12 h-12 rounded-full"
-                        src="{{Storage::disk('s3')->url('profiles-photos/'.Auth::user()->profile_photo_path) }}" alt="">
+                        src="{{Storage::disk('local')->url('profiles-photos/'.Auth::user()->profile_photo_path) }}"
+                        alt="">
                     @else
                     <img class="w-16 h-16 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="">
                     @endif

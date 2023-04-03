@@ -3,7 +3,7 @@
     <div class="w-full md:w-3/4">
         <div class="relative">
             <x-input wire:model.debounce.500ms="search" class="w-3/4 py-3 rounded-full focus:border-amber-600"
-                placeholder="Serach">
+                type="text" autocomplete="text" placeholder="Serach">
                 <x-slot name="append">
                     <div class="absolute inset-y-0 right-0 flex items-center p-0.5">
                         <x-button class="h-full rounded-r-md" icon="search" amber squared />

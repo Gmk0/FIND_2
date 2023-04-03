@@ -22,15 +22,16 @@ class ProjectFactory extends Factory
      */
     public function definition(): array
     {
+        $category=Category::inRandomOrder()->first()->id;
         return [
             'title' => $this->faker->sentence(4),
-            'user_id' => User::factory(),
-            'category_id' => Category::factory(),
-            'sub_category' => '{}',
+            'user_id' => 101,
+            'category_id' => $category,
             'description' => $this->faker->text,
             'files' => '{}',
             'bid_amount' => $this->faker->randomFloat(2, 0, 999999.99),
-            'delivery_time' => $this->faker->numberBetween(-10000, 10000),
+            'begin_project' =>$this->faker->date(),
+            'end_project' => $this->faker->date(),
             'status' => $this->faker->randomElement(["active","inactive","completed"]),
         ];
     }

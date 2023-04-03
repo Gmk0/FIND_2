@@ -1,45 +1,51 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends("layouts.userProfile")
 
-    <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                @livewire('profile.update-profile-information-form')
 
-                <x-section-border />
-            @endif
+@section('content')
 
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.update-password-form')
-                </div>
+<div class="min-h-screen p-8 ">
 
-                <x-section-border />
-            @endif
 
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.two-factor-authentication-form')
-                </div>
 
-                <x-section-border />
-            @endif
 
-            <div class="mt-10 sm:mt-0">
-                @livewire('profile.logout-other-browser-sessions-form')
-            </div>
+    <div class="container mx-aut px-6 lg:px-8">
+        <h2 class="text-xl text-indigo-600 mb-8 font-semibold tracking-wide uppercase">Profile</h2>
+        @if (Auth::user()->freelance()->exists())
+        <div class="mb-4">
+            <x-action-section>
+                <x-slot name="title">
+                    {{ __('Tableau Freelancer') }}
+                </x-slot>
 
-            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                <x-section-border />
+                <x-slot name="description">
+                    {{ __("Accedez a la partie Freelancer.") }}
+                </x-slot>
 
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.delete-user-form')
-                </div>
-            @endif
+                <x-slot name="content">
+
+                    <div class="col-span-6 sm:col-span-4">
+                        <x-button href="{{route('freelance.dashboard')}}" label=" Acceder Au Tableau Freelancer" />
+                    </div>
+
+                </x-slot>
+            </x-action-section>
         </div>
+        @endif
+        @if (Laravel\Fortify\Features::canUpdateProfileInformation())
+        @livewire('profile.update-profile-information-form')
+
+        <x-section-border />
+        @endif
+
+
+
+
+
     </div>
-</x-app-layout>
+
+
+
+
+</div>
+
+@endsection

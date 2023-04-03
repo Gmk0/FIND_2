@@ -21,6 +21,7 @@ return new class extends Migration
             $table->json('langue')->nullable();
             $table->json('diplome')->nullable();
             $table->json('certificat')->nullable();
+           // $table->string('experience')->nullable();
             $table->string('site')->nullable();
             $table->json('competences')->nullable();
             $table->decimal('taux_journalier', 8, 2)->nullable();

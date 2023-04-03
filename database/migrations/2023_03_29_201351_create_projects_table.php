@@ -18,11 +18,12 @@ return new class extends Migration
             $table->string('title');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->constrained();
-            $table->json('sub_category');
+          
             $table->text('description')->nullable();
             $table->json('files')->nullable();
             $table->decimal('bid_amount', 8, 2);
-            $table->integer('delivery_time')->nullable();
+            $table->integer('begin_project')->nullable();
+               $table->integer('end_project')->nullable();
             $table->enum('status', ["active","inactive","completed"])->default('active');
             $table->timestamps();
         });

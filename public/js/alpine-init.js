@@ -25,6 +25,10 @@ function data() {
         },
         notificationActive: false,
         isSideMenuOpen: false,
+        isAside: true,
+        toggleAside() {
+            this.isAside = !this.isAside
+        },
 
         toggleSideMenu() {
             this.isSideMenuOpen = !this.isSideMenuOpen

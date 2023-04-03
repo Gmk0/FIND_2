@@ -6,7 +6,7 @@
             class="flex text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300">
             @if (!empty(Auth::user()->profile_photo_path))
             <img class="w-8 h-8 rounded-full"
-                src="{{Storage::disk('s3')->url('profiles-photos/'.Auth::user()->profile_photo_path) }}" alt="">
+                src="{{Storage::disk('local')->url('profiles-photos/'.Auth::user()->profile_photo_path) }}" alt="">
             @else
             <img class="w-8 h-8 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="">
             @endif
@@ -35,7 +35,7 @@
             {{ __('Manage Account') }}
         </div>
 
-        <x-dropdown-link href="{{ url('/profile.show') }}">
+        <x-dropdown-link href="{{ route('profile.show') }}">
             <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
             <span class="ml-2">{{__('Profile')}}</span>
         </x-dropdown-link>

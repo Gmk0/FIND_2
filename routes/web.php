@@ -60,6 +60,26 @@ Route::middleware([
     Route::get('/registration/freelance',\App\Http\Livewire\User\Freelance\RegistrationFreelance::class)->name('freelancer.register')->middleware('freelance_exist');
 
 
+    //projet
+
+    Route::get('/user/create_project',App\Http\Livewire\User\Projet\CreateProject::class)->name('createProject');
+    Route::get('/user/list_project',App\Http\Livewire\User\Projet\ListProject::class)->name('listProjet');
+   Route::get('/user/list_project/{id}', App\Http\Livewire\User\Projet\PropositionProjet::class)->name('PropostionProjet');
+    Route::view('/user/securite','user.profile.securite')->name('securiteUser');
+
+    //transation
+    Route::get('/user/transaction',App\Http\Livewire\User\Transaction\TransactionUser::class)->name('transactionUser');
+
+    //commande
+    Route::get('/user/commandes',App\Http\Livewire\User\Commande\CommandeUser::class)->name('commandeUser');
+
+    //paiement
+     Route::get('/user/paiement',App\Http\Livewire\User\Paiement\PaiementUser::class)->name('paiementUser');
+
+      //favoris 
+
+     Route::get('/user/favoris',App\Http\Livewire\User\Favoris\FavorisService::class)->name('favorisUser');
+
 });
 
 

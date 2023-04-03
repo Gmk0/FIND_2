@@ -35,6 +35,19 @@
     --tw-text-opacity: 1;
         color: rgb(243 244 246 / var(--tw-text-opacity));
 }
+.dark .bg-white{
+    --tw-bg-opacity: 1;
+        background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+.dark .text-dark {
+
+    --tw-text-opacity: 1;
+    color: rgb(243 244 246 / var(--tw-text-opacity));
+}
+.dark .text-darker{
+    --tw-text-opacity: 1;
+        color: rgb(243 244 246 / var(--tw-text-opacity));
+}
 .tab-content {
     max-height: 0;
     -webkit-transition: max-height 0.35s;

@@ -333,10 +333,11 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
                 'identifiant' => $this->identifiant(),
                 'description' => $this->freelancer['description'],
                 'langue' =>$this->selectedLanguages,
+                
                 'diplome' => $this->selectedDiplome,
                 'certificat' => $this->selectedCertificat,
                 'site' => $this->freelancer['site'],
-                'experience'=>$this->freelancer['experience'],
+                //'experience'=>$this->freelancer['experience'],
                 'competences' => $this->selectedSkill,
                 'taux_journalier' => $this->currency,
                 'comptes' => $this->comptes,
