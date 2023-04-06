@@ -17,8 +17,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('service_id')->constrained();
-            $table->enum('status', ["pending","completed","rejeted"]);
+            $table->foreignId('freelance_id')->nullable()->constrained();
+            $table->enum('type', ["freelance", "service"])->nullable();
+
             $table->decimal('total_amount', 8, 2);
+            $table->integer('quantity')->nullable();
+            $table->foreignId('transaction_id')->nullable()->constrained();
+            $table->enum('status', ["pending", "completed", "rejeted"])->default('pending');
             $table->timestamps();
         });
 

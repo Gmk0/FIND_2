@@ -30,14 +30,14 @@
                 class="flex items-center px-1 text-sm capitalize hover:underline">{{$categoryName}}</a>
         </li>
         @endif
-        @if(isset($services))
+        @if(isset($serviceAll))
         <li class="flex items-center space-x-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"
                 class="w-2 h-2 mt-1 transform rotate-90 fill-current dark:text-gray-600">
                 <path d="M32 30.031h-32l16-28.061z"></path>
             </svg>
             <a rel="noopener noreferrer" href="{{url('/services')}}"
-                class="flex items-center px-1 text-sm capitalize hover:underline">{{$services}}</a>
+                class="flex items-center px-1 text-sm capitalize hover:underline">{{$serviceAll}}</a>
         </li>
         @endif
         @if(isset($checkout))
@@ -50,14 +50,14 @@
                 class="flex items-center px-1 text-sm capitalize hover:underline">{{$checkout}}</a>
         </li>
         @endif
-        @if(isset($ServiceName))
+        @if(isset($ServiceId))
         <li class="flex items-center space-x-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"
                 class="w-2 h-2 mt-1 transform rotate-90 fill-current dark:text-gray-600">
                 <path d="M32 30.031h-32l16-28.061z"></path>
             </svg>
             <a rel="noopener noreferrer" href="#"
-                class="flex items-center px-1 text-sm capitalize hover:underline">{{$ServiceName}}</a>
+                class="flex items-center px-1 text-sm capitalize hover:underline">{{$ServiceId}}</a>
         </li>
         @endif
     </ol>

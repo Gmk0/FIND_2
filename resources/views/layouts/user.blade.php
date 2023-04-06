@@ -18,8 +18,8 @@
 
     </script>
     <title>{{ config('app.name') }}</title>
-    {{--
-    <link rel="stylesheet" href="/build/assets/app.css">--}}
+
+    <link rel="stylesheet" href="/build/assets/app.21af9ae9.css">
 
     <style>
         [x-cloak] {
@@ -28,7 +28,7 @@
     </style>
     @wireUiScripts
 
-    @vite(['resources/css/app.css'])
+    {{-- @vite(['resources/css/app.css'])--}}
     @livewireStyles
 
 </head>
@@ -63,7 +63,7 @@
 
     @stack('script')
 
-    <script src="/build/assets/app.js" defer>
+    <script src="/build/assets/app.bc6ec2bd.js" defer>
     </script>
 
 

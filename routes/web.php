@@ -19,26 +19,24 @@ use Illuminate\Support\Facades\DB;
 
 
 
-Route::controller(home::class)->group(function(){
+Route::controller(home::class)->group(function () {
     Route::get('/', 'home')->name('home');
-   // Route::get('/category', 'category')->name('category');
+    // Route::get('/category', 'category')->name('category');
     //Route::get('/category/{category}', 'categoryRresult')->where('category', '(.*)')->name('category_result');
 
-     //Route::view('/categorys', 'user.serviceView')->name('categoryOne');
-    Route::view('/registration','user.beginner')->name('register.begin');
-    Route::view('/registration/info','user.register_info')->name('register.etape.1');
-     
-   
+    //Route::view('/categorys', 'user.serviceView')->name('categoryOne');
+    Route::view('/registration', 'user.beginner')->name('register.begin');
+    Route::view('/registration/info', 'user.register_info')->name('register.etape.1');
 });
 
-Route::controller(ServiceController::class)->group(function(){
+Route::controller(ServiceController::class)->group(function () {
 
-       Route::get('/services', 'services')->name('services');
-       Route::get('/categories', 'categories')->name('categories');
-       
+    Route::get('/services', 'services')->name('services');
+    Route::get('/categories', 'categories')->name('categories');
 });
 
- 
+//find freelance
+Route::get('/find_freelance', \App\Http\Livewire\User\Freelance\FindFreelance::class)->name('find_freelance');
 
 
 
@@ -52,38 +50,47 @@ Route::middleware([
     })->name('dashboard');
 
     //Services
-    Route::get('/services/checkout',App\Http\Livewire\User\Services\Checkout::class)->name('checkout');
-    Route::get('/categories/{category}/{id}', App\Http\Livewire\User\Services\ServicesViewOne::class)->where('category', '(.*)')->name('ServicesViewOne');     
+    Route::get('/services/checkout', App\Http\Livewire\User\Services\Checkout::class)->name('checkout');
+    Route::get('/categories/{category}/{id}', App\Http\Livewire\User\Services\ServicesViewOne::class)->where('category', '(.*)')->name('ServicesViewOne');
 
     //registration
-   
-    Route::get('/registration/freelance',\App\Http\Livewire\User\Freelance\RegistrationFreelance::class)->name('freelancer.register')->middleware('freelance_exist');
+
+    Route::get('/registration/freelance', \App\Http\Livewire\User\Freelance\RegistrationFreelance::class)->name('freelancer.register')->middleware('freelance_exist');
 
 
     //projet
 
-    Route::get('/user/create_project',App\Http\Livewire\User\Projet\CreateProject::class)->name('createProject');
-    Route::get('/user/list_project',App\Http\Livewire\User\Projet\ListProject::class)->name('listProjet');
-   Route::get('/user/list_project/{id}', App\Http\Livewire\User\Projet\PropositionProjet::class)->name('PropostionProjet');
-    Route::view('/user/securite','user.profile.securite')->name('securiteUser');
+    Route::get('/user/create_project', App\Http\Livewire\User\Projet\CreateProject::class)->name('createProject');
+    Route::get('/user/list_project', App\Http\Livewire\User\Projet\ListProject::class)->name('listProjet');
+    Route::get('/user/list_project/{id}', App\Http\Livewire\User\Projet\PropositionProjet::class)->name('PropostionProjet');
+    Route::view('/user/securite', 'user.profile.securite')->name('securiteUser');
 
     //transation
-    Route::get('/user/transaction',App\Http\Livewire\User\Transaction\TransactionUser::class)->name('transactionUser');
+    Route::get('/user/transaction', App\Http\Livewire\User\Transaction\TransactionUser::class)->name('transactionUser');
 
     //commande
-    Route::get('/user/commandes',App\Http\Livewire\User\Commande\CommandeUser::class)->name('commandeUser');
+    Route::get('/user/commandes', App\Http\Livewire\User\Commande\CommandeUser::class)->name('commandeUser');
 
     //paiement
-     Route::get('/user/paiement',App\Http\Livewire\User\Paiement\PaiementUser::class)->name('paiementUser');
+    Route::get('/user/paiement', App\Http\Livewire\User\Paiement\PaiementUser::class)->name('paiementUser');
 
-      //favoris 
+    //favoris 
 
-     Route::get('/user/favoris',App\Http\Livewire\User\Favoris\FavorisService::class)->name('favorisUser');
+    Route::get('/user/favoris', App\Http\Livewire\User\Favoris\FavorisService::class)->name('favorisUser');
 
+    //freelance
+
+    Route::get('/find_freelance/profile/{identifiant}', \App\Http\Livewire\User\Freelance\ProfileFreelance::class)->name('profile.freelance');
+
+    //conversation
+    Route::get('/user/messages', App\Http\Livewire\User\Conversation\ConversationComponent::class)->name('MessageUser');
+
+
+    Route::get('/user', App\Http\Livewire\User\Transaction\DashbordUser::class)->name('DashbordUser');
 });
 
 
-Route::get('/categories/{category}', App\Http\Livewire\User\Services\ServiceByCategory::class)->where('category', '(.*)')->name('categoryByName');     
+Route::get('/categories/{category}', App\Http\Livewire\User\Services\ServiceByCategory::class)->where('category', '(.*)')->name('categoryByName');
 
 
 //Api

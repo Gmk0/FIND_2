@@ -15,12 +15,12 @@ return new class extends Migration
 
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('order_id')->constrained();
+            //$table->foreignId('user_id')->constrained();
+            // $table->foreignId('order_id')->constrained();
             $table->decimal('amount', 8, 2);
             $table->string('payment_method');
             $table->string('payment_token', 40)->nullable();
-            $table->enum('status', ["pending","successful","failed"]);
+            $table->enum('status', ["pending", "successfull", "failed"]);
             $table->timestamps();
         });
 

@@ -17,11 +17,17 @@ class Conversation extends Model
      * @var array
      */
     protected $fillable = [
-        'freelancer_id',
+        'freelance_id',
         'user_id',
         'status',
     ];
 
+     public static function boot(){
+    parent::boot();
+    static::creating(function ($model) {
+        $model->user_id=auth()->user()->id;
+    });
+}
     /**
      * The attributes that should be cast to native types.
      *
@@ -29,7 +35,7 @@ class Conversation extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'freelancer_id' => 'integer',
+        'freelance_id' => 'integer',
         'user_id' => 'integer',
     ];
 
@@ -43,15 +49,7 @@ class Conversation extends Model
         return $this->belongsTo(Freelance::class);
     }
 
-    public function freelancer(): BelongsTo
-    {
-        return $this->belongsTo(Freelancer::class);
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
+   
 
     public function messages(): HasMany
     {

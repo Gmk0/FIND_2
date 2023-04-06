@@ -10,6 +10,8 @@
 
     <title>{{ config('app.name') }}</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/css/splide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/js/splide.min.js"></script>
     <script src="/js/alpine-init.js">
         <style>
         [x-cloak] {
@@ -47,7 +49,7 @@
     @wireUiScripts
     @livewireScripts
     @stack('scripts')
-    <script src="/build/assets/app.js" defer>
+   <script src="/build/assets/app.bc6ec2bd.js" defer>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
     </script>

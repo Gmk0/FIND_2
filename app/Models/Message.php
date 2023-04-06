@@ -17,7 +17,7 @@ class Message extends Model
      */
     protected $fillable = [
         'sender_id',
-        'receiver',
+        'receiver_id',
         'conversation_id',
         'body',
         'is_read',
@@ -32,7 +32,7 @@ class Message extends Model
     protected $casts = [
         'id' => 'integer',
         'sender_id' => 'integer',
-        'receiver' => 'integer',
+        'receiver_id' => 'integer',
         'conversation_id' => 'integer',
     ];
 
@@ -46,10 +46,7 @@ class Message extends Model
         return $this->belongsTo(Freelance::class);
     }
 
-    public function conversation(): BelongsTo
-    {
-        return $this->belongsTo(Conversation::class);
-    }
+  
 
     public function sender(): BelongsTo
     {

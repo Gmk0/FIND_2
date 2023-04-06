@@ -361,7 +361,7 @@
 
 </section>
 
-<section x-show="isLoading" x-cloak id="confiance" class="bg-white md:min-h-screen">
+<section x-show="isLoading" x-cloak id="confiance" class="bg-white">
     <div class="px-4 py-4 mx-auto sm:mx-2 max-w-7xl md:px-6">
         <div class="container text-gray-600 dark:text-gray-300 ">
             <div class="mb-10 text-center">
@@ -369,9 +369,9 @@
                 <h1 class="text-2xl font-bold text-slate-700 sm:text-3xl">Ils avaient confiance en nous</h1>
 
             </div>
-            <div data-aos="fade-in" data-aos-duration="800" class="m-4 swiper mySwiper">
+            <div data-aos="fade-in" data-aos-duration="800" class="m-8 swiper mySwiper">
 
-                <div class="pb-8 sm:pb-4 swiper-wrapper">
+                <div class="p-8 sm:pb-4 swiper-wrapper">
 
 
                     <div class="swiper-slide !bg-transparent md:px-0">
@@ -678,3 +678,51 @@
 
 </section>
 @endsection
+
+
+
+
+@push('script')
+
+
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.mySwiper', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        centeredSlides: true,
+        keyboard: {
+          enabled: true,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          dynamicBullets: true,
+        },
+        Navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      })
+</script>
+
+<script>
+    var swiper2 = new Swiper('.mySwiper2', {
+    slidesPerView: 1,
+        spaceBetween: 30,
+        centeredSlides: true,
+
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          dynamicBullets: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+</script>
+
+@endpush

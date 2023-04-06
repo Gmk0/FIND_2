@@ -4,7 +4,7 @@
         x-init="setTimeout(() => { isLoading = false }, 3000)">
 
         <div class="px-2">
-            @include('include.breadcumb',['category'=>'cagegory','categoryName'=>$service->category->name,'ServiceName'=>$service->id])
+            @include('include.breadcumb',['category'=>'cagegory','categoryName'=>$service->category->name,'ServiceId'=>$service->id])
         </div>
 
         <div>
@@ -34,13 +34,13 @@
             <div class="flex flex-col md:flex-row md:space-x-8">
 
                 <div class="flex-col mx-4 mb-4 md:flex md:order-2 md:mb-0 md:w-1/3">
-                    <div class="sticky pt-2px-2 flex flex-col gap-2  top-6">
+                    <div style="top:8rem;" class="sticky pt-2px-2 flex flex-col gap-2  ">
                         <div class=" gap-2 flex-wrap hidden">
                             <x-button label="Basic" />
                             <x-button label="Extra" />
                             <x-button label="Premium" />
                         </div>
-                        <div class="border-amber-600 bg-white p-2 dark:bg-gray-800 rounded-lg border  shadow-lg">
+                        <div class="border-blue-400 bg-white p-2 dark:bg-gray-800 rounded-lg border  shadow-lg">
 
 
                             <div class="p-4 mb-4 rounded-lg">
@@ -63,7 +63,7 @@
 
                         </div>
                         <div
-                            class="sticky p-6 hidden md:flex bg-white dark:bg-gray-800 rounded-lg border border-amber-600">
+                            class="sticky p-6 hidden md:flex bg-white dark:bg-gray-800 rounded-lg border border-blue-400">
                             <x-button wire:ignore x-on:click="isOpen=true" label="Contacter le Seller" success />
                         </div>
 

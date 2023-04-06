@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sender_id')->constrained('users');
-            $table->foreignId('receiver')->constrained('users', 'receiver');
+            $table->foreignId('receiver_id')->constrained('users');
             $table->foreignId('conversation_id')->constrained();
             $table->text('body');
             $table->enum('is_read', ["0","1"])->default('0');

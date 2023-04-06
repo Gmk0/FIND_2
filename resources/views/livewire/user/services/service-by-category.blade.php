@@ -164,6 +164,11 @@
 
 
                 </div>
+
+
+            </div>
+
+            <div>
                 {{$services->links()}}
             </div>
         </div>

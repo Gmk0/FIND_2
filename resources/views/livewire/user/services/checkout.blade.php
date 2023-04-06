@@ -3,7 +3,7 @@
     <div class="md:px-12">
         <div>
             <div class="mb-2">
-                @include('include.breadcumb',['services'=>'services','checkout'=>'checkout'])
+                @include('include.breadcumb',['serviceAll'=>'services','checkout'=>'checkout'])
             </div>
             <div class="mb-2">
                 <h1 class="text-3xl md:text-5xl font-bold text-gray-600 dark:text-gray-200">Checkout.</h1>
@@ -118,7 +118,7 @@
                     <div class="px-3 md:w-5/12">
 
                         <div
-                            class="w-full mx-auto rounded-lg bg-white dark:bg-gray-700 border border-gray-200 text-gray-800 font-light mb-6">
+                            class="w-full sticky top-8 mx-auto rounded-lg bg-white dark:bg-gray-700 border border-gray-200 text-gray-800 font-light mb-6">
                             <div class="w-full p-3 border-b border-gray-200 ">
                                 <div class="mb-5">
                                     <label for="type1" class="flex items-center cursor-pointer">
@@ -235,10 +235,14 @@
 
                         </div>
                         <div>
-                            <button wire:click="payer()"
-                                class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-2 font-semibold"><i
-                                    class="mdi mdi-lock-outline mr-1"></i> PAYER </button>
+                            <button wire:click="payer()" wire:loading.attr='disabled'
+                                class="block w-full  max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-2 font-semibold"><i
+                                    class="mdi mdi-lock-outline mr-1"></i> <span wire:loading.remove>PAYER</span>
+                                <span wire:loading wire:target='payer'>PAIEMENT...</span>
+                            </button>
+
                         </div>
+
 
 
                     </div>
@@ -260,6 +264,22 @@
 
 
 <script>
+    window.addEventListener('success', event=> {
+    Swal.fire({
+    // position: 'top-end',
+    icon:'success',
+    //toast: true,
+    title:"operation reussie",
+    text:event.detail.message,
+    showConfirmButton: true,
+   // footer: '<a class="text-green-600" href="">liste des proposition</a>',
+    //timer:5000
+    
+    })
+    
+    });
+
+
     function app() {
         return {
             isOther: false,

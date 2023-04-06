@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Service;
+use App\Models\Freelance;
+
 
 class ServiceController extends Controller
 {
@@ -14,10 +17,19 @@ class ServiceController extends Controller
 
         $category =Category::all();
 
+        $servicesBest=Service::where('category_id',1)->limit(20)->get();
+        
+        $freelance=Freelance::paginate(20);
+
+        $services=Service::orderBy('basic_price','Asc')->paginate(8);
+
     
 
        return view('user.services',[
-        'categories' => $category
+        'categories' => $category,
+        'servicesBest'=>$servicesBest,
+        'freelances'=>$freelance,
+        'services'=>$services,
         ]);
     } 
 

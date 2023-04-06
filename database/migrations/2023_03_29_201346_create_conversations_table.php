@@ -15,7 +15,7 @@ return new class extends Migration
 
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('freelancer_id')->constrained();
+            $table->foreignId('freelance_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamp('last_time_message');
 

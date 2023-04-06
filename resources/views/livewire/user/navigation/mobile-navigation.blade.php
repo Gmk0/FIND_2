@@ -1,4 +1,4 @@
-<div x-show="navOpen" :class="{'block': navOpen, 'hidden': !navOpen}" @click.away="navOpen = false" x-cloak
+<div x-cloak x-show="navOpen" :class="{'block': navOpen, 'hidden': !navOpen}" @click.away="navOpen = false" x-cloak
     class="fixed inset-0 bottom-0 left-0 z-30 w-10/12  overflow-auto origin-left transform shadow-lg bg-gray-50 dark:bg-gray-800 custom-scrollbar lg:hidden"
     x-transition:enter=" transition ease-in duration-300" x-transition:enter-start="opacity-0 transform -translate-x-40"
     x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-out duration-300"

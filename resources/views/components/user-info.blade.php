@@ -39,9 +39,9 @@
             <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
             <span class="ml-2">{{__('Profile')}}</span>
         </x-dropdown-link>
-        <x-dropdown-link href="{{ url('/Project.user.list') }}">
+        <x-dropdown-link href="{{ route('listProjet') }}">
             <ion-icon name="albums-outline" class="w-4 h-4"></ion-icon>
-            <span class="ml-2">{{__('Prs')}}</span>
+            <span class="ml-2">{{__('Mes projet')}}</span>
         </x-dropdown-link>
 
         <x-dropdown-link href="{{ url('/profile.show') }}">
@@ -57,10 +57,10 @@
             <span class="ml-2">{{__('Favoris')}}</span>
         </x-dropdown-link>
 
-        <x-dropdown-link href="{{ url('/conversations') }}">
+        <x-dropdown-link href="{{ route('MessageUser') }}">
             <ion-icon name="chatbox-ellipses-outline" class="w-4 h-4"></ion-icon>
 
-            <span class="ml-2">{{__('Conversation')}}</span>
+            <span class="ml-2">{{__('Mes messages')}}</span>
         </x-dropdown-link>
 
 

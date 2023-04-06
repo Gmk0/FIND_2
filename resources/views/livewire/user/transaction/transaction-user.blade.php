@@ -34,6 +34,8 @@
 
         <ul class="space-y-4">
             <!-- Example transaction item -->
+
+            @forelse($transactions as $transaction)
             <li x-data="{open:false}">
                 <div
                     class="block dark:bg-gray-800 bg-white cursor-pointer hover:bg-gray-400 focus:outline-none focus:bg-gray-200 transition duration-150 ease-in-out">
@@ -47,15 +49,18 @@
                                 </svg>
                             </div>
                             <div class="ml-4">
-                                <p class="text-lg font-semibold text-gray-900 dark:text-white">Nom du service</p>
+                                <p class="text-lg font-semibold text-gray-900 dark:text-white">
+                                    Paiment_token:{{$transaction->payment_token}}</p>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-200">Transaction effectuée le
-                                    1er avril 2023
+                                    {{$transaction->created_at}}
                                 </p>
                             </div>
                         </div>
+
                         <div class="flex justify-between mt-4 md:mt-0  items-center">
-                            <p class="text-lg font-semibold text-gray-900 dark:text-white">$50</p>
-                            <p class="text-sm font-medium text-gray-500 ml-2 text-green">Paiement complet</p>
+                            <p class="text-lg font-semibold text-gray-900 dark:text-white">{{$transaction->amount}}</p>
+                            <p class="text-sm font-medium text-gray-500 ml-2 text-green">paiement
+                                :{{$transaction->status}}</p>
                         </div>
                     </div>
 
@@ -65,6 +70,8 @@
                     </div>
                 </div>
             </li>
+            @empty
+            @endforelse
             <!-- Ajoutez ici les éléments de transaction pour chaque transaction effectuée par l'utilisateur -->
         </ul>
     </div>

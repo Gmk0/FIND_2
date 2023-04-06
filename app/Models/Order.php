@@ -13,13 +13,16 @@ class Order extends Model
 
     /**
      * The attributes that are mass assignable.
-     *
+     ,
      * @var array
      */
     protected $fillable = [
         'user_id',
         'service_id',
+        'freelance_id',
         'status',
+        'quantity',
+        'type',
         'total_amount',
     ];
 
@@ -31,13 +34,14 @@ class Order extends Model
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
+        'freelance_id' => 'integer',
         'service_id' => 'integer',
         'total_amount' => 'decimal:2',
     ];
 
-    public function transaction(): HasOne
+    public function transaction(): belongsTo
     {
-        return $this->hasOne(Transaction::class);
+        return $this->belongsTo(Transaction::class);
     }
 
     public function user(): BelongsTo
@@ -45,15 +49,7 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function service(): BelongsTo
-    {
-        return $this->belongsTo(Service::class);
-    }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function service(): BelongsTo
     {

@@ -49,6 +49,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_activity'=> 'datetime',
     ];
 
     /**
@@ -116,6 +117,10 @@ class User extends Authenticatable
     {
     return $this->hasMany(Notification::class);
 }
+     public function favoris()
+    {
+        return $this->belongsToMany(Freelance::class)->withTimestamps()->orderByDesc('favoris.created_at');
+    }
 
 
 }

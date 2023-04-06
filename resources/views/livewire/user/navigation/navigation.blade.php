@@ -10,7 +10,7 @@
     }
     @endphp
 
-    <header class="{{$fixed}} z-50 w-full bg-skin-fill dark:bg-gray-800">
+    <header class="fixed z-50 w-full bg-skin-fill dark:bg-gray-800">
         <div class="container flex items-center justify-between h-20 px-4 py-6 mx-auto ">
             <div class="flex-shrink-0">
                 <h1 class="text-lg font-semibold tracking-widest text-white uppercase">
@@ -131,7 +131,7 @@
 
 
                                         <li>
-                                            <a href="{{url('/find-freelancer')}}"
+                                            <a href="{{route('find_freelance')}}"
                                                 class="block py-1 font-semibold text-transparent bg-transparent bg-clip-text bg-gradient-to-br from-indigo-400 to-pink-700 via-blue-500 hover:from-blue-600 hover:to-indigo-600 hover:via-pink-400">
                                                 Trouver un Freelanncer
                                             </a>
