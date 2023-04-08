@@ -1,0 +1,148 @@
+<?php
+
+namespace App\Http\Livewire\Freelance\Services;
+
+use Livewire\Component;
+use App\Models\freelance;
+use App\Models\service;
+
+use Illuminate\Support\Facades\Storage;
+
+use Illuminate\Contracts\View\View;
+use Livewire\WithFileUploads;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms;
+use Filament\Forms\Components\{TextInput, RichEditor, MarkdownEditor, Select, Toggle, FileUpload};
+use Illuminate\Support\Facades\Auth;
+use Filament\Notifications\Notification;
+use Filament\Forms\Components\Wizard;
+use Illuminate\Support\HtmlString;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\FormComponent;
+use App\Models\SubCategory;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\TagsInput;
+
+
+class EditService extends Component implements Forms\Contracts\HasForms
+{
+
+    use WithFileUploads;
+
+    use Forms\Concerns\InteractsWithForms;
+
+    public $serviceId;
+    public Service $service;
+
+    public function mount($id)
+    {
+        $this->service = Service::find($id);
+        $this->serviceId = $id;
+        $this->form->fill([
+            'title' => $this->service->title,
+            'description' => $this->service->description,
+            'basic_price' => $this->service->basic_price,
+            'basic_revision' => $this->service->basic_revision,
+            'basic_support' => $this->service->basic_support,
+            'tags' => $this->service->sub_categorie,
+            'basic_delivery_time' => $this->service->basic_delivery_time,
+            'samples' => $this->service->samples,
+            // 'files' => json_encode($),
+
+            'format' => json_decode($this->service->sub_categorie),
+
+        ]);
+    }
+
+    protected function getFormSchema(): array
+    {
+        return [
+            Wizard::make([
+                Wizard\Step::make('Titre')
+                    ->schema([
+                        TextInput::make('title')->label('Titre')->placeholder('Je vais photographier votre mariage civil'),
+                        //TextInput::make('title')->label('Titre')->placeholder('Je vais photographier votre mariage civil'),
+
+
+
+                        TagsInput::make('tags'),
+                        Fieldset::make('Sous categories')
+                            ->schema([
+                                Forms\Components\Select::make('sub_categorie')
+                                    ->label('Sous categorie')
+                                    ->multiple()
+                                    ->options(SubCategory::where('category_id', Auth::user()->freelance->category->id)->pluck('name', 'name')),
+
+                                TextInput::make('format')->label('Format'),
+
+                            ]),
+
+                        Fieldset::make('Prix')
+                            ->schema([
+                                // ...
+                                TextInput::make('basic_price')->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '$', thousandsSeparator: ',', decimalPlaces: 2))->label('Prix du Service'),
+                                Select::make('temps')
+                                    ->options([
+                                        'Heure' => 'Heure',
+                                        'Complet' => 'Complet',
+                                    ])
+
+                            ])
+                            ->columns(2),
+
+                        MarkdownEditor::make('description'),
+                        // ...
+                    ]),
+                Wizard\Step::make('Support du Service')
+                    ->Description('Veuillez Rajouter quelques information contenant votre service et des examples')
+                    ->schema([
+                        FileUpload::make('images')->label('Image Decrivant le service')->multiple(),
+                        RichEditor::make('samples')->label('Quelques Realisation lier')
+                            ->fileAttachmentsDisk('local')
+                            ->fileAttachmentsDirectory('attachments'),
+                        MarkdownEditor::make('basic_support')
+                            ->disableAllToolbarButtons()
+                            ->enableToolbarButtons(['orderedList', 'bulletList'])
+
+                            ->label('Le Support en Rapport a ce projet')
+                            ->placeholder('Utiliser les listes')
+
+                        // ...
+                    ]),
+                Wizard\Step::make('Temps & Visibilite')
+                    ->schema([
+
+                        Fieldset::make('Prix')
+                            ->schema([
+                                // ...
+                                TextInput::make('basic_delivery_time')->label('Temps De livraison'),
+                                Select::make('delivery_time')
+                                    ->options([
+                                        //'Heure' => 'Heure',
+                                        'Jour' => 'Jour',
+                                        //'Mois' => 'Mois',
+                                    ])
+
+                            ]),
+
+
+                        Toggle::make('is_publish')->label('Publier'),
+
+                    ])
+            ])->skippable()
+                ->submitAction(new HtmlString('<button class="bg-amber-600 px-6 py-1.5 rounded-md text-white focus:bg-amber-800"  type="submit"><span wire:loading.remove>Modifications</span><span wire:loading>Creation....</span></button>')),
+
+
+
+
+
+            // ...
+        ];
+    }
+
+    public function render()
+    {
+        return view('livewire.freelance.services.edit-service')->extends('layouts.freelanceTest')->section('content');
+    }
+}

@@ -1,5 +1,5 @@
 <aside x-show="isAside"
-    class="z-20 flex-shrink-0 hidden   h-screen overflow-y-auto bg-white custom-scrollbar dark:bg-gray-800 md:block">
+    class="z-20 flex-shrink-0 hidden   h-screen overflow-y-auto bg-white custom-scrollbar dark:bg-gray-800 lg:block">
     <div class="py-4 text-gray-500 dark:text-gray-400 custom-scrollbar">
         <h1 class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
 

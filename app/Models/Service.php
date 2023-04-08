@@ -55,13 +55,13 @@ class Service extends Model
         'extra_price' => 'decimal:2',
         'view_count' => 'integer',
         'like' => 'integer',
-        'files'=>'array',
-        'Sub_categorie'=>'array',
+        'files' => 'array',
+        'sub_categorie' => 'array',
         'freelance_id' => 'integer',
         'category_id' => 'integer',
     ];
 
-    
+
     public function favoris(): BelongsTo
     {
         return $this->belongsTo(Favoris::class);
@@ -80,5 +80,10 @@ class Service extends Model
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'data->order_id', 'id');
     }
 }

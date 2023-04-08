@@ -69,9 +69,12 @@ Route::middleware([
     Route::get('/user/transaction', App\Http\Livewire\User\Transaction\TransactionUser::class)->name('transactionUser');
 
     //commande
+    Route::get('/user/commandes/{id}', App\Http\Livewire\User\Commande\CommandeOneView::class)->name('commandeOneView');
+
     Route::get('/user/commandes', App\Http\Livewire\User\Commande\CommandeUser::class)->name('commandeUser');
 
     //paiement
+
     Route::get('/user/paiement', App\Http\Livewire\User\Paiement\PaiementUser::class)->name('paiementUser');
 
     //favoris 
@@ -96,3 +99,5 @@ Route::get('/categories/{category}', App\Http\Livewire\User\Services\ServiceByCa
 //Api
 
 Route::get('/service_api', ServicesApi::class)->name('api.services');
+
+include('freelanceRoute.php');

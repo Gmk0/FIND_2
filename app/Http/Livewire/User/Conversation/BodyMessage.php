@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Conversation;
 use App\Models\Freelance;
 use App\Models\Message;
+use App\Events\MessageRead;
+use App\Events\MessageSent;
 
 class BodyMessage extends Component
 {
@@ -17,17 +19,17 @@ class BodyMessage extends Component
     public $paginateVar = 10;
     public $height;
 
-   
 
-    
-  public function  getListeners()
+
+
+    public function  getListeners()
     {
 
         $auth_id = auth()->user()->id;
         return [
             "echo-private:chat.{$auth_id},MessageSent" => 'broadcastedMessageReceived',
-             "echo-private:chat.{$auth_id},MessageRead" => 'broadcastedMessageRead',
-            'loadConversation', 'pushMessage', 'loadmore', 'updateHeight','broadcastMessageRead','resetComponent'
+            "echo-private:chat.{$auth_id},MessageRead" => 'broadcastedMessageRead',
+            'loadConversation', 'pushMessage', 'loadmore', 'updateHeight', 'broadcastMessageRead', 'resetComponent'
         ];
     }
 
@@ -58,36 +60,34 @@ class BodyMessage extends Component
     function updateHeight($height)
     {
 
-         dd($height);
+        //dd($height);
         $this->height = $height;
 
         # code...
     }
 
-     public function loadConversation(Conversation $conversation, $receiver)
+    public function loadConversation(Conversation $conversation, $receiver)
     {
-       // dd($conversation,$receiver);
+        // dd($conversation,$receiver);
 
         $this->selectedConversation =  $conversation;
         $this->receiverInstance =  $receiver;
         $this->messages_count = Message::where('conversation_id', $this->selectedConversation->id)->count();
-  
+
         $this->messages = Message::where('conversation_id',  $this->selectedConversation->id)
             ->skip($this->messages_count -  $this->paginateVar)
             ->take($this->paginateVar)->get();
 
-   
+
 
         $this->dispatchBrowserEvent('chatSelected');
-         $this->dispatchBrowserEvent('rowChatToBottom');
+        $this->dispatchBrowserEvent('rowChatToBottom');
 
-        Message::where('conversation_id',$this->selectedConversation->id)
-         ->where('receiver_id',auth()->user()->id)->update(['is_read'=> 1]);
-
-             
+        Message::where('conversation_id', $this->selectedConversation->id)
+            ->where('receiver_id', auth()->user()->id)->update(['is_read' => 1]);
     }
 
-     public function pushMessage($messageId)
+    public function pushMessage($messageId)
     {
         $newMessage = Message::find($messageId);
         $this->messages->push($newMessage);
@@ -99,19 +99,18 @@ class BodyMessage extends Component
         return view('livewire.user.conversation.body-message');
     }
 
-     public function broadcastedMessageRead($event)
+    public function broadcastedMessageRead($event)
     {
         //dd($event);
 
-        if($this->selectedConversation){
+        if ($this->selectedConversation) {
 
 
 
-            if((int) $this->selectedConversation->id === (int) $event['conversation_id']){
+            if ((int) $this->selectedConversation->id === (int) $event['conversation_id']) {
 
                 $this->dispatchBrowserEvent('markMessageAsRead');
             }
-
         }
 
         # code...
@@ -120,14 +119,14 @@ class BodyMessage extends Component
     /*-----------------------------Broadcasted Event fucntion-------------------------------------------*/
     /*----------------------------------------------------------------------------*/
 
-     function broadcastedMessageReceived($event)
+    function broadcastedMessageReceived($event)
     {
         ///here 
 
-        
-      $this->emitTo('web.conversation.list-chat','refresh');
+
+        $this->emitTo('user.conversation.conversation-component', 'refresh');
         # code...
-        
+
         $broadcastedMessage = Message::find($event['message']);
 
 
@@ -138,20 +137,19 @@ class BodyMessage extends Component
                 # if true  mark message as read
                 $broadcastedMessage->is_read = 1;
                 $broadcastedMessage->save();
-                
-               
+
+
                 $this->pushMessage($broadcastedMessage->id);
-                
+
 
                 $this->emitSelf('broadcastMessageRead');
             }
         }
     }
 
-     public function broadcastMessageRead( )
+    public function broadcastMessageRead()
     {
         broadcast(new MessageRead($this->selectedConversation->id, $this->receiverInstance));
         # code...
     }
-
 }

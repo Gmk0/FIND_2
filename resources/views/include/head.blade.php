@@ -11,12 +11,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/css/splide.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/js/splide.min.js"></script>
 
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="/js/alpine-init.js">
 
     </script>
     <title>{{ config('app.name') }}</title>
 
-    <link rel="stylesheet" href="/build/assets/app.21af9ae9.css">
+    {{--
+    <link rel="stylesheet" href="/build/assets/app.21af9ae9.css">--}}
 
     <style>
         [x-cloak] {
@@ -25,7 +29,7 @@
     </style>
     @wireUiScripts
 
-    {{-- @vite(['resources/css/app.css'])--}}
+    @vite(['resources/css/app.css','resources/js/app.js'])
     @livewireStyles
 
 </head>

@@ -15,6 +15,7 @@ return new class extends Migration
 
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+             $table->string('transaction_numero')->unique();
             //$table->foreignId('user_id')->constrained();
             // $table->foreignId('order_id')->constrained();
             $table->decimal('amount', 8, 2);

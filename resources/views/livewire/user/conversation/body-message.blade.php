@@ -28,15 +28,17 @@
         </div>
         <div class="flex-1 px-2">
             <div
-                class="{{auth()->id() == $message->sender_id ? 'bg-blue-600 text-gray-100':'bg-gray-300 text-gray-700'}} inline-flex rounded-md p-3 md:px-6 ">
+                class=" rounded-xl {{auth()->id() == $message->sender_id ? 'bg-blue-600 rounded-br-none text-gray-100 ':'bg-gray-300 rounded-bl-none text-gray-700'}}  inline-block px-4 py-3 ">
                 <span>{{$message->body}}</span>
 
             </div>
-            <div class="flex justify-end mt-0.5">
-                <span class="text-gray-400 text-sm">{{ $message->created_at->format('m: i a') }}</span>
-                <div class="flex items-center justify-center text-green-600 ml-1" title="Seen">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24"
+
+            <div class="flex {{auth()->id() == $message->sender_id ? 'justify-end':'hidden'}}  mt-0.5">
+                <span class="text-sm text-gray-400">{{ $message->created_at->format('m: i a') }}</span>
+                <div class="flex items-center justify-center ml-1 text-green-600" title="Seen">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
                     </svg>
@@ -55,14 +57,14 @@
     </div>
     @empty
     <div class="mx-6 my-auto">
-        <h1 class="text-gray-800 text-xl">Ecrivez lui un message</h1>
+        <h1 class="text-xl text-gray-800">Ecrivez lui un message</h1>
 
     </div>
     @endforelse
 
     @else
-    <div class="flex items-center py-8 px-6 my-auto ">
-        <h1 class="text-gray-800 text-xl">Pas de Conversation Selectionnées</h1>
+    <div class="flex items-center px-6 py-8 my-auto ">
+        <h1 class="text-xl text-gray-800">Pas de Conversation Selectionnées</h1>
 
     </div>
 

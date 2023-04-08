@@ -46,16 +46,16 @@ class Message extends Model
         return $this->belongsTo(Freelance::class);
     }
 
-  
 
-    public function sender(): BelongsTo
+
+    public function senderUser()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'sender_id');
     }
 
-    public function receiver(): BelongsTo
+    public function receiverUser()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'receiver_id');
     }
 
     public function conversation(): BelongsTo

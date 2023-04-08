@@ -24,6 +24,16 @@ class Transaction extends Model
         'status',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($transaction) {
+            $transaction->transaction_numero = 'TX' . date('YmdH')
+                . rand(10, 99);
+        });
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -36,6 +46,12 @@ class Transaction extends Model
         'amount' => 'decimal:2',
     ];
 
+    // Mutateur pour récupérer le prix formaté avec le dollar direct
+    public function getAmountAttribute($value)
+    {
+        // Formater le prix avec le dollar direct
+        return '$' . number_format($value, 2, ',', ' ');
+    }
 
 
     public function orders(): HasMany

@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Tools\Cart;
 use App\Models\Order;
 use App\Models\transaction;
-
+use App\Events\ServiceOrdered;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -54,11 +54,14 @@ class Checkout extends Component
 
             // Parcourir toutes les commandes pour les mettre à jour
             foreach ($datas as $order) {
+
                 // Mettre à jour le statut de la commande dans la table "commandes"
                 $orderToUpdate = Order::findOrFail($order->id);
                 $orderToUpdate->status = 'completed';
                 $orderToUpdate->transaction_id = $payment->id; // Lier la commande au paiement effectué
                 $orderToUpdate->save();
+
+                event(new ServiceOrdered($order));
             }
 
             // Valider et terminer la transaction de base de données

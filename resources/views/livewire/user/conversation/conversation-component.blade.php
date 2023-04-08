@@ -3,7 +3,7 @@
 
     <div x-show="isLoading">
 
-        <div class="flex flex-row  h-screen p-8 overflow-y-hidden">
+        <div class="flex flex-row h-screen p-8 overflow-y-hidden">
             <div
                 class="order-first hidden w-64 h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse custom-scrollbar md:flex ">
                 <div>
@@ -54,16 +54,20 @@
                                             src="{{$conversation->freelance->user->profile_photo_url }}" alt="">
                                         @endif
 
-
+                                        @if ($conversation->freelance->user->is_online)
                                         <span
-                                            class="absolute bottom-0 right-0 w-4 h-4 {{$conversation->freelance->user->is_online? 'bg-green-600':'bg-gray-400'}} border-2 border-white rounded-full"></span>
+                                            class="absolute bottom-0 right-0 w-2 h-2 bg-green-600 border-2 border-white rounded-full"></span>
+                                        @else
+
+                                        @endif
+
                                     </div>
                                 </div>
                                 <div class="flex-1 px-2">
                                     <div class="w-32 truncate"><span
                                             class="{{$freelance_id == $conversation->freelance_id? 'text-white':'text-gray-800'}}">{{$conversation->freelance->nom}}</span>
                                     </div>
-                                    <div class="truncate w-32"><small
+                                    <div class="w-32 truncate"><small
                                             class="{{$freelance_id == $conversation->freelance_id? 'text-gray-50':'text-gray-600'}} truncate dark:text-gray-200">{{
                                             $conversation->messages->last()?->body
                                             }}</small></div>
@@ -101,7 +105,7 @@
                     <div x-bind:class="{'hidden': sidebarOpen, 'md:flex': !sidebarOpen}"
                         class="chat-area flex-1 bg-white  p-2 rounded-md flex h-[550px]  flex-col">
 
-                        <div x-data="" class="flex gap-3 z-5 bg-gray-100 dark:bg-gray-800">
+                        <div x-data="" class="flex gap-3 bg-gray-100 z-5 dark:bg-gray-800">
                             <button wire:ignore @click="sidebarOpen = true" class="block md:hidden ">
                                 <ion-icon class="w-8 h-8 text-gray-800" name="arrow-back-circle-outline"></ion-icon>
                             </button>
@@ -115,13 +119,17 @@
                             </h2>
                             @else
                             <h2
-                                class="py-1 mx-4  flex flex-col mb-2 text-lg text-gray-800 border-b-2 border-gray-200 md:text-xl dark:text-white md:mb-4">
+                                class="flex flex-col py-1 mx-4 mb-2 text-lg text-gray-800 border-b-2 border-gray-200 md:text-xl dark:text-white md:mb-4">
 
                                 <b>{{$selectedConversation->freelance->nom}}</b>
-                                <span class="text-sm text-gray-600 mt-1">
-                                    {{ $selectedConversation->freelance->user->is_online ?'online':
-                                    $selectedConversation->freelance->user->last_activity?->DiffForHumans()}}
-                                    <span>
+                                @if($selectedConversation->freelance->user->is_online)
+                                <span class="mt-1 text-sm text-green->600">
+                                    online<span>
+                                        @else
+                                        <span class="mt-1 text-sm text-gray-600">
+                                            {{$selectedConversation->freelance->user->last_activity?->DiffForHumans()}}<span>
+
+                                                @endif
 
                             </h2>
                             @endempty

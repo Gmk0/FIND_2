@@ -29,6 +29,10 @@
     }
 }
 
+.dark .bg-gray-400{
+    --tw-text-opacity: 1;
+        color: rgb(55 65 81 / var(--tw-text-opacity));
+}
 
 .dark .text-gray-800{
 

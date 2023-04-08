@@ -1,13 +1,13 @@
 @stack('modals')
 
+@livewire('notifications')
 
 @livewireScripts
-@livewire('notifications')
+
 
 @stack('script')
 
-<script src="/build/assets/app.bc6ec2bd.js" defer>
-</script>
+
 
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

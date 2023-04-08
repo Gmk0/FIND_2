@@ -15,6 +15,7 @@ return new class extends Migration
 
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+             $table->string('order_numero')->unique();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('service_id')->constrained();
             $table->foreignId('freelance_id')->nullable()->constrained();
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->decimal('total_amount', 8, 2);
             $table->integer('quantity')->nullable();
             $table->foreignId('transaction_id')->nullable()->constrained();
+              $table->integer('progress')->default(0);
             $table->enum('status', ["pending", "completed", "rejeted"])->default('pending');
             $table->timestamps();
         });

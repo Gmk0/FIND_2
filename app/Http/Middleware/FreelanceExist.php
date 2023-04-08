@@ -21,13 +21,12 @@ class FreelanceExist
         if (!Auth::check()) {
             return redirect('/login');
         }
-         // Récupérez l'utilisateur actuellement authentifié
+        // Récupérez l'utilisateur actuellement authentifié
         $user = Auth::user();
 
-            if ($user->freelance()->exists()) {
-            return redirect()->route('checkout');
+        if ($user->freelance()->exists()) {
+            return redirect()->route('freelance.dashboard');
         }
         return $next($request);
-     
     }
 }
