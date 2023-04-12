@@ -10,12 +10,13 @@
 
 <body x-data="setup()" x-init="$refs.loading.classList.add('hidden');" @resize.window="watchScreen()"
     class="flex flex-col justify-between overflow-x-hidden overflow-y-hidden bg-gray-100 custom-scrollbar dark:text-gray-100 dark:bg-gray-900">
+    <x-notifications z-index="z-50" position='top-left' />
     <div>
         <div class="flex h-screen overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar">
             <!-- Loading screen -->
             <div x-ref="loading"
-                class="fixed inset-0 z-50 flex items-center justify-center text-2xl font-semibold text-white bg-primary-darker">
-                Loading.....
+                class="fixed inset-0 z-50 flex items-center justify-center text-2xl font-semibold text-white ">
+                Chargement.....
             </div>
 
             <!-- Sidebar -->
@@ -25,50 +26,7 @@
                 <div x-show="isSidebarOpen" class="fixed inset-y-0 z-10 w-16 bg-white"></div>
 
                 <!-- Mobile bottom bar -->
-                <nav aria-label="Options"
-                    class="fixed inset-x-0 bottom-0 flex flex-row-reverse items-center justify-between px-4 py-2 bg-white border-t sm:hidden shadow-t border-primary-100 rounded-t-3xl">
-                    <!-- Menu button -->
-                    <button
-                        @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
-                        class="p-2 transition-colors rounded-lg shadow-md hover:bg-primary-darker hover:text-white focus:outline-none focus:ring focus:ring-primary focus:ring-offset-white focus:ring-offset-2"
-                        :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-primary' : 'text-gray-500 bg-white'">
-                        <span class="sr-only">Toggle sidebar</span>
-                        <svg aria-hidden="true" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h7" />
-                        </svg>
-                    </button>
-
-                    <!-- Logo -->
-                    <a href="#">
-                        <img class="w-10 h-auto" src="./assets/images/logo.png" alt="K-UI" />
-                    </a>
-
-                    <!-- User avatar button -->
-                    <div class="relative flex items-center flex-shrink-0 p-2" x-data="{ isOpen: false }">
-                        <button @click="isOpen = !isOpen; $nextTick(() => {isOpen ? $refs.userMenu.focus() : null})"
-                            class="transition-opacity rounded-lg opacity-80 hover:opacity-100 focus:outline-none focus:ring focus:ring-primary focus:ring-offset-white focus:ring-offset-2">
-                            <img class="w-8 h-8 rounded-lg shadow-md"
-                                src="https://avatars.githubusercontent.com/u/57622665?s=460&u=8f581f4c4acd4c18c33a87b3e6476112325e8b38&v=4"
-                                alt="Ahmed Kamel" />
-                            <span class="sr-only">User menu</span>
-                        </button>
-                        <div x-show="isOpen" @click.away="isOpen = false" @keydown.escape="isOpen = false"
-                            x-ref="userMenu" tabindex="-1"
-                            class="absolute w-48 py-1 mt-2 origin-bottom-left bg-white rounded-md shadow-lg left-10 bottom-14 focus:outline-none"
-                            role="menu" aria-orientation="vertical" aria-label="user menu">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                role="menuitem">Your Profile</a>
-
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                role="menuitem">Settings</a>
-
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                role="menuitem">Sign out</a>
-                        </div>
-                    </div>
-                </nav>
+               
 
                 <!-- Left mini bar -->
                 <nav aria-label="Options"
@@ -148,20 +106,7 @@
 
 
                         <x-asideFreelanceLink />
-                        <div class="flex-shrink-0 p-4 mt-10">
-                            <div class="p-2 space-y-6 rounded-lg bg-blue-gray-100">
-                                <img class="-mt-10" src="./assets/images/undraw_web_developer_p3e5.svg"
-                                    alt="Not Important" />
-                                <p class="text-sm text-primary">
-                                    Use our <span class="text-base text-primary-darker">Premium</span> features now!
-                                    <br />
-                                </p>
-                                <button
-                                    class="w-full px-4 py-2 text-center text-white transition-colors rounded-lg bg-primary hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary focus:ring-offset-2 focus:ring-offset-blue-gray-100">
-                                    Upgrade to pro
-                                </button>
-                            </div>
-                        </div>
+
                     </nav>
 
                     <section x-show="currentSidebarTab == 'messagesTab'" class="px-4 py-6">
@@ -170,6 +115,34 @@
 
                     <section x-show="currentSidebarTab == 'notificationsTab'" class="px-4 py-6">
                         <h2 class="text-xl">Notifications</h2>
+
+                        <div>
+                            <a x-data="{ linkHover: false }" href="#"
+                                class="flex items-center justify-between px-3 py-4 hover:bg-gray-100 dark:hover:bg-gray-700 bg-opacity-20"
+                                @mouseover="linkHover = true" @mouseleave="linkHover = false">
+                                <div class="flex items-center">
+                                    <svg class="w-8 h-8 bg-blue-600 bg-opacity-20 text-blue-600 px-1.5 py-0.5 rounded-full"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                        </path>
+                                    </svg>
+                                    <div class="ml-3 text-sm">
+                                        <p class="font-bold text-gray-600 capitalize"
+                                            :class=" linkHover ? 'text-primary' : ''">
+                                            Order
+                                            Completed</p>
+                                        <p class="text-xs text-gray-600 dark:text-gray-200">bien</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-bold text-gray-600 dark:text-gray-200">
+                                    5 min
+                                </span>
+                            </a>
+                        </div>
+
+
                     </section>
                 </div>
             </div>
