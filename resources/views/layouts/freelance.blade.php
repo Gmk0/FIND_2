@@ -11,6 +11,7 @@
            
         }">
 
+    <x-notifications z-index="z-50" position='top-left' />
 
     <div class="flex h-screen overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar"
         :class="{ 'overflow-hidden': isSideMenuOpen}">

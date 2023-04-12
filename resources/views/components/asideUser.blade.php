@@ -1,5 +1,8 @@
-<aside x-show="isAside"
-    class="z-20 flex-shrink-0 hidden   h-screen overflow-y-auto bg-white custom-scrollbar dark:bg-gray-800 md:block">
+<aside x-show="isAside" x-transition:enter="transform transition-transform duration-300"
+    x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
+    x-transition:leave="transform transition-transform duration-300" x-transition:leave-start="translate-x-0"
+    x-transition:leave-end="-translate-x-full"
+    class="z-20 flex-shrink-0 hidden h-screen overflow-y-auto bg-white custom-scrollbar dark:bg-gray-800 md:block">
     <div class="py-4 text-gray-500 dark:text-gray-400 custom-scrollbar">
         <h1 class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
 

@@ -1,8 +1,10 @@
-<header class="py-4 bg-white shadow-md dark:bg-gray-800">
+<header class="hidden py-4 bg-white shadow-md lg:block dark:bg-gray-800">
     <div class="container flex items-center justify-between h-full px-6 mx-auto text-amber-600 dark:text-amber-300">
         <!-- Mobile hamburger -->
         <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-amber"
-            @click="toggleSideMenu" aria-label="Menu">
+            @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
+            class="p-2 transition-colors rounded-lg shadow-md hover:bg-primary-darker hover:text-white focus:outline-none focus:ring focus:ring-primary focus:ring-offset-white focus:ring-offset-2"
+            :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-primary' : 'text-gray-500 bg-white'">
             <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                     d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
@@ -104,3 +106,30 @@
         </ul>
     </div>
 </header>
+
+<nav aria-label="Options"
+    class="flex flex-row items-center justify-between px-4 py-2 mb-4 bg-white border-b lg:hidden shadow-b border-primary-100">
+    <!-- Menu button -->
+    <button
+        @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'"
+        class="p-2 transition-colors rounded-lg shadow-md hover:bg-primary-darker hover:text-white focus:outline-none focus:ring focus:ring-primary focus:ring-offset-white focus:ring-offset-2"
+        :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-primary' : 'text-gray-500 bg-white'">
+        <span class="sr-only">Toggle sidebar</span>
+        <svg aria-hidden="true" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+    </button>
+
+    <!-- Logo -->
+    <a href="#">
+        <img class="w-12" src="/images/logo/find_02.png" alt="K-UI" />
+    </a>
+
+    <div class="flex">
+        <x-user-info></x-user-info>
+        <x-user-info></x-user-info>
+    </div>
+    <!-- User avatar button -->
+
+</nav>

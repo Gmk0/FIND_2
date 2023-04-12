@@ -7,6 +7,7 @@ use App\Tools\Cart;
 use App\Models\Order;
 use App\Models\transaction;
 use App\Events\ServiceOrdered;
+use App\Models\feedback;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -24,18 +25,8 @@ class Checkout extends Component
         $cart = Session::has('cart') ? Session::get('cart') : null;
 
         //dd($cart->items);
-        foreach ($cart->items as $key => $value) {
-            $data = [
-                'service_id' => $key,
-                'user_id' => auth()->user()->id,
-                'total_amount' => $value['basic_price'] * $value['quantity'],
-                'quantity' => $value['quantity'],
-                'type' => 'service',
 
-            ];
-            $datas[] = Order::create($data);
-        }
-
+        $datas = $this->saveService();
         //dd($datas);
         DB::beginTransaction();
 
@@ -50,6 +41,7 @@ class Checkout extends Component
             $payment->payment_token = "dddddddd";
             $payment->status = 'successfull';
             // $payment->transaction_id = 'mmmmmmmmmmm';
+
             $payment->save();
 
             // Parcourir toutes les commandes pour les mettre à jour
@@ -68,6 +60,7 @@ class Checkout extends Component
             DB::commit();
 
             // Retourner une réponse de succès
+            Session::forget('cart');
             $this->dispatchBrowserEvent('success', ['message' => 'le service a ete ajouté']);
 
             //return response()->json(['success' => 'Paiement traité avec succès']);
@@ -90,6 +83,45 @@ class Checkout extends Component
         return view('livewire.user.services.checkout')->extends('layouts.user')->section('content');
     }
 
+
+    public function saveService()
+    {
+
+        $cart = Session::has('cart') ? Session::get('cart') : null;
+
+
+        DB::beginTransaction();
+        try {
+
+            foreach ($cart->items as $key => $value) {
+                $data = [
+                    'service_id' => $key,
+                    'user_id' => auth()->user()->id,
+                    'total_amount' => $value['basic_price'] * $value['quantity'],
+                    'quantity' => $value['quantity'],
+                    'type' => 'service',
+
+                ];
+                $datas[] = Order::create($data);
+            }
+
+            foreach ($datas as $order) {
+                $feedback = feedback::create(['order_id' => $order->id]);
+            }
+
+            DB::commit();
+
+            return $datas;
+        } catch (\Exception $e) {
+            // En cas d'erreur, annuler la transaction de base de données
+            DB::rollback();
+            // Retourner une réponse d'erreur
+
+            $this->dispatchBrowserEvent('success', ['message' => $e->getMessage()]);
+
+            // return response()->json(['error' => $e->getMessage()], 500);
+        };
+    }
 
 
 

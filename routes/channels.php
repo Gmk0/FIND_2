@@ -22,3 +22,7 @@ Broadcast::channel('chat.{receiver}', function (User $user, $receiver) {
 
     return (int) $user->id === (int) $receiver;
 });
+Broadcast::channel('notify.{receiver}', function (User $user, $receiver) {
+
+    return (int) $user->id === (int) $receiver;
+});

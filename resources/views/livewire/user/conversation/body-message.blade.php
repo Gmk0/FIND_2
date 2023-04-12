@@ -1,4 +1,4 @@
-<div class="flex-1 overflow-auto messages custom-scrollbar">
+<div class="flex-1 mt-4 overflow-auto messages custom-scrollbar">
     @if($selectedConversation)
     @forelse ($messages as $message)
     <div class="message mb-4   flex flex-2 {{auth()->id() == $message->sender_id ? 'text-right items-end':''}}">
@@ -27,11 +27,34 @@
             @endif
         </div>
         <div class="flex-1 px-2">
-            <div
-                class=" rounded-xl {{auth()->id() == $message->sender_id ? 'bg-blue-600 rounded-br-none text-gray-100 ':'bg-gray-300 rounded-bl-none text-gray-700'}}  inline-block px-4 py-3 ">
-                <span>{{$message->body}}</span>
+
+            <div x-data="{linkHover:false}" @mouseover="linkHover = true" @mouseleave="linkHover = false">
+
+
+
+                <div @mouseover="linkHover = true" @mouseleave="linkHover = false"
+                    class=" rounded-xl {{auth()->id() == $message->sender_id ? 'bg-blue-600 rounded-br-none text-gray-100 ':'bg-gray-300 rounded-bl-none text-gray-700'}}  inline-block px-4 py-3 ">
+
+
+                    @if(!empty($message->file))
+                    <a href="{{ url('/storage/messages/' . $message->file) }}" download>
+                        <img src="/storage/messages/{{$message->file }}" alt="Image" class="h-24 max-w-24">
+                    </a>
+
+                    @else
+                    <span>{{$message->body}}</span>
+                    @endif
+
+                    <span class="text-white" x-show="linkHover">
+                        <x-dropdown class="text-white">
+                            <x-dropdown.item wire:click="deleteMessage({{$message->id}})" label="effacer" />
+                        </x-dropdown>
+                    </span>
+                </div>
 
             </div>
+
+
 
 
             <div class="flex {{auth()->id() == $message->sender_id ? 'justify-end':'hidden'}}  mt-0.5">
@@ -57,14 +80,15 @@
     </div>
     @empty
     <div class="mx-6 my-auto">
-        <h1 class="text-xl text-gray-800">Ecrivez lui un message</h1>
+        <h1 class="flex items-center justify-center my-16 text-xl text-gray-800">Ecrivez lui un message</h1>
 
     </div>
     @endforelse
 
     @else
     <div class="flex items-center px-6 py-8 my-auto ">
-        <h1 class="text-xl text-gray-800">Pas de Conversation Selectionnées</h1>
+        <h1 wire:loading.remove wire:target='selectedConversation' class="text-xl text-gray-800">Pas de Conversation
+            Selectionnées</h1>
 
     </div>
 

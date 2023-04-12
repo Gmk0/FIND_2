@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\FeedbackSend;
 use Illuminate\Auth\Events\Registered;
 use App\Events\ServiceOrdered;
+use App\Events\ProjectResponse;
+use App\Listeners\FeedbackNotifaction;
+use App\Listeners\ProjetStatus;
+
 use App\Listeners\SendNotificationToFreelancer;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +27,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         ServiceOrdered::class => [
             SendNotificationToFreelancer::class,
+        ],
+        FeedbackSend::class => [
+            FeedbackNotifaction::class,
+        ],
+        ProjectResponse::class => [
+            ProjetStatus::class,
         ],
     ];
 

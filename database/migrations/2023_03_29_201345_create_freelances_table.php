@@ -21,7 +21,7 @@ return new class extends Migration
             $table->json('langue')->nullable();
             $table->json('diplome')->nullable();
             $table->json('certificat')->nullable();
-           // $table->string('experience')->nullable();
+            $table->string('experience')->nullable();
             $table->string('site')->nullable();
             $table->json('competences')->nullable();
             $table->decimal('taux_journalier', 8, 2)->nullable();
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->json('localisation')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->constrained();
-            $table->enum('level', ["basic","premium","extra"]);
+            $table->enum('level', ["basic", "premium", "extra"]);
             $table->timestamps();
         });
 

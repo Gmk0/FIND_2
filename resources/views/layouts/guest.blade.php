@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'FIND') }}</title>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="css/tailwindcss2.css">
+    <link rel="stylesheet" href="/css/tailwindcss2.css">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
 
+    @vite(['resources/js/app.js'])
     <style>
         .gradient {
             background: linear-gradient(100deg, #FF9E5E 10%, rgb(69, 67, 67) 100%);
@@ -37,13 +38,15 @@
 
     <!-- Styles -->
     @livewireStyles
-    @vite(['resources/js/app.js'])
+
 </head>
 
 <body>
     <div class="font-sans antialiased text-gray-900 dark:text-gray-100">
         {{ $slot }}
     </div>
+
+    @include('include.script')
 </body>
 
 </html>

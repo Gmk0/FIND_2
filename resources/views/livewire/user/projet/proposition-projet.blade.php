@@ -2,47 +2,55 @@
 
 
     <div>
-        @include('include.breadcumbUser',['projet'=>'Projet','projectId'=>'id'])
+        @include('include.breadcumbUser',['projet'=>'Projet','projectId'=>$proposition_id])
     </div>
 
 
     <div class="container mx-auto">
 
         <div class="my-8">
-            <h3 class="text-lg leading-6 font-medium dark:text-white text-gray-900">Propositions de freelances pour
+            <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Propositions de freelances pour
                 votre projet</h3>
-            <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ul class="grid gap-4 mt-4 md:grid-cols-2 xl:grid-cols-3">
 
-                @for($i=0;$i<6 ;$i++) <li>
-                    <a href="#" class="block bg-white">
+                @forelse($proposition as $proposition)
+                <li>
+                    <a href="#" class="block bg-white ">
                         <div class="px-4 py-4 sm:px-6">
                             <div class="flex items-center justify-between">
                                 <p class="text-sm font-medium text-indigo-600 truncate">Titre de la proposition</p>
-                                <div class="ml-2 flex-shrink-0 flex">
+                                <div class="flex flex-shrink-0 ml-2 ">
+                                    @if($proposition->freelance->isOnline())
                                     <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Disponible</span>
+                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Disponible</span>
+
+                                    @else
+                                    <span
+                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-gray-300 bg-green-100 rounded-full">No
+                                        Disponible</span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="mt-2 flex flex-col sm:justify-between">
-                                <div class="sm:flex">
+                            <div class="flex flex-col mt-2 sm:justify-between">
+                                <div class="flex justify-between">
                                     <p class="flex items-center text-sm text-gray-500">
                                         <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
                                                 d="M2 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm2 2v8l2.5-1.5L8 14l5-5-1.5-1.5L10 11l-3.5-3.5L4 10z" />
                                         </svg>
-                                        Nom du freelance
+                                        {{$proposition->freelance->prenom}}
                                     </p>
-                                    <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                    <p class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
                                         <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
                                                 d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0 1a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9zm1-5a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V5a1 1 0 0 1 1-1z" />
                                         </svg>
-                                        Prix : 200€
+                                        Prix : {{$proposition->bid_amount}}
                                     </p>
                                 </div>
-                                <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                                <div class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">
                                     <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd"
@@ -52,25 +60,38 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-gray-50 px-4 py-4 sm:px-6">
+                        <div class="px-4 py-4 bg-gray-50 dark:bg-gray-800 sm:px-4">
                             <div class="text-sm font-medium text-indigo-600 truncate">Description de la proposition
                             </div>
                             <div class="mt-2 text-sm text-gray-500">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut ante euismod,
-                                    fringilla dolor
-                                    id, congue velit. Aenean bibendum erat vel nisi ultricies, et luctus nunc laoreet.
-                                    Donec in
-                                    dolor id odio hendrerit imperdiet at nec quam. In et tellus sit amet nisl
-                                    ullamcorper
-                                    interdum. </p>
+                                <p>{{$proposition->content}} </p>
                             </div>
                         </div>
+                        @if($proposition->status=="approved")
+                        <div class="flex gap-4 px-4 py-4 bg-gray-50">
+                            <div>
+                                <h1>Vous avez accepter cette proposiotion </h1>
+                            </div>
+                            <x-button href="" sm primary label="voir l'evolution" />
+                        </div>
+                        @else
+
+
+                        <div class="flex gap-4 px-4 py-4 bg-gray-50">
+                            <x-button wire:click="refuser({{$proposition->id}})" sm danger label="Rejeter" />
+                            <x-button wire:click="accepter({{$proposition->id}})" sm primary label="Accepter" />
+                        </div>
+                        @endif
                     </a>
-                    </li>
+                </li>
 
-                    @endfor
+                @empty
+                <li class="text-gray-800">
+                    Vous Avez Zero Proposition pour ce projet
+                </li>
+                @endforelse
 
-                    <!-- Répéter le code pour chaque proposition de freelance -->
+                <!-- Répéter le code pour chaque proposition de freelance -->
             </ul>
         </div>
     </div>

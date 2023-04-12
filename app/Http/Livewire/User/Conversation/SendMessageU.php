@@ -8,13 +8,16 @@ use App\Models\Conversation;
 use App\Events\MessageSent;
 use App\Models\Freelance;
 use App\Models\Message;
+use Livewire\WithFileUploads;
 
 class SendMessageU extends Component
 {
 
+    use WithFileUploads;
     public $selectedConversation;
     public $receiverInstance;
     public $body;
+    public $attachment = null;
     public $createdMessage;
     protected $listeners = ['updateSendMessage', 'dispatchMessageSent', 'resetComponent'];
 
@@ -38,14 +41,28 @@ class SendMessageU extends Component
     }
 
 
+    public function addFiles($image)
+    {
+        $fileName = $image->getClientOriginalName();
+
+        $image->storeAs('public/messages', $fileName);
+        return $fileName;
+    }
+
 
 
     public function sendMessage()
     {
+        if (empty($this->attachment)) {
 
-        $this->validate([
-            'body' => 'required'
-        ]);
+            $this->validate([
+                'body' => 'required'
+            ]);
+        }
+
+
+        $filename = $this->attachment ? $this->addFiles($this->attachment) : null;
+
 
 
         //dd($this->selectedConversation);
@@ -56,6 +73,7 @@ class SendMessageU extends Component
             'receiver_id' => $this->receiverInstance->user->id,
             'conversation_id' => $this->selectedConversation->id,
             'body' => $this->body,
+            'file' => $filename,
             'is_read' => '0',
             'type' => "text",
 
@@ -68,7 +86,7 @@ class SendMessageU extends Component
 
         //reshresh coversation list 
         $this->emitTo('user.conversation.conversation-component', 'refresh');
-        $this->reset('body');
+        $this->reset('body', 'attachment');
         $this->emitSelf('dispatchMessageSent');
     }
 

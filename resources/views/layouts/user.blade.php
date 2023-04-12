@@ -19,7 +19,7 @@
     </script>
     <title>{{ config('app.name') }}</title>
 
-    <link rel="stylesheet" href="/build/assets/app.21af9ae9.css">
+    <link rel="stylesheet" href="/build/assets/app.css">
 
     <style>
         [x-cloak] {
@@ -33,13 +33,15 @@
 
 </head>
 
-<body class="flex flex-col justify-between overflow-x-hidden bg-gray-100 custom-scrollbar dark:bg-gray-900"
+<body class="flex flex-col justify-between overflow-x-hidden bg-gray-50 custom-scrollbar dark:bg-gray-900"
     x-data="{navOpen: false,notificationActive: false, isLoading:true, scrolledFromTop: false}" :class="{
             'overflow-hidden': navOpen,
             'overflow-scroll': !navOpen
            
         }">
 
+
+    <x-notifications z-index="z-50" position='top-left' />
 
 
     @livewire('user.navigation.navigation')
@@ -55,22 +57,7 @@
 
     @livewire('user.navigation.footer')
 
-    @stack('modals')
-
-
-    @livewireScripts
-    @livewire('notifications')
-
-    @stack('script')
-
-    <script src="/build/assets/app.bc6ec2bd.js" defer>
-    </script>
-
-
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="/js/intlTelInput.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @include('include.script')
 
 </body>
 

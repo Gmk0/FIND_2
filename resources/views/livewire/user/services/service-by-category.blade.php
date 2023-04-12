@@ -7,7 +7,7 @@
 
 
         <div class="container px-4 ">
-            <h2 class="mb-4 text-lg md:text-2xl font-bold text-gray-900 dark:text-gray-100">Recherche de
+            <h2 class="mb-4 text-lg font-bold text-gray-900 md:text-2xl dark:text-gray-100">Recherche de
                 Services
                 "{{$categoryName}}" </h2>
 
@@ -18,7 +18,7 @@
                 <div class="container px-4 mx-auto">
 
                     <form class="mb-8">
-                        <div class="grid md:grid-cols-4 -mx-2">
+                        <div class="grid -mx-2 md:grid-cols-4">
                             <div class="w-full px-2 mb-4">
 
 
@@ -49,7 +49,7 @@
                                     'premium'=>'premium',
                                     'extra'=>'extra']" />
                             </div>
-                            <div class="flex w-full gap-2  px-2 mb-4">
+                            <div class="flex w-full gap-2 px-2 mb-4">
                                 <x-select placeholder="Prix" wire:model.debounce.500ms="price_range" :options="[
                                 '1'=>'10-50',
                                 '2'=>'50-100',
@@ -74,7 +74,7 @@
             </div>
 
             <button x-on:click="isOpen=!isOpen"
-                class="inline-block pl-3 dark:text-white no-underline md:hidden hover:text-amber-600" href="#">
+                class="inline-block pl-3 no-underline dark:text-white md:hidden hover:text-amber-600" href="#">
                 <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     viewBox="0 0 24 24">
                     <path d="M7 11H17V13H7zM4 7H20V9H4zM10 15H14V17H10z" />
@@ -96,7 +96,7 @@
                         <div class="flex flex-row md:flex-col">
                             @foreach ($service->files as $key=>$value)
 
-                            <div class="w-44 h-auto bg-center bg-cover md:w-full md:h-48"
+                            <div class="w-48 h-auto bg-center bg-cover md:w-full md:h-48"
                                 style="background-image: url('{{$value}}');">
                             </div>
                             @break
@@ -106,7 +106,7 @@
                             <div class="max-h-[14rem] flex flex-col justify-between p-2 dark:text-gray-200 md:p-6">
                                 <div>
                                     <a href="{{route('ServicesViewOne',['id'=>$service->id,'category'=>$service->category->name])}}"
-                                        class="mb-2 text-sm md:text-base font-semibold  "
+                                        class="mb-2 text-sm font-semibold md:text-base "
                                         :class="linkHover ? 'text-amber-600' : 'text-gray-800 dark:text-gray-200'">{{$service->title}}
                                     </a>
                                     <div class="flex items-center mb-2">
@@ -115,7 +115,8 @@
                                             <path
                                                 d="M10 13.165l-4.53 2.73 1.088-5.997L.976 6.305l6.018-.873L10 0l2.006 5.432 6.018.873-4.582 3.593 1.088 5.997L10 13.165z" />
                                         </svg>
-                                        <p class="text-sm text-gray-700 dark:text-gray-200">4.5 (25)</p>
+                                        <p class="text-sm text-gray-700 dark:text-gray-200">
+                                            {{$service->averageFeedback()}} ({{$service->orderCount()}})</p>
                                     </div>
                                     <div class="flex items-center mb-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1 text-gray-500"
@@ -132,20 +133,33 @@
                                 <div class="flex items-center justify-between dark:text-gray-200">
                                     <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
                                         {{$service->basic_price}} $</h4>
-                                    <div class="flex items-center">
-                                        <button class="mr-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M15.707 4.293a1 1 0 010 1.414L6.414 15H3a1 1 0 110-2h2.586l9.293-9.293a1 1 0 011.414 0z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
+                                    <div x-data="{like:false}" class="flex items-center">
+                                        <button class="mr-2" @click="like=!like">
+                                            <template x-if="!like">
+                                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                                </svg>
+                                            </template>
+                                            <template x-if="like">
+                                                <svg class="w-5 h-5 text-red-500" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                                </svg>
+                                            </template>
+
+
                                         </button>
 
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-between pt-2 dark:text-gray-200">
-                                    <x-button sm label="ajouter" />
+                                    <x-button wire:click="add_cart({{$service->id}})" spinner="" flat primary sm
+                                        label="ajouter" />
                                 </div>
                             </div>
                         </div>

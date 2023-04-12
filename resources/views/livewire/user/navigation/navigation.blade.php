@@ -45,7 +45,7 @@
                         </button>
                         <div
                             class="absolute top-0 -left-48 transition group-hover:translate-y-5 translate-y-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-500 ease-in-out group-hover:transform z-50 min-w-[560px] transform">
-                            <div class="relative w-full p-6 bg-white dark:bg-gray-800 shadow-xl top-6 rounded-xl">
+                            <div class="relative w-full p-6 bg-white shadow-xl dark:bg-gray-800 top-6 rounded-xl">
                                 <div
                                     class="w-10 h-10 bg-white dark:bg-gray-800 transform rotate-45 absolute top-0 z-0 translate-x-0 transition-transform group-hover:translate-x-[12rem] duration-500 ease-in-out rounded-sm">
                                 </div>
@@ -63,7 +63,7 @@
 
 
 
-                                        <a href="#" wire:click="getCategory({{$categorie->id}})"
+                                        <a href="{{route('categoryByName',[$categorie->name])}}"
                                             class="block p-2 -mx-2 font-semibold text-gray-800 transition duration-300 ease-in-out rounded-lg dark:text-gray-50 hover:bg-gradient-to-br hover:dark:text-gray-900 hover:text-indigo-600">
                                             {{$categorie->name}}
 
@@ -147,7 +147,7 @@
 
                     <li class="relative px-3 py-2 ">
                         <a href="{{url("/services")}}"
-                            class="flex flex-row items-center px-3 py-2 font-medium text-white border-b border-gray-100 rounded-md dark:border-amber-800 text-md focus:outline-none focus:text-white focus:bg-gray-700">
+                            class="flex flex-row items-center px-3 py-2 font-medium text-white border-gray-100 rounded-md dark:border-amber-800 text-md focus:outline-none focus:text-white focus:bg-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-home">

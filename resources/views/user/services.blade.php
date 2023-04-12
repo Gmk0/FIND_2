@@ -4,9 +4,9 @@
 
 <section class="flex flex-col min-h-screen pt-20 mb-6">
 
-    <div class="flex flex-col h-64 p-2 mx-6 mt-4 bg-white dark:bg-gray-800 rounded-lg">
+    <div class="flex flex-col h-64 p-2 mx-6 mt-4 bg-white rounded-lg dark:bg-gray-800">
         <div class="mb-4">
-            <h3 class="font-serif text-xl text-slate-800 mb-4 text-center leading-snug">
+            <h3 class="mb-4 font-serif text-xl leading-snug text-center dark:text-gray-50 text-slate-800">
                 Découvrez une communauté de freelances talentueux prêts à donner vie à vos projets.
                 Trouvez le service parfait pour vous, choisissez parmi une large sélection de compétences et laissez
                 notre
@@ -35,7 +35,7 @@
                     },
                  }).mount();
              }">
-                <div class="splide w-full">
+                <div class="w-full splide">
                     <div class="splide__track">
                         <div class="splide__list">
                             @foreach ($categories as $category)
@@ -56,29 +56,29 @@
         </div>
     </div>
 
-    <div class="p-4  mt-4 mx-6  bg-white dark:bg-gray-900 rounded-lg justify-beetwen">
+    <div class="p-4 mx-6 mt-4 bg-white rounded-lg dark:bg-gray-900 justify-beetwen">
 
-        <div class="mb-4 flex justify-between">
-            <h1 class="text-lg md:text-2xl font-semibold text-gray-800 dark:text-gray-50
-                            "> Les Service populaire en Photographie </h1>
+        <div class="flex justify-between mb-4">
+            <h1 class="text-lg font-semibold text-gray-800 md:text-2xl dark:text-gray-50 "> Les Service populaire en
+                Photographie </h1>
             <div class="flex items-end justify-end ">
 
                 <x-button label="voir plus"></x-button>
             </div>
 
         </div>
-        <div class="splide splide-1 bg-white  mx-2 py-4 rounded-lg mb-4">
+        <div class="py-4 mx-2 mb-4 bg-white rounded-lg splide splide-1">
 
-            <div class="splide__track p-2">
-                <div class="splide__list  px-auto">
+            <div class="p-2 splide__track">
+                <div class="splide__list px-auto">
                     @forelse ($servicesBest as $servicesBest)
-                    <div class="card-splide mx-auto md:mx-0 splide__slide ">
+                    <div class="mx-auto card-splide md:mx-0 splide__slide ">
                         <div
-                            class="mb-2 overflow-hidden bg-white dark:bg-gray-900 rounded-lg flex flex-col shadow-md md:mb-0 w-64">
+                            class="flex flex-col w-64 mb-2 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-900 md:mb-0">
                             <div x-data="{ swiper: null }"
                                 x-init="swiper = new Swiper($refs.container, { slidesPerView: 'auto', spaceBetween: 10, pagination: { el: '.swiper-pagination', clickable: true } })"
                                 x-ref="container"
-                                class="swiper-container2 w-48 h-auto bg-center bg-cover md:w-full md:h-48">
+                                class="w-48 h-auto bg-center bg-cover swiper-container2 md:w-full md:h-48">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
                                         <img src="https://source.unsplash.com/200x200/?fashion?1" alt=""
@@ -136,26 +136,25 @@
     </div>
 
 
-    <div class="p-4 bg-white mx-6 mt-4  dark:bg-gray-800 rounded-lg justify-beetwen">
+    <div class="p-4 mx-6 mt-4 bg-white rounded-lg dark:bg-gray-800 justify-beetwen">
 
 
-        <div class="mb-4 flex justify-between">
-            <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-50
-                        "> Les Freelance populaire </h1>
+        <div class="flex justify-between mb-4">
+            <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-50 "> Les Freelance populaire </h1>
             <div class="flex items-end justify-end ">
 
                 <x-button primary label="voir plus"></x-button>
             </div>
 
         </div>
-        <div class="splide splide-2  py-4 rounded-lg mb-4">
+        <div class="py-4 mb-4 rounded-lg splide splide-2">
 
             <div class="splide__track">
-                <div class="splide__list gap-4">
+                <div class="gap-4 splide__list">
                     @forelse ($freelances as $freelance)
                     <div class="card-splide splide__slide ">
                         <div
-                            class="mb-2 overflow-hidden bg-white dark:bg-gray-900 rounded-lg flex flex-col shadow-md md:mb-0 w-64">
+                            class="flex flex-col w-64 mb-2 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-900 md:mb-0">
                             <div class="relative h-48">
                                 <img src="https://source.unsplash.com/200x200/?fashion?1" alt=""
                                     class="object-cover w-full h-full">
@@ -181,9 +180,8 @@
                                 <p class="mb-2 text-sm text-gray-500">{{$freelance->category->name}} •
                                     {{$freelance->level}}</p>
                                 <div class="flex flex-wrap justify-between mb-4">
-                                    <span class="inline-block px-2 py-2 rounded-full bg-green-300">#Javascript</span>
-                                    <span class="inline-block">#Javascript</span>
-                                    <span class="inline-block">#Javascript</span>
+                                    <span class="inline-block px-2 py-2 bg-green-300 rounded-full">#Javascript</span>
+
                                 </div>
 
 
@@ -207,7 +205,7 @@
     </div>
 
 
-    <div class="flex flex-col p-2  mt-4 bg-white  md:mx-6 rounded-lg justify-beetwen">
+    <div class="flex flex-col p-2 mt-4 bg-white rounded-lg md:mx-6 justify-beetwen">
 
         <div class="mb-4">
             <h1 class="text-xl font-bold text-skin-fill">Services que vous pourriez aimer</h1>
@@ -215,17 +213,17 @@
 
 
 
-        <div class="grid grid-cols- md:grid-cols-4 mx-2 p-4 gap-4 md:gap-6">
+        <div class="grid gap-4 p-4 mx-2 grid-cols- md:grid-cols-4 md:gap-6">
             @forelse ($services as $service)
 
 
             <div x-data="{linkHover: false}" style="" @mouseover="linkHover = true" @mouseleave="linkHover = false"
-                class="overflow-hidden bg-white rounded-lg shadow-md dark:text-gray-200 dark:bg-gray-800">
+                class="overflow-hidden bg-white rounded-lg shadow-md dark:text-gray-200 dark:bg-gray-900">
                 <div class="flex flex-row md:flex-col">
                     @foreach ($service->files as $key=>$value)
 
-                    <div class="w-44 h-auto bg-center bg-cover md:w-full md:h-48"
-                        style="background-image: url('{{$value}}');">
+                    <div class="h-auto bg-center bg-cover w-44 md:w-full md:h-48"
+                        style="background-image: url('{{Storage::disk('local')->url('public/service/'.$value) }}');">
                     </div>
                     @break
                     @endforeach
@@ -234,7 +232,7 @@
                     <div class="max-h-[14rem] flex flex-col justify-between p-2 dark:text-gray-200 md:p-6">
                         <div>
                             <a href="{{route('ServicesViewOne',['id'=>$service->id,'category'=>$service->category->name])}}"
-                                class="mb-2 text-sm md:text-base font-semibold  "
+                                class="mb-2 text-sm font-semibold md:text-base "
                                 :class="linkHover ? 'text-amber-600' : 'text-gray-800 dark:text-gray-200'">{{$service->title}}
                             </a>
                             <div class="flex items-center mb-2">
@@ -295,15 +293,16 @@
 
 
     <div
-        class="flex mx-6 mt-4 flex-col min-h-64 lg:flex-row items-center justify-center lg:justify-start bg-white rounded-lg shadow-lg p-6">
+        class="flex flex-col items-center justify-center p-6 mx-6 mt-4 bg-white rounded-lg shadow-lg min-h-64 lg:flex-row lg:justify-start">
         <img src="/images/services/projet.jpg" alt="Illustration de projet"
-            class="w-1/2 h-64 lg:mr-6 hidden md:block rounded-md mb-4 lg:mb-0">
+            class="hidden w-1/2 h-64 mb-4 rounded-md lg:mr-6 md:block lg:mb-0">
         <div class="text-center lg:text-left">
-            <h2 class="text-xl font-semibold mb-2">Vous ne trouvez pas ce que vous cherchez ?</h2>
-            <p class="mb-4">Si vous avez besoin d'un service particulier, n'hésitez pas à soumettre votre projet et
+            <h2 class="mb-2 text-xl font-semibold text-gray-800">Vous ne trouvez pas ce que vous cherchez ?</h2>
+            <p class="mb-4 dark:text-gray-300">Si vous avez besoin d'un service particulier, n'hésitez pas à soumettre
+                votre projet et
                 notre communauté de freelances
                 talentueux sera ravie de vous aider..</p>
-            <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">Soumettre un
+            <a href="#" class="px-4 py-2 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600">Soumettre un
                 projet</a>
         </div>
     </div>

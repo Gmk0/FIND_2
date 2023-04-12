@@ -18,9 +18,9 @@ class Project extends Model
      */
     protected $fillable = [
         'title',
-      //'user_id',
+        //'user_id',
         'category_id',
-       // 'sub_category',
+        // 'sub_category',
         'description',
         'files',
         'bid_amount',
@@ -29,12 +29,13 @@ class Project extends Model
         'status',
     ];
 
-   /*  public static function boot(){
-    parent::boot();
-    static::creating(function ($model) {
-        $model->user_id=auth()->user()->id;
-    });
-        } */
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->user_id = auth()->user()->id;
+        });
+    }
     /**
      * The attributes that should be cast to native types.
      *
@@ -49,7 +50,12 @@ class Project extends Model
         'bid_amount' => 'decimal:2',
     ];
 
-    
+
+    public function getBidAmountAttribute($value)
+    {
+        // Formater le prix avec le dollar direct
+        return '$' . number_format($value, 2, ',', ' ');
+    }
 
     public function user(): BelongsTo
     {
@@ -64,6 +70,14 @@ class Project extends Model
     public function projectResponses(): HasMany
     {
         return $this->hasMany(ProjectResponse::class);
+    }
+
+    public function projectRepsonsesCount()
+    {
+
+        $project = $this->projectResponses->count();
+
+        return $project;
     }
 
     public function conversationProjects(): HasMany

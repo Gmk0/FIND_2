@@ -17,13 +17,16 @@ use Filament\Forms\Components\{TextInput, RichEditor, MarkdownEditor, Select, To
 use Illuminate\Support\Facades\Auth;
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Wizard\Step;
 use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FormComponent;
 use App\Models\SubCategory;
+use WireUi\Traits\Actions;
 
 class ServicesCreate extends Component implements Forms\Contracts\HasForms
 {
+    use Actions;
     use WithFileUploads;
 
     use Forms\Concerns\InteractsWithForms;
@@ -44,11 +47,8 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
     public $delivery_time;
     public $sub_categorie;
     public $format;
-    public $step;
+    //public $step;
 
-    protected $queryString = [
-        'step' => ['expect' => ''],
-    ];
 
     protected $listeners = ['refresh' => '$refresh'];
 
@@ -61,7 +61,7 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
     {
         return [
             Wizard::make([
-                Wizard\Step::make('Titre')
+                Step::make('Titre')
                     ->schema([
                         TextInput::make('title')->label('Titre')->placeholder('Je vais photographier votre mariage civil'),
                         //TextInput::make('title')->label('Titre')->placeholder('Je vais photographier votre mariage civil'),
@@ -93,7 +93,7 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
                         MarkdownEditor::make('description'),
                         // ...
                     ]),
-                Wizard\Step::make('Support du Service')
+                Step::make('Support du Service')
                     ->Description('Veuillez Rajouter quelques information contenant votre service et des examples')
                     ->schema([
                         FileUpload::make('images')->label('Image Decrivant le service')->multiple(),
@@ -109,7 +109,7 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
 
                         // ...
                     ]),
-                Wizard\Step::make('Temps & Visibilite')
+                Step::make('Temps & Visibilite')
                     ->schema([
 
                         Fieldset::make('Prix')
@@ -151,11 +151,16 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
     public function submit()
     {
 
+        //$this->emitSelf('refresh');
+
+
+
         //$this->resetForm();
         // dd($this->form->Titre);
 
+        //$this->reset('Step');
         //$this->form->clear();
-        $this->form->validate();
+
         $fileNames = $this->addImage($this->images);
 
         $data = [
@@ -164,18 +169,22 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
             'basic_price' => $this->basic_price,
             'basic_revision' => 0,
             'basic_support' => $this->basic_support,
-            'sub_categorie' => $this->sub_categorie,
+
             'basic_delivery_time' => $this->basic_delivery_time,
             'samples' => $this->samples,
-            'files' => json_encode($fileNames),
+            'files' => $fileNames,
+
             'view_count' => 0,
             //'mode_temps' => $this->temps,
             'like' => 0,
             'format' => $this->format,
+            'sub_categorie' => $this->sub_categorie,
             'is_publish' => $this->is_publish,
             'category_id' => Auth::user()->freelance->category->id,
             'freelance_id' => Auth::user()->freelance->id,
         ];
+
+        // dd($data);
         /*
 
          'title',
@@ -206,19 +215,19 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
 
         // dd($data);
 
-        //service::create($data);
+        service::create($data);
 
-        Notification::make()
-            ->title('Saved successfully')
-            ->success()
-            ->send();
+        $this->notification()->success(
+            $title = "Creation reussi ",
+            $description = 'Votre service  ete creer avec success',
+        );
 
 
-        //$this->emitSelf('refresh');
         //$this->refresh();
         //$this->form()->reset();
         //$this->resetAll();
         return redirect()->route('freelance.service.create');
+        //$this->emitSelf('refresh')
     }
 
     function resetAll()
@@ -248,7 +257,7 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
                 $fileName = $file->getClientOriginalName();
 
 
-                $fal =  $file->storeAs('service', $fileName);
+                $fal =  $file->store('public/service/' . $fileName);
                 $fileNames[] = $fileName;
             }
 

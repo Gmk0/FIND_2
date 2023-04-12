@@ -126,13 +126,13 @@
                 aria-label="submenu">
 
                 <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                    <a class="w-full" x-on:click="linkActive=false" href="{{route('favorisUser')}}">
-                        Missions en cours
+                    <a class="w-full" x-on:click="linkActive=false" href="{{route('freelance.projet.list')}}">
+                        Mission
                     </a>
                 </li>
                 <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                    <a class="w-full" x-on:click="linkActive=false" href="">
-                        Proposiotion mission
+                    <a class="w-full" x-on:click="linkActive=false" href="{{route('freelance.proposition')}}">
+                        Mission Accepter
                     </a>
                 </li>
 
@@ -223,7 +223,7 @@
 
     <li x-data="{ linkHover: false, linkActive: false }" class="relative px-6 py-3">
 
-        @if(request()->routeIs('securiteUser')|| request()->routeIs('profile.show'))
+        @if(request()->routeIs('freelance.profile')|| request()->routeIs('profile.show'))
         <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-amber-600" aria-hidden="true"></span>
         @endif
         <button
@@ -248,12 +248,12 @@
                 aria-label="submenu">
 
                 <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                    <a class="w-full" x-on:click="linkActive=false" href="{{route('profile.show')}}">
+                    <a class="w-full" x-on:click="linkActive=false" href="{{route('freelance.profile')}}">
                         Profile
                     </a>
                 </li>
                 <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                    <a class="w-full" x-on:click="linkActive=false" href="{{route('securiteUser')}}">
+                    <a class="w-full" x-on:click="linkActive=false" href="{{route('freelance.securite')}}">
                         Securite
                     </a>
                 </li>

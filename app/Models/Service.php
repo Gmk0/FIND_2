@@ -27,7 +27,7 @@ class Service extends Model
         'premium_support',
         'premium_revision',
         'premium_delivery_time',
-        'sub_categorie',
+
         'extra_price',
         'extra_support',
         'extra_revision',
@@ -36,6 +36,7 @@ class Service extends Model
         'files',
         'format',
         'video_url',
+        'Sub_categorie',
         'view_count',
         'like',
         'is_publish',
@@ -81,6 +82,34 @@ class Service extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function orderCount()
+    {
+        // Récupérer le nombre de commandes pour ce service
+        $orderCount = $this->orders->count();
+
+        return $orderCount;
+    }
+
+    public function averageFeedback()
+    {
+        // Récupérer les commandes liées à ce service
+        $orders = $this->orders;
+
+        // Récupérer les feedbacks associés à ces commandes
+        $feedbacks = Feedback::whereIn('order_id', $orders->pluck('id'))->get();
+
+        // Calculer la moyenne des feedbacks
+        $averageFeedback = $feedbacks->avg('satisfaction');
+
+        return $averageFeedback;
+    }
+
 
     public function notifications()
     {

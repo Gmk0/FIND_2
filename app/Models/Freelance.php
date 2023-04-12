@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
 class Freelance extends Model
 {
@@ -20,7 +21,7 @@ class Freelance extends Model
         'nom',
         'prenom',
         'identifiant',
-       // 'experience',
+        'experience',
         'description',
         'langue',
         'diplome',
@@ -36,12 +37,13 @@ class Freelance extends Model
         'level',
     ];
 
-     public static function boot(){
-    parent::boot();
-    static::creating(function ($model) {
-        $model->user_id=auth()->user()->id;
-    });
-        }
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->user_id = auth()->user()->id;
+        });
+    }
 
     /**
      * The attributes that should be cast to native types.
@@ -50,14 +52,19 @@ class Freelance extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'langue' => 'array',
-        'diplome' => 'array',
-        'certificat' => 'array',
-        'competences' => 'array',
+        'langue' =>
+        AsArrayObject::class,
+        'diplome' =>
+        AsArrayObject::class,
+        'certificat' =>
+        AsArrayObject::class,
+        'competences' =>
+        AsArrayObject::class,
         'taux_journalier' => 'decimal:2',
         'comptes' => 'array',
         'Sub_categorie' => 'array',
-        'localisation' => 'array',
+        'localisation' =>
+        AsArrayObject::class,
         'user_id' => 'integer',
         'category_id' => 'integer',
     ];
@@ -67,7 +74,22 @@ class Freelance extends Model
         return $this->belongsTo(User::class);
     }
 
-    
+    public function isOnline()
+    {
+
+        if ($this->user->is_online == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function ProjectResponse()
+    {
+        return $this->HasOne(ProjectResponse::class);
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -87,8 +109,4 @@ class Freelance extends Model
     {
         return $this->hasMany(Message::class);
     }
-
-  
-
-  
 }

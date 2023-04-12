@@ -29,8 +29,21 @@ class BodyMessage extends Component
         return [
             "echo-private:chat.{$auth_id},MessageSent" => 'broadcastedMessageReceived',
             "echo-private:chat.{$auth_id},MessageRead" => 'broadcastedMessageRead',
+            'refresh' => '$refresh',
             'loadConversation', 'pushMessage', 'loadmore', 'updateHeight', 'broadcastMessageRead', 'resetComponent'
         ];
+    }
+
+
+    public function deleteMessage($id)
+    {
+        //dd($id);
+
+        $newMessage = Message::find($id)->delete();
+        //$this->messages->destroy($newMessage);
+        $this->dispatchBrowserEvent('rowChatToBottom');
+        $this->emitSelf('refresh');
+        $this->emitTo('user.conversation.conversation-component', 'refresh');
     }
 
 

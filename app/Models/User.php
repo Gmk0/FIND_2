@@ -49,8 +49,15 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'last_activity'=> 'datetime',
+        'last_activity' => 'datetime',
     ];
+
+    public function canAccessFilament(): bool
+    {
+        return str_ends_with($this->email, '@find.com');
+    }
+
+
 
     /**
      * The accessors to append to the model's array form.
@@ -91,36 +98,50 @@ class User extends Authenticatable
         return $this->hasMany(MessageProject::class);
     }
 
-   
+    public function getIdFreelance()
+    {
+        return $this->freelance->id;
+    }
 
-     public function favorites()
+    public function isOnline()
+    {
+
+        if ($this->user->is_online == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+    public function favorites()
     {
         return $this->belongsToMany(Freelance::class, 'favorites')->withTimestamps();
-    } 
+    }
     public function receivers()
     {
-        return $this->hasMany(Message::class,'receiver_id');
+        return $this->hasMany(Message::class, 'receiver_id');
     }
-     public function senders()
+    public function senders()
     {
-        return $this->hasMany(Message::class,'sender_id');
+        return $this->hasMany(Message::class, 'sender_id');
     }
-    public function CommentsService(){
+    public function CommentsService()
+    {
         return $this->hasOne(CommentsService::class);
     }
 
     public function conversations()
     {
-    return $this->hasMany(conversation::class);
-}
-        public function notifcations()
+        return $this->hasMany(conversation::class);
+    }
+    public function notifcations()
     {
-    return $this->hasMany(Notification::class);
-}
-     public function favoris()
+        return $this->hasMany(Notification::class);
+    }
+    public function favoris()
     {
         return $this->belongsToMany(Freelance::class)->withTimestamps()->orderByDesc('favoris.created_at');
     }
-
-
 }

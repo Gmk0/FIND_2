@@ -19,8 +19,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('phone_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('is_online')->default(0);
+            $table->timestamp('last_activity')->default(now());
             $table->rememberToken();
-            $table->timestamps('last_activity');
+
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });

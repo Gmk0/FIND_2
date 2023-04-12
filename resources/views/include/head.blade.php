@@ -19,8 +19,8 @@
     </script>
     <title>{{ config('app.name') }}</title>
 
-    {{--
-    <link rel="stylesheet" href="/build/assets/app.21af9ae9.css">--}}
+
+    <link rel="stylesheet" href="/build/assets/app.css">
 
     <style>
         [x-cloak] {
@@ -29,7 +29,7 @@
     </style>
     @wireUiScripts
 
-    @vite(['resources/css/app.css','resources/js/app.js'])
+
     @livewireStyles
 
 </head>

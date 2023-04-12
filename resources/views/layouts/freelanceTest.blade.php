@@ -26,7 +26,7 @@
                 <div x-show="isSidebarOpen" class="fixed inset-y-0 z-10 w-16 bg-white"></div>
 
                 <!-- Mobile bottom bar -->
-               
+
 
                 <!-- Left mini bar -->
                 <nav aria-label="Options"

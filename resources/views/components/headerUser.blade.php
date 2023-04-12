@@ -10,14 +10,8 @@
             </svg>
         </button>
 
-        <h1 :class="isAside ?'hidden':'md:block hidden'" x-cloak
-            class="ml-3  text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
 
-            <a href="{{url('/')}}">
-                <img src="/images/logo/find_02.png" alt="logo-find" class="h-12 ">
-            </a>
-        </h1>
-        <button class="p-1 mr-5 -ml-1 rounded-md hidden md:block focus:outline-none focus:shadow-outline-amber"
+        <button class="hidden p-1 mr-5 -ml-1 rounded-md md:block focus:outline-none focus:shadow-outline-amber"
             @click="toggleAside()" aria-label="Menu">
             <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"

@@ -197,7 +197,7 @@
                                                     </div>
                                                     @else
                                                     <div class="flex items-center justify-center">
-                                                        <p class="italic text-grey"> Chargement...</p>
+                                                        <p class="italic text-grey">Choisissez une categorie</p>
                                                     </div>
                                                     @endempty
 

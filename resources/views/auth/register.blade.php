@@ -140,9 +140,10 @@
                             <div class="flex flex-wrap px-4">
                                 <x-validation-errors class="mb-2" />
                             </div>
-                            <div class="flex-auto p-6">
+                            <div class="flex-auto p-6" x-data="">
 
-                                <form role="form text-left" method="POST" action="{{ route('register') }}">
+                                <form role="form text-left" method="POST" action="{{ route('register') }}"
+                                    x-data="{ submitting: false }" x-on:submit="submitting = true">
                                     @csrf
 
                                     <div class="mb-4">
@@ -201,9 +202,13 @@
                                     </div>
                                     @endif
                                     <div class="text-center">
-                                        <button type="submit"
+                                        <button type="submit" :disabled="submitting"
                                             class="inline-block w-full px-6 py-3 mt-6 mb-2 text-xs font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer active:opacity-85 hover:scale-102 hover:shadow-soft-xs leading-pro ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 gradient hover:border-slate-700 hover:bg-slate-700 hover:text-white">
-                                            {{__('messages.enregistre')}}</button>
+
+                                            <span x-show="!submitting">{{__('messages.enregistre')}}</span>
+                                            <span x-show="submitting">{{__('Creation...')}}</span>
+                                        </button>
+
                                     </div>
                                     <p class="mt-4 mb-0 text-sm leading-normal">{{__('messages.AlreadyMessages')}}<a
                                             href="{{url('/login')}}"

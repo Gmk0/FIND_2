@@ -4,12 +4,36 @@ namespace App\Http\Livewire\User\Navigation;
 
 use Livewire\Component;
 use App\Models\Notification;
+use App\Events\ProjectResponse;
+use WireUi\Traits\Actions;
 
 class NotificationsComponent extends Component
 {
-    protected $listeners = [
-        'ServiceOrdered' => '$refresh'
-    ];
+
+    use Actions;
+
+    public function  getListeners()
+    {
+
+        $auth_id = auth()->user()->id;
+        return [
+            "echo-private:notify.{$auth_id},ProjectResponse" => 'broadcastedMessageReceived',
+            'ServiceOrdered' => '$refresh'
+
+        ];
+    }
+
+    public function broadcastedMessageReceived()
+    {
+
+
+        $this->notification()->success(
+            $title = "Notification",
+            $description = "Vous avez une nouvelle notifications",
+        );
+
+        $this->render();
+    }
     public function render()
     {
         return view('livewire.user.navigation.notifications-component', [

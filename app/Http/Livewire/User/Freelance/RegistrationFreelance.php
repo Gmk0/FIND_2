@@ -21,12 +21,12 @@ use Filament\Forms\Components\{FileUpload};
 use Illuminate\Support\Facades\Storage;
 
 
-class RegistrationFreelance extends Component implements Forms\Contracts\HasForms 
+class RegistrationFreelance extends Component implements Forms\Contracts\HasForms
 {
-    
-     use Forms\Concerns\InteractsWithForms;
-     use WithFileUploads;
-     
+
+    use Forms\Concerns\InteractsWithForms;
+    use WithFileUploads;
+
 
 
     public $user;
@@ -37,12 +37,12 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
     public $totalStep = 5;
     public $freelancer = [
         'site' => "",
-        'experience'=>"",
+        'experience' => "",
     ];
     public $photo;
     public $category = null;
-    public $localisation=['avenue'=>"",'commune'=>'','ville'=>""];
-    public $selectedDiplome=[];
+    public $localisation = ['avenue' => "", 'commune' => '', 'ville' => ""];
+    public $selectedDiplome = [];
     public $selectedLanguages = [];
     public $selectedCertificat = [];
     public $selectedSkill = array();
@@ -58,20 +58,20 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
     public $comptes = [];
     public $show = false;
     public $code;
-    public $succees=false;
+    public $succees = false;
 
 
     protected $queryString = [
         'step' => "expect"
     ];
 
-     protected function getFormSchema(): array
+    protected function getFormSchema(): array
     {
         return [
-        FileUpload:: make('photo')
-        ->image()
-        ->maxSize(2048)
-        ->required(),
+            FileUpload::make('photo')
+                ->image()
+                ->maxSize(2048)
+                ->required(),
         ];
     }
 
@@ -182,7 +182,7 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
 
 
                 ]);
-                
+
                 $this->addSkill();
                 $this->dispatchBrowserEvent('stepChanged');
 
@@ -253,7 +253,7 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
         $this->dispatchBrowserEvent('stepChanged');
     }
 
- 
+
 
     public function updatedSousCategorie($value)
     {
@@ -314,85 +314,76 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
 
     public function register()
     {
-        try{
-            
-             $this->validate([
-            "userAuth.email" => "required",
-            "userAuth.phone" => "required",
-        ]);
+        try {
 
-        if (empty($this->selectedLanguages) || empty($this->selectedSkill)  || empty($this->SousCategorie)) {
-            $this->modal = true;
-        } else {
+            $this->validate([
+                "userAuth.email" => "required",
+                "userAuth.phone" => "required",
+            ]);
 
-            $this->addImage($this->photo);
+            if (empty($this->selectedLanguages) || empty($this->selectedSkill)  || empty($this->SousCategorie)) {
+                $this->modal = true;
+            } else {
 
-            $data = [
-                'nom' => $this->freelancer['name'],
-                'prenom' => $this->freelancer['prenom'],
-                'identifiant' => $this->identifiant(),
-                'description' => $this->freelancer['description'],
-                'langue' =>$this->selectedLanguages,
-                
-                'diplome' => $this->selectedDiplome,
-                'certificat' => $this->selectedCertificat,
-                'site' => $this->freelancer['site'],
-                //'experience'=>$this->freelancer['experience'],
-                'competences' => $this->selectedSkill,
-                'taux_journalier' => $this->currency,
-                'comptes' => $this->comptes,
-                'Sub_categorie' => $this->SousCategorie,
-                'localisation' => $this->localisation,
-                'category_id' => $this->category,
-                'level'=>"basic"
+                $this->addImage($this->photo);
 
-            ];
+                $data = [
+                    'nom' => $this->freelancer['name'],
+                    'prenom' => $this->freelancer['prenom'],
+                    'identifiant' => $this->identifiant(),
+                    'description' => $this->freelancer['description'],
+                    'langue' => $this->selectedLanguages,
 
-            
-        
-             $this->succees=true;
+                    'diplome' => $this->selectedDiplome,
+                    'certificat' => $this->selectedCertificat,
+                    'site' => $this->freelancer['site'],
+                    'experience' => $this->freelancer['experience'],
+                    'competences' => $this->selectedSkill,
+                    'taux_journalier' => $this->currency,
+                    'comptes' => $this->comptes,
+                    'Sub_categorie' => $this->SousCategorie,
+                    'localisation' => $this->localisation,
+                    'category_id' => $this->category,
+                    'level' => "basic"
 
-               $this->step = 1;
-             $this->resetAll();
-           // dd($data);
-           /* if($result){
-                
-               
-                Notification::make()->title('Bienvenue Dans la partie freelancer')
-                ->success()
-                ->send();
-           
-
-            }*/
-
-            
+                ];
 
 
 
-          
-        };
-        }
-        catch(Exception $e){
+                //dd($data);
+
+
+                $result = Freelance::create($data);
+
+
+                // dd($data);
+                if ($result) {
+
+                    $this->succees = true;
+                    $this->step = 1;
+                    $this->resetAll();
+                    Notification::make()->title('Bienvenue Dans la partie freelancer')
+                        ->success()
+                        ->send();
+                }
+            };
+        } catch (Exception $e) {
             dd($e->getMessage());
         }
-
-       
     }
-     function addImage($files)
+    function addImage($files)
     {
-        $fileNames=[];
+        $fileNames = [];
 
         foreach ($files as $file) {
             $fileName = $file->getClientOriginalName();
 
             $file->storeAs('profiles-photos', $fileName);
-            $fileNames []=$fileName;
-         
+            $fileNames[] = $fileName;
         }
 
-        $this->user->profile_photo_path=$fileNames[0];
+        $this->user->profile_photo_path = $fileNames[0];
         $this->user->update();
-    
     }
 
 
@@ -410,36 +401,36 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
         ]);
     }
 
-    public function resetAll(){
-         $this->photo=null;
-   $this->category = null;
-    $this->localisation=[];
-    $this->selectedDiplome=[];
-    $this->selectedLanguages = [];
-    $this->selectedCertificat = [];
-    $this->selectedSkill = array();
-   
-    $this->SousCategorie = [];
-  
-    $this->currency=null;
-    $this->suggestions = [];
-   
-    $this->comptes = [];
+    public function resetAll()
+    {
+        $this->photo = null;
+        $this->category = null;
+        $this->localisation = [];
+        $this->selectedDiplome = [];
+        $this->selectedLanguages = [];
+        $this->selectedCertificat = [];
+        $this->selectedSkill = array();
+
+        $this->SousCategorie = [];
+
+        $this->currency = null;
+        $this->suggestions = [];
+
+        $this->comptes = [];
     }
 
-     public function identifiant()
+    public function identifiant()
     {
-                    // Générer une chaîne aléatoire unique de 16 caractères
-            $randomString = uniqid();
+        // Générer une chaîne aléatoire unique de 16 caractères
+        $randomString = uniqid();
 
-            // Extraire les 8 premiers caractères de la chaîne aléatoire pour obtenir l'ID unique de 8 caractères
-            $uniqueId = substr($randomString, 0, 5);
+        // Extraire les 8 premiers caractères de la chaîne aléatoire pour obtenir l'ID unique de 8 caractères
+        $uniqueId = substr($randomString, 0, 5);
 
-            // Compteur pour incrémenter la fin de l'ID unique
-            $counter = DB::table('freelances')->count() + 1;
+        // Compteur pour incrémenter la fin de l'ID unique
+        $counter = DB::table('freelances')->count() + 1;
 
-            // Concaténer le compteur à la fin de l'ID unique
-          return  $finalId = 'FD' . $uniqueId . $counter;
-
+        // Concaténer le compteur à la fin de l'ID unique
+        return  $finalId = 'FD' . $uniqueId . $counter;
     }
 }

@@ -6,8 +6,11 @@ use Livewire\Component;
 use App\Models\Freelance;
 use App\Models\Conversation;
 
+use Wireui\Traits\Actions;
+
 class ConversationComponent extends Component
 {
+  use Actions;
   public $conversations;
 
   public $selectedConversation = null;
@@ -43,6 +46,45 @@ class ConversationComponent extends Component
     $this->emitTo('user.conversation.send-message-u', 'updateSendMessage', $this->selectedConversation, $receiverId);
     $this->emitSelf('loadConversation', $this->selectedConversation);
   }
+
+
+  public function effacerConversation()
+  {
+
+
+    $this->notification()->confirm([
+      'title'       => 'etes  vous Sur?',
+      'description' => 'etes vous sure de supprimer la conversation?',
+      'icon'        => 'question',
+      'accept'      => [
+        'label'  => 'Yes, effacer ',
+        'method' => 'deleteConversation',
+
+      ],
+      'reject' => [
+        'label'  => 'No, cancel',
+        'method' => 'cancel',
+      ],
+    ]);
+  }
+
+  public function deleteConversation()
+  {
+    //dd($this->selectedConversation);
+
+    $data = $this->selectedConversation->delete();
+
+    $this->notifications()->success(
+      [
+        $title = "succees",
+      ]
+    );
+
+    $this->emitTo('user.conversation.body-message', 'refresh');
+    $this->emitTo('user.conversation.send-message-u', 'refresh');
+    $this->emitSelf('refresh');
+  }
+
 
   public function loadConversation(Conversation $conversation)
   {

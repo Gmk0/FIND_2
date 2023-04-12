@@ -67,10 +67,16 @@
                                     <div class="w-32 truncate"><span
                                             class="{{$freelance_id == $conversation->freelance_id? 'text-white':'text-gray-800'}}">{{$conversation->freelance->nom}}</span>
                                     </div>
-                                    <div class="w-32 truncate"><small
-                                            class="{{$freelance_id == $conversation->freelance_id? 'text-gray-50':'text-gray-600'}} truncate dark:text-gray-200">{{
-                                            $conversation->messages->last()?->body
-                                            }}</small></div>
+                                    <div class="w-32 truncate">
+                                        <small
+                                            class="{{$freelance_id == $conversation->freelance_id? 'text-gray-50':'text-gray-600'}} truncate dark:text-gray-200">
+
+                                            @if ($conversation->messages->last()?->sender_id == auth()->user()->id)
+                                            <span>vous:</span>
+                                            @endif
+
+                                            {{$conversation->messages->last()?->body}}</small>
+                                    </div>
                                 </div>
                                 <div class="text-right flex-2">
                                     <div><small
@@ -102,7 +108,7 @@
                     </div>
 
 
-                    <div x-bind:class="{'hidden': sidebarOpen, 'md:flex': !sidebarOpen}"
+                    <div x-data="{message:''}" x-bind:class="{'hidden': sidebarOpen, 'md:flex': !sidebarOpen}"
                         class="chat-area flex-1 bg-white  p-2 rounded-md flex h-[550px]  flex-col">
 
                         <div x-data="" class="flex gap-3 bg-gray-100 z-5 dark:bg-gray-800">
@@ -112,24 +118,41 @@
 
                             @empty($selectedConversation)
                             <h2
-                                class="py-1 mb-4 text-lg text-center text-gray-800 border-b-2 border-gray-200 md:text-xl dark:text-white md:mb-8">
+                                class="py-1 mb-4 text-base text-center text-gray-800 border-b-2 border-gray-200 md:text-xl dark:text-white md:mb-8">
 
                                 <b>Selectionnez une Conversation
                                 </b>
                             </h2>
                             @else
                             <h2
-                                class="flex flex-col py-1 mx-4 mb-2 text-lg text-gray-800 border-b-2 border-gray-200 md:text-xl dark:text-white md:mb-4">
+                                class="flex justify-between flex-grow py-1 mx-4 mb-2 text-lg text-gray-800 border-b-2 border-gray-200 md:text-xl dark:text-white md:mb-4">
 
-                                <b>{{$selectedConversation->freelance->nom}}</b>
-                                @if($selectedConversation->freelance->user->is_online)
-                                <span class="mt-1 text-sm text-green->600">
-                                    online<span>
-                                        @else
-                                        <span class="mt-1 text-sm text-gray-600">
-                                            {{$selectedConversation->freelance->user->last_activity?->DiffForHumans()}}<span>
+                                <div class="flex flex-col">
+                                    <b>{{$selectedConversation->freelance->nom}}</b>
+                                    @if($selectedConversation->freelance->user->is_online)
+                                    <span class="mt-1 text-sm text-green->600">
+                                        online<span>
+                                            @else
+                                            <span class="mt-1 text-sm text-gray-600">
+                                                last seen
+                                                {{$selectedConversation->freelance->user->last_activity?->DiffForHumans()}}<span>
 
-                                                @endif
+                                                    @endif
+                                </div>
+                                <div class="flex items-end gap-4">
+                                    <x-button sm secondary icon="clipboard-list" />
+                                    <div>
+                                        <x-dropdown>
+                                            <x-dropdown.item label="Envoyer un fichier " />
+                                            <x-dropdown.item label="Maquer non lue" />
+                                            <x-dropdown.item label="Favoris" />
+                                            <x-dropdown.item wire:click="effacerConversation()" label="Effacer" />
+                                            <x-dropdown.item label="Bloquer l'utilisateur" />
+                                        </x-dropdown>
+                                    </div>
+
+                                </div>
+
 
                             </h2>
                             @endempty

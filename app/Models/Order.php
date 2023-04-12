@@ -76,6 +76,11 @@ class Order extends Model
         return $this->HasMany(Rapport::class);
     }
 
+
+    public function feedback(): HasOne
+    {
+        return $this->hasOne(feedback::class);
+    }
     public function notification()
     {
         return $this->hasOne(Notification::class, 'data->order_id');

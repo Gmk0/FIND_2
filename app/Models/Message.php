@@ -19,6 +19,8 @@ class Message extends Model
         'sender_id',
         'receiver_id',
         'conversation_id',
+        'service_id',
+        'file',
         'body',
         'is_read',
         'type',
@@ -52,6 +54,12 @@ class Message extends Model
     {
         return $this->belongsTo(User::class, 'sender_id');
     }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
 
     public function receiverUser()
     {
