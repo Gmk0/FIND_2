@@ -34,31 +34,99 @@ class EditService extends Component implements Forms\Contracts\HasForms
 
     public $serviceId;
     public Service $service;
+    public $serviceEdit;
+    public $description;
+    public $basic_support;
+    public $samples;
+
+    protected $listeners = ['refresh' => '$refresh'];
 
     public function mount($id)
     {
         $this->service = Service::find($id);
+        $this->serviceEdit
+            = Service::find($id)->toArray();
         $this->serviceId = $id;
         $this->form->fill([
-            'title' => $this->service->title,
-            'description' => $this->service->description,
-            'basic_price' => $this->service->basic_price,
-            'basic_revision' => $this->service->basic_revision,
-            'basic_support' => $this->service->basic_support,
-            'tags' => $this->service->sub_categorie,
-            'basic_delivery_time' => $this->service->basic_delivery_time,
-            'samples' => $this->service->samples,
+            //'title' => $this->service->title,
+            'description' => $this->serviceEdit['description'],
+            //'basic_price' => $this->service->basic_price,
+            //'basic_revision' => $this->service->basic_revision,
+            'basic_support' => $this->serviceEdit['basic_support'],
+            //'tags' => $this->service->sub_categorie,
+            //'basic_delivery_time' => $this->service->basic_delivery_time,
+            'samples' => $this->serviceEdit['samples'],
             // 'files' => json_encode($),
 
-            'format' => json_decode($this->service->sub_categorie),
+            // 'format' => json_decode($this->service->sub_categorie),
 
         ]);
+    }
+
+    public function submit()
+    {
+        $this->form->validate();
+
+        $this->service->update([
+            'description' => $this->description,
+            'basic_support' => $this->basic_support,
+            'samples' => $this->samples,
+
+        ]);
+
+        $this->emitSelf('refresh');
+    }
+
+    public function effacerImage($key)
+    {
+    }
+    public function modifierFirst()
+    {
+        $this->validate([
+            'serviceEdit.title' => 'required',
+            'serviceEdit.basic_price' => 'required',
+            'serviceEdit.basic_delivery_time' => 'required',
+            'serviceEdit.basic_revision' => 'required',
+        ]);
+
+        $this->service->update([
+            'title' => $this->serviceEdit['title'],
+            'basic_price' => $this->serviceEdit['basic_price'],
+            'basic_delivery_time' => $this->serviceEdit['basic_delivery_time'],
+            'basic_revision' => $this->serviceEdit['basic_revision'],
+        ]);
+
+        $this->emitSelf('refresh');
     }
 
     protected function getFormSchema(): array
     {
         return [
-            Wizard::make([
+
+
+
+
+
+            MarkdownEditor::make('description'),
+
+            RichEditor::make('samples')->label('Quelques Realisation lier')
+                ->fileAttachmentsDisk('local')
+                ->fileAttachmentsDirectory('attachments'),
+            MarkdownEditor::make('basic_support')
+                ->disableAllToolbarButtons()
+                ->enableToolbarButtons(['orderedList', 'bulletList'])
+
+                ->label('Le Support en Rapport a ce projet')
+                ->placeholder('Utiliser les listes')
+
+
+
+
+
+
+
+
+            /* Wizard::make([
                 Wizard\Step::make('Titre')
                     ->schema([
                         TextInput::make('title')->label('Titre')->placeholder('Je vais photographier votre mariage civil'),
@@ -136,7 +204,7 @@ class EditService extends Component implements Forms\Contracts\HasForms
 
 
 
-
+*/
             // ...
         ];
     }
