@@ -33,6 +33,8 @@ Route::controller(ServiceController::class)->group(function () {
 
     Route::get('/services', 'services')->name('services');
     Route::get('/categories', 'categories')->name('categories');
+
+    Route::get('/checkout/status', 'checkout')->name('checkoutStatus');
 });
 
 //find freelance

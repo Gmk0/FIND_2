@@ -1,4 +1,4 @@
-<div x-data="app()" class="min-w-screen dark:bg-gray-900 min-h-screen pt-24 bg-gray-100 py-5">
+<div x-data="app()" class="min-h-screen py-5 pt-20 bg-gray-50 min-w-screen dark:bg-gray-900">
 
     <div class="md:px-12">
         <div>
@@ -6,9 +6,57 @@
                 @include('include.breadcumb',['serviceAll'=>'services','checkout'=>'checkout'])
             </div>
             <div class="mb-2">
-                <h1 class="text-3xl md:text-5xl font-bold text-gray-600 dark:text-gray-200">Checkout.</h1>
+                <h1 class="text-3xl font-bold text-gray-600 md:text-5xl dark:text-gray-200">Checkout.</h1>
             </div>
 
+        </div>
+        <div>
+
+        </div>
+
+        <div>
+
+
+
+
+            @if ($errors->has('message'))
+            <div
+                class="relative flex items-center max-w-xl overflow-hidden rounded shadow-md dark:bg-gray-600 dark:text-gray-100">
+                <div class="flex items-center self-stretch flex-shrink-0 px-3 dark:bg-gray-700 dark:text-violet-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        class="w-8 h-8">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <div class="flex-1 p-4">
+                    <h3 class="text-xl font-bold">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Erreur</font>
+                        </font>
+                    </h3>
+                    <p class="text-sm dark:text-gray-400">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Le mot de passe est incorrect. </font>
+                            <font style="vertical-align: inherit;">Avez-vous besoin de </font>
+                        </font>
+                        <a href="#" rel="referrer noopener" class="underline">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">récupérer votre mot de passe ?</font>
+                            </font>
+                        </a>
+                    </p>
+                </div>
+                <button class="absolute top-2 right-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                        class="w-4 h-4 p-2 rounded cursor-pointer">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            @endif
         </div>
 
         @if(Session::has('cart'))
@@ -16,49 +64,88 @@
 
 
         <div
-            class="w-full mx-0 bg-white dark:bg-gray-800 border-t rounded-md border-b border-gray-200 px-5 py-10 text-gray-800">
+            class="w-full px-5 py-10 mx-0 text-gray-800 bg-white border-t border-b border-gray-200 rounded-md dark:bg-gray-800">
             <div class="w-full">
-                <div class="-mx-3 md:flex items-start">
+                <div class="items-start -mx-3 md:flex">
                     <div class="px-3 md:w-7/12 lg:pr-10">
-                        @foreach ($products as $item)
-                        <div class="w-full mx-auto text-gray-800 font-light mb-6 border-b border-gray-200 pb-6">
-                            <div class="w-full flex items-center">
-                                <div class="overflow-hidden rounded-lg w-16 h-16 bg-gray-50 border border-gray-200">
-                                    <img src="{{Storage::disk('local')->url('public/service/'.$item['image']) }}"
-                                        alt="">
+
+                        <ul class="flex flex-col divide-y divide-gray-700">
+                            @foreach ($products as $item)
+                            <li class="flex flex-col py-6 sm:flex-row sm:justify-between">
+                                <div class="flex w-full space-x-2 sm:space-x-4">
+                                    <img class="flex-shrink-0 object-cover w-20 h-20 rounded outline-none dark:border-transparent sm:w-32 sm:h-32 dark:bg-gray-500"
+                                        src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-1.2.1&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80"
+                                        alt="Polaroid camera">
+                                    <div class="flex flex-col justify-between w-full pb-4">
+                                        <div class="flex justify-between w-full pb-2 space-x-2">
+                                            <div class="space-y-1">
+                                                <h3 class="text-lg font-semibold leading-snug sm:pr-8">
+                                                    {{$item['title']}}
+                                                </h3>
+                                                <p class="text-sm dark:text-gray-400">Classic</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-lg font-semibold">{{$item['basic_price']}}€</p>
+                                                <p class="text-sm line-through dark:text-gray-600">75.50€</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex text-sm divide-x">
+                                            <button type="button" class="flex items-center px-2 py-1 pl-0 space-x-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                                    class="w-4 h-4 fill-current">
+                                                    <path
+                                                        d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z">
+                                                    </path>
+                                                    <rect width="32" height="200" x="168" y="216"></rect>
+                                                    <rect width="32" height="200" x="240" y="216"></rect>
+                                                    <rect width="32" height="200" x="312" y="216"></rect>
+                                                    <path
+                                                        d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z">
+                                                    </path>
+                                                </svg>
+                                                <span>Remove</span>
+                                            </button>
+                                            <button type="button" class="flex items-center px-2 py-1 space-x-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                                    class="w-4 h-4 fill-current">
+                                                    <path
+                                                        d="M453.122,79.012a128,128,0,0,0-181.087.068l-15.511,15.7L241.142,79.114l-.1-.1a128,128,0,0,0-181.02,0l-6.91,6.91a128,128,0,0,0,0,181.019L235.485,449.314l20.595,21.578.491-.492.533.533L276.4,450.574,460.032,266.94a128.147,128.147,0,0,0,0-181.019ZM437.4,244.313,256.571,425.146,75.738,244.313a96,96,0,0,1,0-135.764l6.911-6.91a96,96,0,0,1,135.713-.051l38.093,38.787,38.274-38.736a96,96,0,0,1,135.765,0l6.91,6.909A96.11,96.11,0,0,1,437.4,244.313Z">
+                                                    </path>
+                                                </svg>
+                                                <span>Add to favorites</span>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="flex-grow pl-3">
-                                    <h6 class="font-semibold uppercase text-gray-600 dark:text-gray-200">
-                                        {{$item['title']}}</h6>
-                                    <p class="text-gray-400 dark:text-gray-50">{{$item['quantity']}}</p>
-                                </div>
-                                <div>
-                                    <span
-                                        class="font-semibold text-gray-600 dark:text-gray-200 text-xl">${{$item['basic_price']}}
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                        <div class="mb-6 pb-6 border-b border-gray-200">
-                            <div class="-mx-2 flex items-end justify-end">
+                            </li>
+                            @endforeach
+
+                        </ul>
+
+
+
+
+
+                        <div class="pb-6 mb-6 border-b border-gray-200">
+                            <div class="flex items-end justify-end -mx-2">
                                 <div class="flex-grow px-2 lg:max-w-xs">
                                     <label
-                                        class="text-gray-600 dark:text-gray-200 font-semibold text-sm mb-2 ml-1">Discount
+                                        class="mb-2 ml-1 text-sm font-semibold text-gray-600 dark:text-gray-200">Discount
                                         code</label>
                                     <div>
                                         <input
-                                            class="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                                            class="w-full px-3 py-2 transition-colors border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500"
                                             placeholder="XXXXXX" type="text" />
                                     </div>
                                 </div>
                                 <div class="px-2">
                                     <button
-                                        class="block w-full max-w-xs mx-auto border border-transparent bg-gray-400 hover:bg-gray-500 focus:bg-gray-500 text-white rounded-md px-5 py-2 font-semibold">APPLY</button>
+                                        class="block w-full max-w-xs px-5 py-2 mx-auto font-semibold text-white bg-gray-400 border border-transparent rounded-md hover:bg-gray-500 focus:bg-gray-500">APPLY</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-6 pb-6 border-b border-gray-200 text-gray-800">
-                            <div class="w-full flex mb-3 items-center">
+                        <div class="pb-6 mb-6 text-gray-800 border-b border-gray-200">
+                            <div class="flex items-center w-full mb-3">
                                 <div class="flex-grow">
                                     <span class="text-gray-600 dark:text-gray-200">Subtotal</span>
                                 </div>
@@ -67,7 +154,7 @@
                                         class="font-semibold dark:text-gray-50">${{Session('cart')->totalPrice}}</span>
                                 </div>
                             </div>
-                            <div class="w-full flex items-center">
+                            <div class="flex items-center w-full">
                                 <div class="flex-grow">
                                     <span class="text-gray-600 dark:text-gray-200">Taxes (GST)</span>
                                 </div>
@@ -76,53 +163,29 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-6 pb-6 border-b border-gray-200 md:border-none text-gray-800 text-xl">
-                            <div class="w-full flex items-center">
+                        <div class="pb-6 mb-6 text-xl text-gray-800 border-b border-gray-200 md:border-none">
+                            <div class="flex items-center w-full">
                                 <div class="flex-grow">
                                     <span class="text-gray-600 dark:text-gray-200">Total</span>
                                 </div>
                                 <div class="pl-3">
-                                    <span class="font-semibold text-gray-400 dark:text-gray-20 text-sm"></span> <span
+                                    <span class="text-sm font-semibold text-gray-400 dark:text-gray-20"></span> <span
                                         class="font-semibold">${{Session('cart')->totalPrice}}</span>
                                 </div>
                             </div>
                         </div>
 
 
-                        <div
-                            class="w-full hdidden mx-auto rounded-lg bg-white  dark:bg-gray-700 border border-gray-200 p-3 text-gray-800 font-light mb-6">
-                            <div class="w-full flex flex-col gap-2 mb-3 ">
-                                <div class="w-32">
-                                    <span class="text-gray-600 dark:text-gray-200 font-semibold">Contact</span>
-                                </div>
 
-                                <x-input placeholder='name' />
-
-
-                            </div>
-                            <div class="w-full flex flex-col gap-2 ">
-                                <div class="w-32">
-                                    <span class="text-gray-600 dark:text-gray-200 font-semibold">Billing Address</span>
-                                </div>
-
-                                <x-input placeholder='adrresse 1' />
-                                <x-input placeholder='adrresse 1' />
-                                <x-input placeholder='commune' />
-                                <x-input placeholder='Ville' />
-                                <x-input placeholder='Pays' />
-
-
-                            </div>
-                        </div>
                     </div>
                     <div class="px-3 md:w-5/12">
 
                         <div
-                            class="w-full sticky top-8 mx-auto rounded-lg bg-white dark:bg-gray-700 border border-gray-200 text-gray-800 font-light mb-6">
+                            class="sticky w-full mx-auto mb-6 font-light text-gray-800 bg-white border border-gray-200 rounded-lg top-8 dark:bg-gray-900">
                             <div class="w-full p-3 border-b border-gray-200 ">
                                 <div class="mb-5">
                                     <label for="type1" class="flex items-center cursor-pointer">
-                                        <input type="checkbox" class="form-radio h-5 w-5 text-indigo-500"="type"
+                                        <input type="checkbox" class="w-5 h-5 text-indigo-500 form-radio"="type"
                                             id="type1" x-model="isCard" @click="isOther=false">
                                         <img src="https://leadershipmemphis.org/wp-content/uploads/2020/08/780370.png"
                                             class="h-6 ml-3">
@@ -130,31 +193,31 @@
                                 </div>
                                 <div x-collapse x-cloak x-show="isCard">
                                     <div class="mb-3">
-                                        <label class="text-gray-600 dark:text-gray-200 font-semibold text-sm mb-2 ml-1">
+                                        <label class="mb-2 ml-1 text-sm font-semibold text-gray-600 dark:text-gray-200">
                                             on
                                             card</label>
                                         <div>
                                             <input
-                                                class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                                                class="w-full px-3 py-2 mb-1 transition-colors border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500"
                                                 placeholder="John Smith" type="text" />
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <label
-                                            class="text-gray-600 dark:text-gray-200 font-semibold text-sm mb-2 ml-1">Card
+                                            class="mb-2 ml-1 text-sm font-semibold text-gray-600 dark:text-gray-200">Card
                                             number</label>
                                         <div>
                                             <x-input placeholder="0000 0000 0000 0000" />
                                         </div>
                                     </div>
-                                    <div class="mb-3 -mx-2 flex items-end">
-                                        <div class="px-2 w-1/4">
+                                    <div class="flex items-end mb-3 -mx-2">
+                                        <div class="w-1/4 px-2">
                                             <label
-                                                class="text-gray-600 dark:text-gray-200 font-semibold text-sm mb-2 ml-1">Expiration
+                                                class="mb-2 ml-1 text-sm font-semibold text-gray-600 dark:text-gray-200">Expiration
                                                 date</label>
                                             <div>
                                                 <select
-                                                    class="form-select w-full px-3 py-2 mb-1 border dark:text-gray-800 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                                                    class="w-full px-3 py-2 mb-1 transition-colors border border-gray-200 rounded-md cursor-pointer form-select dark:text-gray-800 focus:outline-none focus:border-indigo-500">
                                                     <option value="01">01 - January</option>
                                                     <option value="02">02 - February</option>
                                                     <option value="03">03 - March</option>
@@ -170,9 +233,9 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="px-2 w-1/4">
+                                        <div class="w-1/4 px-2">
                                             <select
-                                                class="form-select dark:text-gray-800 w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                                                class="w-full px-3 py-2 mb-1 transition-colors border border-gray-200 rounded-md cursor-pointer form-select dark:text-gray-800 focus:outline-none focus:border-indigo-500">
 
                                                 <option value="2023">2023</option>
                                                 <option value="2024">2024</option>
@@ -183,65 +246,63 @@
                                                 <option value="2029">2029</option>
                                             </select>
                                         </div>
-                                        <div class="px-2 w-1/4">
+                                        <div class="w-1/4 px-2">
                                             <label
-                                                class="text-gray-600 dark:text-gray-200 font-semibold text-sm mb-2 ml-1">Security
+                                                class="mb-2 ml-1 text-sm font-semibold text-gray-600 dark:text-gray-200">Security
                                                 code</label>
                                             <div>
                                                 <input
-                                                    class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                                                    class="w-full px-3 py-2 mb-1 transition-colors border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500"
                                                     placeholder="000" type="text" />
                                             </div>
                                         </div>
+
+                                    </div>
+                                    <div>
+                                        <button wire:click="payer()" wire:loading.attr='disabled'
+                                            class="block w-full max-w-xs px-3 py-2 mx-auto font-semibold text-white bg-indigo-500 rounded-lg hover:bg-indigo-700 focus:bg-indigo-700"><i
+                                                class="mr-1 mdi mdi-lock-outline"></i> <span
+                                                wire:loading.remove>PAYER</span>
+                                            <span wire:loading wire:target='payer'>PAIEMENT...</span>
+                                        </button>
+
                                     </div>
                                 </div>
                             </div>
                             <div class="w-full p-6 border-b border-gray-200">
                                 <div class="mb-5">
                                     <label for="type1" class="flex items-center cursor-pointer">
-                                        <input type="checkbox" class="form-radio h-5 w-5 text-indigo-500"="type"
+                                        <input type="checkbox" class="w-5 h-5 text-indigo-500 form-radio"="type"
                                             id="type1" x-model="isOther" @click="isCard=false">
-                                        <label class="text-gray-600 dark:text-gray-200 font-semibold text-sm mb-2 ml-1">
-                                            Autres</label>
+                                        <img src="/images/icon/maxicash.png" class="h-6 ml-3">
+
                                     </label>
                                 </div>
                                 <div x-collapse x-cloak x-show="isOther">
-                                    <div class="mb-3">
-                                        <label class="text-gray-600 dark:text-gray-200 font-semibold text-sm mb-2 ml-1">
-                                            on
-                                            Mobile</label>
-                                        <div>
-                                            <x-button primary lg label='Mobile' />
-                                        </div>
+
+                                    <div class="flex flex-col gap-4 mb-3">
+
+
+                                        <x-input label="Nom" wire:model.defer="name" />
+
+
+
+                                        <x-input label="telephone" wire:model.defer="telephone" />
+
+                                        <button wire:click="checkoutmaxi()" wire:loading.attr='disabled'
+                                            class="block w-full max-w-xs px-3 py-2 mx-auto font-semibold text-white bg-indigo-500 rounded-lg hover:bg-indigo-700 focus:bg-indigo-700"><i
+                                                class="mr-1 mdi mdi-lock-outline"></i> <span
+                                                wire:loading.remove>PAYER</span>
+                                            <span wire:loading wire:target='checkoutmaxi'>PAIEMENT...</span>
+                                        </button>
+
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="text-gray-600 dark:text-gray-200 font-semibold text-sm mb-2 ml-1">
-                                            on
-                                            Maxi Cash</label>
-                                        <div>
-                                            <x-button primary lg label='Maxi Cash' />
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="text-gray-600 dark:text-gray-200 font-semibold text-sm mb-2 ml-1">
-                                            on
-                                            PayPal</label>
-                                        <div>
-                                            <x-button primary lg label='PayPal' />
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
 
                         </div>
-                        <div>
-                            <button wire:click="payer()" wire:loading.attr='disabled'
-                                class="block w-full  max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-2 font-semibold"><i
-                                    class="mdi mdi-lock-outline mr-1"></i> <span wire:loading.remove>PAYER</span>
-                                <span wire:loading wire:target='payer'>PAIEMENT...</span>
-                            </button>
 
-                        </div>
 
 
 
@@ -250,6 +311,8 @@
             </div>
         </div>
 
+
+
         @else
 
         @endif
@@ -257,6 +320,10 @@
     </div>
     {{-- Because she competes with no one, no one can compete with her. --}}
 </div>
+
+
+
+
 
 @push('script')
 

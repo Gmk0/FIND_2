@@ -193,20 +193,7 @@
 
 
     </li>
-    <li class="relative px-6 py-3">
 
-        @if(request()->routeIs('transactionUser'))
-        <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-amber-600" aria-hidden="true"></span>
-        @endif
-
-        <x-asideLinkNav href="{{route('transactionUser')}}" :active="request()->routeIs('transactionUser')">
-            <ion-icon name="card-outline" class="w-6 h-6"></ion-icon>
-            <span class="ml-4">Evalution</span>
-        </x-asideLinkNav>
-
-
-
-    </li>
     <li class="relative px-6 py-3">
 
 

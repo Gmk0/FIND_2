@@ -79,12 +79,13 @@
 
 
                         <div x-data="{ image: @entangle('images') }" class="flex flex-col items-center justify-center">
-                            <img :src="image" class="object-cover w-full h-full mr-4 rounded-md" alt="Product Name">
+                            <img :src="'/storage/messages/'image" class="object-cover w-full h-full mr-4 rounded-md"
+                                alt="Product Name">
 
 
                             <div class="flex justify-between mt-4 space-x-2 items-cetnter">
                                 @foreach ($service->files as $key=>$value)
-                                <img @click="image = '{{$value}}'" src="{{asset('public/storage/service/'.$value)}}"
+                                <img @click="image = '{{$value}}'" src="{{ url('/storage/messages/' . $value) }}"
                                     alt="Product Name"
                                     class="w-16 h-full border cursor-pointer xl:w-16 2xl:w-24 hover:opacity-80">
                                 @endforeach
@@ -245,6 +246,8 @@
                                 {{$serviceOther->freelance->user->name}} •
                                 {{$serviceOther->category->name}}</p>
                             <div class="flex items-center justify-between">
+
+
                                 <div class="flex items-center">
                                     <svg class="w-4 h-4 mr-1 text-yellow-500 fill-current"
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

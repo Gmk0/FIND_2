@@ -3,11 +3,11 @@
 @section('content')
 
 <section
-    class="z-40 min-h-screen relative text-neutral-50 pt-20 px-4 overflow-hidden 2xl:px-60  grid grid-cols-1 gap-8 lg:grid-cols-12 relative bg-skin-fill dark:bg-gray-900">
+    class="relative z-40 grid min-h-screen grid-cols-1 gap-8 px-4 pt-20 overflow-hidden text-neutral-50 2xl:px-60 lg:grid-cols-12 bg-skin-fill dark:bg-gray-800">
     <div
         class="[mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] absolute bottom-[-100px] md:w-[800px] md:h-[800px] lg:top-[120px] lg:right-[-100px] xl:right-0 w-[500px] h-[500px] 2xl:w-[1026px] 2xl:h-[1026px]">
         <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true"
-            class="absolute inset-0 h-full w-full animate-spin-slow">
+            class="absolute inset-0 w-full h-full animate-spin-slow">
             <path d="M1025 513c0 282.77-229.23 512-512 512S1 795.77 1 513 230.23 1 513 1s512 229.23 512 512Z"
                 stroke="#D4D4D4" stroke-opacity="0.7"></path>
             <path d="M513 1025C230.23 1025 1 795.77 1 513" stroke="url(#:R65m:-gradient-1)" stroke-linecap="round">
@@ -20,7 +20,7 @@
             </defs>
         </svg>
         <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true"
-            class="absolute inset-0 h-full w-full animate-spin-slow">
+            class="absolute inset-0 w-full h-full animate-spin-slow">
             <path
                 d="M913 513c0 220.914-179.086 400-400 400S113 733.914 113 513s179.086-400 400-400 400 179.086 400 400Z"
                 stroke="#D4D4D4" stroke-opacity="0.7"></path>
@@ -36,22 +36,22 @@
         </svg>
     </div>
 
-    <div class="col-span-6 xl:place-self-center mb-8 mt-8 xl:mt-0 lg:mb-0 z-50">
-        <h1 class="text-2xl md:text-3xl xl:text-5xl font-bold text-center lg:text-left">
+    <div class="z-20 col-span-6 px-4 mt-8 mb-8 xl:place-self-center xl:mt-0 lg:mb-0">
+        <h1 class="text-2xl font-bold text-center md:text-3xl xl:text-5xl lg:text-left">
             Votre satisfaction dans nos services Freelance <br />
 
         </h1>
-        <p class="my-8 max-w-lg mx-auto lg:mx-0 text-center lg:text-left opacity-70">
-            .
+        <p class="max-w-lg mx-auto my-8 text-center lg:mx-0 lg:text-left opacity-70">
+
         </p>
-        <div class="flex flex-col lg:flex-row items-center">
+        <div class="flex flex-col items-center lg:flex-row">
             <button
-                class="w-full lg:w-max px-4 py-3 bg-neutral-50 hover:cursor-pointer text-cyan-600 font-bold rounded-lg lg:mr-8 mb-4 lg:mb-0">
+                class="w-full px-4 py-3 mb-4 font-bold rounded-lg lg:w-max bg-neutral-50 hover:cursor-pointer text-cyan-600 lg:mr-8 lg:mb-0">
                 Get started for free
             </button>
         </div>
     </div>
-    <div class="col-span-6 relative hidden md:flex z-50">
+    <div class="relative z-50 hidden col-span-6 md:flex">
         <picture>
             <source srcset="/images/hero/hero_women.webp" type="image/webp" />
             <source srcset="/images/hero/hero_women.png" type="image/png" />
@@ -75,7 +75,7 @@
                     <span class="text-amber-600">FIND</span>
                 </h1>
 
-                <div class="grid gap-2 grid-cols-1 mx-auto md:mx-0 md:grid-cols-2">
+                <div class="grid grid-cols-1 gap-2 mx-auto md:mx-0 md:grid-cols-2">
 
                     <a href="{{url('find-freelancer')}}"
                         class="w-10/12 rounded-md mx-auto bg-amber-600 px-8 py-2.5 font-semibold text-white shadow-md shadow-amber-500/20 hover:bg-amber-700 duration-200 sm:w-auto">Trouver
@@ -96,17 +96,17 @@
                 </div>
                 <div class="grid grid-cols-2 gap-6 mt-6 px-auto md:gap-2 md:grid-cols-3 ">
                     <img src="/images/brand/brand (1).png" alt="brand"
-                        class="w-32 h-16 px-5 py-3 duration-200 bg-gray-50 border rounded-lg shadow-md cursor-pointer border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                        class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
                     <img src="/images/brand/influeworld.png" alt="brand"
-                        class="w-32 h-16 px-5 py-3 duration-200 bg-gray-50 border rounded-lg shadow-md cursor-pointer border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                        class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
                     <img src="/images/brand/influnet2.jpg" alt="brand"
                         class="w-32 h-16 px-5 py-3 bg-white border rounded-lg shadow-md cursor-pointer duration border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
                     <img src="/images/brand/udemy.PNG" alt="brand"
-                        class="w-32 h-16 px-5 py-3 duration-200 bg-gray-50 border rounded-lg shadow-md cursor-pointer border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                        class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
                     <img src="/images/brand/microsoft.svg" alt="brand"
-                        class="w-32 h-16 px-5 py-3 duration-200 bg-gray-50 border rounded-lg shadow-md cursor-pointer border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                        class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
                     <img src="/images/brand/airbnb.svg" alt="brand"
-                        class="w-32 h-16 px-5 py-3 duration-200 bg-gray-50 border rounded-lg shadow-md cursor-pointer md:h-none border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
+                        class="w-32 h-16 px-5 py-3 duration-200 border rounded-lg shadow-md cursor-pointer bg-gray-50 md:h-none border-blue-300/20 shadow-blue-500/5 hover:scale-95 sm:w-36">
                 </div>
             </div>
 
@@ -115,7 +115,7 @@
             <div data-aos="fade-left" data-aos-duration="800" class="hidden w-full px-4 lg:block md:w-6/12">
                 <div class="lg:ml-auto lg:text-right">
                     <div class="relative z-10 inline-block pt-11 lg:pt-0">
-                        <img src="images/hero/women.jpeg" alt="hero section img" class="rounded-full w-3/4 lg:ml-auto">
+                        <img src="images/hero/women.jpeg" alt="hero section img" class="w-3/4 rounded-full lg:ml-auto">
                     </div>
                 </div>
             </div>
@@ -192,7 +192,7 @@
     <div class="py-16">
         <div class="px-6 m-auto text-gray-600 xl:container md:px-12 xl:px-16">
             <div
-                class="flex-row-reverse justify-center space-y-6 rounded-lg bg-gray-100 dark:bg-gray-800 lg:p-16 md:flex md:gap-6 md:space-y-0 lg:items-center">
+                class="flex-row-reverse justify-center space-y-6 bg-gray-100 rounded-lg dark:bg-gray-800 lg:p-16 md:flex md:gap-6 md:space-y-0 lg:items-center">
                 <div data-aos="flip-left" data-aos-duration="800" class="md:5/12 lg:w-1/2">
                     <img src="/images/services/presentation3.png" alt="image"
                         class="rounded-lg dark:bg-gray-800 bg-skin-fill" loading="lazy" width="" height="" />
@@ -288,7 +288,7 @@
         <!-- box wrapper -->
         <div class="grid grid-cols-2 gap-4 md:gap-6 md:grid-cols-4 xl:gap-8">
             <div
-                class="flex flex-col items-center px-2 py-4 duration-200 bg-gray-50 border shadow-lg cursor-pointer group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                class="flex flex-col items-center px-2 py-4 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                 <img src="/images/services/develloper.png" class="w-20 h-20 rounded-md" alt="">
                 <h4
                     class="mt-3 mb-1 md:text-[20px] text-[16px]   font-semibold text-slate-600 duration-200 group-hover:text-white">
@@ -297,7 +297,7 @@
             </div>
 
             <div
-                class="flex flex-col items-center px-5 py-8 duration-200 bg-gray-50 border shadow-lg cursor-pointer group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                 <img src="/images/services/designer.png" class="w-20 h-20 rounded-md" alt="">
                 <h4
                     class="mt-3 mb-1 md:text-[20px] text-[16px] font-semibold text-slate-600 duration-200 group-hover:text-white">
@@ -306,7 +306,7 @@
             </div>
 
             <div
-                class="flex flex-col items-center px-5 py-8 duration-200 bg-gray-50 border shadow-lg cursor-pointer group rounded-xl border-blue-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-blue-500/10 shadow-amber-300/10 hover:bg-amber-600">
                 <img src="/images/services/photo.png" class="w-20 h-20 rounded-md" alt="">
                 <h4
                     class="mt-3 mb-1 md:text-[20px] text-[16px]  font-semibold text-slate-600 duration-200 group-hover:text-white">
@@ -315,7 +315,7 @@
             </div>
 
             <div
-                class="flex flex-col items-center px-5 py-8 duration-200 bg-gray-50 border shadow-lg cursor-pointer group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                 <img src="/images/services/marketing.png" class="w-20 h-20 rounded-md" alt="">
                 <h4
                     class="mt-3 mb-1 md:text-[20px] text-[16px] font-semibold text-slate-600 duration-200 group-hover:text-white">
@@ -324,7 +324,7 @@
             </div>
 
             <div
-                class="flex flex-col items-center px-5 py-8 duration-200 bg-gray-50 border shadow-lg cursor-pointer group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                 <img src="/images/services/deco.png" class="w-20 h-20 rounded-md" alt="">
                 <h4
                     class="mt-3 mb-1 md:text-[20px] text-[16px] font-semibold text-slate-600 duration-200 group-hover:text-white">
@@ -333,7 +333,7 @@
             </div>
 
             <div
-                class="flex flex-col items-center px-5 py-8 duration-200 bg-gray-50 border shadow-lg cursor-pointer group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                 <img src="/images/services/business.svg" class="w-20 h-20 rounded-md" alt="">
                 <h4
                     class="mt-3 mb-1 md:text-[20px] text-[16px]  font-semibold text-slate-600 duration-200 group-hover:text-white">
@@ -341,7 +341,7 @@
 
             </div>
             <div
-                class="flex flex-col items-center px-5 py-8 duration-200 bg-gray-50 border shadow-lg cursor-pointer group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                 <img src="/images/services/redaction.svg" class="w-20 h-20 rounded-md" alt="">
                 <h4
                     class="mt-3 mb-1 md:text-[20px] text-[16px] font-semibold text-slate-600 duration-200 group-hover:text-white">
@@ -349,7 +349,7 @@
 
             </div>
             <div
-                class="flex flex-col items-center px-5 py-8 duration-200 bg-gray-50 border shadow-lg cursor-pointer group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                 <img src="/images/services/loisir.svg" class="w-20 h-20 rounded-md hover:bg-white" alt="">
                 <h4
                     class="mt-3 mb-1 md:text-[20px] text-[16px]  font-semibold text-slate-600 duration-200 group-hover:text-white">
@@ -519,7 +519,7 @@
             <div data-aos="fade-in" data-aos-duration="500"
                 class="grid gap-4 mb-4 sm:grid-cols-2 md:grid-cols-3 xl:gap-8">
                 <div
-                    class="flex flex-col items-center w-full px-8 py-8 duration-200 bg-gray-50 border shadow-lg cursor-pointer dark:bg-gray-800 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                    class="flex flex-col items-center w-full px-8 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 dark:bg-gray-800 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                     <ion-icon name="people-outline"
                         class="text-[55px] text-amber-600 duration-200  group-hover:text-white">
                     </ion-icon>
@@ -530,7 +530,7 @@
                 </div>
 
                 <div
-                    class="flex flex-col items-center px-5 py-8 duration-200 bg-gray-50 border shadow-lg cursor-pointer group rounded-xl dark:bg-gray-800 border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                    class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl dark:bg-gray-800 border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                     <ion-icon name="bag-check-outline"
                         class="text-[55px] text-amber-600 duration-200 group-hover:text-white">
                     </ion-icon>
@@ -542,7 +542,7 @@
 
                 </div>
                 <div
-                    class="flex flex-col items-center px-5 py-8 duration-200 bg-gray-50 border shadow-lg cursor-pointer dark:bg-gray-800 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                    class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 dark:bg-gray-800 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                     <ion-icon name="albums-outline"
                         class="text-[55px] text-amber-600 duration-200 group-hover:text-white">
                     </ion-icon>

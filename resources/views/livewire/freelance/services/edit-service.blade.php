@@ -13,9 +13,63 @@
 
         <div class="my-3 overflow-auto md:mx-12">
 
-            <form wire:submit.prevent="submit" class="p-4 mb-4 rounded-md dark:text-gray-100 dark:bg-gray-800 ">
+            <form class="p-4 mb-4 rounded-md dark:text-gray-100 dark:bg-gray-800 ">
 
-                {{ $this->form }}
+
+                <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2">
+
+                    <x-input wire:model.defer="serviceEdit.title" label="titre" />
+
+                    <x-inputs.currency label="prix" icon="currency-dollar" thousands="." decimal="," precision="2"
+                        wire:model.defer="serviceEdit.basic_price" />
+                    <x-input type="number" wire:model.defer="serviceEdit.basic_delivery_time" label="delivery_time" />
+                    <x-input wire:model.defer="serviceEdit.basic_revision" label="revision" />
+                    <x-checkbox wire:model.defer="serviceEdit.is_publish" label="publier" />
+                    <div>
+                        <x-button label="Modifier" wire:click="modifierFirst"></x-button>
+                    </div>
+                </div>
+
+
+                <div>
+
+                    {{ $this->form }}
+
+                    <div class="flex items-end">
+
+                        <x-button wire:click="submit" label="Modifcation"></x-button>
+
+                    </div>
+                </div>
+
+
+
+                <div>
+
+                    <div x-data="{ image: @entangle('images') }" class="flex flex-col items-start justify-start py-4">
+
+
+
+                        <div class="flex items-start justify-between mt-4 space-x-2">
+                            @foreach ($service->files as $key=>$value)
+                            <img src="/storage/service/'.{{$value}}" alt="Product Name"
+                                class="w-16 h-full border cursor-pointer xl:w-16 2xl:w-24 hover:opacity-80">
+
+                            <x-button icon="trash" wire:click="effacerImage({{$key}})"></x-button>
+                            @endforeach
+
+                        </div>
+                    </div>
+
+                    <x-input type="file"></x-input>
+
+
+                </div>
+
+
+                <div>
+                    <x-button label='Modifcation' type="submit"></x-button>
+                </div>
 
 
             </form>

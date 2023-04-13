@@ -11,10 +11,17 @@ use App\Models\feedback;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class Checkout extends Component
 {
     public $product;
+    public $telephone;
+    public $name;
+    public $payType = "MaxiCash";
+    public $amount;
+    public $currency = "maxiDollar";
+
     public function mount()
     {
     }
@@ -123,6 +130,52 @@ class Checkout extends Component
         };
     }
 
+
+    public function checkoutmaxi()
+    {
+        $this->validate([
+            'telephone' => 'required',
+            'name' => 'required'
+        ]);
+
+        $cart = Session::has('cart') ? Session::get('cart') : null;
+
+
+        // Récupérer les valeurs des propriétés du composant
+        $payType = $this->payType;
+        $amount = $cart->totalPrice * 100;
+        $currency = $this->currency;
+        $telephone = $this->telephone;
+
+        // Construire les données de la requête
+        $requestData = [
+            'PayType' => $payType,
+            'MerchantID' => env('MerchantID'),
+            'MerchantPassword' => env('MerchantPassword'),
+            'Amount' => $amount,
+            'Currency' => $currency,
+            'Telephone' => $telephone,
+            'Language' => 'fr',
+            "Reference" =>  "508005",
+            "SuccessURL" =>  env('SuccessURL'),
+            "FailureURL" =>  env('FailureURL'),
+            "CancelURL" =>  env('CancelURL'),
+
+            // Ajouter d'autres données de requête nécessaires
+        ];
+
+        // dd($requestData);
+
+        // Envoyer la requête HTTP avec les données du formulaire
+        // Construire les données de la requête
+
+
+        // Construire l'URL de redirection avec les données du formulaire
+        $url = 'https://api-testbed.maxicashapp.com/PayEntry?data=' . urlencode(json_encode($requestData));
+
+        // Effectuer la redirection
+        return redirect($url);
+    }
 
 
     /*  public function effectuerPaiementGroupé(Request $request)
