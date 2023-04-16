@@ -211,6 +211,6 @@ class EditService extends Component implements Forms\Contracts\HasForms
 
     public function render()
     {
-        return view('livewire.freelance.services.edit-service')->extends('layouts.freelanceTest')->section('content');
+        return view('livewire.freelance.services.edit-service')->extends('layouts.freelanceTest2')->section('content');
     }
 }

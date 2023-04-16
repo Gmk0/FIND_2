@@ -1,4 +1,4 @@
-@extends("layouts.userProfile")
+@extends("layouts.freelanceTest2")
 
 
 @section('content')
@@ -8,8 +8,8 @@
 
 
 
-    <div class="container mx-aut px-6 lg:px-8">
-        <h2 class="text-xl text-indigo-600 mb-8 font-semibold tracking-wide uppercase">Profile</h2>
+    <div class="container px-6 mx-aut lg:px-8">
+        <h2 class="mb-8 text-xl font-semibold tracking-wide text-indigo-600 uppercase">Profile</h2>
         @if (Auth::user()->freelance()->exists())
         <div class="mb-4">
             <x-action-section>

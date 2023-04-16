@@ -1,4 +1,4 @@
-<div x-show="isSearch" x-cloak x-collapse @click.away="isSearch = false" class="flex gap-4 p-2 pt-8 mx-8">
+<div x-show="isSearch" x-cloak @click.away="isSearch = false" class="flex   z-50    gap-4 p-2 pt-8 mx-8">
 
     <div class="w-full md:w-3/4">
         <div class="relative">
@@ -18,7 +18,7 @@
                 {{-- <a class="block p-2 hover:bg-indigo-50" href="#">Tailwind</a>--}}
                 <a href="{{route('ServicesViewOne',['id'=>$result->id,'category'=>$result->category->name])}}" wire:key="{{
                     $index }}"
-                    class="block p-2 text-sm cursor-pointer md:text-base hover:bg-amber-600 hover:text-white">{{
+                    class="block p-2 text-sm cursor-pointer md:text-base hover:bg-amber-700 hover:text-white">{{
                     $result->title
                     }}
                     - {{

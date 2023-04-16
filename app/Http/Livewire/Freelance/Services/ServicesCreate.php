@@ -257,7 +257,7 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
                 $fileName = $file->getClientOriginalName();
 
 
-                $fal =  $file->store('public/service/' . $fileName);
+                $fal =  $file->storeAs('public/service/', $fileName);
                 $fileNames[] = $fileName;
             }
 
@@ -270,6 +270,6 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
 
     public function render()
     {
-        return view('livewire.freelance.services.services-create')->extends('layouts.freelanceTest')->section('content');
+        return view('livewire.freelance.services.services-create')->extends('layouts.freelanceTest2')->section('content');
     }
 }

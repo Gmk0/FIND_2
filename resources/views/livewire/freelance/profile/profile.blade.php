@@ -12,7 +12,7 @@
         <div class="md:px-6 ">
 
             <x-section-border />
-            <div class='md:grid  mx-auto md:grid-cols-3 md:gap-6'>
+            <div class='mx-auto md:grid md:grid-cols-3 md:gap-6'>
                 <div class="flex justify-between md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -29,8 +29,8 @@
 
                 <div class="mt-5 md:mt-0 md:col-span-2">
 
-                    <div class="px-4 py-5 bg-white dark:bg-gray-800  rounded-lg   shadow ">
-                        <div class="grid md:gap-6 gap-4 grid-cols-1 md:grid-cols-2 md:mb-2">
+                    <div class="px-4 py-5 bg-white rounded-lg shadow dark:bg-gray-800 ">
+                        <div class="grid grid-cols-1 gap-4 md:gap-6 md:grid-cols-2 md:mb-2">
                             <x-input label='Use name' value="" wire:model.defer="user.name" />
                             <x-input label='Nom' wire:model.defer="freelance.nom" />
                             <x-input label='Prenom' wire:model.defer="freelance.prenom" />
@@ -50,7 +50,7 @@
                         </div>
 
                         <div
-                            class="flex items-center justify-end px-4 py-3 text-right shadow bg-gray-50 dark:bg-gray-800  sm:rounded-bl-md sm:rounded-br-md">
+                            class="flex items-center justify-end px-4 py-3 text-right shadow bg-gray-50 dark:bg-gray-800 sm:rounded-bl-md sm:rounded-br-md">
                             <x-action-message class="mr-3 " on="updateFirts">
                                 {{ __('profiles.Saved') }}
                             </x-action-message>
@@ -615,26 +615,6 @@
                                                 <tbody class="bg-white divide-y divide-gray-400">
 
 
-                                                    @forelse ($freelance['comptes'] as $value )
-
-                                                    <tr>
-                                                        <td
-                                                            class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                                                            {{$value}}
-                                                        </td>
-                                                        <td
-                                                            class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
-
-                                                        </td>
-
-
-                                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-
-                                                        </td>
-                                                    <tr>
-                                                        @empty
-
-                                                        @endforelse
 
 
 

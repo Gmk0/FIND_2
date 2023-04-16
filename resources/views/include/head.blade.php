@@ -20,6 +20,7 @@
     <title>{{ config('app.name') }}</title>
 
 
+
     <link rel="stylesheet" href="/build/assets/app.css">
 
     <style>
@@ -27,9 +28,10 @@
             display: none !important;
         }
     </style>
+
+
     @wireUiScripts
-
-
+    @vite(['resources/css/app.css','resources/js/app.js'])
     @livewireStyles
 
 </head>

@@ -146,6 +146,7 @@ class Checkout extends Component
         $amount = $cart->totalPrice * 100;
         $currency = $this->currency;
         $telephone = $this->telephone;
+        $reference = $this->references();
 
         // Construire les données de la requête
         $requestData = [
@@ -156,7 +157,7 @@ class Checkout extends Component
             'Currency' => $currency,
             'Telephone' => $telephone,
             'Language' => 'fr',
-            "Reference" =>  "508005",
+            "Reference" => $reference,
             "SuccessURL" =>  env('SuccessURL'),
             "FailureURL" =>  env('FailureURL'),
             "CancelURL" =>  env('CancelURL'),
@@ -175,6 +176,22 @@ class Checkout extends Component
 
         // Effectuer la redirection
         return redirect($url);
+    }
+
+
+    function references()
+    {
+        // Générer une chaîne aléatoire unique de 16 caractères
+        $randomString = uniqid();
+
+        // Extraire les 8 premiers caractères de la chaîne aléatoire pour obtenir l'ID unique de 8 caractères
+        $uniqueId = substr($randomString, 0, 8);
+
+        // Compteur pour incrémenter la fin de l'ID unique
+        $counter = DB::table('transactions')->count() + 1;
+
+        // Concaténer le compteur à la fin de l'ID unique
+        return  $finalId = 'PM' . $uniqueId . $counter;
     }
 
 

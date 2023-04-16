@@ -63,6 +63,6 @@ class MissionViewOne extends Component
 
     public function render()
     {
-        return view('livewire.freelance.mission.mission-view-one')->extends('layouts.freelanceTest')->section('content');
+        return view('livewire.freelance.mission.mission-view-one')->extends('layouts.freelanceTest2')->section('content');
     }
 }

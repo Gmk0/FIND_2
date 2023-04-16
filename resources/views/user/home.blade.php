@@ -36,8 +36,8 @@
         </svg>
     </div>
 
-    <div class="z-20 col-span-6 px-4 mt-8 mb-8 xl:place-self-center xl:mt-0 lg:mb-0">
-        <h1 class="text-2xl font-bold text-center md:text-3xl xl:text-5xl lg:text-left">
+    <div class="z-20 col-span-6 px-4 py-16 mt-8 mb-8 xl:place-self-center xl:mt-0 lg:mb-0">
+        <h1 class="text-3xl font-bold text-center md:text-3xl xl:text-5xl lg:text-left">
             Votre satisfaction dans nos services Freelance <br />
 
         </h1>
@@ -47,7 +47,7 @@
         <div class="flex flex-col items-center lg:flex-row">
             <button
                 class="w-full px-4 py-3 mb-4 font-bold rounded-lg lg:w-max bg-neutral-50 hover:cursor-pointer text-cyan-600 lg:mr-8 lg:mb-0">
-                Get started for free
+                Commencer
             </button>
         </div>
     </div>
@@ -132,22 +132,22 @@
 
         </div>
 
-        <div class="mx-3 my-6 swiper mySwiper ">
+        <div class="mx-3 my-auto swiper mySwiper ">
             <div class="pb-8 swiper-wrapper ">
-                @for ($i = 0; $i < 1; $i++) <div class="swiper-slide !bg-transparent px-2 md:px-0">
+                @for ($i = 0; $i < 3; $i++) <div class="swiper-slide !bg-transparent px-2 md:px-0">
                     <div
                         class="px-2 bg-white border border-gray-100 dark:border-gray-300 rounded-3xl dark:bg-gray-800 dark:shadow-none md:mx-auto lg:w-11/12 xl:w-8/12">
-                        <div class="grid md:grid-cols-5">
+                        <div class="grid md:grid-cols-2">
 
 
-                            <div class="w-full m-2 h-50 aspect-w-8 aspect-h-9 md:col-span-2 rounded-2xl">
+                            <div class="w-2/3 h-auto m-2 aspect-w-8 aspect-h-9 rounded-2xl">
 
                                 <iframe class="rounded-sm w-11/2 h-9/12 aspect-video hover:aspect-square"
                                     src="https://www.youtube.com/embed/r9jwGansp1E" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen></iframe>
                             </div>
-                            <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
+                            <div class="p-6 mx-auto space-y-6 text-center sm:p-8">
                                 <div class="w-24 mx-auto">
                                     <img src="images/clients/client-4.png" alt="company logo" height="400" width="142"
                                         loading="lazy" />
@@ -187,7 +187,7 @@
 </section>
 
 
-<section x-show="isLoading" x-cloak id="monde2" class="min-h-screen bg-white dark:bg-gray-900">
+<section x-show="isLoading" x-cloak id="monde2" class="min-h-screen bg-white dark:bg-gray-800">
 
     <div class="py-16">
         <div class="px-6 m-auto text-gray-600 xl:container md:px-12 xl:px-16">
@@ -275,7 +275,7 @@
 
 </section>
 
-<section x-show="isLoading" x-cloakid="Services" class="min-h-screen bg-gray-100 dark:bg-gray-800">
+<section x-show="isLoading" x-cloakid="Services" class="min-h-screen bg-gray-100 dark:bg-gray-900">
 
     <div class="px-8 py-6 mx-auto max-w-7xl md:px-6">
         <!-- heading text -->
@@ -287,6 +287,23 @@
 
         <!-- box wrapper -->
         <div class="grid grid-cols-2 gap-4 md:gap-6 md:grid-cols-4 xl:gap-8">
+
+            @forelse ($category as $category)
+
+            <a href="{{route('categoryByName',[$category->name])}}"
+                class="flex flex-col items-center px-2 py-4 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+                <img src="{{Storage::disk('local')->url('public/'.$category->illustration) }}"
+                    class="w-20 h-20 rounded-md" alt="">
+                <h4
+                    class="mt-3 mb-1 md:text-[20px] text-[16px]   font-semibold text-slate-600 duration-200 group-hover:text-white">
+                    {{$category->name}}</h4>
+
+            </a>
+            @empty
+
+
+
+
             <div
                 class="flex flex-col items-center px-2 py-4 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
                 <img src="/images/services/develloper.png" class="w-20 h-20 rounded-md" alt="">
@@ -356,100 +373,138 @@
                     Loisirs</h4>
 
             </div>
+            @endforelse
         </div>
     </div>
 
 </section>
 
 <section x-show="isLoading" x-cloak id="confiance" class="bg-white">
-    <div class="px-4 py-4 mx-auto sm:mx-2 max-w-7xl md:px-6">
+    <div class="px-4 py-4 mx-auto sm:mx-2 md:px-auto">
         <div class="container text-gray-600 dark:text-gray-300 ">
             <div class="mb-10 text-center">
                 <span class="font-medium text-amber-600">{{__('Comentaire')}}</span>
                 <h1 class="text-2xl font-bold text-slate-700 sm:text-3xl">Ils avaient confiance en nous</h1>
 
             </div>
-            <div data-aos="fade-in" data-aos-duration="800" class="m-8 swiper mySwiper">
+            <div class="container flex flex-col mx-auto my-10 overflow-hidden shadow-sm md:my-24 md:flex-row"
+                x-data="{ testimonialActive: 2 }" x-cloak>
+                <div
+                    class="relative flex flex-col justify-center w-full py-2 bg-indigo-700 md:py-24 md:w-1/2 item-center">
 
-                <div class="p-8 sm:pb-4 swiper-wrapper">
-
-
-                    <div class="swiper-slide !bg-transparent md:px-0">
-                        <div
-                            class="p-3 mx-auto space-y-6 text-center bg-gray-100 border rounded-lg dark:border-gray-100 dark:bg-gray-800 lg:w-10/12 xl:w-8/12">
-                            <img class="mx-auto !h-16 !w-16 rounded-full" src="images/avatars/first_user.webp"
-                                alt="user avatar" height="220" width="220" loading="lazy" />
-                            <p class="font-mono text-lg font-semibold leading-none dark:text-gray-100 ">
-                                <span class="font-serif text-md">"</span> Nous Avons utilisé FIND pour notre SEO, notre
-                                logo, Notre
-                                site
-                                web et son Contenu, ainsi que pour nos vidéos Quasiment
-                                pour tout! c'était comme travailler avec quelqu'un qui se trouve a cote de vous et non a
-                                l'autre bout
-                                du
-                                monde. <span class="font-serif">"</span>
-                            </p>
-                            <div>
-                                <h6 class="text-lg font-semibold leading-none">John Doe</h6>
-                                <span class="text-xs text-gray-500">Product Designer</span>
-                            </div>
-                            <img class="mx-auto !w-28" src="images/clients/client-8.png" alt="company logo" height="400"
-                                width="142" loading="lazy" />
-                        </div>
-                    </div>
-                    <div class="swiper-slide !bg-transparent">
-                        <div
-                            class="p-3 mx-auto space-y-6 text-center bg-gray-100 border dark:border-gray-100 dark:bg-gray-800 rounded-lg lg:w-[500px] xl:w-8/12">
-                            <img class="mx-auto !h-16 !w-16 rounded-full" src="images/avatars/second_user.webp"
-                                alt="user avatar" height="220" width="220" loading="lazy" />
-                            <p class="font-mono text-lg font-semibold leading-none dark:text-gray-100">
-                                <span class="font-serfi">"</span> Si Vous voulez créer un business de grande envergure,
-                                vous aurez
-                                besoin
-                                d'aide. Et c'est ce que FIND fait. <span class="font-serif">"</span>
-                            </p>
-                            <div>
-                                <h6 class="text-lg font-semibold leading-none">Georges Mubemba</h6>
-                                <span class="text-xs text-gray-500">Développeur</span>
-                            </div>
-                            <img class="mx-auto !w-28" src="images/clients/client-8.png" alt="company logo" height="400"
-                                width="142" loading="lazy" />
-                        </div>
+                    <div class="absolute top-0 left-0 z-10 w-16 h-16 grid-indigo md:w-40 md:h-40 md:ml-20 md:mt-24">
                     </div>
 
-                    <div class="swiper-slide !bg-transparent">
-                        <div
-                            class="p-3 mx-auto space-y-6 text-center bg-gray-100 border rounded-lg dark:border-gray-100 dark:bg-gray-800 lg:w-10/12 xl:w-8/12">
-                            <img class="mx-auto !h-16 !w-16 rounded-full" src="images/avatars/third_user.webp"
-                                alt="user avatar" height="220" width="220" loading="lazy" />
-                            <p class="font-mono text-lg font-semibold leading-none dark:text-gray-100">
-                                <span class="font-serif">"</span> Nous avons utilise FIND pour le développement web de
-                                notre Site, la
-                                conception graphique et le développement web
-                                Backend. Travailler Avec FIND Facilite mon travail tous les jours un peu plus <span
-                                    class="font-serif">"</span>
-                            </p>
-                            <div>
-                                <h6 class="text-lg font-semibold leading-none">John Doe</h6>
-                                <span class="text-xs text-gray-500">Product Designer</span>
-                            </div>
-                            <img class="mx-auto !w-28" src="images/clients/client-4.png" alt="company logo" height="400"
-                                width="142" loading="lazy" />
-                        </div>
+                    <div
+                        class="relative z-20 px-6 py-2 mb-0 text-2xl font-semibold leading-tight tracking-tight text-indigo-100 md:text-5xl md:py-6 md:px-1 md:w-64 md:mx-auto">
+                        <span class="md:block">What Our</span>
+                        <span class="md-block">Customers</span>
+                        <span class="block">Are Saying!</span>
+                    </div>
+
+                    <div class="absolute bottom-0 right-0 hidden mb-4 mr-4 md:block">
+                        <button
+                            class="w-12 h-10 font-bold text-gray-500 bg-gray-100 border-r rounded-l-full focus:outline-none hover:text-indigo-500"
+                            x-on:click="testimonialActive = testimonialActive === 1 ? 3 : testimonialActive - 1">
+                            &#8592;
+                        </button><button
+                            class="w-12 h-10 font-bold text-gray-500 bg-gray-100 rounded-r-full focus:outline-none hover:text-indigo-500"
+                            x-on:click="testimonialActive = testimonialActive >= 3 ? 1 : testimonialActive + 1">
+                            &#8594;
+                        </button>
                     </div>
                 </div>
 
+                <div class="bg-gray-100 md:w-1/2">
+                    <div class="relative flex flex-col h-full">
 
+                        <div class="absolute top-0 left-0 mt-3 ml-4 md:mt-5 md:ml-12">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-12 h-12 text-indigo-200 fill-current md:w-16 md:h-16" viewBox="0 0 24 24">
+                                <path
+                                    d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L9.758 4.03c0 0-.218.052-.597.144C8.97 4.222 8.737 4.278 8.472 4.345c-.271.05-.56.187-.882.312C7.272 4.799 6.904 4.895 6.562 5.123c-.344.218-.741.4-1.091.692C5.132 6.116 4.723 6.377 4.421 6.76c-.33.358-.656.734-.909 1.162C3.219 8.33 3.02 8.778 2.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C2.535 17.474 4.338 19 6.5 19c2.485 0 4.5-2.015 4.5-4.5S8.985 10 6.5 10zM17.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L20.758 4.03c0 0-.218.052-.597.144-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.143-.686.238-1.028.467-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.944-.33.358-.656.734-.909 1.162C14.219 8.33 14.02 8.778 13.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C13.535 17.474 15.338 19 17.5 19c2.485 0 4.5-2.015 4.5-4.5S19.985 10 17.5 10z" />
+                            </svg>
+                        </div>
 
-                <div class="swiper-pagination"></div>
+                        <div class="relative z-10 h-full">
+                            <div x-show.immediate="testimonialActive === 1">
+                                <p class="px-6 py-6 text-xl italic font-normal text-gray-600 serif md:px-16 md:py-10 md:text-2xl"
+                                    x-show.transition="testimonialActive == 1">
+                                    Leverage agile frameworks to provide a robust synopsis for high level overviews.
+                                    Iterative
+                                    approaches to corporate strategy foster collaborative thinking to further the
+                                    overall value
+                                    proposition. Organically grow the holistic world view of disruptive innovation via
+                                    workplace
+                                    diversity and empowerment.
+                                </p>
+                            </div>
 
+                            <div x-show.immediate="testimonialActive === 2">
+                                <p class="px-6 py-6 text-xl italic font-normal text-gray-600 serif md:px-16 md:py-10 md:text-2xl"
+                                    x-show.transition="testimonialActive == 2">
+                                    Bring to the table win-win survival strategies to ensure proactive domination. At
+                                    the end of the
+                                    day, going forward, a new normal that has evolved from generation X is on the runway
+                                    heading
+                                    towards a streamlined cloud solution. User generated content in real-time will have
+                                    multiple
+                                    touchpoints for offshoring.
+                                </p>
+                            </div>
 
+                            <div x-show.immediate="testimonialActive === 3">
+                                <p class="px-6 py-6 text-xl italic font-normal text-gray-600 serif md:px-16 md:py-10 md:text-2xl"
+                                    x-show.transition="testimonialActive == 3">
+                                    Capitalize on low hanging fruit to identify a ballpark value added activity to beta
+                                    test.
+                                    Override the digital divide with additional clickthroughs from DevOps.
+                                    Nanotechnology immersion
+                                    along the information highway will close the loop on focusing solely on the bottom
+                                    line.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-center my-4">
+                            <button @click.prevent="testimonialActive = 1"
+                                class="inline-block mx-2 font-bold text-center rounded-full shadow-xs focus:outline-none focus:shadow-outline"
+                                :class="{'h-12 w-12 opacity-25 bg-indigo-300 text-gray-600': testimonialActive != 1, 'h-16 w-16 opacity-100 bg-indigo-600 text-white': testimonialActive == 1 }">JD</button>
+                            <button @click.prevent="testimonialActive = 2"
+                                class="inline-block w-16 h-16 mx-2 font-bold text-center bg-indigo-600 rounded-full shadow-xs focus:outline-none focus:shadow-outline"
+                                :class="{'h-12 w-12 opacity-25 bg-indigo-300 text-gray-600': testimonialActive != 2, 'h-16 w-16 opacity-100 bg-indigo-600 text-white': testimonialActive == 2 }">WD</button>
+                            <button @click.prevent="testimonialActive = 3"
+                                class="inline-block w-12 h-12 mx-2 font-bold text-center bg-indigo-600 rounded-full shadow-xs focus:outline-none focus:shadow-outline"
+                                :class="{'h-12 w-12 opacity-25 bg-indigo-300 text-gray-600': testimonialActive != 3, 'h-16 w-16 opacity-100 bg-indigo-600 text-white': testimonialActive == 3 }">JW</button>
+                        </div>
+
+                        <div class="flex justify-center px-6 pt-2 pb-6 md:py-6">
+                            <div class="text-center" x-show="testimonialActive == 1">
+                                <h2 class="text-sm font-bold leading-tight text-gray-700 md:text-base">John Doe</h2>
+                                <small class="text-xs text-gray-500 truncate md:text-sm">CEO, ABC Inc.</small>
+                            </div>
+
+                            <div class="text-center" x-show="testimonialActive == 2">
+                                <h2 class="text-sm font-bold leading-tight text-gray-700 md:text-base">Winter Doe</h2>
+                                <small class="text-xs text-gray-500 truncate md:text-sm">CTO, XYZ Corp.</small>
+                            </div>
+
+                            <div class="text-center" x-show="testimonialActive == 3">
+                                <h2 class="text-sm font-bold leading-tight text-gray-700 md:text-base">John Wick</h2>
+                                <small class="text-xs text-gray-500 truncate md:text-sm">Product Manager, Fake
+                                    Corp.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+
 </section>
 
-<section x-show="isLoading" x-cloak id="getStarted" class="min-h-screen bg-gray-800">
+<section x-show="isLoading" x-cloak id="getStarted" class="min-h-screen bg-gray-900">
 
 
 
@@ -505,7 +560,7 @@
 
 </section>
 
-<section x-show="isLoading" x-cloak id="presentation" class="bg-gray-100 md:min-h-screen dark:bg-dark">
+<section x-show="isLoading" x-cloak id="presentation" class="bg-gray-100 md:min-h-screen ">
     <div class="px-8 py-6 mx-auto max-w-7xl md:px-4">
 
         <!-- heading text -->
@@ -627,7 +682,7 @@
                                       answer: 'Oui la plate-forme est gratuite pour ceux qui veulent acheter un service. Pour les Freelance ( vendeurs) , ils doivent souscrire à un pack d’abonnement',
                                       isOpen: false,
                                   },
-  
+
                                   {
                                       question: 'Comment se fait le paiement pour celui qui commande le service ?',
                                       answer: 'Pour celui qui commande un service, il aura la possibilité de payer par Mobile money local ( M-pesa, Airtel money, Orange money soit par visa et Mastercard.',

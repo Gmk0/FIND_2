@@ -96,6 +96,23 @@ class Service extends Model
         return $orderCount;
     }
 
+
+    public function isLikedByUser(User $user)
+    {
+        return $this->likes()->where('user_id', $user->id)->exists();
+    }
+
+    // ...
+
+    /**
+     * Relation avec le modèle User pour les likes du produit.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'likes', 'service_id', 'user_id');
+    }
     public function averageFeedback()
     {
         // Récupérer les commandes liées à ce service
@@ -109,6 +126,7 @@ class Service extends Model
 
         return $averageFeedback;
     }
+
 
 
     public function notifications()

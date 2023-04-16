@@ -17,6 +17,6 @@ class MissionList extends Component
         $category = auth()->user()->freelance->category_id;
         return view('livewire.freelance.mission.mission-list', [
             'projets' => Project::paginate(10),
-        ])->extends('layouts.freelanceTest')->section('content');
+        ])->extends('layouts.freelanceTest2')->section('content');
     }
 }

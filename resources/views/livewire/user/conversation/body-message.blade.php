@@ -45,7 +45,8 @@
                     <span>{{$message->body}}</span>
                     @endif
 
-                    <span class="text-white" x-show="linkHover">
+                    <span class="text-white {{auth()->id() == $message->sender_id ? 'flex':'hidden'}}"
+                        x-show="linkHover">
                         <x-dropdown class="text-white">
                             <x-dropdown.item wire:click="deleteMessage({{$message->id}})" label="effacer" />
                         </x-dropdown>
@@ -141,15 +142,15 @@ window.livewire.emit('loadmore');
 <script>
     window.addEventListener('markMessageAsRead',event=>{
     var value= document.querySelectorAll('.status_tick');
-    
+
     value.array.forEach(element, index => {
-    
-    
+
+
     element.classList.remove('bi bi-check2');
     element.classList.add('bi bi-check2-all','text-primary');
     });
-    
+
     });
-    
+
 </script>
 @endpush

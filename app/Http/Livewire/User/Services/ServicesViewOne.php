@@ -24,11 +24,12 @@ class ServicesViewOne extends Component
         $this->service = Service::find($id);
         // dd($this->service->averageFeedback());
         $this->images = $this->images();
+        // dd($this->images);
         $this->commentaires = feedback::whereHas('order', function ($query) {
             $query->whereHas('service', function ($q) {
                 $q->where('id', $this->service->id);
             });
-        })->get();
+        })->where('is_publish', 1)->get();
 
         //dd($this->commentaires);
 

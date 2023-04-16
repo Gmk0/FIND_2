@@ -26,7 +26,10 @@ class CategoryResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\TextInput::make('description'),
-                Forms\Components\TextInput::make('illustration'),
+                Forms\Components\FileUpload::make('illustration')->label('Image Decrivant le service')
+                    ->preserveFilenames()
+                    ->directory('illustration'),
+                // Forms\Components\TextInput::make('illustration'),
             ]);
     }
 

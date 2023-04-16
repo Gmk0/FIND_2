@@ -98,6 +98,6 @@ class ViewCommande extends Component
         $this->Order = Order::find($this->orderId);
         $this->progress = $this->Order->progress;
 
-        return view('livewire.freelance.commande.view-commande')->extends('layouts.freelanceTest')->section('content');
+        return view('livewire.freelance.commande.view-commande')->extends('layouts.freelanceTest2')->section('content');
     }
 }

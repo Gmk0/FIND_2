@@ -978,17 +978,53 @@
 
 
                         </div>
-                        <div class="mt-5 md:mt-0 md:col-span-2">
-                            <div class="grid gap-4 md:grid-cols-2">
-                                <x-input placeholde="username" wire:model.defer="comptes.tiktok" label="tiktok" />
-                                <x-input placeholder="lien du compte" wire:model.defer="comptes.youtube"
-                                    label="youtube" />
-                                <x-input placeholder="lien du compte" wire:model.defer="comptes.dribbler"
-                                    label="dribbler" />
-                                <x-input placeholde="lien du compte" wire:model.defer="comptes.instagram"
-                                    label="Instagram" />
-                            </div>
 
+
+                        <div class="mt-5 md:mt-0 md:col-span-2">
+                            <div>
+                                <div
+                                    class="px-4 py-5 bg-white dark:bg-gray-800 dark:border dark:border-gray-200 rounded-lg  sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
+                                    <div class="">
+
+
+                                        <div>
+                                            <p class="mb-2 text-lg font-bold">Commptes lies :</p>
+                                            <ul class="mb-4">
+                                                @forelse($selectedComptes as $index => $comptes)
+                                                <li class="flex items-center">
+                                                    <span class="mr-1">{{ $comptes['comptes'] }} - {{ $comptes['lien']
+                                                        }}
+                                                    </span>
+                                                    <x-button.circle xs icon="x"
+                                                        wire:click="removeLanguage({{$index}},'skill')" />
+                                                </li>
+                                                @empty
+                                                <li>Cliquer sur ajouter </li>
+                                                @endforelse
+                                            </ul>
+                                        </div>
+
+
+                                        <div class="grid gap-4 mb-4 md:grid-cols-3">
+                                            <x-select label="" placeholder="Choisissez un niveau"
+                                                :options="['Tiktok', 'instagram', 'twitter', 'youtube', 'whatsapp']"
+                                                wire:model.defer="newComptes.comptes" />
+                                            <x-input placeholder="ajouter le lien du compte"
+                                                wire:model.defer="newComptes.lien" />
+
+                                            <div>
+                                                <x-button sm outline stone wire:click="addComptes()" icon="plus-circle"
+                                                    spinner="addComptes" label="Ajouter" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            @error('skill')
+                                            <p>Veuillez rajouter une compences</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
 
@@ -1213,7 +1249,7 @@
 
                         <x-button flat label="Home" href="" />
 
-                        <x-button flat label="Tableau de Bord" href="{{ url('freelance.dashboard')}}" />
+                        <x-button flat label="Tableau de Bord" href="{{ url('freelance/dashboard')}}" />
 
                     </div>
                 </x-slot>
@@ -1227,16 +1263,12 @@
     @push('script')
     <script>
         window.addEventListener('stepChanged', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        function scroolTop()
-        {
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-        }
-        function show(){
 
-        }
+
     </script>
 
     <script>

@@ -43,12 +43,14 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
     public $category = null;
     public $localisation = ['avenue' => "", 'commune' => '', 'ville' => ""];
     public $selectedDiplome = [];
+    public $selectedComptes = [];
     public $selectedLanguages = [];
     public $selectedCertificat = [];
     public $selectedSkill = array();
     public $newCertificate = ['certificate' => '', 'delivrer' => '', 'annee' => ''];
     public $newLanguage = ['language' => '', 'level' => ''];
     public $newSkill = ['skill' => '', 'level' => ''];
+    public $newComptes = ['comptes' => '', 'lien' => ''];
     public $newDiplome = ['diplome' => '', 'universite' => '', 'annee' => ''];
     public $SousCategorie = [];
     public $query;
@@ -112,6 +114,22 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
 
 
             $this->newSkill = ['skill' => '', 'level' => ''];
+        }
+
+        // Emit an event to inform that a new language has been added
+
+    }
+
+    public function addComptes()
+    {
+
+        if (!empty($this->newComptes['comptes']) && !empty($this->newComptes['lien'])) {
+            // Add the new language to the selectedLanguages list
+            //  array_push($this->selectedComptes, ['comptes' => $this->newComptes['comptes'], 'lien' => $this->newComptes['lien']]);
+
+
+            $this->selectedComptes[] = ['comptes' => $this->newComptes['comptes'], 'lien' => $this->newComptes['lien']];
+            $this->newComptes = ['comptes' => '', 'lien' => ''];
         }
 
         // Emit an event to inform that a new language has been added
@@ -183,8 +201,9 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
 
                 ]);
 
+
                 $this->addSkill();
-                $this->dispatchBrowserEvent('stepChanged');
+
 
                 break;
             case 2:
@@ -195,7 +214,7 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
                 ]);
                 $this->form->validate();
                 $this->addLanguage();
-                $this->dispatchBrowserEvent('stepChanged');
+
 
                 break;
 
@@ -205,7 +224,7 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
                 $this->addCertificate();
                 $this->addDiplome();
 
-                $this->dispatchBrowserEvent('stepChanged');
+
                 break;
             case 4:
 
@@ -279,7 +298,7 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
             'created_at' => now(),
         ]);
 
-        Mail::to($this->userAuth['email'])->send(new EmailVerification($code));
+        /// Mail::to($this->userAuth['email'])->send(new EmailVerification($code));
 
         $this->show = true;
     }
@@ -340,7 +359,7 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
                     'experience' => $this->freelancer['experience'],
                     'competences' => $this->selectedSkill,
                     'taux_journalier' => $this->currency,
-                    'comptes' => $this->comptes,
+                    'comptes' => $this->selectedComptes,
                     'Sub_categorie' => $this->SousCategorie,
                     'localisation' => $this->localisation,
                     'category_id' => $this->category,
@@ -365,6 +384,10 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
                     Notification::make()->title('Bienvenue Dans la partie freelancer')
                         ->success()
                         ->send();
+
+                    sleep(5);
+
+                    return redirect()->intended('freelance/dashboard');
                 }
             };
         } catch (Exception $e) {
@@ -378,7 +401,7 @@ class RegistrationFreelance extends Component implements Forms\Contracts\HasForm
         foreach ($files as $file) {
             $fileName = $file->getClientOriginalName();
 
-            $file->storeAs('profiles-photos', $fileName);
+            $file->storeAs('public/profiles-photos', $fileName);
             $fileNames[] = $fileName;
         }
 

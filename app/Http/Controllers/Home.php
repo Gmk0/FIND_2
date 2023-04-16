@@ -2,30 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class Home extends Controller
 {
     //
 
-    public function home(){
+    public function home()
+    {
 
-        return view('user.home');
+        $category = Category::all();
+
+        return view('user.home', ['category' => $category]);
     }
 
-    public function category(){
-        
+    public function category()
+    {
+
         return view('user.category');
     }
-    public function categoryRresult(Request $request){
-       
+    public function categoryRresult(Request $request)
+    {
 
-       return view('user.categoryR');
 
+        return view('user.categoryR');
     }
-    public function categoryOne(Request $request){
+    public function categoryOne(Request $request)
+    {
 
-        
-       return view('user.serviceView');
-    } 
+
+        return view('user.serviceView');
+    }
 }

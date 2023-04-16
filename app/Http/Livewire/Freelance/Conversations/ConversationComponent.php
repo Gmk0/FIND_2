@@ -38,6 +38,6 @@ class ConversationComponent extends Component
     public function render()
     {
         $this->conversations = Conversation::where('freelance_id', $this->freelancerId)->orderBy('last_time_message', 'DESC')->get();
-        return view('livewire.freelance.conversations.conversation-component')->extends('layouts.freelanceTest')->section('content');
+        return view('livewire.freelance.conversations.conversation-component')->extends('layouts.freelanceTest2')->section('content');
     }
 }

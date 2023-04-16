@@ -150,45 +150,53 @@
         <div class="py-4 mb-4 rounded-lg splide splide-2">
 
             <div class="splide__track">
-                <div class="gap-4 splide__list">
+                <div class="gap-4 p-2 splide__list">
                     @forelse ($freelances as $freelance)
-                    <div class="card-splide splide__slide ">
+                    <div class="p-2 card-splide splide__slide">
                         <div
                             class="flex flex-col w-64 mb-2 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-900 md:mb-0">
                             <div class="relative h-48">
                                 <img src="https://source.unsplash.com/200x200/?fashion?1" alt=""
                                     class="object-cover w-full h-full">
                                 <div class="absolute top-2 right-2">
-                                    <span
-                                        class="inline-flex items-center px-2 py-1 text-xs font-bold text-white bg-green-500 rounded-full">En
-                                        ligne</span>
-                                </div>
-                                <div class="absolute bottom-2 right-2">
-                                    <button
-                                        class="inline-flex items-center px-2 py-1 text-xs font-bold text-gray-500 hover:text-gray-700 focus:outline-none">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                        </svg>
-                                        Like
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="px-4 py-2 mt-2 md:mt-2" style="max-height: 12rem;">
-                                <h3 class="mb-2 text-lg font-bold">{{$freelance->user->name}}</h3>
-                                <p class="mb-2 text-sm text-gray-500">{{$freelance->category->name}} •
-                                    {{$freelance->level}}</p>
-                                <div class="flex flex-wrap justify-between mb-4">
-                                    <span class="inline-block px-2 py-2 bg-green-300 rounded-full">#Javascript</span>
+
+
+                                    @if($freelance->isOnline())
+                                    <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <circle cx="10" cy="10" r="10" />
+                                    </svg>
+                                    @endif
 
                                 </div>
+                                <div class="absolute bottom-2 right-2">
+
+
+                                </div>
+                            </div>
+                            <div class="px-4 py-2 mt-2 md:mt-2" style="min-height: 12rem;">
+                                <h3 class="mb-2 text-lg font-bold text-gray-800">{{$freelance->user->name}}</h3>
+                                <p class="mb-2 text-sm text-gray-500">{{$freelance->category->name}} •
+                                    {{$freelance->level}}</p>
+                                <ul class="mb-4 text-gray-800 list-disc list-inside">
+                                    @forelse ($freelance->competences as $key => $value)
+                                    <li class="text-sm">{{$value['skill']}}</li>
+                                    @empty
+
+                                    @endforelse
+
+                                </ul>
+
+
 
 
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center">
                                         <x-button label="contacter" />
                                     </div>
+                                    <div class="flex items-center">
+                                        <x-button label="voir profil" />
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -208,7 +216,7 @@
     <div class="flex flex-col p-2 mt-4 bg-white rounded-lg md:mx-6 justify-beetwen">
 
         <div class="mb-4">
-            <h1 class="text-xl font-bold text-skin-fill">Services que vous pourriez aimer</h1>
+            <h1 class="text-xl font-bold text-gray-800">Services que vous pourriez aimer</h1>
         </div>
 
 
@@ -241,7 +249,9 @@
                                     <path
                                         d="M10 13.165l-4.53 2.73 1.088-5.997L.976 6.305l6.018-.873L10 0l2.006 5.432 6.018.873-4.582 3.593 1.088 5.997L10 13.165z" />
                                 </svg>
-                                <p class="text-sm text-gray-700 dark:text-gray-200">4.5 (25)</p>
+                                <p class="text-sm text-gray-700 dark:text-gray-200">{{$service->averageFeedback()}}
+                                    ({{$service->orderCount()}})
+                                </p>
                             </div>
                             <div class="flex items-center mb-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1 text-gray-500"
@@ -258,17 +268,45 @@
                         <div class="flex items-center justify-between dark:text-gray-200">
                             <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
                                 {{$service->basic_price}} $</h4>
-                            <div class="flex items-center">
-                                <button class="mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M15.707 4.293a1 1 0 010 1.414L6.414 15H3a1 1 0 110-2h2.586l9.293-9.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+
+                            @auth
+                            <div x-data="{ like: @json($service->isLikedByUser(auth()->user())) }"
+                                class="flex items-center">
+                                <button class="mr-2" @click="likeProduct()">
+                                    <template x-if="!like">
+                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                        </svg>
+                                    </template>
+                                    <template x-if="like">
+                                        <svg class="w-5 h-5 text-red-500" xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                        </svg>
+                                    </template>
+
+
                                 </button>
 
+                                <script>
+                                    function likeProduct() {
+                                                                                                            // Effectuer une requête POST à l'API pour liker ou unliker un produit
+                                                    axios.post('/like', { service: {{ $service->id }} })
+                                                                                                                .then(response => {
+                                                                                                                    // Mettre à jour l'état du like dans le front-end
+                                                                                                                    liked = !liked;
+                                                                                                                })
+                                                                                                                .catch(error => {
+                                                                                                                    console.error(error);
+                                                                                                                });
+                                                                                                        }
+                                </script>
+
                             </div>
+                            @endauth
                         </div>
                         <div class="flex items-center justify-between pt-2 dark:text-gray-200">
                             <x-button sm label="ajouter" />
@@ -302,7 +340,8 @@
                 votre projet et
                 notre communauté de freelances
                 talentueux sera ravie de vous aider..</p>
-            <a href="#" class="px-4 py-2 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600">Soumettre un
+            <a href="{{route('createProject')}}"
+                class="px-4 py-2 font-semibold text-white bg-blue-500 rounded hover:bg-blue-600">Soumettre un
                 projet</a>
         </div>
     </div>
@@ -333,8 +372,8 @@
     autoplay: true,
     pagination: false,
     fixedWidth : '24rem',
-    
- 
+
+
       breakpoints: {
         640: {
           perPage: 1,
@@ -359,8 +398,8 @@
     perPage: 4,
     autoplay: true,
     pagination: false,
-    fixedWidth : '20rem',
-   
+    fixedWidth : '24rem',
+
     gap: '1rem',
       breakpoints: {
         640: {

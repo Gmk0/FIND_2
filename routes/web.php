@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ServicesApi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ToolsController;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -79,7 +80,7 @@ Route::middleware([
 
     Route::get('/user/paiement', App\Http\Livewire\User\Paiement\PaiementUser::class)->name('paiementUser');
 
-    //favoris 
+    //favoris
 
     Route::get('/user/favoris', App\Http\Livewire\User\Favoris\FavorisService::class)->name('favorisUser');
 
@@ -92,6 +93,9 @@ Route::middleware([
 
 
     Route::get('/user', App\Http\Livewire\User\Transaction\DashbordUser::class)->name('DashbordUser');
+    Route::view('status_payement', 'status.success')->name('status_payement');
+
+    Route::get('facturaction/{facture}', [ToolsController::class, 'facture'])->where('facture', '(.*)')->name('facturation');
 });
 
 
@@ -101,5 +105,6 @@ Route::get('/categories/{category}', App\Http\Livewire\User\Services\ServiceByCa
 //Api
 
 Route::get('/service_api', ServicesApi::class)->name('api.services');
+Route::post('/like', [ToolsController::class, 'like'])->middleware('auth');
 
 include('freelanceRoute.php');

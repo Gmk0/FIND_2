@@ -185,8 +185,8 @@
                             <div class="w-full p-3 border-b border-gray-200 ">
                                 <div class="mb-5">
                                     <label for="type1" class="flex items-center cursor-pointer">
-                                        <input type="checkbox" class="w-5 h-5 text-indigo-500 form-radio"="type"
-                                            id="type1" x-model="isCard" @click="isOther=false">
+                                        <input type="checkbox" class="w-5 h-5 text-indigo-500 form-radio" id="type1"
+                                            x-model="isCard" @click="isOther=false">
                                         <img src="https://leadershipmemphis.org/wp-content/uploads/2020/08/780370.png"
                                             class="h-6 ml-3">
                                     </label>
@@ -271,9 +271,9 @@
                             </div>
                             <div class="w-full p-6 border-b border-gray-200">
                                 <div class="mb-5">
-                                    <label for="type1" class="flex items-center cursor-pointer">
+                                    <label for="type2" class="flex items-center cursor-pointer">
                                         <input type="checkbox" class="w-5 h-5 text-indigo-500 form-radio"="type"
-                                            id="type1" x-model="isOther" @click="isCard=false">
+                                            id="type2" x-model="isOther" @click="isCard=false">
                                         <img src="/images/icon/maxicash.png" class="h-6 ml-3">
 
                                     </label>
@@ -341,9 +341,9 @@
     showConfirmButton: true,
    // footer: '<a class="text-green-600" href="">liste des proposition</a>',
     //timer:5000
-    
+
     })
-    
+
     });
 
 
@@ -351,7 +351,7 @@
         return {
             isOther: false,
             isCard: false,
-           
+
         }
     }
 </script>

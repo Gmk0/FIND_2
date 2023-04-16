@@ -10,7 +10,7 @@
     }
     @endphp
 
-    <header class="fixed z-50 w-full bg-skin-fill dark:bg-gray-800">
+    <header x-data="{isSearchBoxOpen:false}" class="fixed z-50 w-full bg-skin-fill dark:bg-gray-800">
         <div class="container flex items-center justify-between h-20 px-4 py-6 mx-auto ">
             <div class="flex-shrink-0">
                 <h1 class="text-lg font-semibold tracking-widest text-white uppercase">
@@ -162,7 +162,7 @@
                 </ul>
                 <div class="flex items-center justify-center">
 
-
+                    @guest
                     <div class="relative px-3 py-2 ">
 
                         <button
@@ -184,6 +184,10 @@
                             </template>
                         </button>
                     </div>
+
+                    @endguest
+
+
                     <div class="relative px-3 py-2 ">
 
                         <button
@@ -194,6 +198,8 @@
 
                         </button>
                     </div>
+
+
                     @auth
                     {{-- @livewire('user.navigation.notifications-component')
                     --}}
@@ -218,7 +224,7 @@
                     </li>
                     @else
                     <li class="flex gap-2">
-                        <a href="{{url('/register')}}"
+                        <a href="{{url('/login')}}"
                             class="relative flex items-center justify-center h-12 px-4 mx-auto mr-4 text-sm duration-300 rounded-md bg-gray-50 before:absolute before:inset-0 before:transition hover:scale-105 active:duration-75 active:scale-95 sm:w-max">
                             <span class="relative text-base font-semibold text-amber-600">{{__("connexion")}}</span>
                         </a>
@@ -262,7 +268,7 @@
 
                     <button
                         class="text-gray-800 rounded-md dark:text-white focus:outline-none focus:shadow-outline-purple"
-                        @click="toggleSearch" aria-label="Toggle color mode">
+                        @click="isSearchBoxOpen=!isSearchBoxOpen" aria-label="Toggle color mode">
 
                         <ion-icon name="search-outline" class="w-5 h-5 text-white"></ion-icon>
 
@@ -291,6 +297,7 @@
                 </button>
             </div>
 
+            @livewire('user.navigation.search-mobile')
             @livewire('user.navigation.mobile-navigation')
         </div>
 
