@@ -84,6 +84,16 @@ class Freelance extends Model
         }
     }
 
+    public function competences()
+    {
+        // Utiliser le modèle "Freelance" pour récupérer les trois premiers éléments de la colonne "compétences"
+        $competences = Freelance::pluck('competences')->take(3);
+
+        // Retourner les compétences récupérées
+        return $competences;
+    }
+
+
 
     public function ProjectResponse()
     {

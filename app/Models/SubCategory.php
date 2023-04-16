@@ -29,13 +29,11 @@ class SubCategory extends Model
     protected $casts = [
         'id' => 'integer',
         'category_id' => 'integer',
-        
+
     ];
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
-
-  
 }
