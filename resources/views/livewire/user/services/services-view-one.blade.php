@@ -52,7 +52,7 @@
                                 <p class="mb-2 text-gray-800 dark:text-gray-200">Format : AI, EPS, SVG, PDF, PNG, JPG
                                 </p>
 
-                                <p class="mb-2 text-xl font-thin text-gray-800 dark:text-gray-200">Prix :
+                                <p class="mb-2 text-xl font-bold text-gray-800 dark:text-gray-200">Prix :
                                     {{$service->basic_price}} $</p>
 
                                 <x-button wire:click="add_cart()" x-on:click="isOpen=true" class="w-full"
@@ -79,13 +79,13 @@
 
 
                         <div x-data="{ image: @entangle('images') }" class="flex flex-col items-center justify-center">
-                            <img :src="'/storage/messages/'image" class="object-cover w-full h-full mr-4 rounded-md"
+                            <img :src="'/storage/service/'image" class="object-cover w-full h-full mr-4 rounded-md"
                                 alt="Product Name">
 
 
                             <div class="flex justify-between mt-4 space-x-2 items-cetnter">
                                 @foreach ($service->files as $key=>$value)
-                                <img @click="image = '{{$value}}'" src="{{ url('/storage/messages/' . $value) }}"
+                                <img @click="image = '{{$value}}'" src="{{ url('/storage/service/' . $value) }}"
                                     alt="Product Name"
                                     class="w-16 h-full border cursor-pointer xl:w-16 2xl:w-24 hover:opacity-80">
                                 @endforeach
@@ -370,3 +370,9 @@
 
     </div>
 </div>
+
+@push('script')
+
+
+
+@endpush
