@@ -117,10 +117,10 @@
                     </div>
 
                     <div class="grid gap-6 p-2 md:grid-cols-2">
-                        <x-datetime-picker label=" Date Debut" wire:model.defer='dateD' parse-format="DD-MM-YYYY HH:mm"
-                            placeholder="Date Debut" />
+                        <x-datetime-picker label=" Date Debut" wire:model.defer='dateD' parse-format="DD-MM-YYYY HH:mm:ss"
+                             placeholder="Date Debut" />
 
-                        <x-datetime-picker label=" Date Fin" wire:model.defer='dateF' parse-format="DD-MM-YYYY HH:mm"
+                        <x-datetime-picker label=" Date Fin" without wire:model.defer='dateF' parse-format="DD-MM-YYYY HH:mm:ss"
                             placeholder="Date Fin" />
 
 
