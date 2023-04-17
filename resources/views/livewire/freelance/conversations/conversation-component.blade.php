@@ -1,14 +1,14 @@
 <div>
     <div class="flex h-screen" x-data="{sidebarOpen:false}">
 
-        <div class="flex-1 w-full h-full ">
-            <div class="container flex flex-col w-11/12 h-full p-4 m-auto main-body">
+        <div class="flex-1 w-full h-full mx-auto ">
+            <div class="container flex flex-col w-full h-full p-4 lg:w-11/12 main-body">
 
 
                 <div class="flex flex-col flex-1 main">
 
 
-                    <div class="flex flex-1 h-full">
+                    <div class="flex flex-1 h-full mx-2">
                         <div x-bind:class="{'hidden': !sidebarOpen, 'md:block': sidebarOpen}"
                             class="sidebar   w-full lg:flex md:w-1/3 flex-2 h-[550px] custom-scrollbar flex-col pt-2 rounded-md md:pr-6">
                             <div class="px-2 pb-6 search flex-2">
@@ -79,7 +79,7 @@
 
 
                         <div x-bind:class="{'hidden': sidebarOpen, 'md:flex': !sidebarOpen}"
-                            class="chat-area flex-1 bg-white  p-2 rounded-md flex h-[550px]  flex-col">
+                            class="chat-area bg-white sm:mx-auto  p-2 rounded-md flex h-[550px]  flex-col">
 
 
                             <div x-data="" class="flex gap-3 bg-gray-100 z-5 dark:bg-gray-800">
@@ -112,10 +112,12 @@
                                 @endempty
 
                             </div>
-
                             @livewire('user.conversation.body-message')
+
+
                             @livewire('freelance.conversations.send-message-f')
                         </div>
+
 
                     </div>
                 </div>

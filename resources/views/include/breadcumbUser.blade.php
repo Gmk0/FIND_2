@@ -80,5 +80,6 @@
                 class="flex items-center px-1 text-sm capitalize hover:underline">{{$ServiceName}}</a>
         </li>
         @endif
+
     </ol>
 </nav>
