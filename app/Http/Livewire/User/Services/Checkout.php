@@ -165,7 +165,7 @@ class Checkout extends Component
             // Ajouter d'autres données de requête nécessaires
         ];
 
-        // dd($requestData);
+        dd($requestData);
 
         // Envoyer la requête HTTP avec les données du formulaire
         // Construire les données de la requête
