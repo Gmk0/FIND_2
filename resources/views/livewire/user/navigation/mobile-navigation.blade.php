@@ -96,45 +96,21 @@
                         <span class="ml-2">{{__('Trouver un Freelancer')}}</span>
                     </a>
 
-                    <div class="relative" x-data="{ open: false }">
-                        <button @click="open = true"
-                            class="flex flex-row items-center w-full px-3 py-2 mt-1 text-lg font-medium text-left text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-700 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
-                            <ion-icon name="globe-outline" class="w-4 h-4 dark:text-white"></ion-icon>
-                            <span class="ml-2">{{__('Decouverte')}}</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" :class="{'rotate-180': open, 'rotate-0': !open}"
-                                class="w-4 h-4 mt-1 transform" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="feather feather-chevron-down">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        <div x-show="open" x-collapse @click.away="open = false"
-                            class="px-2 py-2 mt-2 rounded-md shadow-xs bg-inherit" role="menu"
-                            aria-orientation="vertical" aria-labelledby="user-menu" role="menuitem">
+                    <a href="{{route('createProject')}}" @click="navOpen = false"
+                        class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-700 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
+                        <ion-icon name="chatbubbles-outline" class="w-4 h-4 dark:text-white"></ion-icon>
+                        <span class="ml-2">{{__('Soumettre un mission')}}</span>
+                    </a>
 
 
-
-                            <a href="{{url('/demande.service')}}" @click="navOpen = false"
-                                class="flex flex-row items-center px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-white hover:text-gray-900 hover:bg-gray-200 focus:outline-none focus:text-gray-900 focus:bg-gray-200"
-                                role="menuitem">
-                                <span class="ml-2">{{__('Faire Une Demande')}}</span>
-                            </a>
-                            <a href="#" @click="navOpen = false"
-                                class="flex flex-row items-center px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-white hover:text-gray-900 hover:bg-gray-200 focus:outline-none focus:text-gray-900 focus:bg-gray-200"
-                                role="menuitem">
-                                <span class="ml-2">{{__('Faire Une Demande')}}</span>
-                            </a>
-
-                        </div>
-                    </div>
                     <a href="{{url('/about')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-700 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                         <ion-icon name="chatbubbles-outline" class="w-4 h-4 dark:text-white"></ion-icon>
-                        <span class="ml-2">{{__('Approps')}}</span>
+                        <span class="ml-2">{{__('Apropos')}}</span>
                     </a>
 
                     <button
-                        class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-700 focus:outline-none focus:dark:text-white focus:text-white "
+                        class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-700 focus:dark:text-white focus:text-white "
                         @click="toggleTheme" aria-label="Toggle color mode">
                         <template x-if="!dark">
                             <svg class="w-5 h-5 " aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -149,13 +125,15 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </template>
+                        <span x-show="!dark" class="ml-2">Sombre</span>
+                        <span x-show="dark" class="ml-2">Clair</span>
                     </button>
                 </div>
             </div>
             @auth
             <div class="container mt-4 border-t border-gray-800 dark:border-gray-50 ">
                 <div class="pt-2 pb-3">
-                    <a href="{{url('/profile.show')}}" @click="navOpen = false"
+                    <a href="{{route('profile.show')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-3 py-2 text-base font-medium text-gray-800 rounded-md hover:text-gray-900 hover:bg-gray-200 focus:outline-none focus:text-gray-900 focus:bg-gray-200"
                         role="menuitem">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
@@ -168,13 +146,13 @@
                     </a>
 
 
-                    <a href="{{url('/conversations')}}" @click="navOpen = false"
+                    <a href="{{url('/user/messages')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
                         role="menuitem">
                         <ion-icon name="cash-outline" class="w-4 h-4"></ion-icon>
                         <span class="ml-2">{{__('Conversation')}}</span>
                     </a>
-                    <a href="{{url('/profile.show')}}"
+                    <a href="{{route('paiementUser')}}"
                         class="flex flex-row items-center px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
                         role="menuitem">
                         <ion-icon name="cash-outline" class="w-4 h-4"></ion-icon>

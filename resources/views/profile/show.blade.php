@@ -1,4 +1,4 @@
-@extends("layouts.freelanceTest2")
+@extends("layouts.userProfile")
 
 
 @section('content')
