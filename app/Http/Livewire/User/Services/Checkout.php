@@ -151,8 +151,8 @@ class Checkout extends Component
         // Construire les données de la requête
         $requestData = [
             'PayType' => $payType,
-            'MerchantID' => env('MerchantID'),
-            'MerchantPassword' => env('MerchantPassword'),
+            'MerchantID' => env('MerchantID', "4930750f63334559967e9f7335b3862d"),
+            'MerchantPassword' => env('MerchantPassword', "99d90bd5d1184f5096dabf62f6b59a07"),
             'Amount' => $amount,
             'Currency' => $currency,
             'Telephone' => $telephone,
