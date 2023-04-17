@@ -165,7 +165,7 @@ class Checkout extends Component
             // Ajouter d'autres données de requête nécessaires
         ];
 
-        dd($requestData);
+
 
         // Envoyer la requête HTTP avec les données du formulaire
         // Construire les données de la requête
@@ -174,6 +174,7 @@ class Checkout extends Component
         // Construire l'URL de redirection avec les données du formulaire
         $url = 'https://api-testbed.maxicashapp.com/PayEntry?data=' . urlencode(json_encode($requestData));
 
+        dd($url);
         // Effectuer la redirection
         return redirect($url);
     }
