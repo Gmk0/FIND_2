@@ -58,7 +58,7 @@
                                     </p>
                                     <div class="grid grid-cols-2 gap-4">
 
-                                        @foreach($categories as $categorie)
+                                        @forelse($categories as $categorie)
 
 
 
@@ -69,10 +69,10 @@
 
                                         </a>
 
+                                        @empty
 
 
-
-                                        @endforeach
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
 
             $table->text('description')->nullable();
-            $table->json('files')->nullable();
+            $table->string('files')->nullable();
             $table->decimal('bid_amount', 8, 2);
             $table->timestamp('begin_project')->nullable();
             $table->timestamp('end_project')->nullable();

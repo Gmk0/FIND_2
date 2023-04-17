@@ -1,15 +1,15 @@
 <div x-cloak x-show="navOpen" :class="{'block': navOpen, 'hidden': !navOpen}" @click.away="navOpen = false" x-cloak
-    class="fixed inset-0 bottom-0 left-0 z-30 w-10/12  overflow-auto origin-left transform shadow-lg bg-gray-50 dark:bg-gray-800 custom-scrollbar lg:hidden"
+    class="fixed inset-0 bottom-0 left-0 z-30 w-10/12 overflow-auto origin-left transform shadow-lg bg-gray-50 dark:bg-gray-800 custom-scrollbar lg:hidden"
     x-transition:enter=" transition ease-in duration-300" x-transition:enter-start="opacity-0 transform -translate-x-40"
     x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-out duration-300"
     x-transition:leave-start="opacity-0 transform translate-x-40"
     x-transition:leave-end="opacity-0 transform translate-x-0">
 
     <div
-        class="flex sticky top-0 h-24 z-20 p-3 dark:bg-gray-800 bg-white   border-b border-gray-700 dark:border-gray-300 ">
+        class="sticky top-0 z-20 flex h-24 p-3 bg-white border-b border-gray-700 dark:bg-gray-800 dark:border-gray-300 ">
         <div class="p-3 mx-1 ">
             @auth
-            <div class="flex   w-full text-left">
+            <div class="flex w-full text-left">
                 <div class="flex-shrink-0">
                     @if (!empty(Auth::user()->profile_photo_path))
                     <img class="w-12 h-12 rounded-full"
@@ -33,7 +33,7 @@
         </div>
 
     </div>
-    <div class="overflow-auto p-4 custom-scrollbar">
+    <div class="p-4 overflow-auto custom-scrollbar">
         <div class="flex flex-col ">
 
             <div class="flex-1 border-gray-800 dark:border-white custom-scrollbar">
@@ -69,7 +69,7 @@
                             class="flex flex-col px-2 py-2 mt-2 rounded-md shadow-xs bg-inherit" role="menu"
                             aria-orientation="vertical" aria-labelledby="user-menu" role="menuitem">
 
-                            @foreach($categories as $categorie)
+                            @forelse($categories as $categorie)
 
 
                             <a href="#" @click="navOpen = false" wire:click="getCategory({{$categorie->id}})"
@@ -78,7 +78,8 @@
                                 {{$categorie->name}}
                             </a>
 
-                            @endforeach
+                            @empty
+                            @endforelse
 
 
 
@@ -168,7 +169,7 @@
 
 
                     <a href="{{url('/conversations')}}" @click="navOpen = false"
-                        class="flex flex-row items-center px-4 py-2 text-gray-800 text-md focus:text-gray-900  hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
+                        class="flex flex-row items-center px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
                         role="menuitem">
                         <ion-icon name="cash-outline" class="w-4 h-4"></ion-icon>
                         <span class="ml-2">{{__('Conversation')}}</span>
