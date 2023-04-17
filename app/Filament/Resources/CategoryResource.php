@@ -44,9 +44,6 @@ class CategoryResource extends Resource
                 //Tables\Columns\TextColumn::make('updated_at')
                 // ->dateTime(),
             ])
-            ->filters([
-                Tables\Filters\TrashedFilter::make(),
-            ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
