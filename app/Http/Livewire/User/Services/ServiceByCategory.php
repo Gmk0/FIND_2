@@ -4,7 +4,7 @@ namespace App\Http\Livewire\User\Services;
 
 use Livewire\Component;
 use App\Models\Category;
-use App\Models\service;
+use App\Models\Service;
 use App\Models\SubCategory;
 use Livewire\WithPagination;
 use App\Tools\cart;
