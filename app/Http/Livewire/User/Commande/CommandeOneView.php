@@ -32,6 +32,7 @@ class CommandeOneView extends Component
 
     public function sendFeedback()
     {
+        $this->validate(['feedback.description'=>'required'])
         $data = feedback::where('order_id', $this->order_id)->first();
         $data->satisfaction = $this->satisfaction;
         $data->commentaires = $this->feedback['description'];
