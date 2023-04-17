@@ -7,7 +7,7 @@ use App\Models\feedback;
 use App\Models\Message;
 use App\Models\Service;
 use Livewire\Component;
-use App\Tools\cart;
+use App\Tools\Cart;
 use Illuminate\Support\Facades\Session;
 
 class ServicesViewOne extends Component
@@ -25,7 +25,7 @@ class ServicesViewOne extends Component
         // dd($this->service->averageFeedback());
         $this->images = $this->images();
         // dd($this->images);
-        $this->commentaires = feedback::whereHas('order', function ($query) {
+        $this->commentaires = feedback::whereHas('Order', function ($query) {
             $query->whereHas('service', function ($q) {
                 $q->where('id', $this->service->id);
             });

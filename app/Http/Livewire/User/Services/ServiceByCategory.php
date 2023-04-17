@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Service;
 use App\Models\SubCategory;
 use Livewire\WithPagination;
-use App\Tools\cart;
+use App\Tools\Cart;
 use Illuminate\Support\Facades\Session;
 
 class ServiceByCategory extends Component
