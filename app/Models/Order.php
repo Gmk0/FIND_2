@@ -73,7 +73,7 @@ class Order extends Model
     }
     public function rapports(): HasMany
     {
-        return $this->HasMany(Rapport::class);
+        return $this->HasMany(rapport::class);
     }
 
 
