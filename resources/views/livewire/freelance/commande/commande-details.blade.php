@@ -71,7 +71,7 @@
                             </x-select>
                         </div>
                         <div>
-                            <x-datetime-picker wire:model.defer='jour' label='Date de livraison' />
+                            <x-datetime-picker wire:model.defer='jour' parse-format="YYYY-MM-DD HH:mm:ss"  label='Date de livraison' />
 
 
                         </div>
