@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Freelance\Services;
 
 use Livewire\Component;
 use App\Models\freelance;
-use App\Models\service;
+use App\Models\Service as modelsService;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -32,7 +32,7 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
     use Forms\Concerns\InteractsWithForms;
 
 
-    public Service $service;
+    public modelsService $service;
 
     public $title;
     public $description;
@@ -215,7 +215,7 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
 
         // dd($data);
 
-        service::create($data);
+        modelsService::create($data);
 
         $this->notification()->success(
             $title = "Creation reussi ",

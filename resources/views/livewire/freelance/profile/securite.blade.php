@@ -1,11 +1,11 @@
 <div>
 
-    <div class="min-h-screen p-8 ">
+    <div class="min-h-screen ">
 
 
 
 
-        <div class="container px-6 mx-aut lg:px-8">
+        <div class="container px-4 mx-auto lg:px-8">
             <h2 class="mb-8 text-xl font-semibold tracking-wide text-indigo-600 uppercase">Securite</h2>
 
 

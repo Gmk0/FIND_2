@@ -6,8 +6,9 @@
     x-transition:leave-end="opacity-0 transform translate-x-0">
 
     <div
-        class="sticky top-0 z-20 flex h-24 p-3 bg-white border-b border-gray-700 dark:bg-gray-800 dark:border-gray-300 ">
-        <div class="p-3 mx-1 ">
+        class="sticky top-0 z-20 flex justify-between h-24 p-2 bg-white border-b border-gray-700 dark:bg-gray-800 dark:border-gray-300 ">
+
+        <div class="flex p-3 mx-1 ">
             @auth
             <div class="flex w-full text-left">
                 <div class="flex-shrink-0">
@@ -32,13 +33,17 @@
             @endauth
         </div>
 
+        <div class="text-left">
+            <x-button @click="navOpen = false" sm icon="x"></x-button>
+        </div>
+
     </div>
     <div class="p-4 overflow-auto custom-scrollbar">
         <div class="flex flex-col ">
 
             <div class="flex-1 border-gray-800 dark:border-white custom-scrollbar">
                 <div class="pt-4 pb-3">
-                    <a href="{{url('/')}}"
+                    <a href="{{url('/')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-white focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -48,16 +53,16 @@
                         </svg>
                         <span class="ml-2">{{__('messages.Home')}}</span>
                     </a>
-                    <a href="{{url('/register.begin')}}"
+                    <a href="{{url('/registration')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-white hover:dark:text-white hover:bg-gray-700 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                         <ion-icon name="person-add-outline" class="w-4 h-4"></ion-icon>
                         <span class="ml-2">{{__('messages.DevenirFreelancer')}}</span>
                     </a>
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = true"
-                            class="flex flex-row items-center w-full px-3 py-2 mt-1 text-lg font-medium text-left text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-700 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
+                            class="flex flex-row items-center w-full px-3 py-2 mt-1 text-lg font-medium text-left text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-700 focus:dark:text-white focus:text-white focus:bg-amber-600">
                             <ion-icon name="albums-outline" class="w-4 h-4 dark:text-white"></ion-icon>
-                            <span class="ml-2">{{__('messages.OurServices')}}</span>
+                            <span class="ml-2">{{__('Categories')}}</span>
                             <svg xmlns="http://www.w3.org/2000/svg" :class="{'rotate-180': open, 'rotate-0': !open}"
                                 class="w-4 h-4 mt-1 transform" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -72,7 +77,8 @@
                             @forelse($categories as $categorie)
 
 
-                            <a href="#" @click="navOpen = false" wire:click="getCategory({{$categorie->id}})"
+                            <a @click="navOpen = false" href="#" @click="navOpen = false"
+                                wire:click="getCategory({{$categorie->id}})"
                                 class="flex flex-row items-center px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-white hover:text-gray-900 hover:bg-gray-200 focus:outline-none focus:text-gray-900 focus:bg-gray-200"
                                 role="menuitem">
                                 {{$categorie->name}}
@@ -85,12 +91,12 @@
 
                         </div>
                     </div>
-                    <a href="{{url('/service_favoris')}}"
+                    <a href="{{url('/services')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-700 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                         <ion-icon name="star-outline" class="w-4 h-4 dark:text-white"></ion-icon>
-                        <span class="ml-2">{{__('Favoris')}}</span>
+                        <span class="ml-2">{{__('Service')}}</span>
                     </a>
-                    <a href="{{url('/freelancer/find')}}"
+                    <a href="{{url('/find_freelance')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-700 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                         <ion-icon name="reader-outline" class="w-4 h-4 dark:text-white"></ion-icon>
                         <span class="ml-2">{{__('Trouver un Freelancer')}}</span>

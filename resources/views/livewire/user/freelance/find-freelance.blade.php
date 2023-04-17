@@ -7,7 +7,7 @@
             }
         }
     </style>
-    <div class="flex flex-col bg-gray-100 pt-20 dark:bg-gray-900"
+    <div class="flex flex-col pt-20 bg-gray-100 dark:bg-gray-900"
         x-data="{ isOpen:false,message:@entangle('message'),isLoading: true,showFilters: false,showSearch: false }"
         x-init="setTimeout(() => { isLoading = false }, 3000)">
 
@@ -39,19 +39,19 @@
         </div>
 
 
-        <div x-cloak x-show="!isLoading" class=" flex flex-wrap w-full p-6 mx-auto ">
-            <div class="w-full text-xl leading-normal text-gray-800 lg:w-1/5  lg:px-2">
+        <div x-cloak x-show="!isLoading" class="flex flex-wrap w-full p-6 mx-auto ">
+            <div class="w-full text-xl leading-normal text-gray-800 lg:w-1/5 lg:px-2">
 
 
 
                 <div x-bind:class="showFilters ? 'fixed inset-0  top-0  bottom-0  dark:bg-gray-800 bg-white z-50 p-4 transition-all duration-200 w-full' : 'hidden w-full h-64 mt-0  md:top-[6rem] sticky inset-0 z-20'"
-                    class=" md:h-64  overflow-x-hidden border border-gray-400 rounded-md shadow lg:h-auto lg:block lg:border-transparent lg:shadow-none lg:bg-transparent overflow-y-auto custom-scrollbar"
+                    class="overflow-x-hidden overflow-y-auto border border-gray-400 rounded-md shadow md:h-64 lg:h-auto lg:block lg:border-transparent lg:shadow-none lg:bg-transparent custom-scrollbar"
                     id="menu-content">
 
                     <nav>
                         <!-- Filtres -->
                         <div x-data=" toggleAccordion()"
-                            class="w-full p-4  bg-white custom-scrollbar  overflow-y-auto rounded-lg dark:bg-gray-800">
+                            class="w-full p-4 overflow-y-auto bg-white rounded-lg custom-scrollbar dark:bg-gray-800">
                             <h3 class="mb-6 font-bold text-gray-700 dark:text-gray-100">Filtres</h3>
                             <div class="mt-4 mb-4 border-t py-2.5 border-b border-gray-400 ">
                                 <button @click="setCategory()"
@@ -205,11 +205,10 @@
 
             </div>
 
-            <div
-                class="w-full px-2    mt-4 leading-normal px-auto md:px-0  text-gray-900 px-auto lg:w-4/5 lg:mt-0 border-rounded">
+            <div class="w-full px-2 mt-4 leading-normal text-gray-900 px-auto md:px-0 lg:w-4/5 lg:mt-0 border-rounded">
                 <!--Title-->
 
-                <header id="" class="p-2  border-gray-300 ">
+                <header id="" class="p-2 border-gray-300 ">
                     <div class="px-2 ">
 
                         <div x-data="{open:false}" class="">
@@ -238,17 +237,17 @@
 
                         </div>
                     </div>
-                    <div class=" flex flex-wrap justify-between mt-4">
+                    <div class="flex flex-wrap justify-between mt-4 ">
 
                         <div class='flex flex-wrap gap-2'>
                             @empty(!$query)
-                            <div class="flex flex-nowrap items-center gap-1">
+                            <div class="flex items-center gap-1 flex-nowrap">
 
                                 <span
                                     class=" items-center py-1 pl-2 pr-0.5 rounded-md text-[12px] font-medium border border-secondary-200 shadow-sm bg-secondary-100 text-secondary-700 dark:bg-secondary-700 dark:text-secondary-400 dark:border-none">
-                                    <span style="" class="">Resultat {{$query}} </span>
+                                    <span style="" class="">{{$query}} </span>
                                     <button
-                                        class="shrink-0 h-4 w-4 flex items-center text-secondary-400 justify-center hover:text-secondary-500"
+                                        class="flex items-center justify-center w-4 h-4 shrink-0 text-secondary-400 hover:text-secondary-500"
                                         wire:click="unselect('query')" type="button">
                                         <ion-icon wire:ignore name="close-circle-outline" class="w-4 h-4"></ion-icon>
 
@@ -258,13 +257,13 @@
                             </div>
                             @endempty
                             @empty(!$experience)
-                            <div class="flex flex-nowrap items-center gap-1">
+                            <div class="flex items-center gap-1 flex-nowrap">
 
                                 <span
                                     class="inline-flex items-center py-1 pl-2 pr-0.5 rounded-full text-[12px] font-medium border border-secondary-200 shadow-sm bg-secondary-100 text-secondary-700 dark:bg-secondary-700 dark:text-secondary-400 dark:border-none">
                                     <span style="max-width: 6rem" class="truncate">{{$experience}} Ans </span>
                                     <button
-                                        class="shrink-0 h-4 w-4 flex items-center text-secondary-400 justify-center hover:text-secondary-500"
+                                        class="flex items-center justify-center w-4 h-4 shrink-0 text-secondary-400 hover:text-secondary-500"
                                         wire:click="unselect('experience')" type="button">
                                         <ion-icon wire:ignore name="close-circle-outline" class="w-4 h-4"></ion-icon>
 
@@ -274,13 +273,13 @@
                             </div>
                             @endempty
                             @empty(!$taux)
-                            <div class="flex flex-nowrap items-center gap-1">
+                            <div class="flex items-center gap-1 flex-nowrap">
 
                                 <span
                                     class="inline-flex items-center py-1 pl-2 pr-0.5 rounded-full text-[12px] font-medium border border-secondary-200 shadow-sm bg-secondary-100 text-secondary-700 dark:bg-secondary-700 dark:text-secondary-400 dark:border-none">
                                     <span style="max-width: 6rem" class="truncate">10 a {{$taux}} $</span>
                                     <button
-                                        class="shrink-0 h-4 w-4 flex items-center text-secondary-400 justify-center hover:text-secondary-500"
+                                        class="flex items-center justify-center w-4 h-4 shrink-0 text-secondary-400 hover:text-secondary-500"
                                         wire:click="unselect('taux')" type="button">
                                         <ion-icon wire:ignore name="close-circle-outline" class="w-4 h-4"></ion-icon>
 
@@ -292,10 +291,10 @@
                         </div>
 
 
-                        <div class="flex flex-nowrap justify-between">
+                        <div class="flex justify-between lg:flex-nowrap">
                             <button @click="showFilters=!showFilters"
-                                class="inline-flex md:hidden items-center px-2  py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                <svg class="h-5 w-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+                                class="inline-flex md:hidden  px-2  py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
                                         d="M3 3a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm16 5a1 1 0 01-1 1H2a1 1 0 010-2h16a1 1 0 011 1zm-2 5a1 1 0 01-1 1H6a1 1 0 110-2h10a1 1 0 011 1z"
@@ -304,15 +303,7 @@
 
                             </button>
 
-                            <div class="items-end">
-                                <x-select label="" placeholder="trier" wire:model.defer="model">
-                                    <x-select.option label="Par taux ascendant " value="1" />
-                                    <x-select.option label="Par taux descendant" value="2" />
-                                    <x-select.option label="Par Niveau ascendant " value="1" />
-                                    <x-select.option label="Par Niveau descendant" value="2" />
-                                    >
-                                </x-select>
-                            </div>
+
 
 
 
@@ -324,20 +315,20 @@
 
 
 
-                <div class="  grid grid-cols-1 gap-8  md:mx-auto  md:px-2  md:grid-cols-3">
+                <div class="grid grid-cols-1 gap-8 md:mx-auto md:px-2 md:grid-cols-3">
 
 
 
                     @forelse($freelancers as $freelancer)
-                    <div class="max-w-64 mx-auto md:mx-2 ">
+                    <div class="mx-auto max-w-64 md:mx-2 ">
                         <div class="relative h-48 bg-center bg-cover rounded-t-lg w-72"
                             style="background-image: url('https://randomuser.me/api/portraits/women/77.jpg')">
                             <div class="absolute bottom-0 left-0 p-2 bg-gray-500 bg-opacity-50 ">
-                                <h2 class="text-base md:text-lg font-thin tracking-wide text-white">{{$freelancer->nom}}
+                                <h2 class="text-base font-thin tracking-wide text-white md:text-lg">{{$freelancer->nom}}
                                 </h2>
                             </div>
                             <div class="absolute top-0 right-0 flex items-center p-2">
-                                <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-3 h-3 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                                     <circle cx="10" cy="10" r="10" />
                                 </svg>
 
@@ -359,13 +350,13 @@
 
                             </div>
                         </div>
-                        <div class="h-60 p-4 overflow-hidden bg-white rounded-b-lg shadow-md dark:bg-gray-800 w-72">
+                        <div class="p-4 overflow-hidden bg-white rounded-b-lg shadow-md h-60 dark:bg-gray-800 w-72">
 
                             <div class="flex justify-between">
-                                <p class="mb-2 text-base text-start text-gray-700 dark:text-gray-100">
+                                <p class="mb-2 text-base text-gray-700 text-start dark:text-gray-100">
                                     {{$freelancer->category->name}}
                                 </p>
-                                <span class="mb-2 text-base text-start text-gray-700 dark:text-gray-100">
+                                <span class="mb-2 text-base text-gray-700 text-start dark:text-gray-100">
 
                                     {{$freelancer->level}}
                                 </span>
@@ -399,8 +390,8 @@
                             </div>
                             <div class="flex justify-end mt-4">
                                 <a href="{{route('profile.freelance',[$freelancer->identifiant])}}"
-                                    class="mr-4 font-medium text-indigo-500">Voir mon profil FIND</a>
-                                <x-button wire:click="conversations({{$freelancer->id}})" label="Contacter" primary />
+                                    class="mr-4 font-medium text-indigo-500">Voir mon profil</a>
+                                <x-button wire:click="conversations({{$freelancer->id}})" icon="chat-alt-2" primary />
                             </div>
                         </div>
                     </div>
@@ -431,7 +422,7 @@
 
         <div class="fixed bottom-0 right-0 z-10 mb-4 mr-4">
             <button
-                class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                class="flex items-center justify-center w-12 h-12 text-white bg-blue-600 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5h6M9 12h6m-6 7h6">
                     </path>
@@ -439,7 +430,7 @@
             </button>
 
             <div x-cloak x-show="message" class=" sm:block">
-                <div class="w-64 h-96 rounded-lg shadow-lg">
+                <div class="w-64 rounded-lg shadow-lg h-96">
                     <div class="flex flex-col h-full">
                         <div class="flex items-center justify-between p-4 bg-gray-800 rounded-t-lg">
                             <h3 class="text-lg font-medium text-white">Chat</h3>
@@ -451,7 +442,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <div class="flex-1 p-4 bg-white overflow-y-auto">
+                        <div class="flex-1 p-4 overflow-y-auto bg-white">
                             <!-- contenu de la discussion -->
 
                             <div class="flex flex-col space-y-2">
@@ -529,9 +520,9 @@
         showConfirmButton: true,
         footer: '<a class="text-green-600" href="{{route('login')}}">liste des proposition</a>',
         //timer:5000
-        
+
         })
-        
+
         });
 
 
@@ -546,7 +537,7 @@
           Langue:false,
           isOpen: false,
 
-    
+
           showPriceFilter:false,
           Experience:false,
           SousCategorie:false,
@@ -578,33 +569,33 @@
           }
         }
       }
-    
-    
+
+
     // Récupérer l'élément div
     var fixedDiv = document.getElementById("fixed-div");
-    
+
     var fixedNav= document.getElementById('fixed-nav');
-    
+
     // Récupérer la position de l'élément div par rapport au haut de la page
     var divOffsetTop = fixedDiv.offsetTop;
-    
-    
-    
+
+
+
     // Ajouter un événement de défilement à la fenêtre
     window.addEventListener("scroll", function() {
     // Récupérer la position de défilement actuelle de la fenêtre
     var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-    
+
     // Vérifier si l'élément div est en haut de la page
     if (scrollPosition >= divOffsetTop) {
     // Ajouter la classe "fixed" à l'élément div
     fixedDiv.classList.add("fixed-top");
-    
-    
+
+
     } else {
     // Supprimer la classe "fixed" de l'élément div
     fixedDiv.classList.remove("fixed-top");
-    
+
     }
     });
     </script>

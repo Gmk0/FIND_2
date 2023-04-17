@@ -21,7 +21,7 @@
 
 
 
-    <link rel="stylesheet" href="/build/assets/app.css">
+
 
     <style>
         [x-cloak] {
@@ -29,6 +29,7 @@
         }
     </style>
 
+    @vite(['resources/css/app.css'])
 
     @wireUiScripts
 

@@ -64,12 +64,4 @@ class CategoryResource extends Resource
             'index' => Pages\ManageCategories::route('/'),
         ];
     }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
 }

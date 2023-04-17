@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Freelance\Services;
 
 use Livewire\Component;
 use App\Models\freelance;
-use App\Models\service;
+use App\Models\Service as ModelService;
 
 use Filament\Tables;
 use Illuminate\Contracts\View\View;
@@ -42,7 +42,7 @@ class ServiceList extends Component implements Tables\Contracts\HasTable
         $freelance = freelance::where('user_id', Auth::user()->id)->first();
 
         // Créer une requête pour la table "Service"
-        $service = service::query();
+        $service = ModelService::query();
 
         // Ajouter une condition pour l'utilisateur connecté
         $service->where('freelance_id', $freelance->id);
@@ -93,7 +93,7 @@ class ServiceList extends Component implements Tables\Contracts\HasTable
         return [
             // ...
             Action::make('Modifier')
-                ->url(fn (Service $record): string => route('freelance.service.edit', $record->id))
+                ->url(fn (ModelService $record): string => route('freelance.service.edit', $record->id))
                 // ->openUrlInNewTab()
                 ->icon('heroicon-s-pencil'),
             Tables\Actions\DeleteAction::make(),

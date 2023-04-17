@@ -3,12 +3,20 @@
 
 @include('include.head')
 
+@php
+if(request()->routeIs('MessageUser')){
+$overflow="overflow-hidden lg:overflow-y-auto";
+}else{
+$overflow="overflow-y-auto";
+}
+@endphp
+
 <body
     class="flex flex-col justify-between overflow-x-hidden overflow-y-hidden bg-gray-100 custom-scrollbar dark:bg-gray-900"
     x-data="{navOpen: false,notificationActive: false,isAside:true, isLoading:true, scrolledFromTop: false}" :class="{
             'overflow-hidden': navOpen,
             'overflow-scroll': !navOpen
-           
+
         }">
     <x-notifications z-index="z-50" position='top-right' />
 
@@ -20,7 +28,7 @@
         <div class="flex flex-col flex-1">
             <x-headerUser />
 
-            <main class="h-full pb-16 overflow-y-auto">
+            <main class="h-full pb-16 {{$overflow}} ">
 
                 @yield('content')
 

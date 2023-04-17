@@ -33,9 +33,9 @@
                         function validateTextarea() {
                                                 const message = this.message;
                                                 if (message.length < 100) {
-            
+
                                                 } else {
-            
+
                                                 }
                                                     }
                     </script>
@@ -67,9 +67,9 @@
                         function validateTextarea() {
                                 const message = this.message;
                                 if (message.length < 250) {
-            
+
                                 } else {
-            
+
                                 }
                                 }
                     </script>
@@ -117,9 +117,11 @@
                     </div>
 
                     <div class="grid gap-6 p-2 md:grid-cols-2">
-                        <x-datetime-picker label=" Date Debut" wire:model.defer='dateD' placeholder="Date Debut" />
+                        <x-datetime-picker label=" Date Debut" wire:model.defer='dateD' parse-format="DD-MM-YYYY HH:mm"
+                            placeholder="Date Debut" />
 
-                        <x-datetime-picker label=" Date Fin" wire:model.defer='dateF' placeholder="Date Fin" />
+                        <x-datetime-picker label=" Date Fin" wire:model.defer='dateF' parse-format="DD-MM-YYYY HH:mm"
+                            placeholder="Date Fin" />
 
 
 
@@ -191,9 +193,9 @@
     showConfirmButton: true,
     footer: '<a class="text-green-600" href="">liste des proposition</a>',
     //timer:5000
-    
+
     })
-    
+
     });
 
     function  project(){

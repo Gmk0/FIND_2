@@ -1,7 +1,7 @@
 <div class="p-4">
 
     <div>
-        @include('include.breadcumbUser',['projet'=>'Projet'])
+        @include('include.breadcumbFreelance',['profile'=>'profile'])
     </div>
     <div class="container mx-auto">
 
@@ -55,9 +55,14 @@
                                 {{ __('profiles.Saved') }}
                             </x-action-message>
 
-                            <x-button label="Enregistrer" stone wire:click="updateFirts()">
+                            <x-jet-button wire:click="updateFirts()">
+                                <span wire:loading.remove wire:target='updateFirts'>{{ __('profiles.Save')
+                                    }}</span>
 
-                            </x-button>
+                                <span wire:loading wire:target='updateFirts'>Modification...</span>
+
+                            </x-jet-button>
+
                         </div>
 
                     </div>

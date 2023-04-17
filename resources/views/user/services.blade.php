@@ -4,9 +4,9 @@
 
 <section class="flex flex-col min-h-screen pt-20 mb-6">
 
-    <div class="flex flex-col h-64 p-2 mx-6 mt-4 bg-white rounded-lg dark:bg-gray-800">
+    <div class="flex flex-col p-2 mx-6 mt-4 bg-white rounded-lg md:h-64 dark:bg-gray-800">
         <div class="mb-4">
-            <h3 class="mb-4 font-serif text-xl leading-snug text-center dark:text-gray-50 text-slate-800">
+            <h3 class="mb-4 font-serif text-xl leading-snug text-center dark:text-gray-400 text-slate-800">
                 Découvrez une communauté de freelances talentueux prêts à donner vie à vos projets.
                 Trouvez le service parfait pour vous, choisissez parmi une large sélection de compétences et laissez
                 notre
@@ -59,11 +59,11 @@
     <div class="p-4 mx-6 mt-4 bg-white rounded-lg dark:bg-gray-900 justify-beetwen">
 
         <div class="flex justify-between mb-4">
-            <h1 class="text-lg font-semibold text-gray-800 md:text-2xl dark:text-gray-50 "> Les Service populaire en
+            <h1 class="text-base font-semibold text-gray-800 md:text-2xl dark:text-gray-300 "> Les Service populaire en
                 Photographie </h1>
             <div class="flex items-end justify-end ">
 
-                <x-button label="voir plus"></x-button>
+                <x-button sm label="plus"></x-button>
             </div>
 
         </div>
@@ -136,18 +136,18 @@
     </div>
 
 
-    <div class="p-4 mx-6 mt-4 bg-white rounded-lg dark:bg-gray-800 justify-beetwen">
+    <div class="p-4 mx-6 mt-4 bg-white rounded-lg dark:bg-gray-900 justify-beetwen">
 
 
         <div class="flex justify-between mb-4">
-            <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-50 "> Les Freelance populaire </h1>
+            <h1 class="text-sm font-semibold text-gray-800 md:text-xl dark:text-gray-300 "> Freelance populaire </h1>
             <div class="flex items-end justify-end ">
 
-                <x-button primary label="voir plus"></x-button>
+                <x-button sm label="plus"></x-button>
             </div>
 
         </div>
-        <div class="py-4 mb-4 rounded-lg splide splide-2">
+        <div class="py-4 mb-4 bg-white rounded-lg splide splide-2">
 
             <div class="splide__track">
                 <div class="gap-4 p-2 splide__list">
@@ -213,15 +213,15 @@
     </div>
 
 
-    <div class="flex flex-col p-2 mt-4 bg-white rounded-lg md:mx-6 justify-beetwen">
+    <div class="flex flex-col p-2 mx-6 mt-4 bg-white rounded-lg md:mx-6 justify-beetwen">
 
         <div class="mb-4">
-            <h1 class="text-xl font-bold text-gray-800">Services que vous pourriez aimer</h1>
+            <h1 class="text-xl font-bold text-gray-800 dark:text-gray-300">Services que vous pourriez aimer</h1>
         </div>
 
 
 
-        <div class="grid gap-4 p-4 mx-2 grid-cols- md:grid-cols-4 md:gap-6">
+        <div class="grid grid-cols-1 gap-4 p-4 mx-2 md:grid-cols-4 md:gap-6">
             @forelse ($services as $service)
 
 
@@ -376,7 +376,7 @@
 
       breakpoints: {
         640: {
-          perPage: 1,
+          perPage: 2,
         },
         768: {
           perPage: 5,
@@ -392,7 +392,8 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     new Splide('.splide-2', {
-     type : 'loop',
+
+    type:'loop',
     drag : 'free',
     focus : 'center',
     perPage: 4,
@@ -400,10 +401,10 @@
     pagination: false,
     fixedWidth : '24rem',
 
-    gap: '1rem',
+
       breakpoints: {
         640: {
-          perPage: 1,
+          perPage: 2,
         },
         768: {
           perPage: 4,

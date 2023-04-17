@@ -1,4 +1,4 @@
-<div class="flex max-h-screen overflow-hidden" x-data="{sidebarOpen:false, isLoading:true}"
+<div class="flex max-h-screen overflow-hidden" x-data="{sidebarOpen:true, isLoading:true}"
     x-init="setTimeout(() => { isLoading = false }, 3000)">
 
     <div x-show="isLoading">
@@ -134,13 +134,13 @@
                                         online<span>
                                             @else
                                             <span class="mt-1 text-sm text-gray-600">
-                                                last seen
+
                                                 {{$selectedConversation->freelance->user->last_activity?->DiffForHumans()}}<span>
 
                                                     @endif
                                 </div>
                                 <div class="flex items-end gap-4">
-                                    <x-button sm secondary icon="clipboard-list" />
+
                                     <div>
                                         <x-dropdown>
                                             <x-dropdown.item label="Envoyer un fichier " />

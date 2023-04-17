@@ -261,31 +261,33 @@
         <div class="container">
             <div class="flex flex-wrap -mx-3">
                 <div class="flex-shrink-0 w-full max-w-full mx-auto mb-6 text-center lg:flex-0 lg:w-8/12">
-                    <a href="javascript:;" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> Servives
+                    <a href="{{url('/services')}}" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
+                        Servives
                     </a>
-                    <a href="javascript:;" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> A propos
+                    <a href="{{url('/apropos')}}" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> A
+                        propos
                     </a>
-                    <a href="javascript:;" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> Communaute
+                    <a href="" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> Communaute
                     </a>
 
-                    <a href="javascript:;" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> Blog </a>
+                    <a href="" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> Blog </a>
 
 
                 </div>
                 <div class="flex-shrink-0 w-full max-w-full mx-auto mt-2 mb-6 text-center lg:flex-0 lg:w-8/12">
-                    <a href="javascript:;" target="_blank" class="mr-6 text-slate-400">
+                    <a href="" target="_blank" class="mr-6 text-slate-400">
                         <span class="text-lg fab fa-dribbble"></span>
                     </a>
-                    <a href="javascript:;" target="_blank" class="mr-6 text-slate-400">
+                    <a href="" target="_blank" class="mr-6 text-slate-400">
                         <span class="text-lg fab fa-twitter"></span>
                     </a>
-                    <a href="javascript:;" target="_blank" class="mr-6 text-slate-400">
+                    <a href="" target="_blank" class="mr-6 text-slate-400">
                         <span class="text-lg fab fa-instagram"></span>
                     </a>
-                    <a href="javascript:;" target="_blank" class="mr-6 text-slate-400">
+                    <a href="" target="_blank" class="mr-6 text-slate-400">
                         <span class="text-lg fab fa-pinterest"></span>
                     </a>
-                    <a href="javascript:;" target="_blank" class="mr-6 text-slate-400">
+                    <a href="" target="_blank" class="mr-6 text-slate-400">
                         <span class="text-lg fab fa-github"></span>
                     </a>
                 </div>

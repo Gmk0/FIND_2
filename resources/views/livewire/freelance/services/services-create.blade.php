@@ -3,9 +3,9 @@
 
 
 
-        @include('include.breadcumbUser',['transation'=>'transation'])
+        @include('include.breadcumbFreelance',['serviceName'=>'service'])
     </div>
-    <div class="px-6 py-4 mx-auto max-w-7xl lg:px-8">
+    <div class="px-2 py-4 mx-auto max-w-7xl lg:px-8">
 
 
         <div class="max-w-3xl ">
@@ -16,7 +16,7 @@
 
         <div class="my-3 overflow-auto md:mx-12">
 
-            <form wire:submit.prevent="submit" class="p-4 mb-4 rounded-md dark:text-gray-100 dark:bg-gray-800 ">
+            <form wire:submit.prevent="submit" class="p-2 mb-4 rounded-md dark:text-gray-100 dark:bg-gray-800 ">
 
                 {{ $this->form }}
 

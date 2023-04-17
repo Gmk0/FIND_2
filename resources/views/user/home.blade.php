@@ -123,31 +123,32 @@
     </div>
 </section>
 
-<section x-show="isLoading" x-cloak id="talkAbout" class="bg-gray-100 dark:bg-gray-900">
 
-    <div class="container p-4 m-4 mx-auto md:p-6 max-w-7xl">
+<section x-show="isLoading" x-cloak id="talkAbout" class="bg-gray-100 dark:bg-gray-800 md:min-h-screen">
+
+    <div class="container max-w-6xl p-4 m-4 mx-auto md:p-6">
         <div class="mb-10 text-center">
             <span class="font-medium text-amber-600">Presentation</span>
             <h1 class="text-2xl font-bold text-slate-700 dark:text-gray-200 ">Ils en Parlent mieux Que nous</h1>
 
         </div>
 
-        <div class="mx-3 my-auto swiper mySwiper ">
+        <div class="mx-3 my-8 swiper mySwiper ">
             <div class="pb-8 swiper-wrapper ">
                 @for ($i = 0; $i < 3; $i++) <div class="swiper-slide !bg-transparent px-2 md:px-0">
                     <div
                         class="px-2 bg-white border border-gray-100 dark:border-gray-300 rounded-3xl dark:bg-gray-800 dark:shadow-none md:mx-auto lg:w-11/12 xl:w-8/12">
-                        <div class="grid md:grid-cols-2">
+                        <div class="grid md:grid-cols-5">
 
 
-                            <div class="w-2/3 h-auto m-2 aspect-w-8 aspect-h-9 rounded-2xl">
+                            <div class="w-full m-2 h-50 aspect-w-8 aspect-h-9 md:col-span-2 rounded-2xl">
 
                                 <iframe class="rounded-sm w-11/2 h-9/12 aspect-video hover:aspect-square"
                                     src="https://www.youtube.com/embed/r9jwGansp1E" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen></iframe>
                             </div>
-                            <div class="p-6 mx-auto space-y-6 text-center sm:p-8">
+                            <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
                                 <div class="w-24 mx-auto">
                                     <img src="images/clients/client-4.png" alt="company logo" height="400" width="142"
                                         loading="lazy" />

@@ -32,17 +32,18 @@
 
 
 
-                <div @mouseover="linkHover = true" @mouseleave="linkHover = false"
+                <div
                     class=" rounded-xl {{auth()->id() == $message->sender_id ? 'bg-blue-600 rounded-br-none text-gray-100 ':'bg-gray-300 rounded-bl-none text-gray-700'}}  inline-block px-4 py-3 ">
 
 
                     @if(!empty($message->file))
-                    <a href="{{ url('/storage/messages/' . $message->file) }}" download>
+                    <a @mouseover="linkHover = true" @mouseleave="linkHover = false"
+                        href="{{ url('/storage/messages/' . $message->file) }}" download>
                         <img src="/storage/messages/{{$message->file }}" alt="Image" class="h-24 max-w-24">
                     </a>
 
                     @else
-                    <span>{{$message->body}}</span>
+                    <span @mouseover="linkHover = true" @mouseleave="linkHover = false">{{$message->body}}</span>
                     @endif
 
                     <span class="text-white {{auth()->id() == $message->sender_id ? 'flex':'hidden'}}"

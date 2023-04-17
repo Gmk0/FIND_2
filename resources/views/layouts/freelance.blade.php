@@ -8,39 +8,39 @@
     x-data="{navOpen: false,notificationActive: false,isAside:true, isLoading:true, scrolledFromTop: false}" :class="{
             'overflow-hidden': navOpen,
             'overflow-scroll': !navOpen
-           
+
         }">
 
-    <x-notifications z-index="z-50" position='top-left' />
+    <x-notifications z-index="z-50" position='top-right'>
 
-    <div class="flex h-screen overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar"
-        :class="{ 'overflow-hidden': isSideMenuOpen}">
+        <div class="flex h-screen overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar"
+            :class="{ 'overflow-hidden': isSideMenuOpen}">
 
-        <x-asideFreelance />
+            <x-asideFreelance />
 
-        <div class="flex flex-col flex-1">
-            <x-headerFreelance />
+            <div class="flex flex-col flex-1">
+                <x-headerFreelance />
 
-            <main class="h-full pb-16 overflow-y-auto">
+                <main class="h-full pb-16 overflow-y-auto">
 
-                @yield('content')
+                    @yield('content')
 
-            </main>
+                </main>
+
+            </div>
+
+
+
 
         </div>
 
 
 
 
-    </div>
 
 
 
-
-
-
-
-    @include('include.script')
+        @include('include.script')
 
 
 

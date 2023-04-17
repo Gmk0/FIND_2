@@ -7,6 +7,8 @@
 <body class="antialiased text-gray-900 bg-white">
     <div class="flex h-screen overflow-y-hidden bg-white" x-data="setup()"
         x-init="$refs.loading.classList.add('hidden')">
+
+        <x-notifications z-index="z-50" position='top-right' />
         <!-- Loading screen -->
         <div x-ref="loading"
             class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-50"
@@ -129,7 +131,8 @@
                                                 </span>
                                                 <span class="flex flex-col">
                                                     <span class="text-lg">Atlassian</span>
-                                                    <span class="text-sm text-gray-400">Lorem ipsum dolor sit.</span>
+                                                    <span class="text-sm text-gray-400">Lorem ipsum dolor
+                                                        sit.</span>
                                                 </span>
                                             </a>
                                         </li>
