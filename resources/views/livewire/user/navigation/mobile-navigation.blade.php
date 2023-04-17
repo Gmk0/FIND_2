@@ -78,7 +78,7 @@
 
 
                             <a @click="navOpen = false" href="#" @click="navOpen = false"
-                                wire:click="getCategory({{$categorie->id}})"
+                                
                                 class="flex flex-row items-center px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-white hover:text-gray-900 hover:bg-gray-200 focus:outline-none focus:text-gray-900 focus:bg-gray-200"
                                 role="menuitem">
                                 {{$categorie->name}}
