@@ -5,7 +5,7 @@ namespace App\Http\Livewire\User\Services;
 use App\Models\Conversation;
 use App\Models\feedback;
 use App\Models\Message;
-use App\Models\service;
+use App\Models\Service;
 use Livewire\Component;
 use App\Tools\cart;
 use Illuminate\Support\Facades\Session;
