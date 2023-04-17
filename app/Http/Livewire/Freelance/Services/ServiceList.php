@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Freelance\Services;
 
 use Livewire\Component;
-use App\Models\freelance;
+use App\Models\Freelance;
 use App\Models\Service as ModelService;
 
 use Filament\Tables;

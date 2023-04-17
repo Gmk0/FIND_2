@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\feedback;
 
 class Service extends Model
 {
@@ -119,7 +120,7 @@ class Service extends Model
         $orders = $this->orders;
 
         // Récupérer les feedbacks associés à ces commandes
-        $feedbacks = Feedback::whereIn('order_id', $orders->pluck('id'))->get();
+        $feedbacks = feedback::whereIn('order_id', $orders->pluck('id'))->get();
 
         // Calculer la moyenne des feedbacks
         $averageFeedback = $feedbacks->avg('satisfaction');
