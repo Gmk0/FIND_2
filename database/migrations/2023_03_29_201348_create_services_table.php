@@ -33,11 +33,11 @@ return new class extends Migration
             $table->string('files')->nullable();
             $table->string('format')->nullable();
             $table->string('video_url')->nullable();
-              $table->json('Sub_categorie')->nullable();
+            $table->string('Sub_categorie', 2048)->nullable();
 
             $table->bigInteger('view_count')->default(0);
             $table->bigInteger('like')->default(0);
-            $table->enum('is_publish', ["0","1"])->default('0');
+            $table->enum('is_publish', ["0", "1"])->default('0');
             $table->foreignId('freelance_id')->constrained();
             $table->foreignId('category_id')->constrained();
             $table->timestamps();
