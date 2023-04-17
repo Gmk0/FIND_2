@@ -138,6 +138,8 @@ class ServiceController extends Controller
 
             // Rediriger vers une page par défaut
             return redirect()->route('checkout')->withErrors(['message' => 'Une erreur s\'est produite.']);
+        } else {
+            return redirect()->route('checkout')->withErrors(['message' => 'Une erreur s\'est produite.']);
         }
     }
 

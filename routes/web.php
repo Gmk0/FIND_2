@@ -93,7 +93,7 @@ Route::middleware([
 
 
     Route::get('/user', App\Http\Livewire\User\Transaction\DashbordUser::class)->name('DashbordUser');
-    Route::view('status_payement', 'status.success')->name('status_payement');
+    Route::view('/status_payement', 'status.success')->name('status_payement');
 
     Route::get('facturaction/{facture}', [ToolsController::class, 'facture'])->where('facture', '(.*)')->name('facturation');
 });
