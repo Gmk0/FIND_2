@@ -10,15 +10,32 @@
 
 
 
-    <div class="grid grid-cols-2 gap-4 px-6 md:gap-6 md:grid-cols-4 xl:gap-8">
-        <a href="{{route('categoryByName',['programation'])}}"
+    <div class="grid grid-cols-2 gap-4 md:gap-6 md:grid-cols-4 xl:gap-8">
+
+        @forelse ($categories as $category)
+
+        <a href="{{route('categoryByName',[$category->name])}}"
+            class="flex flex-col items-center px-2 py-4 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
+            <img src="{{Storage::disk('local')->url('public/'.$category->illustration) }}" class="w-20 h-20 rounded-md"
+                alt="">
+            <h4
+                class="mt-3 mb-1 md:text-[20px] text-[16px]   font-semibold text-slate-600 duration-200 group-hover:text-white">
+                {{$category->name}}</h4>
+
+        </a>
+        @empty
+
+
+
+
+        <div
             class="flex flex-col items-center px-2 py-4 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
             <img src="/images/services/develloper.png" class="w-20 h-20 rounded-md" alt="">
             <h4
                 class="mt-3 mb-1 md:text-[20px] text-[16px]   font-semibold text-slate-600 duration-200 group-hover:text-white">
                 Programation</h4>
 
-        </a>
+        </div>
 
         <div
             class="flex flex-col items-center px-5 py-8 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
@@ -80,7 +97,8 @@
                 Loisirs</h4>
 
         </div>
-    </div>
+        @endforelse
+    </div>>
 </div>
 
 

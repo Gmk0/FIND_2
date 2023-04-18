@@ -45,10 +45,10 @@
 
         </p>
         <div class="flex flex-col items-center lg:flex-row">
-            <button
+            <a href="{{ url('/categories')}}"
                 class="w-full px-4 py-3 mb-4 font-bold rounded-lg lg:w-max bg-neutral-50 hover:cursor-pointer text-cyan-600 lg:mr-8 lg:mb-0">
                 Commencer
-            </button>
+            </a>
         </div>
     </div>
     <div class="relative z-50 hidden col-span-6 md:flex">

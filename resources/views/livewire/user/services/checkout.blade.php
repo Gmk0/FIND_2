@@ -20,39 +20,21 @@
 
 
             @if ($errors->has('message'))
-            <div
-                class="relative flex items-center max-w-xl overflow-hidden rounded shadow-md dark:bg-gray-600 dark:text-gray-100">
-                <div class="flex items-center self-stretch flex-shrink-0 px-3 dark:bg-gray-700 dark:text-violet-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        class="w-8 h-8">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            <div x-data="{show:true}" x-show="show"
+                class="flex items-center justify-between px-6 py-4 text-white bg-red-500 rounded-md">
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
                     </svg>
+                    <p class="text-sm">Une erreur s'est produite. Veuillez réessayer.</p>
                 </div>
-                <div class="flex-1 p-4">
-                    <h3 class="text-xl font-bold">
-                        <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Erreur</font>
-                        </font>
-                    </h3>
-                    <p class="text-sm dark:text-gray-400">
-                        <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Le mot de passe est incorrect. </font>
-                            <font style="vertical-align: inherit;">Avez-vous besoin de </font>
-                        </font>
-                        <a href="#" rel="referrer noopener" class="underline">
-                            <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">récupérer votre mot de passe ?</font>
-                            </font>
-                        </a>
-                    </p>
-                </div>
-                <button class="absolute top-2 right-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                        class="w-4 h-4 p-2 rounded cursor-pointer">
-                        <path fill-rule="evenodd"
-                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
+                <button @click="show=false" class="text-white" type="button">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
                     </svg>
                 </button>
             </div>
