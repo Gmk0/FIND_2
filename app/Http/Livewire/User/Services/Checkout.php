@@ -21,13 +21,34 @@ class Checkout extends Component
     public $payType = "MaxiCash";
     public $amount;
     public $currency = "maxiDollar";
+    public $isLiked = false;
 
     public function mount()
     {
     }
 
-    public function payer()
+    public function remove($id)
     {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new cart($oldCart);
+        $cart->removeItem($id);
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        } else {
+            Session::forget('cart');
+            return redirect()->route('services');
+        }
+    }
+
+    public function addFavorites()
+    {
+        dd("lolo");
+    }
+
+    public function payers()
+    {
+
+
 
         $cart = Session::has('cart') ? Session::get('cart') : null;
 

@@ -9,10 +9,12 @@ use App\Models\Service;
 use Livewire\Component;
 use App\Tools\Cart;
 use Illuminate\Support\Facades\Session;
+use WireUi\Traits\Actions;
 
 class ServicesViewOne extends Component
 {
 
+    use Actions;
     public $service;
     public $images;
     public $products;
@@ -135,7 +137,11 @@ class ServicesViewOne extends Component
         $cart->add($items, $items->id, $this->images);
         Session::put('cart', $cart);
         $this->emitTo('user.navigation.card-component', 'refreshComponent');
-        $this->dispatchBrowserEvent('success', ['message' => 'le service a ete ajouté']);
+
+        $this->notification()->success(
+            $title = "le Service a ete ajouté dans le panier",
+
+        );
 
         // dd(Session::get('cart'));
     }

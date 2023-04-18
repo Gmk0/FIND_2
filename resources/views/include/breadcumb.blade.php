@@ -1,4 +1,4 @@
-<nav aria-label="breadcrumb" class="w-full p-4 dark:text-gray-100">
+<nav aria-label="breadcrumb" class="w-full p-4 text-gray-600 dark:text-gray-300">
     <ol class="flex h-8 space-x-2">
         <li class="flex items-center">
             <a rel="noopener noreferrer" href="{{url('/')}}" title="Back to homepage" class="hover:underline">

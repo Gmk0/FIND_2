@@ -9,10 +9,14 @@ use App\Models\SubCategory;
 use Livewire\WithPagination;
 use App\Tools\Cart;
 use Illuminate\Support\Facades\Session;
+use wireui\Traits\Actions;
 
 class ServiceByCategory extends Component
 {
+
+
     use WithPagination;
+    use Actions;
     protected $paginationTheme = 'tailwind';
     public $categories;
     public $categoryName = "";
@@ -22,7 +26,7 @@ class ServiceByCategory extends Component
     public $delivery_time = null;
     public $freelance_niveau = null;
     public $price_range = null;
-    public $orderBy = "basic_price";
+    public $orderBy = null;
 
     protected $queryString = [
         'sous_category' => ['expect' => ''],
@@ -73,6 +77,13 @@ class ServiceByCategory extends Component
         $this->emitTo('user.navigation.card-component', 'refreshComponent');
         $this->dispatchBrowserEvent('success', ['message' => 'le service a ete ajouté']);
 
+        $this->notification()->success(
+            $title = "le Service a ete ajouté dans le panier",
+
+        );
+
+
+
         // dd(Session::get('cart'));
     }
 
@@ -100,6 +111,34 @@ class ServiceByCategory extends Component
         }
     }
 
+    public function servicesCount()
+    {
+        $count = Service::whereHas('category', function ($query) {
+            $query->where('name', $this->categoryName);
+        })
+            ->when($this->sous_category, function ($query) {
+                $query->where('Sub_categorie', 'like', '%"' . $this->sous_category . '"%');
+            })
+            ->when($this->delivery_time, function ($query) {
+                $range = $this->getDeliveryTimeRange();
+
+                $query->whereBetween('basic_delivery_time', $range);
+            })->when($this->freelance_niveau, function ($query) {
+                $query->whereHas('freelance', function ($query) {
+                    $query->where('level', $this->freelance_niveau);
+                });
+            })->when($this->price_range, function ($query) {
+                $range = $this->getPriceRange();
+
+                $query->whereBetween('basic_price', $range);
+            })->when($this->price_range, function ($query) {
+                $query->orderBy($this->orderBy, 'DESC');
+            })->count();
+
+        return $count;
+    }
+
+
 
 
     public function render()
@@ -126,9 +165,14 @@ class ServiceByCategory extends Component
                         $range = $this->getPriceRange();
 
                         $query->whereBetween('basic_price', $range);
-                    })->orderBy($this->orderBy, 'DESC')
+                    })->when($this->price_range, function ($query) {
+                        $query->orderBy($this->orderBy, 'DESC');
+                    })
+
 
                     ->paginate(12),
+                'count' => $this->servicesCount(),
+
 
                 'subCategorie' => SubCategory::whereHas('category', function ($query) {
                     $query->where('name', $this->categoryName);

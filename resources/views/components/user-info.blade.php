@@ -35,10 +35,20 @@
             {{ __('Manage Account') }}
         </div>
 
-        <x-dropdown-link href="{{ route('profile.show') }}">
+        <x-dropdown-link href="{{ url('/user') }}">
             <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
             <span class="ml-2">{{__('Profile')}}</span>
         </x-dropdown-link>
+
+        @if(Auth::user()->freelance()->exists())
+
+        <x-dropdown-link href="{{route('freelance.dashboard')}}">
+            <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
+            <span class="ml-2">{{__('Dashbord Freelance')}}</span>
+        </x-dropdown-link>
+        @endif
+
+
         <x-dropdown-link href="{{ route('listProjet') }}">
             <ion-icon name="albums-outline" class="w-4 h-4"></ion-icon>
             <span class="ml-2">{{__('Mes projet')}}</span>

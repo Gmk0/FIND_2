@@ -82,7 +82,7 @@
                                                 <h3 class="text-lg font-semibold leading-snug sm:pr-8">
                                                     {{$item['title']}}
                                                 </h3>
-                                                <p class="text-sm dark:text-gray-400">Classic</p>
+                                                <p class="text-sm dark:text-gray-400">Basic</p>
                                             </div>
                                             <div class="text-right">
                                                 <p class="text-lg font-semibold">{{$item['basic_price']}}€</p>
@@ -90,7 +90,8 @@
                                             </div>
                                         </div>
                                         <div class="flex text-sm divide-x">
-                                            <button type="button" class="flex items-center px-2 py-1 pl-0 space-x-1">
+                                            <button type="button" wire:click="remove({{$item['id']}})"
+                                                class="flex items-center px-2 py-1 pl-0 space-x-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                                     class="w-4 h-4 fill-current">
                                                     <path
@@ -105,15 +106,33 @@
                                                 </svg>
                                                 <span>Remove</span>
                                             </button>
-                                            <button type="button" class="flex items-center px-2 py-1 space-x-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                                    class="w-4 h-4 fill-current">
-                                                    <path
-                                                        d="M453.122,79.012a128,128,0,0,0-181.087.068l-15.511,15.7L241.142,79.114l-.1-.1a128,128,0,0,0-181.02,0l-6.91,6.91a128,128,0,0,0,0,181.019L235.485,449.314l20.595,21.578.491-.492.533.533L276.4,450.574,460.032,266.94a128.147,128.147,0,0,0,0-181.019ZM437.4,244.313,256.571,425.146,75.738,244.313a96,96,0,0,1,0-135.764l6.911-6.91a96,96,0,0,1,135.713-.051l38.093,38.787,38.274-38.736a96,96,0,0,1,135.765,0l6.91,6.909A96.11,96.11,0,0,1,437.4,244.313Z">
-                                                    </path>
-                                                </svg>
-                                                <span>Add to favorites</span>
-                                            </button>
+
+                                            <div x-data="{like:false}" class="flex items-center">
+                                                <button class="flex mr-2" wire:click=addFavorites() @click="like=!like">
+                                                    <template x-if="!like">
+                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                                        </svg>
+                                                    </template>
+                                                    <template x-if="like">
+                                                        <svg class="w-5 h-5 text-red-500"
+                                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                                        </svg>
+                                                    </template>
+                                                    <span>Add to favorites</span>
+
+
+                                                </button>
+
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -126,19 +145,49 @@
 
 
 
-                        <div class="pb-6 mb-6 border-b border-gray-200">
-                            <div class="flex items-end justify-end -mx-2">
-                                <div class="flex-grow px-2 lg:max-w-xs">
-                                    <label
-                                        class="mb-2 ml-1 text-sm font-semibold text-gray-600 dark:text-gray-200">Discount
-                                        code</label>
-                                    <div>
+                        <div x-data="{isShow:false}" class="pb-6 mb-6 border-b border-gray-200">
+
+                            <button @click="isShow=!isShow" class="">
+                                <label
+                                    class="flex gap-1 mb-2 ml-1 text-sm font-semibold text-gray-600 dark:text-gray-200">Discount
+                                    code <span class="py-1.5">
+                                        <svg x-show="!isShow" class="w-4 h-4 fill-current"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path
+                                                d="M5.293 6.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" />
+                                        </svg>
+
+                                    </span>
+                                    <span class="py-1.5">
+                                        <svg x-show="isShow" class="w-4 h-4 fill-current"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path
+                                                d="M14.293 15.293a1 1 0 01-1.414 0L10 12.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 010 1.414z" />
+                                        </svg>
+
+                                    </span>
+                                </label>
+
+
+
+
+
+
+                            </button>
+
+
+                            <div class="flex items-end justify-end " x-show="isShow" x-collapse x-cloak>
+
+
+                                <div class="flex-grow px-2 lg:max-w-md">
+
+                                    <div class="p-2">
                                         <input
                                             class="w-full px-3 py-2 transition-colors border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500"
                                             placeholder="XXXXXX" type="text" />
                                     </div>
                                 </div>
-                                <div class="px-2">
+                                <div class="p-2">
                                     <button
                                         class="block w-full max-w-xs px-5 py-2 mx-auto font-semibold text-white bg-gray-400 border border-transparent rounded-md hover:bg-gray-500 focus:bg-gray-500">APPLY</button>
                                 </div>
@@ -274,7 +323,9 @@
                                     <label for="type2" class="flex items-center cursor-pointer">
                                         <input type="checkbox" class="w-5 h-5 text-indigo-500 form-radio"="type"
                                             id="type2" x-model="isOther" @click="isCard=false">
-                                        <img src="/images/icon/maxicash.png" class="h-6 ml-3">
+
+                                        <img src="{{asset('images/icon/maxicash.png')}}" class="h-6 ml-3">
+                                        <span>MaxiCash</span>
 
                                     </label>
                                 </div>

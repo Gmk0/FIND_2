@@ -37,15 +37,16 @@
     x-data="{navOpen: false,notificationActive: false, isLoading:true, scrolledFromTop: false}" :class="{
             'overflow-hidden': navOpen,
             'overflow-scroll': !navOpen
-           
+
         }">
 
 
-    <x-notifications z-index="z-50" position='top-left' />
+
 
 
     @livewire('user.navigation.navigation')
 
+    <x-notifications z-index="z-50" position='top-right' />
 
 
 

@@ -140,9 +140,8 @@
                                             </div>
                                         </div>
 
-                                        <button type="submit"
-                                            class="flex items-center justify-center w-full px-8 py-3 mt-6 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add
-                                            to bag</button>
+                                        <button wire:click='add_cart()' type="button"
+                                            class="flex items-center justify-center w-full px-8 py-3 mt-6 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Ajouter</button>
                                     </form>
                                 </section>
                             </div>

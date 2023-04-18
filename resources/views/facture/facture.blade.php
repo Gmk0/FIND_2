@@ -150,7 +150,9 @@
 <body>
     <header class="clearfix">
         <div id="logo">
-            <img src="/images/logo/find_01.png">
+
+
+            <H1>FIND</H1>
         </div>
         <h1>INVOICE {{$order->transaction_numero}}</h1>
         <div id="company" class="clearfix">
@@ -161,9 +163,9 @@
         </div>
         <div id="project">
             <div><span>PROJECT</span> Website development</div>
-            <div><span>CLIENT</span> {{$order->orders->user->name}}</div>
+            <div><span>CLIENT</span> </div>
             <div><span>ADDRESS</span> 796 Silver Harbour, TX 79273, US</div>
-            <div><span>EMAIL</span> <a href="mailto:john@example.com">{{$order->orders->user->email}}</a></div>
+            <div><span>EMAIL</span> <a href="mailto:john@example.com"></a></div>
             <div><span>DATE</span> August 17, 2015</div>
             <div><span>DUE DATE</span> September 17, 2015</div>
         </div>
@@ -180,46 +182,31 @@
                 </tr>
             </thead>
             <tbody>
+                @forelse ($order->orders as $orders )
+
                 <tr>
-                    <td class="service">Design</td>
-                    <td class="desc">Creating a recognizable design solution based on the company's existing visual
-                        identity</td>
-                    <td class="unit">$40.00</td>
-                    <td class="qty">26</td>
-                    <td class="total">$1,040.00</td>
+                    <td class="service">{{$orders->service->title}}</td>
+                    <td class="desc">{{$orders->service->category->name}}</td>
+                    <td class="unit">${{$orders->service->basic_price}}</td>
+                    <td class="qty">{{$orders->quantity}}</td>
+                    <td class="total">{{$orders->total_amount}}</td>
                 </tr>
-                <tr>
-                    <td class="service">Development</td>
-                    <td class="desc">Developing a Content Management System-based Website</td>
-                    <td class="unit">$40.00</td>
-                    <td class="qty">80</td>
-                    <td class="total">$3,200.00</td>
-                </tr>
-                <tr>
-                    <td class="service">SEO</td>
-                    <td class="desc">Optimize the site for search engines (SEO)</td>
-                    <td class="unit">$40.00</td>
-                    <td class="qty">20</td>
-                    <td class="total">$800.00</td>
-                </tr>
-                <tr>
-                    <td class="service">Training</td>
-                    <td class="desc">Initial training sessions for staff responsible for uploading web content</td>
-                    <td class="unit">$40.00</td>
-                    <td class="qty">4</td>
-                    <td class="total">$160.00</td>
-                </tr>
+                @empty
+
+                @endforelse
+
+
                 <tr>
                     <td colspan="4">SUBTOTAL</td>
-                    <td class="total">$5,200.00</td>
+                    <td class="total">{{$order->amount}}</td>
                 </tr>
                 <tr>
-                    <td colspan="4">TAX 25%</td>
-                    <td class="total">$1,300.00</td>
+                    <td colspan="4">TAX 0%</td>
+                    <td class="total">$0</td>
                 </tr>
                 <tr>
                     <td colspan="4" class="grand total">GRAND TOTAL</td>
-                    <td class="grand total">$6,500.00</td>
+                    <td class="grand total">{{$order->amount}}</td>
                 </tr>
             </tbody>
         </table>

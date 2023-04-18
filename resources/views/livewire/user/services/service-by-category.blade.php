@@ -7,9 +7,9 @@
 
 
         <div class="container px-4 ">
-            <h2 class="mb-4 text-lg font-bold text-gray-900 md:text-2xl dark:text-gray-100">Recherche de
+            <h2 class="mb-4 text-lg font-bold text-gray-600 md:text-2xl dark:text-gray-400">Recherche de
                 Services
-                "{{$categoryName}}" </h2>
+                "{{$categoryName}}" ({{$count}}) </h2>
 
         </div>
         <div>
@@ -54,9 +54,9 @@
                                 '1'=>'10-50',
                                 '2'=>'50-100',
                                 '3'=>'100+',
-                    
+
                                 ]" />
-                                <x-select wire:model.debounce.500ms="orderBy" placeholder="Trie Par">
+                                <x-select wire:model.debounce.500ms="orderBy" placeholder="trier par">
                                     <x-select.option label="Prix" value="basic_price" />
                                     <x-select.option label="Delai" value="basic_delivery_time" />
                                     <x-select.option label="Niveau" value="basic_delivery_time" />
@@ -68,8 +68,9 @@
                     </form>
                 </div>
                 <div class="flex gap-4 md:hidden">
-                    <x-button label="appliquer" />
+                    <x-button label="Resultat ({{$count}})" @click="isOpen=false" />
                     <x-button @click="isOpen=false" label="Fermer" />
+
                 </div>
             </div>
 

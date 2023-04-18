@@ -22,7 +22,7 @@
         <x-asideF />
 
         <div class="flex flex-col flex-1 h-full overflow-hidden bg-gray-100 dark:bg-gray-900">
-            <header class="flex-shrink-0 bg-white border-b">
+            <header class="flex-shrink-0 sm:fixed bg-white border-b">
                 <div class="flex items-center justify-between p-2">
                     <!-- Navbar left -->
                     <div class="flex items-center space-x-3">
@@ -36,13 +36,14 @@
                                     d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                             </svg>
                         </button>
-                        <a class="lg:hidden" href="#">
-                            <img src="/images/logo/find_02.png" alt="logo-find" class="h-12 ">
-                        </a>
+
 
                         <!-- Toggle sidebar button -->
 
                     </div>
+                    <a class="lg:hidden" href="#">
+                        <img src="/images/logo/find_02.png" alt="logo-find" class="h-12 ">
+                    </a>
 
                     <!-- Mobile search box -->
                     <div x-show.transition="isSearchBoxOpen" class="fixed inset-0 z-10 bg-black bg-opacity-20"
@@ -86,12 +87,21 @@
                     <!-- Navbar right -->
                     <div class="relative flex items-center space-x-3">
                         <!-- Search button -->
+
                         <button @click="isSearchBoxOpen = true"
                             class="p-2 bg-gray-100 rounded-full md:hidden focus:outline-none focus:ring hover:bg-gray-200">
-                            <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                        <button @click="isSettingsPanelOpen = true"
+                            class="p-2 bg-gray-100 rounded-full md:hidden focus:outline-none focus:ring hover:bg-gray-200">
+                            <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                             </svg>
                         </button>
 
@@ -207,7 +217,7 @@
             class="fixed inset-y-0 right-0 flex flex-col bg-white shadow-lg bg-opacity-20 w-80"
             style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
             <div class="flex items-center justify-between flex-shrink-0 p-2">
-                <h6 class="p-2 text-lg">Settings</h6>
+                <h6 class="p-2 text-gray-800">Notification</h6>
                 <button @click="isSettingsPanelOpen = false" class="p-2 rounded-md focus:outline-none focus:ring">
                     <svg class="w-6 h-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
@@ -217,7 +227,9 @@
                 </button>
             </div>
             <div class="flex-1 max-h-full p-4 overflow-hidden hover:overflow-y-scroll">
-                <span>Settings Content</span>
+                <span></span>
+
+                @livewire("user.navigation.notification-freelance")
                 <!-- Settings Panel Content ... -->
             </div>
         </div>
