@@ -71,7 +71,7 @@ class CommandeDetails extends Component
 
         $data = [
             'description' => $this->description,
-            'order_id' => $this->Order->id,
+            'order_id' => $this->order->id,
             'is_finish' => 0
         ];
 

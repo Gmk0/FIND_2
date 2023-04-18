@@ -1,4 +1,4 @@
-@extends('layoutS.user')
+@extends('layouts.user')
 
 @section('content')
 
