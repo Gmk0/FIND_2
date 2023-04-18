@@ -1,7 +1,7 @@
 <nav class="flex-1 overflow-hidden hover:overflow-y-auto custom-scrollbar">
     <ul class="p-2 overflow-hidden custom-scrollbar">
         <li>
-            <a href="href=" {{route('freelance.dashboard')}}"
+            <a href="{{url('/freelance/dashboard')}}" {{route('freelance.dashboard')}}"
                 class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
                 :class="{'justify-center': !isSidebarOpen}">
                 <span>

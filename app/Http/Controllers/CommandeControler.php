@@ -25,7 +25,8 @@ class CommandeControler extends Controller
         // Récupérer l'objet Order correspondant à l'ID
         $data = Order::find($id);
 
-        if (!empty($data)) {
+
+        if ($data->transaction != null) {
             // Retourner la vue avec les données $data
             return view('freelance.commandeView', ['commande' => $data]);
         } else {

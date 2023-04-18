@@ -5,7 +5,7 @@
 
 @php
 if(request()->routeIs('MessageUser')){
-$overflow="overflow-hidden lg:overflow-y-auto";
+$overflow="overflow-y-auto";
 }else{
 $overflow="overflow-y-auto";
 }

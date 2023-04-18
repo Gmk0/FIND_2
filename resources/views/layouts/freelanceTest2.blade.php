@@ -22,7 +22,7 @@
         <x-asideF />
 
         <div class="flex flex-col flex-1 h-full overflow-hidden bg-gray-100 dark:bg-gray-900">
-            <header class="flex-shrink-0 sm:fixed bg-white border-b">
+            <header class="flex-shrink-0 bg-white border-b md:relative">
                 <div class="flex items-center justify-between p-2">
                     <!-- Navbar left -->
                     <div class="flex items-center space-x-3">
@@ -42,7 +42,7 @@
 
                     </div>
                     <a class="lg:hidden" href="#">
-                        <img src="/images/logo/find_02.png" alt="logo-find" class="h-12 ">
+                        <img class="w-24" src="/images/logo/find_02.png" alt="" />
                     </a>
 
                     <!-- Mobile search box -->
@@ -226,7 +226,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="flex-1 max-h-full p-4 overflow-hidden hover:overflow-y-scroll">
+            <div class="flex-1 max-h-full p-4 overflow-hidden overflow-y-auto">
                 <span></span>
 
                 @livewire("user.navigation.notification-freelance")

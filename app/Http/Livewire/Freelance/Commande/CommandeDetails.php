@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\feedback;
 use App\Models\rapport;
 use WireUi\Traits\Actions;
+use App\Events\notificationOrder;
 
 class CommandeDetails extends Component
 {
@@ -55,6 +56,8 @@ class CommandeDetails extends Component
             $this->reset('progress', 'jour', 'status');
 
             $this->emitSelf('refresh');
+
+            broadcast(new notificationOrder($this->order->user));
         } catch (Exception $e) {
             dd($e->getMessage());
         }
@@ -88,6 +91,8 @@ class CommandeDetails extends Component
 
 
         $this->reset('description');
+
+        broadcast(new notificationOrder($this->order->user));
         $this->emitSelf('refresh');
     }
 

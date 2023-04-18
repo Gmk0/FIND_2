@@ -63,9 +63,9 @@ class ListCommande extends Component implements Tables\Contracts\HasTable
         return [
 
             Split::make([
-                Tables\Columns\TextColumn::make('order_numero')->description('commande id'),
+                Tables\Columns\TextColumn::make('order_numero')->label('order')->description('commande id'),
                 Tables\Columns\TextColumn::make('user.name')->description('client'),
-                Tables\Columns\TextColumn::make('service.title')->description('service'),
+                Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('md'),
                 Tables\Columns\TextColumn::make('progress')->description('progression'),
                 BadgeColumn::make('status')
                     ->enum([
@@ -84,6 +84,7 @@ class ListCommande extends Component implements Tables\Contracts\HasTable
 
                     Tables\Columns\TextColumn::make('total_amount'),
                     Tables\Columns\TextColumn::make('created_at'),
+                    Tables\Columns\TextColumn::make('service.title')->visible('sm'),
 
                 ]),
             ])->collapsible(),

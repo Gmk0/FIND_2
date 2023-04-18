@@ -10,10 +10,10 @@
         <span class="p-2 text-xl font-semibold leading-8 tracking-wider uppercase whitespace-nowrap">
 
 
-            <a :class="{'lg:hidden':!isSidebarOpen}" href="#">
+            <a :class="{'lg:hidden':!isSidebarOpen}" href="{{url('/')}}">
                 <img src="/images/logo/find_02.png" alt="logo-find" class="h-12 ">
             </a>
-            <a :class="{'hidden':isSidebarOpen}" href="#">
+            <a :class="{'hidden':isSidebarOpen}" href="{{url('/')}}">
                 <img class="h-12" src="/images/logo/find_01.png" alt="FIND" />
             </a>
         </span>

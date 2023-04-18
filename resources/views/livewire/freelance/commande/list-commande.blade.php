@@ -41,7 +41,7 @@
                 </div>
                 <div class="flex flex-col">
                     <div class="flex items-end">
-                        <span class="text-2xl font-bold 2xl:text-4xl">{{$pending}}</span>
+                        <span class="text-2xl font-bold dark:text-gray-200 2xl:text-4xl">{{$pending}}</span>
 
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="flex flex-col">
                     <div class="flex items-end">
-                        <span class="text-2xl font-bold 2xl:text-4xl">{{$payer}}</span>
+                        <span class="text-2xl font-bold dark:text-gray-200 2xl:text-4xl">{{$payer}}</span>
 
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="flex flex-col">
                     <div class="flex items-end">
-                        <span class="text-2xl font-bold 2xl:text-4xl">{{$rejeted}}</span>
+                        <span class="text-2xl font-bold dark:text-gray-200 2xl:text-4xl">{{$rejeted}}</span>
 
                     </div>
                 </div>

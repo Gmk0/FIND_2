@@ -7,6 +7,7 @@ use App\Models\feedback;
 use Livewire\Component;
 use App\Models\Order;
 use WireUi\Traits\Actions;
+use App\Events\notificationOrder;
 
 
 class CommandeOneView extends Component
@@ -16,6 +17,19 @@ class CommandeOneView extends Component
     public $modal = false;
     public $feedback;
     public $satisfaction = 0;
+
+    public function  getListeners()
+    {
+
+        $auth_id = auth()->user()->id;
+        return [
+            "echo-private:notify.{$auth_id},notificationOrder" => 'broadcastedMessageNotificationOrder',
+            "echo-private:notify.{$auth_id},notificationOrder" => '$refresh', //
+            'ServiceOrdered' => '$refresh',
+
+
+        ];
+    }
     public function mount($id)
     {
         $this->order_id = $id;
@@ -32,7 +46,7 @@ class CommandeOneView extends Component
 
     public function sendFeedback()
     {
-        $this->validate(['feedback.description'=>'required']);
+        $this->validate(['feedback.description' => 'required']);
         $data = feedback::where('order_id', $this->order_id)->first();
         $data->satisfaction = $this->satisfaction;
         $data->commentaires = $this->feedback['description'];
@@ -51,6 +65,16 @@ class CommandeOneView extends Component
 
         event(new FeedbackSend($data));
         // dd($this->feedback, $this->satisfaction);
+    }
+
+    public function broadcastedMessageNotificationOrder()
+    {
+
+
+        $this->notification()->success(
+            $title = "Votre commande a ete modifier",
+
+        );
     }
     public function render()
     {

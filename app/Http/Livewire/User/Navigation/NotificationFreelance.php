@@ -16,10 +16,13 @@ class NotificationFreelance extends Component
         $auth_id = auth()->user()->id;
         return [
             "echo-private:notify.{$auth_id},ProjectResponse" => 'broadcastedMessageReceived',
-            'ServiceOrdered' => '$refresh'
+            'ServiceOrdered' => '$refresh',
+
 
         ];
     }
+
+
 
     public function broadcastedMessageReceived()
     {
@@ -32,6 +35,13 @@ class NotificationFreelance extends Component
 
         $this->render();
     }
+
+    public function remove($id)
+    {
+
+        $data = Notification::destroy($id);
+    }
+
     public function render()
     {
         return view('livewire.user.navigation.notification-freelance', [
