@@ -54,8 +54,14 @@ class Transaction extends Model
     }
 
 
+
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function User(){
+
+        return
     }
 }
