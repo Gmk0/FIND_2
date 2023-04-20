@@ -8,7 +8,8 @@ use Livewire\Component;
 use App\Models\Order;
 use WireUi\Traits\Actions;
 use App\Events\notificationOrder;
-
+use App\Models\Conversation;
+use App\Models\Message;
 
 class CommandeOneView extends Component
 {
@@ -17,6 +18,16 @@ class CommandeOneView extends Component
     public $modal = false;
     public $feedback;
     public $satisfaction = 0;
+    public $conversation = null;
+    public $freelance_id;
+    public $openMessage = false;
+    public $messages;
+    public $body;
+
+    public $confirmModal = false;
+
+
+
 
     public function  getListeners()
     {
@@ -33,6 +44,8 @@ class CommandeOneView extends Component
     public function mount($id)
     {
         $this->order_id = $id;
+
+        $this->freelance_id = Order::find($id)->service->freelance->id;
     }
 
 
@@ -42,6 +55,22 @@ class CommandeOneView extends Component
     public function openModal()
     {
         $this->modal = true;
+    }
+    public function openModalConfirm()
+    {
+        $this->confirmModal = true;
+    }
+
+
+    public function deleteConfirmed()
+    {
+        $order = Order::find($this->order_id);
+
+        $this->confirmModal = false;
+
+        $this->notification()->error(
+            $title = "Impossible d'annuler la commande ",
+        );
     }
 
     public function sendFeedback()
@@ -76,6 +105,89 @@ class CommandeOneView extends Component
 
         );
     }
+
+
+    public function conversation()
+    {
+
+
+        $id = $this->freelance_id;
+
+        $this->conversation = Conversation::where('user_id', auth()->user()->id)
+            ->where('freelance_id', $id)->first();
+
+        if ($this->conversation  !== null) {
+            $this->messages = Message::where('conversation_id', $this->conversation->id)->get();
+        } else {
+
+
+            $conversation = new Conversation();
+            $conversation->freelance_id = $this->freelance_id;
+            $conversation->last_time_message = now();
+            $conversation->status = 'pending';
+            $conversation->save();
+
+            $this->conversation = $conversation;
+
+            $createdMessage = Message::create([
+                'sender_id' => auth()->user()->id,
+                'receiver_id' => $this->freelance_id,
+                'conversation_id' => $this->conversation->id,
+                'body' => 'salut',
+                'is_read' => '0',
+                'type' => "text",
+
+            ]);
+
+            $this->messages = Message::where('conversation_id', $conversation->id)->get();
+        }
+        $this->openMessage = true;
+    }
+
+    public function sendMessage()
+    {
+
+
+
+        if ($this->freelance_id != null && $this->body != null) {
+
+
+            // $freelance = Freelance::find($id);
+
+            //            dd($this->conversation->id);
+
+
+
+
+
+            $createdMessage = Message::create([
+                'sender_id' => auth()->user()->id,
+                'receiver_id' => $this->freelance_id,
+                'conversation_id' => $this->conversation->id,
+                'body' => $this->body,
+                'file' => null,
+                'is_read' => '0',
+                'type' => "text",
+
+            ]);
+
+            $this->body = null;
+
+
+            // Si une conversation est trouvée, afficher la vue de la conversation
+
+            $this->pushMessage($createdMessage->id);
+        };
+    }
+
+    public function pushMessage($messageId)
+    {
+        $newMessage = Message::find($messageId);
+        $this->messages->push($newMessage);
+        $this->dispatchBrowserEvent('rowChatToBottom');
+        # code...
+    }
+
     public function render()
     {
         return view('livewire.user.commande.commande-one-view', [
