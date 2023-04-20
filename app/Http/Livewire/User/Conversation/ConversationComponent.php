@@ -23,8 +23,10 @@ class ConversationComponent extends Component
     public $height;
     public $auth_id;
     public $query = '';
+    public $freelance;
 
     protected $listeners = ['loadConversation', 'refresh' => '$refresh'];
+
 
 
 
@@ -34,6 +36,28 @@ class ConversationComponent extends Component
         $this->auth_id = auth()->id();
     }
 
+    public function updatedFreelance()
+    {
+
+        if ($this->freelance != null) {
+
+            $data = Conversation::where('freelance_id', $this->freelance)->where('user_id', auth()->user()->id)->first();
+
+
+            if ($data == null) {
+
+
+                $conversation = new Conversation();
+                $conversation->freelance_id = $this->freelance;
+                $conversation->last_time_message = now();
+                $conversation->status = 'pending';
+                $conversation->save();
+                $this->chatUserSelected($conversation, $this->freelance);
+            } else {
+                $this->chatUserSelected($data, $this->freelance);
+            }
+        }
+    }
     public function chatUserSelected(Conversation $conversation, $receiverId)
     {
 
@@ -69,16 +93,62 @@ class ConversationComponent extends Component
         ]);
     }
 
+    public function cancel()
+    {
+
+
+        $this->notification()->success(
+
+            $title = "vous avez annuler",
+
+        );
+    }
+
+    public function BloquerConversation()
+    {
+
+
+        $this->notification()->confirm([
+            'title'       => 'etes  vous Sur?',
+            'description' => 'etes vous sure de bloquer cette utilisateur ?',
+            'icon'        => 'question',
+            'accept'      => [
+                'label'  => 'Yes, Bloquer ',
+                'method' => 'bolquerUser',
+
+            ],
+            'reject' => [
+                'label'  => 'No, cancel',
+                'method' => 'cancel',
+            ],
+        ]);
+    }
+
+    public function bolquerUser()
+    {
+        $data = $this->selectedConversation->update(['status' => 'finished']);
+
+        $this->notification()->success(
+
+            $title = "Vous avez bloquer l'utilisateur",
+
+        );
+
+        $this->emitTo('user.conversation.body-message', 'refresh');
+        $this->emitTo('user.conversation.send-message-u', 'refresh');
+        $this->emitSelf('refresh');
+    }
+
     public function deleteConversation()
     {
         //dd($this->selectedConversation);
 
         $data = $this->selectedConversation->delete();
 
-        $this->notifications()->success(
-            [
-                $title = "succees",
-            ]
+        $this->notification()->success(
+
+            $title = "succees",
+
         );
 
         $this->emitTo('user.conversation.body-message', 'refresh');

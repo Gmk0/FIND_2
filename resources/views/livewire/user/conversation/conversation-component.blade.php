@@ -1,4 +1,4 @@
-<div class="flex max-h-screen overflow-hidden md:overflow-y-auto" x-data="{sidebarOpen:true, isLoading:true}"
+<div class="flex max-h-screen overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
     x-init="setTimeout(() => { isLoading = false }, 3000)">
 
     <div x-show="isLoading">
@@ -26,10 +26,15 @@
 
                 <div class="flex flex-1 h-full">
 
-                    <div x-bind:class="{'hidden': !sidebarOpen, 'md:block': sidebarOpen}"
+                    <div x-bind:class="{'hidden ': !sidebarOpen, 'md:block': sidebarOpen}"
                         class="sidebar   w-full lg:flex md:w-1/3 flex-2 h-[550px] custom-scrollbar overflow-x-hidden flex-col pt-2 rounded-md md:pr-6">
                         <div class="px-2 pb-6 search flex-2">
-                            <x-input type="text" wire:model='query' placeholder="Search" />
+                            <x-select label="Search a User" wire:model.debounce.500ms="freelance"
+                                placeholder="Selectionner un freelance" :async-data="route('api.freelance.users')"
+                                :template="[
+                                        'name'   => 'user-option',
+                                        'config' => ['src' => 'profile_photo_url']
+                                    ]" option-label="name" option-value="id" option-description="category_name" />
                         </div>
                         <div class="flex-1  overflow-auto px-2 h-[500px] custom-scrollbar">
 
@@ -147,7 +152,8 @@
                                             <x-dropdown.item label="Maquer non lue" />
                                             <x-dropdown.item label="Favoris" />
                                             <x-dropdown.item wire:click="effacerConversation()" label="Effacer" />
-                                            <x-dropdown.item label="Bloquer l'utilisateur" />
+                                            <x-dropdown.item wire:click="BloquerConversatione()"
+                                                label="Bloquer l'utilisateur" />
                                         </x-dropdown>
                                     </div>
 

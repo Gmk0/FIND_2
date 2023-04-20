@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamp('last_time_message');
 
-            $table->enum('status', ["pending", "finished"]);
+            $table->enum('status', ["pending", "finished", "bloquer"]);
             $table->timestamps();
             $table->softDeletes();
         });

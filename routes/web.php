@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\ApiFreelanceGet;
 use App\Http\Controllers\Api\ServicesApi;
+use App\Http\Controllers\FacebookAuth;
+use App\Http\Controllers\GoogleAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\ServiceController;
@@ -105,6 +108,20 @@ Route::get('/categories/{category}', App\Http\Livewire\User\Services\ServiceByCa
 //Api
 
 Route::get('/service_api', ServicesApi::class)->name('api.services');
+Route::get('/freelance_api', ApiFreelanceGet::class)->name('api.freelance.users');
+
 Route::post('/like', [ToolsController::class, 'like'])->middleware('auth');
+
+
+Route::controller(GoogleAuth::class)->group(function () {
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('auth/google/callback', 'handleGoogleCallback');
+});
+
+//Facebook controller
+Route::controller(FacebookAuth::class)->group(function () {
+    Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+    Route::get('auth/facebook/callback', 'handleFacebookCallback');
+});
 
 include('freelanceRoute.php');

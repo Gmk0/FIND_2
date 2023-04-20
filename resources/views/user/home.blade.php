@@ -151,7 +151,7 @@
                             <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
                                 <div class="w-24 mx-auto">
                                     <img src="images/clients/client-4.png" alt="company logo" height="400" width="142"
-                                        loading="lazy" />
+                                        loading="lazy" />s ggg
                                 </div>
                                 <p class="dark:text-gray-200">
                                     <span class="font-serif "></span> Lorem ipsum dolor sit amet consectetur

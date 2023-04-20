@@ -23,7 +23,7 @@ class ServiceController extends Controller
 
         $category = Category::all();
 
-        $servicesBest = Service::where('category_id', 1)->limit(20)->get();
+        $servicesBest = Service::limit(20)->get();
 
         $freelance = Freelance::paginate(20);
 

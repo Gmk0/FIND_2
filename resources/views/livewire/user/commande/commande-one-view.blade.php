@@ -50,8 +50,23 @@
 
                 <!-- Freelance lié à la commande -->
                 <div x-data="{open:false}" class="px-6 py-4 border-t border-gray-200">
-                    <a @click="open=!open" class="mb-2 text-lg font-bold text-gray-800 cursor-pointer">Freelance lié</a>
-                    <div x-cloak x-show="open" x-collapse class="flex items-center">
+                    <a @click="open=!open" class="flex mb-2 text-lg font-bold text-gray-800 cursor-pointer">
+
+                        <span class="">Freelance lié</span>
+
+                        <svg x-show="!open" class="w-4 h-4 fill-current text-dark" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20">
+                            <path
+                                d="M5.293 6.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" />
+                        </svg>
+                        <svg x-show="open" class="w-4 h-4 fill-current text-dark" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20">
+                            <path
+                                d="M14.293 15.293a1 1 0 01-1.414 0L10 12.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 010 1.414z" />
+                        </svg>
+
+                    </a>
+                    <div x-cloak x-show="open" x-collapse class="flex items-center mt-4">
                         <img src="https://via.placeholder.com/48" alt="Avatar du freelance"
                             class="w-12 h-12 rounded-full">
                         <div class="ml-4">
@@ -65,8 +80,8 @@
 
                 <div x-data="{open:false}" class="px-6 py-4 border-t border-gray-200">
                     <a @click="open=!open" class="flex gap-2 mb-2 text-lg font-bold text-gray-800 cursor-pointer">
-                        <span>Rapport Envoyer</span>
-                        <span>
+                        <span class="py-1.5">Rapport Envoyer</span>
+                        <span class="py-1.5">
                             <svg x-show="!open" class="w-4 h-4 fill-current text-dark"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path
@@ -114,11 +129,27 @@
                             Paiement </button>
                         @endif
 
-                        <x-button wire:click='openModal()' class="mr-2" label='Evaluer' />
-                        <button
-                            class="px-4 py-2 mr-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">Contacter</button>
-                        <button class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Annuler
-                            commande</button>
+                        @if($Order->feedback->statut=="Livré")
+                        <div>
+                            <x-button wire:click='openModal()' class="mr-2" label='Evaluer' />
+
+                        </div>
+
+                        @endif
+                        <div>
+                            <button
+                                class="px-4 py-2 mr-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">Contacter</button>
+
+                        </div>
+
+                        <div>
+                            <button class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Annuler
+                                commande</button>
+
+                        </div>
+
+
+
                     </div>
 
                 </div>

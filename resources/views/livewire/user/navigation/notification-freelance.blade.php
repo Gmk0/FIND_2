@@ -43,7 +43,7 @@
     </a>
 
     @empty
-    <div>0notification</div>
+    <div>Pas de notification</div>
 
     @endforelse
 </div
