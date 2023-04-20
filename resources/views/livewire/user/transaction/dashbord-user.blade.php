@@ -1,83 +1,255 @@
-<div>
-    <section class="p-6 my-6 dark:bg-gray-900 dark:text-gray-100">
-        <div class="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-4">
-            <div class="flex p-4 space-x-4 bg-white rounded-lg md:space-x-6 dark:bg-gray-800 dark:text-gray-100">
-                <div class="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-violet-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"
-                        class="h-9 w-9 dark:text-gray-800">
-                        <polygon
-                            points="160 96.039 160 128.039 464 128.039 464 191.384 428.5 304.039 149.932 304.039 109.932 16 16 16 16 48 82.068 48 122.068 336.039 451.968 336.039 496 196.306 496 96.039 160 96.039">
-                        </polygon>
-                        <path
-                            d="M176.984,368.344a64.073,64.073,0,0,0-64,64h0a64,64,0,0,0,128,0h0A64.072,64.072,0,0,0,176.984,368.344Zm0,96a32,32,0,1,1,32-32A32.038,32.038,0,0,1,176.984,464.344Z">
-                        </path>
-                        <path
-                            d="M400.984,368.344a64.073,64.073,0,0,0-64,64h0a64,64,0,0,0,128,0h0A64.072,64.072,0,0,0,400.984,368.344Zm0,96a32,32,0,1,1,32-32A32.038,32.038,0,0,1,400.984,464.344Z">
-                        </path>
-                    </svg>
+<div class="p-2">
+    <div
+        class="flex flex-col min-h-screen gap-6 p-6 mx-auto bg-gray-100 md:max-w-7xl md:container px-auto dark:bg-gray-900">
+        <!-- start::Stats -->
+        <div class="grid grid-cols-1 gap-4 px-auto md:grid-cols-2 lg:grid-cols-4">
+            <a href="{{route('commandeUser')}}"
+                class="px-4 py-6 bg-white rounded-lg shadow-xl cursor-pointer hover:scale-50 lg:px-6 lg:py-6">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-bold text-indigo-600">Total Depense</span>
+                    <span
+                        class="px-2 py-1 text-xs text-gray-500 transition duration-200 bg-gray-200 rounded-lg cursor-default hover:bg-gray-500 dark:text-gray-900 hover:text-gray-200">Today</span>
                 </div>
-                <div class="flex flex-col justify-center align-middle">
-                    <p class="text-3xl font-semibold leading-none">200</p>
-                    <p class="capitalize">Orders</p>
+                <div class="flex items-center justify-between mt-6">
+                    <div>
+                        <svg class="w-12 h-12 p-1 text-indigo-600 bg-indigo-400 border border-indigo-600 rounded-full 2xl:w-16 2xl:h-16 2xl:p-3 bg-opacity-20"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="flex items-end">
+                            <span class="text-xl font-bold text-gray-800 2xl:text-3xl">{{$amount}}</span>
+                            <div class="flex items-center mb-1 ml-2">
+                                @if ($percentTransaction > 0)
+                                <svg class="w-12 h-12 p-1 text-green-600 bg-green-400 border border-green-600 rounded-full 2xl:w-16 2xl:h-16 2xl:p-3 bg-opacity-20"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                </svg>
+                                <span class="font-bold text-sm text-gray-500 ml-0.5">{{$percentTransaction}}</span>
+                                @elseif ($percentTransaction < 0) <svg class="w-5 h-5 text-red-600" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>
+                                    </svg>
+                                    <span class="font-bold text-sm text-gray-500 ml-0.5">{{$percentTransaction}}</span>
+                                    @else
+                                    <svg class="hidden w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.6 3.6a9 9 0 1 1-12.8 0 9 9 0 0 1 12.8 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                        </path>
+                                    </svg>
+                                    <span
+                                        class="font-bold text-sm hidden text-gray-500 ml-0.5">{{$percentTransaction}}</span>
+                                    @endif
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="flex p-4 space-x-4 bg-white rounded-lg md:space-x-6 dark:bg-gray-800 dark:text-gray-100">
-                <div class="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-violet-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"
-                        class="h-9 w-9 dark:text-gray-800">
-                        <path
-                            d="M256,16C123.452,16,16,123.452,16,256S123.452,496,256,496,496,388.548,496,256,388.548,16,256,16ZM403.078,403.078a207.253,207.253,0,1,1,44.589-66.125A207.332,207.332,0,0,1,403.078,403.078Z">
-                        </path>
-                        <path d="M256,384A104,104,0,0,0,360,280H152A104,104,0,0,0,256,384Z"></path>
-                        <polygon
-                            points="205.757 228.292 226.243 203.708 168 155.173 109.757 203.708 130.243 228.292 168 196.827 205.757 228.292">
-                        </polygon>
-                        <polygon
-                            points="285.757 203.708 306.243 228.292 344 196.827 381.757 228.292 402.243 203.708 344 155.173 285.757 203.708">
-                        </polygon>
-                    </svg>
+            </a>
+            <a href="{{route('commandeUser')}}" class="px-6 py-6 bg-white rounded-lg shadow-xl cursor-pointer">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-bold text-green-600">Commande</span>
+                    <span
+                        class="px-2 py-1 text-xs text-gray-500 transition duration-200 bg-gray-200 rounded-lg cursor-default dark:text-gray-900 hover:bg-gray-500 hover:text-gray-200">7
+                        days</span>
                 </div>
-                <div class="flex flex-col justify-center align-middle">
-                    <p class="text-3xl font-semibold leading-none">7500</p>
-                    <p class="capitalize">New customers</p>
+                <div class="flex items-center justify-between mt-6">
+                    <div>
+                        <svg class="w-12 h-12 p-1 text-green-600 bg-green-400 border border-green-600 rounded-full 2xl:w-16 2xl:h-16 2xl:p-3 bg-opacity-20"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="flex items-end">
+                            <span class="text-2xl font-bold text-gray-800 2xl:text-4xl">{{$orderCount}}</span>
+                            <div class="flex items-center mb-1 ml-2">
+                                @if ($orderEvolution > 0)
+                                <svg class="w-12 h-12 p-1 text-green-600 bg-green-400 border border-green-600 rounded-full 2xl:w-16 2xl:h-16 2xl:p-3 bg-opacity-20"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                </svg>
+                                <span class="font-bold text-sm text-gray-500 ml-0.5">{{$orderEvolution}}</span>
+                                @elseif ($orderEvolution < 0) <svg class="w-5 h-5 text-red-600" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6">
+                                    </path>
+                                    </svg>
+                                    <span class="font-bold text-sm text-gray-500 ml-0.5">{{$orderEvolution}}</span>
+                                    @else
+                                    <svg class="hidden w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.6 3.6a9 9 0 1 1-12.8 0 9 9 0 0 1 12.8 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                        </path>
+                                    </svg>
+                                    <span
+                                        class="font-bold text-sm hidden text-gray-500 ml-0.5">{{$orderEvolution}}</span>
+                                    @endif
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="flex p-4 space-x-4 bg-white rounded-lg md:space-x-6 dark:bg-gray-800 dark:text-gray-100">
-                <div class="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-violet-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"
-                        class="h-9 w-9 dark:text-gray-800">
-                        <path
-                            d="M425.706,142.294A240,240,0,0,0,16,312v88H160V368H48V312c0-114.691,93.309-208,208-208s208,93.309,208,208v56H352v32H496V312A238.432,238.432,0,0,0,425.706,142.294Z">
-                        </path>
-                        <rect width="32" height="32" x="80" y="264"></rect>
-                        <rect width="32" height="32" x="240" y="128"></rect>
-                        <rect width="32" height="32" x="136" y="168"></rect>
-                        <rect width="32" height="32" x="400" y="264"></rect>
-                        <path
-                            d="M297.222,335.1l69.2-144.173-28.85-13.848L268.389,321.214A64.141,64.141,0,1,0,297.222,335.1ZM256,416a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,416Z">
-                        </path>
-                    </svg>
+            </a>
+            <a href="{{route('MessageUser')}}" class="px-6 py-6 bg-white rounded-lg shadow-xl cursor-pointer">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-bold text-blue-600">Conversation</span>
+                    <span
+                        class="px-2 py-1 text-xs text-gray-500 transition duration-200 bg-gray-200 rounded-lg cursor-default dark:text-gray-900 hover:bg-gray-500 hover:text-gray-200">7
+                        days</span>
                 </div>
-                <div class="flex flex-col justify-center align-middle">
-                    <p class="text-3xl font-semibold leading-none">172%</p>
-                    <p class="capitalize">Growth</p>
+                <div class="flex items-center justify-between mt-6">
+                    <div>
+                        <svg class="w-12 h-12 p-1 text-blue-600 bg-blue-400 border border-blue-600 rounded-full 2xl:w-16 2xl:h-16 2xl:p-3 bg-opacity-20"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-col hidden">
+                        <div class="flex items-end ">
+                            <span class="text-2xl font-bold text-gray-800 2xl:text-4xl">{{$conversations}}</span>
+                            <div class="flex items-center mb-1 ml-2">
+                                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                                <span class="font-bold text-sm text-gray-500 ml-0.5">7%</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="flex p-4 space-x-4 bg-white rounded-lg md:space-x-6 dark:bg-gray-800 dark:text-gray-100">
-                <div class="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-violet-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"
-                        class="h-9 w-9 dark:text-gray-800">
-                        <path
-                            d="M454.423,278.957,328,243.839v-8.185a116,116,0,1,0-104,0V312H199.582l-18.494-22.6a90.414,90.414,0,0,0-126.43-13.367,20.862,20.862,0,0,0-8.026,33.47L215.084,496H472V302.08A24.067,24.067,0,0,0,454.423,278.957ZM192,132a84,84,0,1,1,136,65.9V132a52,52,0,0,0-104,0v65.9A83.866,83.866,0,0,1,192,132ZM440,464H229.3L79.141,297.75a58.438,58.438,0,0,1,77.181,11.91l28.1,34.34H256V132a20,20,0,0,1,40,0V268.161l144,40Z">
-                        </path>
-                    </svg>
+            </a>
+            <a class="px-6 py-6 bg-white rounded-lg shadow-xl cursor-pointer">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-bold text-gray-800">Project en attente</span>
+                    <span
+                        class="px-2 py-1 text-xs text-gray-500 transition duration-200 bg-gray-200 rounded-lg cursor-default dark:text-gray-900 hover:bg-gray-500 hover:text-gray-200">30
+                        days</span>
                 </div>
-                <div class="flex flex-col justify-center align-middle">
-                    <p class="text-3xl font-semibold leading-none">17%</p>
-                    <p class="capitalize">Bounce rate</p>
+                <div class="flex items-center justify-between mt-6">
+                    <div>
+                        <svg class="w-12 h-12 p-1 text-yellow-600 bg-yellow-400 border border-yellow-600 rounded-full 2xl:w-16 2xl:h-16 2xl:p-3 bg-opacity-20"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="flex items-end">
+                            <span class="text-2xl font-bold text-gray-800 2xl:text-4xl">{{$projet->count()}}</span>
+                            <div class="flex items-center hidden mb-1 ml-2">
+                                <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>
+                                </svg>
+                                <span class="font-bold text-sm text-gray-500 ml-0.5">-1%</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
-    </section>
-    {{-- The Master doesn't talk, he acts. --}}
+        <!-- end::Stats -->
+
+        <!-- start::Charts -->
+
+        <!-- end::Charts -->
+
+        <!-- start::Stats  -->
+
+        <!-- end::Stats -->
+
+        <!-- start::Activities -->
+
+        <!-- end::Activities -->
+
+        <!-- start::Table -->
+        <div class="px-8 py-6 overflow-auto bg-white rounded-lg custom-scrollbar">
+            <h4 class="text-xl font-semibold text-gray-800">Recent transactions</h4>
+            <table class="w-full my-8 overflow-auto whitespace-nowrap">
+                <thead class="font-bold text-gray-100 bg-blue-400">
+
+                    <td class="py-2 pl-2 text-gray-800">
+                        Order ID
+                    </td>
+                    <td class="hidden py-2 pl-2 text-gray-800 md:flex">
+                        Services
+                    </td>
+                    <td class="py-2 pl-2 text-gray-800">
+                        Price
+                    </td>
+                    <td class="py-2 pl-2 text-gray-800">
+                        status
+                    </td>
+                    <td class="py-2 pl-2 text-gray-800">
+                        view
+                    </td>
+
+                </thead>
+                <tbody class="text-sm">
+                    @forelse ($order as $order )
+                    <tr
+                        class="transition duration-200 bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-900 hover:bg-opacity-20">
+
+                        <td class="py-3 pl-2">
+                            {{$order->order_numero}}
+                        </td>
+                        <td class="hidden py-3 pl-2 capitalize truncate md:flex">
+                            {{$order->service->title}}
+                        </td>
+                        <td class="py-3 pl-2">
+                            {{$order->total_amount}}
+                        </td>
+                        <td class="py-3 pl-2">
+
+                            @if($order->status =="pending")
+                            <span class="bg-red-300 px-1.5 py-0.5 rounded-lg ">en Attente</span>
+                            @elseif ($order->status =="completed")
+                            <span class="bg-green-500 px-1.5 py-0.5 rounded-lg text-gray-100">Payé</span>
+                            @else
+                            <span class="bg-red-500 px-1.5 py-0.5 rounded-lg text-gray-100">Rejeter</span>
+                            @endif
+                        </td>
+                        <td class="py-3 pl-2">
+                            <x-button href="{{route('commandeOneView',[$order->id])}}" sm primary icon="eye"></x-button>
+                        </td>
+
+                    </tr>
+                    @empty
+
+                    <h1>Pas de Trnsactions pour l'instant</h1>
+
+                    @endforelse
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- end::Table -->
+    </div>
+
 </div>

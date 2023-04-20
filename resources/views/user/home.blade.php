@@ -46,7 +46,7 @@
         </p>
         <div class="flex flex-col items-center lg:flex-row">
             <a href="{{ url('/categories')}}"
-                class="w-full px-4 py-3 mb-4 font-bold rounded-lg lg:w-max bg-neutral-50 hover:cursor-pointer text-cyan-600 lg:mr-8 lg:mb-0">
+                class="w-full px-4 py-4 mb-4 font-bold text-center rounded-lg lg:w-max bg-neutral-50 hover:cursor-pointer text-cyan-600 lg:mr-8 lg:mb-0">
                 Commencer
             </a>
         </div>
@@ -135,7 +135,7 @@
 
         <div class="mx-3 my-8 swiper mySwiper ">
             <div class="pb-8 swiper-wrapper ">
-                @for ($i = 0; $i < 3; $i++) <div class="swiper-slide !bg-transparent px-2 md:px-0">
+                <div class="swiper-slide !bg-transparent px-2 md:px-0">
                     <div
                         class="px-2 bg-white border border-gray-100 dark:border-gray-300 rounded-3xl dark:bg-gray-800 dark:shadow-none md:mx-auto lg:w-11/12 xl:w-8/12">
                         <div class="grid md:grid-cols-5">
@@ -150,35 +150,62 @@
                             </div>
                             <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
                                 <div class="w-24 mx-auto">
-                                    <img src="images/clients/client-4.png" alt="company logo" height="400" width="142"
-                                        loading="lazy" />s ggg
+                                    <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />s
                                 </div>
                                 <p class="dark:text-gray-200">
-                                    <span class="font-serif "></span> Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Quaerat repellat perspiciatis excepturi est. Non ipsum iusto
-                                    aliquam consequatur repellat provident, omnis ut, sapiente voluptates
-                                    veritatis cum deleniti repudiandae ad doloribus.
+                                    <span class="font-serif "></span> Find est une plateforme incontournable pour tous
+                                    les demandeurs de services. J'ai été impressionné par la qualité des
+                                    freelances proposés.
                                     <span class="font-serif">"</span>
                                 </p>
                                 <h6 class="text-lg font-semibold leading-none dark:text-gray-200">John Doe</h6>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="swiper-slide !bg-transparent px-2 md:px-0">
+                    <div
+                        class="px-2 bg-white border border-gray-100 dark:border-gray-300 rounded-3xl dark:bg-gray-800 dark:shadow-none md:mx-auto lg:w-11/12 xl:w-8/12">
+                        <div class="grid md:grid-cols-5">
+
+
+                            <div class="w-full m-2 h-50 aspect-w-8 aspect-h-9 md:col-span-2 rounded-2xl">
+
+                                <iframe class="rounded-sm w-11/2 h-9/12 aspect-video hover:aspect-square"
+                                    src="https://www.youtube.com/embed/r9jwGansp1E" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+                            <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
+                                <div class="w-24 mx-auto">
+                                    <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />s
+                                </div>
+                                <p class="dark:text-gray-200">
+                                    <span class="font-serif "></span> Find est un outil essentiel pour tous ceux qui
+                                    cherchent à trouver des freelances qualifiés. La plateforme est vraiment
+                                    bien conçue et facile à utiliser
+                                    <span class="font-serif">"</span>
+                                </p>
+                                <h6 class="text-lg font-semibold leading-none dark:text-gray-200">John Doe</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
             </div>
-            @endfor
 
-
-
-
+            <div class="swiper-pagination"></div>
         </div>
 
-        <div class="swiper-pagination"></div>
-    </div>
 
 
 
-
-    <!-- single-blog -->
+        <!-- single-blog -->
 
     </div>
 
@@ -276,7 +303,7 @@
 
 </section>
 
-<section x-show="isLoading" x-cloakid="Services" class="min-h-screen bg-gray-100 dark:bg-gray-900">
+<section x-show="isLoading" x-cloak id="Services" class="min-h-screen bg-gray-100 dark:bg-gray-900">
 
     <div class="px-8 py-6 mx-auto max-w-7xl md:px-6">
         <!-- heading text -->
@@ -289,18 +316,6 @@
         <!-- box wrapper -->
         <div class="grid grid-cols-2 gap-4 md:gap-6 md:grid-cols-4 xl:gap-8">
 
-            @forelse ($category as $category)
-
-            <a href="{{route('categoryByName',[$category->name])}}"
-                class="flex flex-col items-center px-2 py-4 duration-200 border shadow-lg cursor-pointer bg-gray-50 group rounded-xl border-amber-500/10 shadow-amber-300/10 hover:bg-amber-600">
-                <img src="{{Storage::disk('local')->url('public/'.$category->illustration) }}"
-                    class="w-20 h-20 rounded-md" alt="">
-                <h4
-                    class="mt-3 mb-1 md:text-[20px] text-[16px]   font-semibold text-slate-600 duration-200 group-hover:text-white">
-                    {{$category->name}}</h4>
-
-            </a>
-            @empty
 
 
 
@@ -374,7 +389,7 @@
                     Loisirs</h4>
 
             </div>
-            @endforelse
+
         </div>
     </div>
 
@@ -385,7 +400,8 @@
         <div class="container text-gray-600 dark:text-gray-300 ">
             <div class="mb-10 text-center">
                 <span class="font-medium text-amber-600">{{__('Comentaire')}}</span>
-                <h1 class="text-2xl font-bold text-slate-700 sm:text-3xl">Ils avaient confiance en nous</h1>
+                <h1 class="text-2xl font-bold text-slate-700  dark:text-gray-200 sm:text-xl">Ils avaient confiance en
+                    nous</h1>
 
             </div>
             <div class="container flex flex-col mx-auto my-10 overflow-hidden shadow-sm md:my-24 md:flex-row"
@@ -398,9 +414,12 @@
 
                     <div
                         class="relative z-20 px-6 py-2 mb-0 text-2xl font-semibold leading-tight tracking-tight text-indigo-100 md:text-5xl md:py-6 md:px-1 md:w-64 md:mx-auto">
-                        <span class="md:block">What Our</span>
-                        <span class="md-block">Customers</span>
-                        <span class="block">Are Saying!</span>
+                        <span class="md:block">Ce que</span>
+
+                        <span class="md-block">disent</span>
+                        <span class="block">nos clients !</span>
+
+
                     </div>
 
                     <div class="absolute bottom-0 right-0 hidden mb-4 mr-4 md:block">
@@ -431,38 +450,28 @@
                             <div x-show.immediate="testimonialActive === 1">
                                 <p class="px-6 py-6 text-xl italic font-normal text-gray-600 serif md:px-16 md:py-10 md:text-2xl"
                                     x-show.transition="testimonialActive == 1">
-                                    Leverage agile frameworks to provide a robust synopsis for high level overviews.
-                                    Iterative
-                                    approaches to corporate strategy foster collaborative thinking to further the
-                                    overall value
-                                    proposition. Organically grow the holistic world view of disruptive innovation via
-                                    workplace
-                                    diversity and empowerment.
+                                    Votre plateforme m'a permis de trouver rapidement et facilement le freelance idéal
+                                    pour mon projet. C'était vraiment
+                                    simple à utiliser et j'ai apprécié la transparence dans le processus de sélection."
                                 </p>
                             </div>
 
                             <div x-show.immediate="testimonialActive === 2">
                                 <p class="px-6 py-6 text-xl italic font-normal text-gray-600 serif md:px-16 md:py-10 md:text-2xl"
                                     x-show.transition="testimonialActive == 2">
-                                    Bring to the table win-win survival strategies to ensure proactive domination. At
-                                    the end of the
-                                    day, going forward, a new normal that has evolved from generation X is on the runway
-                                    heading
-                                    towards a streamlined cloud solution. User generated content in real-time will have
-                                    multiple
-                                    touchpoints for offshoring.
+                                    Je suis très satisfaite des résultats que j'ai obtenus grâce à votre plateforme.
+                                    J'ai pu trouver un freelance
+                                    expérimenté qui a su répondre parfaitement à mes besoins et à mes attentes.
                                 </p>
                             </div>
 
                             <div x-show.immediate="testimonialActive === 3">
                                 <p class="px-6 py-6 text-xl italic font-normal text-gray-600 serif md:px-16 md:py-10 md:text-2xl"
                                     x-show.transition="testimonialActive == 3">
-                                    Capitalize on low hanging fruit to identify a ballpark value added activity to beta
-                                    test.
-                                    Override the digital divide with additional clickthroughs from DevOps.
-                                    Nanotechnology immersion
-                                    along the information highway will close the loop on focusing solely on the bottom
-                                    line.
+                                    Je recommande vivement votre plateforme à tous ceux qui cherchent à trouver des
+                                    freelances de qualité. J'ai été très
+                                    satisfait des résultats obtenus et je n'hésiterai pas à utiliser à nouveau votre
+                                    service à l'avenir.
                                 </p>
                             </div>
                         </div>

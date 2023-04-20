@@ -134,29 +134,36 @@
                                 <div class="flex items-center justify-between dark:text-gray-200">
                                     <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
                                         {{$service->basic_price}} $</h4>
-                                    <div x-data="{like:false}" class="flex items-center">
-                                        <button class="mr-2" @click="like=!like">
-                                            <template x-if="!like">
+                                    @auth
+                                    <div x-data="{ like: @json($service->isFavorite()) }" class="flex items-center">
+                                        <button class="mr-2" x-on:click="like=!like"
+                                            @click="$wire.toogleFavorite({{$service->id}})">
+
+
+                                            <span x-cloak x-show="!like" class="">
                                                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                                 </svg>
-                                            </template>
-                                            <template x-if="like">
+                                            </span>
+                                            <span x-cloak x-show="like">
                                                 <svg class="w-5 h-5 text-red-500" xmlns="http://www.w3.org/2000/svg"
                                                     fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                                 </svg>
-                                            </template>
+                                            </span>
 
 
                                         </button>
 
+
+
                                     </div>
+                                    @endauth
                                 </div>
                                 <div class="flex items-center justify-between pt-2 dark:text-gray-200">
                                     <x-button wire:click="add_cart({{$service->id}})" spinner="" flat primary sm

@@ -62,8 +62,9 @@
             <ion-icon name="notifications-outline" class="w-4 h-4"></ion-icon>
             <span class="ml-2">{{__('Notification')}}</span>
         </x-dropdown-link>
-        <x-dropdown-link href="{{ url('/lolo') }}">
-            <ion-icon name="notifications-outline" class="w-4 h-4"></ion-icon>
+        <x-dropdown-link href="{{ url('/user/favoris') }}">
+
+            <ion-icon class="w-4 h-4" name="star-outline"></ion-icon>
             <span class="ml-2">{{__('Favoris')}}</span>
         </x-dropdown-link>
 

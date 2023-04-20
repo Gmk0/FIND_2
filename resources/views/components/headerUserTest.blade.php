@@ -18,6 +18,8 @@
             <a class="flex md:hidden" href="{{url('/')}}">
                 <img class="w-24" src="/images/logo/find_02.png" alt="" />
             </a>
+
+
             <div class="relative hidden w-full max-w-xl mr-6 md:block focus-within:text-amber-600">
                 <div class="absolute inset-y-0 flex items-center pl-2">
                     <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -28,7 +30,7 @@
                 </div>
                 <input autocomplete="text" value=""
                     class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-amber-600 focus:outline-none focus:shadow-outline-purple "
-                    type="text" placeholder="Search for projects" aria-label="Search" />
+                    type="text" placeholder="Rechereche" aria-label="Search" />
             </div>
         </div>
 
@@ -108,6 +110,8 @@
             </li>
         </ul>
     </div>
+
+
 </header>
 
 {{--<nav aria-label="Options"

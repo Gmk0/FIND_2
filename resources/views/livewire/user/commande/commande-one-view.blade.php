@@ -306,27 +306,11 @@
 
             </x-modal>
 
+            <x-jet-modal wire:model.defer="confirmModal">
 
 
-            <x-confirmation-modal wire:model="confirmModal">
-                <x-slot name="title">
-                    {{ __('Confirmer la suppression') }}
-                </x-slot>
 
-                <x-slot name="content">
-                    {{ __('Êtes-vous sûr de vouloir supprimer cet élément ?') }}
-                </x-slot>
-
-                <x-slot name="footer">
-                    <x-secondary-button wire:click="$toggle('confirmModal')" wire:loading.attr="disabled">
-                        {{ __('Annuler') }}
-                    </x-secondary-button>
-
-                    <x-danger-button wire:click="deleteConfirmed()" wire:loading.attr="disabled">
-                        {{ __('Annuler la commande') }}
-                    </x-danger-button>
-                </x-slot>
-            </x-confirmation-modal>
+            </x-jet-modal>
 
             <div class="fixed bottom-0 right-0 z-10 mb-4 mr-4">
 

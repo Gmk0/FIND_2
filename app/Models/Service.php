@@ -110,10 +110,23 @@ class Service extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function likes()
+    public function favorites()
     {
-        return $this->belongsToMany(User::class, 'likes', 'service_id', 'user_id');
+        return $this->belongsToMany(User::class, 'likes')
+            ->withTimestamps();
     }
+
+
+    public function isFavorite()
+    {
+        return $this->favorites()
+            ->where('user_id', auth()->id())
+            ->exists();
+    }
+
+
+
+
     public function averageFeedback()
     {
         // Récupérer les commandes liées à ce service

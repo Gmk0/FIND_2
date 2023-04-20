@@ -24,11 +24,6 @@ class CommandeOneView extends Component
     public $messages;
     public $body;
 
-    public $confirmModal = false;
-
-
-
-
     public function  getListeners()
     {
 
@@ -55,22 +50,6 @@ class CommandeOneView extends Component
     public function openModal()
     {
         $this->modal = true;
-    }
-    public function openModalConfirm()
-    {
-        $this->confirmModal = true;
-    }
-
-
-    public function deleteConfirmed()
-    {
-        $order = Order::find($this->order_id);
-
-        $this->confirmModal = false;
-
-        $this->notification()->error(
-            $title = "Impossible d'annuler la commande ",
-        );
     }
 
     public function sendFeedback()
@@ -184,6 +163,7 @@ class CommandeOneView extends Component
     {
         $newMessage = Message::find($messageId);
         $this->messages->push($newMessage);
+
         $this->dispatchBrowserEvent('rowChatToBottom');
         # code...
     }

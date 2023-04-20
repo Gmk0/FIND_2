@@ -28,7 +28,7 @@
         </div>
         <div class="flex-1 px-2">
 
-            <div x-data="{linkHover:false}" @mouseover="linkHover = true" @mouseleave="linkHover = false">
+            <div x-data="{linkHover:false}">
 
 
 
@@ -43,7 +43,8 @@
                     </a>
 
                     @else
-                    <span @mouseover="linkHover = true" @mouseleave="linkHover = false">{{$message->body}}</span>
+                    <span class="cursor-pointer" @mouseover="linkHover = true"
+                        @mouseleave="linkHover = false">{{$message->body}}</span>
                     @endif
 
                     <span class="text-white {{auth()->id() == $message->sender_id ? 'flex':'hidden'}}"

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\User\Services;
 
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\Like;
 use App\Models\Service;
 use App\Models\SubCategory;
 use Livewire\WithPagination;
@@ -87,6 +88,23 @@ class ServiceByCategory extends Component
         // dd(Session::get('cart'));
     }
 
+
+    public function toogleFavorite($serviceId)
+    {
+
+        $favorite = Like::where('user_id', auth()->id())
+            ->where('service_id', $serviceId)
+            ->first();
+
+        if ($favorite) {
+            $favorite->delete();
+        } else {
+            Like::create([
+                'user_id' => auth()->id(),
+                'service_id' => $serviceId,
+            ]);
+        }
+    }
 
 
     public function getDeliveryTimeRange()

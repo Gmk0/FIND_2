@@ -118,8 +118,12 @@ class User extends Authenticatable implements FilamentUser
 
     public function favorites()
     {
-        return $this->belongsToMany(Freelance::class, 'favorites')->withTimestamps();
+        return $this->belongsToMany(Service::class, 'likes')
+            ->withTimestamps();
     }
+
+
+
     public function receivers()
     {
         return $this->hasMany(Message::class, 'receiver_id');

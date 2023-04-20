@@ -5,7 +5,7 @@
 
 @php
 if(request()->routeIs('MessageUser')){
-$overflow="overflow-y-auto";
+$overflow="overflow-y-auto md:overflow-y-hidden";
 }else{
 $overflow="overflow-y-auto";
 }
@@ -82,12 +82,16 @@ $overflow="overflow-y-auto";
 
                     <!-- User avatar -->
                     <div class="relative flex items-center flex-shrink-0 p-2" x-data="{ isOpen: false }">
-                        <button @click="isOpen = !isOpen; $nextTick(() => {isOpen ? $refs.userMenu.focus() : null})"
-                            class="transition-opacity rounded-lg opacity-80 hover:opacity-100 focus:outline-none focus:ring focus:ring-primary focus:ring-offset-white focus:ring-offset-2">
 
-                            <img class="w-10 h-10 rounded-lg shadow-md" src="" alt="Ahmed Kamel" />
-                            <span class="sr-only">Us</span>
-                        </button>
+                        <form method="POST" action="{{ url('/logout') }}" x-data>
+                            @csrf
+
+                            <a href="{{ url('/logout') }}" @click.prevent="$root.submit();">
+                                <ion-icon name="log-in-outline" class="w-8 h-8 text-white"></ion-icon>
+
+                            </a>
+                        </form>
+
 
                     </div>
                 </nav>
@@ -126,12 +130,40 @@ $overflow="overflow-y-auto";
                 </div>
             </div>
             <div class="flex flex-col flex-1">
-                <x-headerFreelance />
+                <x-headerUserTest />
 
-                <main class="h-full pb-16 overflow-y-auto">
+                <main class="h-full pb-16 {{$overflow}}">
                     <!-- Main -->
                     @yield('content')
+
+
+
+
                 </main>
+
+                @if(request()->routeIs('MessageUser'))
+
+
+                @else
+
+                <footer class="bottom-0 text-center text-white bg-gray-300 dark:bg-gray-800" style="">
+
+
+                    <!--Copyright section-->
+                    <div class="p-2 text-center text-gray-800">
+                        © 2023 Copyright:
+                        <a class="text-white" href="https://tailwind-elements.com/">FIND</a>
+                    </div>
+                </footer>
+                @endif
+
+
+
+
+                <!--Footer container-->
+
+
+
             </div>
         </div>
 
