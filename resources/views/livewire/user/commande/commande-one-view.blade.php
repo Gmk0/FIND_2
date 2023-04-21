@@ -164,7 +164,7 @@
                         </div>
 
                         <div>
-                            <x-button wire:click="openModalConfirm()" danger label="Annuler la commande"></x-button>
+                            <x-button negative label="Annuler la commande"></x-button>
 
 
                         </div>
