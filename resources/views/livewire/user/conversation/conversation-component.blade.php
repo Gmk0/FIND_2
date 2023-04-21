@@ -152,7 +152,7 @@
                                             <x-dropdown.item label="Maquer non lue" />
                                             <x-dropdown.item label="Favoris" />
                                             <x-dropdown.item wire:click="effacerConversation()" label="Effacer" />
-                                            <x-dropdown.item wire:click="BloquerConversatione()"
+                                            <x-dropdown.item wire:click="BloquerConversation()"
                                                 label="Bloquer l'utilisateur" />
                                         </x-dropdown>
                                     </div>
