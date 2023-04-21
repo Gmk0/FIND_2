@@ -5,7 +5,7 @@
         <div>
             @include('include.breadcumbUser',['commande'=>'commande','commandeID'=>'1'])
         </div>
-        <div class="max-w-6xl mx-auto">
+        <div class="md:max-w-6xl mx-auto">
 
             <!-- Titre de la section -->
             <h2 class="mb-4 text-3xl font-semibold text-gray-800 dark:text-gray-300">Détails de la commande</h2>
