@@ -94,7 +94,7 @@
                     <a href="{{url('/services')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-700 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                         <ion-icon name="star-outline" class="w-4 h-4 dark:text-white"></ion-icon>
-                        <span class="ml-2">{{__('Service')}}</span>
+                        <span class="ml-2">{{__('Services')}}</span>
                     </a>
                     <a href="{{url('/find_freelance')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-700 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
@@ -105,7 +105,7 @@
                     <a href="{{route('createProject')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-3 py-2 mt-1 text-base font-medium text-gray-800 rounded-md dark:text-gray-50 hover:dark:text-white hover:bg-gray-700 focus:outline-none focus:dark:text-white focus:text-white focus:bg-amber-600">
                         <ion-icon name="chatbubbles-outline" class="w-4 h-4 dark:text-white"></ion-icon>
-                        <span class="ml-2">{{__('Soumettre un mission')}}</span>
+                        <span class="ml-2">{{__('Soumettre une mission')}}</span>
                     </a>
 
 
@@ -139,7 +139,7 @@
             @auth
             <div class="container mt-4 border-t border-gray-800 dark:border-gray-50 ">
                 <div class="pt-2 pb-3">
-                    <a href="{{route('profile.show')}}" @click="navOpen = false"
+                    <a href="{{url('/user')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-3 py-2 text-base font-medium text-gray-800 rounded-md hover:text-gray-900 hover:bg-gray-200 focus:outline-none focus:text-gray-900 focus:bg-gray-200"
                         role="menuitem">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
@@ -155,7 +155,7 @@
                     <a href="{{url('/user/messages')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
                         role="menuitem">
-                        <ion-icon name="cash-outline" class="w-4 h-4"></ion-icon>
+                        <ion-icon name="chatbox-outline" class="w-4 h-4"></ion-icon>
                         <span class="ml-2">{{__('Conversation')}}</span>
                     </a>
                     <a href="{{route('paiementUser')}}"
