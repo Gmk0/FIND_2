@@ -23,7 +23,7 @@ class CommandeOneView extends Component
     public $openMessage = false;
     public $messages;
     public $body;
-    public $modalC
+    public $modalC;
 
     public function  getListeners()
     {
