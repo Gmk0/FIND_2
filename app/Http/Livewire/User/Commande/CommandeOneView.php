@@ -23,6 +23,7 @@ class CommandeOneView extends Component
     public $openMessage = false;
     public $messages;
     public $body;
+    public $modalC
 
     public function  getListeners()
     {
@@ -44,7 +45,20 @@ class CommandeOneView extends Component
     }
 
 
-
+    public function openConfirmModal()
+    {
+        $this->modalC=true;
+    }
+    
+    public function confirmed()
+    {
+        
+        
+        $this->modalC=false;
+        $this->notification()->error($title="impossible d Annuller la commande");
+        
+        
+    }
 
 
     public function openModal()
