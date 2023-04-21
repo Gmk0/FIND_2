@@ -186,7 +186,7 @@
         <!-- end::Activities -->
 
         <!-- start::Table -->
-        <div class="px-8 py-6 overflow-auto bg-white rounded-lg custom-scrollbar">
+        <div class="px-8 py-6 overflow-auto bg-white rounded-lg hidden custom-scrollbar">
             <h4 class="text-xl font-semibold text-gray-800">Recent transactions</h4>
             <table class="w-full my-8 overflow-auto whitespace-nowrap">
                 <thead class="font-bold text-gray-100 bg-blue-400">
