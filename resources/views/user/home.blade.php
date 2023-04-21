@@ -78,11 +78,11 @@
                 <div class="grid grid-cols-1 gap-2 mx-auto md:mx-0 md:grid-cols-2">
 
                     <a href="{{url('find-freelancer')}}"
-                        class="w-10/12 rounded-md mx-auto bg-amber-600 px-8 py-2.5 font-semibold text-white shadow-md shadow-amber-500/20 hover:bg-amber-700 duration-200 sm:w-auto">Trouver
+                        class="w-10/12 rounded-md mx-auto text-center bg-amber-600 px-8 py-2.5 font-semibold text-white shadow-md shadow-amber-500/20 hover:bg-amber-700 duration-200 sm:w-auto">Trouver
                         un freelancer</a>
 
                     <a href="{{url('register.begin')}}"
-                        class="mt-4 md:mt-0 mx-auto box-border w-10/12   rounded-md border border-amber-500/20 px-8 py-2.5 font-semibold text-amber-600 shadow-md shadow-amber-500/10 hover:bg-gray-100 duration-200   ">Dévenir
+                        class="mt-4 md:mt-0 mx-auto text-center box-border w-10/12   rounded-md border border-amber-500/20 px-8 py-2.5 font-semibold text-amber-600 shadow-md shadow-amber-500/10 hover:bg-gray-100 duration-200   ">Dévenir
 
                         freelancer</a>
 
@@ -149,7 +149,7 @@
                                     allowfullscreen></iframe>
                             </div>
                             <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
-                                <div class="w-24 mx-auto">
+                                <div class="w-20 mx-auto">
                                     <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />s
                                 </div>
                                 <p class="dark:text-gray-200">
@@ -158,7 +158,7 @@
                                     freelances proposés.
                                     <span class="font-serif">"</span>
                                 </p>
-                                <h6 class="text-lg font-semibold leading-none dark:text-gray-200">John Doe</h6>
+                                <h6 class="text-lg font-semibold leading-none dark:text-gray-200">Georges Mk</h6>
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                                     allowfullscreen></iframe>
                             </div>
                             <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
-                                <div class="w-24 mx-auto">
+                                <div class="w-20 mx-auto">
                                     <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />s
                                 </div>
                                 <p class="dark:text-gray-200">
@@ -187,7 +187,7 @@
                                     bien conçue et facile à utiliser
                                     <span class="font-serif">"</span>
                                 </p>
-                                <h6 class="text-lg font-semibold leading-none dark:text-gray-200">John Doe</h6>
+                                <h6 class="text-lg font-semibold leading-none dark:text-gray-200">Ulrich Lukemba</h6>
                             </div>
                         </div>
                     </div>
@@ -482,7 +482,7 @@
                                 :class="{'h-12 w-12 opacity-25 bg-indigo-300 text-gray-600': testimonialActive != 1, 'h-16 w-16 opacity-100 bg-indigo-600 text-white': testimonialActive == 1 }">JD</button>
                             <button @click.prevent="testimonialActive = 2"
                                 class="inline-block w-16 h-16 mx-2 font-bold text-center bg-indigo-600 rounded-full shadow-xs focus:outline-none focus:shadow-outline"
-                                :class="{'h-12 w-12 opacity-25 bg-indigo-300 text-gray-600': testimonialActive != 2, 'h-16 w-16 opacity-100 bg-indigo-600 text-white': testimonialActive == 2 }">WD</button>
+                                :class="{'h-12 w-12 opacity-25 bg-indigo-300 text-gray-600': testimonialActive != 2, 'h-16 w-16 opacity-100 bg-indigo-600 text-white': testimonialActive == 2 }">WM</button>
                             <button @click.prevent="testimonialActive = 3"
                                 class="inline-block w-12 h-12 mx-2 font-bold text-center bg-indigo-600 rounded-full shadow-xs focus:outline-none focus:shadow-outline"
                                 :class="{'h-12 w-12 opacity-25 bg-indigo-300 text-gray-600': testimonialActive != 3, 'h-16 w-16 opacity-100 bg-indigo-600 text-white': testimonialActive == 3 }">JW</button>
@@ -490,18 +490,18 @@
 
                         <div class="flex justify-center px-6 pt-2 pb-6 md:py-6">
                             <div class="text-center" x-show="testimonialActive == 1">
-                                <h2 class="text-sm font-bold leading-tight text-gray-700 md:text-base">John Doe</h2>
+                                <h2 class="text-sm font-bold leading-tight text-gray-700 md:text-base">Jean Dongo</h2>
                                 <small class="text-xs text-gray-500 truncate md:text-sm">CEO, ABC Inc.</small>
                             </div>
 
                             <div class="text-center" x-show="testimonialActive == 2">
-                                <h2 class="text-sm font-bold leading-tight text-gray-700 md:text-base">Winter Doe</h2>
-                                <small class="text-xs text-gray-500 truncate md:text-sm">CTO, XYZ Corp.</small>
+                                <h2 class="text-sm font-bold leading-tight text-gray-700 md:text-base">William Muka </h2>
+                                <small class="text-xs text-gray-500 truncate md:text-sm">CTO, Ack Corp.</small>
                             </div>
 
                             <div class="text-center" x-show="testimonialActive == 3">
-                                <h2 class="text-sm font-bold leading-tight text-gray-700 md:text-base">John Wick</h2>
-                                <small class="text-xs text-gray-500 truncate md:text-sm">Product Manager, Fake
+                                <h2 class="text-sm font-bold leading-tight text-gray-700 md:text-base">John Wata</h2>
+                                <small class="text-xs text-gray-500 truncate md:text-sm">Product Manager, Fortran
                                     Corp.</small>
                             </div>
                         </div>
