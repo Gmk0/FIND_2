@@ -52,14 +52,14 @@
                     </div>
                     <div class="overflow-hidden leading-normal tab-content">
                         <ul class="flex flex-col w-full p-0 text-left list-none text-gray-50">
-                            <li><a href="#" class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Privacy
+                            <li><a href="{{url('/policy')}}" class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Privacy
                                     Policy</a></li>
                             <li><a href="#" class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Return
                                     Policy</a></li>
                             <li><a href="#"
                                     class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Shipping</a>
                             </li>
-                            <li><a href="#" class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Terms
+                            <li><a href="{{url('/terms-of-service')}}" class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Terms
                                     of
                                     Service</a></li>
                         </ul>
@@ -83,11 +83,8 @@
                     </div>
                     <div class="overflow-hidden leading-normal tab-content">
                         <ul class="flex flex-col w-full p-0 font-thin text-left list-none text-gray-50">
-                            <li><a href="#" class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Developer
-                                    API</a></li>
-                            <li><a href="#"
-                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Documentation</a>
-                            </li>
+                            
+                            
                             <li><a href="#"
                                     class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Guides</a>
                             </li>
@@ -168,7 +165,7 @@
                 </div>
             </div>
             <div class="flex items-center justify-between mt-2 border-t border-gray-800">
-                <img src="/images/find_02.png" alt="logo find" class="h-8" />
+                <img src="/images/logo/find_02.png" alt="logo find" class="h-8" />
                 <div class="flex flex-col items-center justify-center p-3 mt-2 text-gray-600 md:flex-row">Copyright ©
                     <script>
                         document.write(new Date().getFullYear());
