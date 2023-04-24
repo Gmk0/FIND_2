@@ -62,26 +62,35 @@ class ServiceByCategory extends Component
     public function add_cart($id)
     {
 
-        $service = Service::find($id);
-        $files = $service->files;
-        foreach ($files as $key => $file) {
-            $images = $file;
-            break;
+        if (auth()->check()) {
+            $service = Service::find($id);
+            $files = $service->files;
+            foreach ($files as $key => $file) {
+                $images = $file;
+                break;
+            }
+
+            // dd($images);
+
+            $oldCart = Session::has('cart') ? Session::get('cart') : null;
+            $cart = new Cart($oldCart);
+            $cart->add($service, $service->id, $images);
+            Session::put('cart', $cart);
+            $this->emitTo('user.navigation.card-component', 'refreshComponent');
+            $this->dispatchBrowserEvent('success', ['message' => 'le service a ete ajouté']);
+
+            $this->notification()->success(
+                $title = "le Service a ete ajouté dans le panier",
+
+            );
+        } else {
+
+            $this->notification()->error(
+                $title = "Connectez vous  pour pouvoir ajouté un service dans le panier",
+
+            );
         }
 
-        // dd($images);
-
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->add($service, $service->id, $images);
-        Session::put('cart', $cart);
-        $this->emitTo('user.navigation.card-component', 'refreshComponent');
-        $this->dispatchBrowserEvent('success', ['message' => 'le service a ete ajouté']);
-
-        $this->notification()->success(
-            $title = "le Service a ete ajouté dans le panier",
-
-        );
 
 
 

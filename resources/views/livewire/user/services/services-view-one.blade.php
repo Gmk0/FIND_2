@@ -61,7 +61,7 @@
 
                             </div>--}}
 
-                            <div class="sm:col-span-8 lg:col-span-7">
+                            <div class="p-3 sm:col-span-8 lg:col-span-7">
                                 <h2 class="text-2xl font-bold text-gray-800 truncate sm:pr-12">{{$service->title}}</h2>
 
                                 <section aria-labelledby="information-heading" class="mt-2">
@@ -74,43 +74,17 @@
                                         <h4 class="sr-only">Reviews</h4>
                                         <div class="flex items-center">
                                             <div class="flex items-center">
-                                                <!-- Active: "text-gray-900", Default: "text-gray-200" -->
-                                                <svg class="flex-shrink-0 w-5 h-5 text-gray-900" viewBox="0 0 20 20"
-                                                    fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                        clip-rule="evenodd" />
+                                                <svg class="w-4 h-4 mr-1 text-yellow-500 fill-current"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M10 14.155L4.284 17.84l.828-5.076L.898 7.865l5.059-.736L10 2l2.043 5.129 5.059.736-3.215 3.9.828 5.076z" />
                                                 </svg>
-
-                                                <svg class="flex-shrink-0 w-5 h-5 text-gray-900" viewBox="0 0 20 20"
-                                                    fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-
-                                                <svg class="flex-shrink-0 w-5 h-5 text-gray-900" viewBox="0 0 20 20"
-                                                    fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-
-                                                <svg class="flex-shrink-0 w-5 h-5 text-gray-900" viewBox="0 0 20 20"
-                                                    fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-
-                                                <svg class="flex-shrink-0 w-5 h-5 text-gray-200" viewBox="0 0 20 20"
-                                                    fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
+                                                <span
+                                                    class="font-semibold text-gray-700">{{$service->averageFeedback()}}
+                                                </span>
                                             </div>
-                                            <p class="sr-only">3.9 out of 5 stars</p>
+
+                                            <p class="sr-only">{{$service->averageFeedback()}} out of 5 stars</p>
                                             <a href="#"
                                                 class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">{{$service->orderCount()}}
                                                 reviews</a>
@@ -118,27 +92,20 @@
                                     </div>
                                 </section>
 
-                                <section aria-labelledby="options-heading" class="mt-10">
-                                    <h3 id="options-heading" class="sr-only">Product options</h3>
+                                <section aria-labelledby="options-heading" class="mt-5">
+                                    <h3 id="options-heading" class="sr-only">Service options</h3>
 
                                     <form>
                                         <!-- Colors -->
                                         <div>
                                             <h4 class="text-sm font-medium text-gray-900">Support</h4>
                                             <ul>
-
+                                                {{$service->basic_support}}
                                             </ul>
                                         </div>
 
                                         <!-- Sizes -->
-                                        <div class="mt-10">
-                                            <div class="flex items-center justify-between">
-                                                <h4 class="text-sm font-medium text-gray-900">Format</h4>
-                                                <a href="#"
-                                                    class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Size
-                                                    guide</a>
-                                            </div>
-                                        </div>
+
 
                                         <button wire:click='add_cart()' type="button"
                                             class="flex items-center justify-center w-full px-8 py-3 mt-6 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Ajouter</button>
@@ -158,14 +125,15 @@
 
 
                 </div>
-                <div class="w-full md:w-2/3">
+                <div x-data="{showInfo:false}" class="w-full md:w-2/3">
                     <div class="p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
 
 
                         <div x-data="{ image: @entangle('images') }" class="flex flex-col items-center justify-center">
-                            <img :src="'/storage/service/'image" class="object-cover w-full h-full mr-4 rounded-md"
-                                alt="Product Name">
 
+
+                            <img x-bind:src="'/storage/service/' + image"
+                                class="object-cover w-full mr-4 rounded-md h-72" alt="Product Name">
 
                             <div class="flex justify-between mt-4 space-x-2 items-cetnter">
                                 @foreach ($service->files as $key=>$value)
@@ -178,6 +146,7 @@
                         </div>
 
 
+
                         <div>
                             <p class="mt-4 text-lg font-bold text-gray-800 md:text-2xl dark:text-gray-200">
                                 {{$service->title}}</p>
@@ -188,42 +157,62 @@
 
                         <p class="mb-4 text-sm text-gray-800 md:text-base dark:text-gray-200">{{$service->description}}
                         </p>
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <p class="font-bold text-gray-800 dark:text-gray-200">Support :</p>
-                                <ul class="text-gray-700 dark:text-gray-300">
-                                    <li>{{$service->basic_support}}</li>
 
-                                </ul>
+                        <p class="mb-4 text-lg font-bold text-gray-600 dark:text-gray-200">Service
+                            information</p>
+
+                        <div x-show="showInfo">
+
+
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <p class="font-bold text-gray-700 dark:text-gray-200">Support :</p>
+                                    <ul class="text-gray-700 dark:text-gray-300">
+                                        <li>{{$service->basic_support}}</li>
+
+                                    </ul>
+
+                                </div>
+
+                                <div>
+                                    <p class="font-bold text-gray-800 dark:text-gray-200">Révision :</p>
+                                    <p class="text-gray-700 dark:text-gray-300">{{$service->basic_revision}}</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <p class="font-bold text-gray-800 dark:text-gray-200">Exemples réalisés :</p>
+                                    <p class="text-gray-700 dark:text-gray-300">12</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-800">Commentaires :</p>
+                                    <p class="text-gray-700 dark:text-gray-300">{{count($commentaires)}}</p>
+                                </div>
 
                             </div>
-
-                            <div>
-                                <p class="font-bold text-gray-800 dark:text-gray-200">Révision :</p>
-                                <p class="text-gray-700 dark:text-gray-300">{{$service->basic_revision}}</p>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <p class="font-bold text-gray-800 dark:text-gray-200">Prix :</p>
+                                    <p class="text-gray-700 dark:text-gray-300">à partir de {{$service->basic_price}}$
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-800 dark:text-gray-200">Délai :</p>
+                                    <p class="text-gray-700 dark:text-gray-300">{{$service->basic_delivery_time}} jours
+                                    </p>
+                                </div>
                             </div>
+
                         </div>
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <p class="font-bold text-gray-800 dark:text-gray-200">Exemples réalisés :</p>
-                                <p class="text-gray-700 dark:text-gray-300">12</p>
-                            </div>
-                            <div>
-                                <p class="font-bold text-gray-800">Commentaires :</p>
-                                <p class="text-gray-700 dark:text-gray-300">{{count($commentaires)}}</p>
-                            </div>
+
+
+                        <p class="mb-4 text-lg font-bold text-gray-600 dark:text-gray-200">Exemple realise
+                        </p>
+
+                        <div>
 
                         </div>
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <p class="font-bold text-gray-800 dark:text-gray-200">Prix :</p>
-                                <p class="text-gray-700 dark:text-gray-300">à partir de {{$service->basic_price}}$</p>
-                            </div>
-                            <div>
-                                <p class="font-bold text-gray-800 dark:text-gray-200">Délai :</p>
-                                <p class="text-gray-700 dark:text-gray-300">{{$service->basic_delivery_time}} jours</p>
-                            </div>
-                        </div>
+
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <div>
                                 <p class="font-bold text-gray-800 dark:text-gray-200">Format :</p>
