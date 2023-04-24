@@ -197,6 +197,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
+        Martinschenk\LivewireCookieConsent\CookieConsentModalServiceProvider::class,
 
     ],
 
