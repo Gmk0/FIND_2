@@ -79,7 +79,7 @@
 }
 
 /* Open Multiple Icon Formatting - Open */
-.tab input[type="checkbox"]:checked+.label .icon {
+.tab2 input[type="checkbox"]:checked+.label .icon {
     transform: rotate(180deg);
 }
 

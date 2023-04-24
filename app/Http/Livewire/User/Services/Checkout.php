@@ -40,9 +40,20 @@ class Checkout extends Component
         }
     }
 
-    public function addFavorites()
+    public function addFavorites($serviceId)
     {
-        dd("lolo");
+        $favorite = Like::where('user_id', auth()->id())
+            ->where('service_id', $serviceId)
+            ->first();
+
+        if ($favorite) {
+            $favorite->delete();
+        } else {
+            Like::create([
+                'user_id' => auth()->id(),
+                'service_id' => $serviceId,
+            ]);
+        }
     }
 
     public function payers()

@@ -90,7 +90,8 @@
                                             </button>
 
                                             <div x-data="{like:false}" class="flex items-center">
-                                                <button class="flex mr-2" wire:click=addFavorites() @click="like=!like">
+                                                <button class="flex mr-2" wire:click="addFavorites({{$item['id']}})"
+                                                    @click="like=!like">
                                                     <template x-if="!like">
                                                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
