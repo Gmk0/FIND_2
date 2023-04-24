@@ -3,7 +3,7 @@
 @section('content')
 
 <section
-    class="relative z-40 grid min-h-screen grid-cols-1 gap-8 px-4 pt-20 overflow-hidden text-neutral-50 2xl:px-60 lg:grid-cols-12 bg-skin-fill dark:bg-gray-800">
+    class="relative grid min-h-screen grid-cols-1 gap-8 px-4 pt-20 overflow-hidden text-neutral-50 2xl:px-60 lg:grid-cols-12 bg-skin-fill dark:bg-gray-800">
     <div
         class="[mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] absolute bottom-[-100px] md:w-[800px] md:h-[800px] lg:top-[120px] lg:right-[-100px] xl:right-0 w-[500px] h-[500px] 2xl:w-[1026px] 2xl:h-[1026px]">
         <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true"
@@ -49,9 +49,11 @@
                 class="w-full px-4 py-4 mb-4 font-bold text-center rounded-lg lg:w-max bg-neutral-50 hover:cursor-pointer text-cyan-600 lg:mr-8 lg:mb-0">
                 Commencer
             </a>
+
+
         </div>
     </div>
-    <div class="relative z-50 hidden col-span-6 md:flex">
+    <div class="relative z-20 hidden col-span-6 md:flex">
         <picture>
             <source srcset="/images/hero/hero_women.webp" type="image/webp" />
             <source srcset="/images/hero/hero_women.png" type="image/png" />
@@ -400,7 +402,7 @@
         <div class="container text-gray-600 dark:text-gray-300 ">
             <div class="mb-10 text-center">
                 <span class="font-medium text-amber-600">{{__('Comentaire')}}</span>
-                <h1 class="text-2xl font-bold text-slate-700  dark:text-gray-200 sm:text-xl">Ils avaient confiance en
+                <h1 class="text-2xl font-bold text-slate-700 dark:text-gray-200 sm:text-xl">Ils avaient confiance en
                     nous</h1>
 
             </div>
@@ -495,7 +497,8 @@
                             </div>
 
                             <div class="text-center" x-show="testimonialActive == 2">
-                                <h2 class="text-sm font-bold leading-tight text-gray-700 md:text-base">William Muka </h2>
+                                <h2 class="text-sm font-bold leading-tight text-gray-700 md:text-base">William Muka
+                                </h2>
                                 <small class="text-xs text-gray-500 truncate md:text-sm">CTO, Ack Corp.</small>
                             </div>
 

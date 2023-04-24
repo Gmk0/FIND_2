@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bfd83d4eb79687e6b9688ed19abb3aca",
+    "content-hash": "b1e206f2fefee2fc8af39bd261cc3b4b",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -3402,6 +3402,66 @@
                 }
             ],
             "time": "2023-03-03T20:12:38+00:00"
+        },
+        {
+            "name": "martinschenk/livewire-cookie-consent",
+            "version": "v1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/martinschenk/livewire-cookie-consent.git",
+                "reference": "7864c5908db2e3431919cd344a307fbe41d9ade2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/martinschenk/livewire-cookie-consent/zipball/7864c5908db2e3431919cd344a307fbe41d9ade2",
+                "reference": "7864c5908db2e3431919cd344a307fbe41d9ade2",
+                "shasum": ""
+            },
+            "require": {
+                "livewire/livewire": "^2.0",
+                "php": "^8.0",
+                "wire-elements/modal": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Martinschenk\\LivewireCookieConsent\\CookieConsentModalServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Martinschenk\\LivewireCookieConsent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Schenk",
+                    "email": "mschenk.pda@gmail.com",
+                    "homepage": "https://www.martin-schenk.es",
+                    "role": "Developer"
+                }
+            ],
+            "description": "livewire cookie consent modals with laravel livewire",
+            "homepage": "https://github.com/martinschenk/livewire-cookie-consent",
+            "keywords": [
+                "consent",
+                "cookie",
+                "cookie-consent",
+                "laravel",
+                "livewire",
+                "modal"
+            ],
+            "support": {
+                "issues": "https://github.com/martinschenk/livewire-cookie-consent/issues",
+                "source": "https://github.com/martinschenk/livewire-cookie-consent/tree/v1.0.7"
+            },
+            "time": "2023-01-25T19:06:07+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -7998,6 +8058,64 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wire-elements/modal",
+            "version": "1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wire-elements/modal.git",
+                "reference": "1019f423485afb6df0d1531d978e93d4ad0975fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wire-elements/modal/zipball/1019f423485afb6df0d1531d978e93d4ad0975fb",
+                "reference": "1019f423485afb6df0d1531d978e93d4ad0975fb",
+                "shasum": ""
+            },
+            "require": {
+                "livewire/livewire": "^2.0",
+                "php": "^7.4|^8.0",
+                "spatie/laravel-package-tools": "^1.9"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.15",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LivewireUI\\Modal\\LivewireModalServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LivewireUI\\Modal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philo Hermans",
+                    "email": "me@philohermans.com"
+                }
+            ],
+            "description": "Laravel Livewire modal component",
+            "keywords": [
+                "laravel",
+                "livewire",
+                "modal"
+            ],
+            "support": {
+                "issues": "https://github.com/wire-elements/modal/issues",
+                "source": "https://github.com/wire-elements/modal/tree/1.0.8"
+            },
+            "time": "2023-04-07T12:35:15+00:00"
         },
         {
             "name": "wireui/wireui",

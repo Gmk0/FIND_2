@@ -1,5 +1,5 @@
 
-@import 'aos/dist/aos.css'; 
+@import 'aos/dist/aos.css';
 
 @import '@splidejs/splide/css';
 
@@ -60,18 +60,18 @@
 }
 
 /* :checked - resize to full height */
-.tab input:checked~.tab-content {
+.tab2 input:checked~.tab-content {
     max-height: 100vh;
 }
 
 /* Label formatting when open */
-.tab input:checked+label {
+.tab2 input:checked+label {
     border-left-width: 1px;
     border-color: white;
 }
 
 /* Icon */
-.tab .label .icon {
+.tab2 .label .icon {
     -webkit-transition: all 0.5s;
     -o-transition: all 0.5s;
     transition: all 0.5s;

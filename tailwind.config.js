@@ -69,12 +69,14 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/typography'),
+    plugins: [require('@tailwindcss/typography'), require("daisyui"),
     require('@tailwindcss/forms')({
         strategy: 'class',
     }),
 
+
     require('@tailwindcss/aspect-ratio'),
+
 
     plugin(function ({ addUtilities, theme }) {
         const newUtilities = {
@@ -88,6 +90,17 @@ module.exports = {
 
         addUtilities(newUtilities, ['responsive', 'hover'])
     })],
+
+    daisyui: {
+        styled: true,
+        themes: true,
+        base: true,
+        utils: true,
+        logs: true,
+        rtl: false,
+        prefix: "",
+        darkTheme: "dark",
+    },
 
 
 };

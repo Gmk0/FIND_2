@@ -6,7 +6,7 @@
         <div class="container flex flex-col p-4 mx-auto overflow-hidden lg:flex-row">
             <div class="w-full p-2 mx-auto">
                 <!-- Accordions -->
-                <div class="w-full overflow-hidden tab">
+                <div class="w-full overflow-hidden tab2">
                     <input class="absolute hidden opacity-0" id="tab-multi-one" type="checkbox" name="tabs">
                     <div class="relative label">
                         <label class="block px-3 py-2 text-lg font-medium text-gray-50 dark:text-gray-200"
@@ -26,8 +26,8 @@
                         <ul class="flex flex-col w-full p-0 space-y-2 text-left list-none list-inside text-gray-50">
 
                             @foreach($categories as $category)
-                            <li><a wire:click="getCategory({{$category->id}}) href=" #"
-                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">{{$category->name}}</a>
+                            <li><a href="{{route('categoryByName',[$category->name])}}"
+                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-200">{{$category->name}}</a>
                             </li>
                             @endforeach
 
@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <div class="w-full overflow-hidden tab">
+                <div class="w-full overflow-hidden tab2">
                     <input class="absolute hidden opacity-0" id="tab-multi-two" type="checkbox" name="tabs">
                     <div class="relative label">
                         <label class="block px-3 py-2 text-lg font-medium text-white cursor-pointer text-gray-50"
@@ -52,21 +52,23 @@
                     </div>
                     <div class="overflow-hidden leading-normal tab-content">
                         <ul class="flex flex-col w-full p-0 text-left list-none text-gray-50">
-                            <li><a href="{{url('/policy')}}" class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Privacy
+                            <li><a href="{{url('/policy')}}"
+                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Privacy
                                     Policy</a></li>
                             <li><a href="#" class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Return
                                     Policy</a></li>
                             <li><a href="#"
                                     class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Shipping</a>
                             </li>
-                            <li><a href="{{url('/terms-of-service')}}" class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Terms
+                            <li><a href="{{url('/terms-of-service')}}"
+                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Terms
                                     of
                                     Service</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="w-full overflow-hidden tab">
+                <div class="w-full overflow-hidden tab2">
                     <input class="absolute hidden opacity-0" id="tab-multi-three" type="checkbox" name="tabs">
                     <div class="relative label">
                         <label class="block px-3 py-2 text-lg font-medium cursor-pointer text-gray-50 "
@@ -83,8 +85,8 @@
                     </div>
                     <div class="overflow-hidden leading-normal tab-content">
                         <ul class="flex flex-col w-full p-0 font-thin text-left list-none text-gray-50">
-                            
-                            
+
+
                             <li><a href="#"
                                     class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Guides</a>
                             </li>
@@ -92,7 +94,7 @@
                     </div>
                 </div>
 
-                <div class="w-full overflow-hidden tab">
+                <div class="w-full overflow-hidden tab2">
                     <input class="absolute hidden opacity-0" id="tab-multi-four" type="checkbox" name="tabs">
                     <div class="relative label">
                         <label class="block px-3 py-2 text-lg font-medium cursor-pointer text-gray-50"
@@ -180,53 +182,49 @@
     </div>
 
     <!-- FOOTER 2 DESKTOP -->
-    <div class="hidden p-6 text-gray-100 dark:bg-gray-800 md:block">
-        <div class="container grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
-            <div class="flex flex-col space-y-4">
-                <h2 class="font-medium">Category</h2>
-                <div class="flex flex-col space-y-2 text-sm dark:text-gray-400">
 
-                    <a rel="noopener noreferrer" href="#">IntelliSense</a>
-                </div>
+    <div class="hidden md:flex">
+        <footer class="p-10 footer bg-base-200 text-base-content">
+            <div>
+
+                <img src="/images/logo/find_02.png" alt="logo find" class="h-8" />
+                <p>FIND Ltd.<br />Providing reliable tech since 2020</p>
             </div>
-            <div class="flex flex-col space-y-4">
-                <h2 class="font-medium">Core Concepts</h2>
-                <div class="flex flex-col space-y-2 text-sm dark:text-gray-400">
-                    <a rel="noopener noreferrer" href="#">Utility-First</a>
-                    <a rel="noopener noreferrer" href="#">Responsive Design</a>
-                    <a rel="noopener noreferrer" href="#">Hover, Focus, &amp; Other States</a>
-                    <a rel="noopener noreferrer" href="#">Dark Mode</a>
-                    <a rel="noopener noreferrer" href="#">Adding Base Styles</a>
-                    <a rel="noopener noreferrer" href="#">Extracting Components</a>
-                    <a rel="noopener noreferrer" href="#">Adding New Utilities</a>
+            <div>
+                <span class="footer-title">Services</span>
+                <div class="grid grid-cols-2 gap-4">
+
+                    @foreach($categories as $category)
+                    <a href="{{route('categoryByName',[$category->name])}}"
+                        class="link link-hover">{{$category->name}}</a>
+                    @endforeach
+
+
+
                 </div>
+
             </div>
-            <div class="flex flex-col space-y-4">
-                <h2 class="font-medium">Customization</h2>
-                <div class="flex flex-col space-y-2 text-sm dark:text-gray-400">
-                    <a rel="noopener noreferrer" href="#">Configuration</a>
-                    <a rel="noopener noreferrer" href="#">Theme Configuration</a>
-                    <a rel="noopener noreferrer" href="#">Breakpoints</a>
-                    <a rel="noopener noreferrer" href="#">Customizing Colors</a>
-                    <a rel="noopener noreferrer" href="#">Customizing Spacing</a>
-                    <a rel="noopener noreferrer" href="#">Configuring Variants</a>
-                    <a rel="noopener noreferrer" href="#">Plugins</a>
-                </div>
+            <div>
+                <span class="footer-title">Company</span>
+                <a href="{{url('/apropos')}}" class="link link-hover">Aprpos de nous </a>
+                <a href="{{url('/contact')}}" class="link link-hover">Contact</a>
+                <a href="{{url('/jobs')}}" class="link link-hover">Jobs</a>
+
             </div>
-            <div class="flex flex-col space-y-4">
-                <h2 class="font-medium">Community</h2>
-                <div class="flex flex-col space-y-2 text-sm dark:text-gray-400">
-                    <a rel="noopener noreferrer" href="#">GitHub</a>
-                    <a rel="noopener noreferrer" href="#">Discord</a>
-                    <a rel="noopener noreferrer" href="#">Twitter</a>
-                    <a rel="noopener noreferrer" href="#">YouTube</a>
-                </div>
+            <div>
+                <span class="footer-title">Legal</span>
+                <a href="{{url('/terms-of-services')}}" class="link link-hover">Terms of use</a>
+                <a href="{{url('/policy')}} class=" link link-hover">Privacy policy</a>
+
+                <a class='link link-hover' href="#" onclick="Livewire.emit('openModal', 'cookie-consent-edit')">
+                    {{ __('Cookie policy') }}
+                </a>
             </div>
-        </div>
-        <div class="flex items-center justify-center px-6 pt-12 text-sm">
-            <span class="dark:text-gray-400">© Copyright 1986. All Rights Reserved.</span>
-        </div>
+        </footer>
+
     </div>
+
+
 
     <!-- Footer Middle -->
 

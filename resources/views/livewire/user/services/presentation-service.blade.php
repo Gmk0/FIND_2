@@ -1,6 +1,8 @@
 <div>
 
 
+
+
     <section class="flex flex-col min-h-screen pt-20 mb-6">
 
         <div class="flex flex-col p-2 mx-6 mt-4 bg-white rounded-lg md:h-64 dark:bg-gray-800">
@@ -67,18 +69,19 @@
                 </div>
 
             </div>
-            <div class="py-4 mx-2 mb-4 bg-white rounded-lg splide splide-1">
+            <div class="py-4 mx-auto mb-4 rounded-lg splide splide-1">
+
 
                 <div class="p-2 splide__track">
-                    <div class="splide__list px-auto">
+                    <div class="max-w-5xl mx-auto splide__list">
                         @forelse ($servicesBest as $servicesBest)
                         <div class="mx-auto md:mx-0 splide__slide ">
                             <div
-                                class="flex flex-col w-64 mb-2 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-900 md:mb-0">
+                                class="flex flex-col mb-2 overflow-hidden bg-white rounded-lg shadow-md w-72 dark:bg-gray-800 md:mb-0">
                                 <div x-data="{ swiper: null }"
                                     x-init="swiper = new Swiper($refs.container, { slidesPerView: 'auto', spaceBetween: 10, pagination: { el: '.swiper-pagination', clickable: true } })"
                                     x-ref="container"
-                                    class="w-48 h-auto bg-center bg-cover swiper-container2 md:w-full md:h-48">
+                                    class="w-auto h-auto bg-center bg-cover swiper-container2 md:w-full md:h-48">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
                                             <img src="https://source.unsplash.com/200x200/?fashion?1" alt=""
@@ -142,11 +145,30 @@
 
                     </div>
                 </div>
+
+                <div class="splide__arrows splide__arrows--ltr">
+                    <button class="text-gray-800 bg-transparent splide__arrow splide__arrow--prev" type="button"
+                        aria-label="Previous slide" aria-controls="splide01-track">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-8 h-8">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </button>
+                    <button class="splide__arrow splide__arrow--next" type="button" aria-label="Next slide"
+                        aria-controls="splide01-track">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
 
-        <div class="p-4 mx-6 mt-4 bg-white rounded-lg dark:bg-gray-900 justify-beetwen">
+        <div class="p-4 mx-6 mt-4 bg-gray-100 rounded-lg dark:bg-gray-900 justify-beetwen">
 
 
             <div class="flex justify-between mb-4">
@@ -158,69 +180,52 @@
                 </div>
 
             </div>
-            <div class="py-4 mb-4 bg-white rounded-lg splide splide-2">
 
-                <div class="splide__track">
-                    <div class="gap-4 p-2 splide__list">
-                        @forelse ($freelances as $freelance)
-                        <div class="p-2 card-splide splide__slide">
-                            <div
-                                class="flex flex-col w-64 mb-2 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-900 md:mb-0">
-                                <div class="relative h-48">
-                                    <img src="https://source.unsplash.com/200x200/?fashion?1" alt=""
-                                        class="object-cover w-full h-full">
-                                    <div class="absolute top-2 right-2">
+            <div class="slide-container swiper">
+                <div class="slide-content">
+                    <div class="card-wrapper swiper-wrapper">
 
+                        @foreach ($freelances as $freelance)
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+                                <span class="overlay"></span>
 
-                                        @if($freelance->isOnline())
-                                        <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor"
-                                            viewBox="0 0 20 20">
-                                            <circle cx="10" cy="10" r="10" />
-                                        </svg>
-                                        @endif
-
-                                    </div>
-                                    <div class="absolute bottom-2 right-2">
-
-
-                                    </div>
+                                <div class="card-image">
+                                    <img src="{{$freelance->user->profile_photo_url}}" alt="" class="card-img">
                                 </div>
-                                <div class="px-4 py-2 mt-2 md:mt-2" style="min-height: 12rem;">
-                                    <h3 class="mb-2 text-lg font-bold text-gray-800">{{$freelance->user->name}}</h3>
-                                    <p class="mb-2 text-sm text-gray-500">{{$freelance->category->name}} •
-                                        {{$freelance->level}}</p>
-                                    <ul class="mb-4 text-gray-800 list-disc list-inside">
+                            </div>
+
+                            <div class="card-content">
+                                <h2 class="name">{{$freelance->getName()}}</h2>
+                                <div class="flex flex-col">
+                                    <span>{{$freelance->category->name}}</span>
+
+                                    <ul>
                                         @forelse ($freelance->competences as $key => $value)
-                                        <li class="text-sm">{{$value['skill']}}</li>
+                                        <li>{{$value['skill']}}</li>
                                         @empty
 
                                         @endforelse
 
                                     </ul>
-
-
-
-
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center">
-                                            <x-button label="contacter" />
-                                        </div>
-                                        <div class="flex items-center">
-                                            <x-button label="voir profil" />
-                                        </div>
-
-                                    </div>
                                 </div>
-                            </div>
 
+                                <p class="description">
+
+
+                                </p>
+                                <button class="button">View More</button>
+                            </div>
                         </div>
-                        @empty
-                        @endforelse
+                        @endforeach
+
 
                     </div>
-
                 </div>
-                <ul class="splide__pagination"></ul>
+
+                <div class="swiper-button-next swiper-navBtn"></div>
+                <div class="swiper-button-prev swiper-navBtn"></div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
 
@@ -334,6 +339,8 @@
 
 
 
+
+
         <div
             class="flex flex-col items-center justify-center p-6 mx-6 mt-4 bg-white rounded-lg shadow-lg min-h-64 lg:flex-row lg:justify-start">
             <img src="/images/services/projet.jpg" alt="Illustration de projet"
@@ -358,6 +365,7 @@
 
 
 
+
     </section>
 
 </div>
@@ -373,18 +381,18 @@
         type : 'loop',
         drag : 'free',
         focus : 'center',
-        perPage: 4,
+        perPage: 3,
         autoplay: true,
         pagination: false,
-        fixedWidth : '24rem',
+
 
 
           breakpoints: {
             640: {
-              perPage: 2,
+              perPage: 1,
             },
             768: {
-              perPage: 5,
+              perPage: 4,
             },
             1024: {
               perPage: 5,

@@ -45,6 +45,12 @@ class Freelance extends Model
         });
     }
 
+    public function getName()
+    {
+
+        return $this->nom . '-' . $this->prenom;
+    }
+
     /**
      * The attributes that should be cast to native types.
      *

@@ -22,6 +22,7 @@ class GoogleAuth extends Controller
         return Socialite::driver('google')->redirect();
     }
 
+
     /**
      * Create a new controller instance.
      *
@@ -32,6 +33,8 @@ class GoogleAuth extends Controller
         try {
 
             $user = Socialite::driver('google')->user();
+
+            dd($user);
 
             $finduser = User::where('google_id', $user->id)->first();
 
@@ -56,7 +59,7 @@ class GoogleAuth extends Controller
             }
         } catch (Exception $e) {
 
-            return redirect()->route('home')->with('$messages', 'Erreur lors de la connexion');
+            return redirect()->route('home')->with('messages', 'Erreur lors de la connexion');
         }
     }
     //
