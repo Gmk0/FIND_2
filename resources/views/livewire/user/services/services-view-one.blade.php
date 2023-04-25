@@ -125,7 +125,7 @@
 
 
                 </div>
-                <div x-data="{showInfo:false}" class="w-full md:w-2/3">
+                <div x-data="{showInfo:true, showExemple:false}" class="w-full md:w-2/3">
                     <div class="p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
 
 
@@ -158,10 +158,21 @@
                         <p class="mb-4 text-sm text-gray-800 md:text-base dark:text-gray-200">{{$service->description}}
                         </p>
 
-                        <p class="mb-4 text-lg font-bold text-gray-600 dark:text-gray-200">Service
-                            information</p>
 
-                        <div x-show="showInfo">
+
+                        <h1 @click="showInfo = !showInfo"
+                            class="flex items-start gap-2 mt-5 text-lg font-bold cursor-pointer">
+                            Service information
+                            <button @click="showInfo = !showInfo">
+                                <svg :class="{ 'rotate-180': showInfo }" class="w-6 h-6 fill-current"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path
+                                        d="M14.707 7.293a1 1 0 0 0-1.414 0L10 10.586 6.707 7.293a1 1 0 0 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0 0-1.414z" />
+                                </svg>
+                            </button>
+                        </h1>
+
+                        <div x-collapse x-show="showInfo">
 
 
                             <div class="grid grid-cols-2 gap-4 mb-4">
@@ -203,27 +214,37 @@
                                 </div>
                             </div>
 
-                        </div>
-
-
-                        <p class="mb-4 text-lg font-bold text-gray-600 dark:text-gray-200">Exemple realise
-                        </p>
-
-                        <div>
-
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <p class="font-bold text-gray-800 dark:text-gray-200">Format :</p>
-                                <p class="text-gray-700 dark:text-gray-300">Jpg , jepg</p>
-                            </div>
-                            <div>
-                                <p class="font-bold text-gray-800 dark:text-gray-200">Source :</p>
-                                <p class="text-gray-700 dark:text-gray-300">Fichier source inclus</p>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <p class="font-bold text-gray-800 dark:text-gray-200">Format :</p>
+                                    <p class="text-gray-700 dark:text-gray-300">Jpg , jepg</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-800 dark:text-gray-200">Source :</p>
+                                    <p class="text-gray-700 dark:text-gray-300">Fichier source inclus</p>
+                                </div>
                             </div>
                         </div>
-                        <div>
+
+
+                        <h1 @click="showExemple = !showExemple"
+                            class="flex items-start gap-2 my-10 text-lg font-bold cursor-pointer">
+                            Exemples realise
+                            <button @click="showExemple = !showExemple">
+                                <svg :class="{ 'rotate-180': showExemple }" class="w-6 h-6 fill-current"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path
+                                        d="M14.707 7.293a1 1 0 0 0-1.414 0L10 10.586 6.707 7.293a1 1 0 0 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0 0-1.414z" />
+                                </svg>
+                            </button>
+                        </h1>
+
+                        <div x-show="showExemple" x-collapse class="">
+
+                        </div>
+
+
+                        <div class="mt-8">
                             <p class="mb-4 text-lg font-bold text-gray-800 md:text-xl dark:text-gray-200">Avis des
                                 clients</p>
 
@@ -354,7 +375,7 @@
 
 
 
-        <div
+        <div x-show="!navOpen"
             class="fixed bottom-0 left-0 z-50 flex items-center p-2 m-4 bg-white shadow-lg rounded-xl dark:bg-gray-800">
             <div class="w-10 h-10 mr-4 overflow-hidden rounded-full md:w-12 md:h-12">
 

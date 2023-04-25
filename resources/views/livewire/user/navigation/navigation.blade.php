@@ -64,7 +64,7 @@
 
 
                                         <a href="{{route('categoryByName',[$categorie->name])}}"
-                                            class="block p-2 -mx-2 font-semibold text-gray-800 transition duration-300 ease-in-out rounded-lg dark:text-gray-50 hover:bg-gradient-to-br hover:dark:text-gray-900 hover:text-indigo-600">
+                                            class="block p-2 -mx-2 font-semibold text-gray-800 transition duration-300 ease-in-out rounded-lg dark:text-gray-50 hover:bg-gradient-to-br hover:dark:text-gray-200 hover:text-indigo-600">
                                             {{$categorie->name}}
 
                                         </a>

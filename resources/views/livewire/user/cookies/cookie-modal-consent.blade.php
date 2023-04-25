@@ -12,7 +12,7 @@
     <div class="grid grid-cols-2 gap-4 mt-4 shrink-0">
         <button wire:click="acceptAll()"
             class=" text-xs bg-gray-900 font-medium rounded-lg hover:bg-gray-700 text-white px-4 py-2.5 duration-300 transition-colors focus:outline-none">
-            Accept tous les coojies
+            Accept tous les cookies
         </button>
 
         <button wire:click="refuseConsent()"
