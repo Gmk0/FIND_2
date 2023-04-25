@@ -40,7 +40,7 @@
                             <x-button label="Extra" />
                             <x-button label="Premium" />
                         </div>
-                        <div class="p-2 bg-white  rounded-lg shadow-lg dark:bg-gray-800">
+                        <div class="p-2 bg-white rounded-lg shadow-lg dark:bg-gray-800">
 
 
                             {{-- <div class="p-4 mb-4 rounded-lg">
@@ -114,7 +114,7 @@
                             </div>
 
                         </div>
-                        <div class="sticky hidden p-6 bg-white  rounded-lg md:flex dark:bg-gray-800">
+                        <div class="sticky hidden p-6 bg-white rounded-lg md:flex dark:bg-gray-800">
                             <x-button wire:ignore positive x-on:click="isOpen=true" wire:click="contacter"
                                 label="Contacter le Seller" success />
                         </div>
@@ -161,11 +161,11 @@
 
                         <div class="w-full tabs">
                             <a @click="step = 1" :class="step == 1 ? 'tab-active':''"
-                                class="tab tab-lg tab-bordered">Service information</a>
+                                class="tab md:tab-lg tab-bordered">information</a>
                             <a @click="step = 2" :class="step == 2 ? 'tab-active':''"
-                                class="tab tab-lg tab-bordered ">Exemple realises</a>
+                                class="tab md:tab-lg tab-bordered ">Exemple </a>
                             <a @click="step = 3" :class="step == 3 ? 'tab-active':''"
-                                class="tab tab-lg tab-bordered">Review</a>
+                                class="tab md:tab-lg tab-bordered">Review</a>
                         </div>
 
 
