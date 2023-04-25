@@ -40,7 +40,7 @@
                             <x-button label="Extra" />
                             <x-button label="Premium" />
                         </div>
-                        <div class="p-2 bg-white border border-blue-400 rounded-lg shadow-lg dark:bg-gray-800">
+                        <div class="p-2 bg-white  rounded-lg shadow-lg dark:bg-gray-800">
 
 
                             {{-- <div class="p-4 mb-4 rounded-lg">
@@ -114,9 +114,8 @@
                             </div>
 
                         </div>
-                        <div
-                            class="sticky hidden p-6 bg-white border border-blue-400 rounded-lg md:flex dark:bg-gray-800">
-                            <x-button wire:ignore x-on:click="isOpen=true" wire:click="contacter"
+                        <div class="sticky hidden p-6 bg-white  rounded-lg md:flex dark:bg-gray-800">
+                            <x-button wire:ignore positive x-on:click="isOpen=true" wire:click="contacter"
                                 label="Contacter le Seller" success />
                         </div>
 
@@ -125,7 +124,7 @@
 
 
                 </div>
-                <div x-data="{showInfo:true, showExemple:false}" class="w-full md:w-2/3">
+                <div x-data="{step:1, showExemple:false}" class="w-full md:w-2/3">
                     <div class="p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
 
 
@@ -160,24 +159,23 @@
 
 
 
-                        <h1 @click="showInfo = !showInfo"
-                            class="flex items-start gap-2 mt-5 text-lg font-bold cursor-pointer">
-                            Service information
-                            <button @click="showInfo = !showInfo">
-                                <svg :class="{ 'rotate-180': showInfo }" class="w-6 h-6 fill-current"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path
-                                        d="M14.707 7.293a1 1 0 0 0-1.414 0L10 10.586 6.707 7.293a1 1 0 0 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0 0-1.414z" />
-                                </svg>
-                            </button>
-                        </h1>
+                        <div class="w-full tabs">
+                            <a @click="step = 1" :class="step == 1 ? 'tab-active':''"
+                                class="tab tab-lg tab-bordered">Service information</a>
+                            <a @click="step = 2" :class="step == 2 ? 'tab-active':''"
+                                class="tab tab-lg tab-bordered ">Exemple realises</a>
+                            <a @click="step = 3" :class="step == 3 ? 'tab-active':''"
+                                class="tab tab-lg tab-bordered">Review</a>
+                        </div>
 
-                        <div x-collapse x-show="showInfo">
+
+
+                        <div x-show.transition="step==1" class="py-5 min-h-64">
 
 
                             <div class="grid grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <p class="font-bold text-gray-700 dark:text-gray-200">Support :</p>
+                                    <p class="font-bold text-gray-500 dark:text-gray-200">Support :</p>
                                     <ul class="text-gray-700 dark:text-gray-300">
                                         <li>{{$service->basic_support}}</li>
 
@@ -186,29 +184,29 @@
                                 </div>
 
                                 <div>
-                                    <p class="font-bold text-gray-800 dark:text-gray-200">Révision :</p>
+                                    <p class="font-bold text-gray-500 dark:text-gray-200">Révision :</p>
                                     <p class="text-gray-700 dark:text-gray-300">{{$service->basic_revision}}</p>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <p class="font-bold text-gray-800 dark:text-gray-200">Exemples réalisés :</p>
+                                    <p class="font-bold text-gray-500 dark:text-gray-200">Exemples réalisés :</p>
                                     <p class="text-gray-700 dark:text-gray-300">12</p>
                                 </div>
                                 <div>
-                                    <p class="font-bold text-gray-800">Commentaires :</p>
+                                    <p class="font-bold text-gray-500">Commentaires :</p>
                                     <p class="text-gray-700 dark:text-gray-300">{{count($commentaires)}}</p>
                                 </div>
 
                             </div>
                             <div class="grid grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <p class="font-bold text-gray-800 dark:text-gray-200">Prix :</p>
+                                    <p class="font-bold text-gray-500 dark:text-gray-200">Prix :</p>
                                     <p class="text-gray-700 dark:text-gray-300">à partir de {{$service->basic_price}}$
                                     </p>
                                 </div>
                                 <div>
-                                    <p class="font-bold text-gray-800 dark:text-gray-200">Délai :</p>
+                                    <p class="font-bold text-gray-500 dark:text-gray-200">Délai :</p>
                                     <p class="text-gray-700 dark:text-gray-300">{{$service->basic_delivery_time}} jours
                                     </p>
                                 </div>
@@ -216,37 +214,25 @@
 
                             <div class="grid grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <p class="font-bold text-gray-800 dark:text-gray-200">Format :</p>
+                                    <p class="font-bold text-gray-500 dark:text-gray-200">Format :</p>
                                     <p class="text-gray-700 dark:text-gray-300">Jpg , jepg</p>
                                 </div>
                                 <div>
-                                    <p class="font-bold text-gray-800 dark:text-gray-200">Source :</p>
+                                    <p class="font-bold text-gray-500 dark:text-gray-200">Source :</p>
                                     <p class="text-gray-700 dark:text-gray-300">Fichier source inclus</p>
                                 </div>
                             </div>
                         </div>
 
 
-                        <h1 @click="showExemple = !showExemple"
-                            class="flex items-start gap-2 my-10 text-lg font-bold cursor-pointer">
-                            Exemples realise
-                            <button @click="showExemple = !showExemple">
-                                <svg :class="{ 'rotate-180': showExemple }" class="w-6 h-6 fill-current"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path
-                                        d="M14.707 7.293a1 1 0 0 0-1.414 0L10 10.586 6.707 7.293a1 1 0 0 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0 0-1.414z" />
-                                </svg>
-                            </button>
-                        </h1>
 
-                        <div x-show="showExemple" x-collapse class="">
+                        <div x-show.transition="step==2" class="py-5 min-h-72">
 
                         </div>
 
 
-                        <div class="mt-8">
-                            <p class="mb-4 text-lg font-bold text-gray-800 md:text-xl dark:text-gray-200">Avis des
-                                clients</p>
+                        <div x-show.transition="step==3" class="py-5 min-h-72">
+
 
                             @if(!empty($commentaires))
                             @foreach ($commentaires as $commentaire)
@@ -282,26 +268,25 @@
 
 
 
-                            <div class="">
-                                <p class="mb-4 text-xl font-bold text-gray-800 dark:text-gray-200">À propos du freelance
-                                </p>
-                                <div class="flex items-center mb-8">
+                        </div>
 
 
-                                    @if (!empty($service->freelance->user->profile_photo_path))
-                                    <img class="w-8 h-8 rounded-full"
-                                        src="{{$service->freelance->user->profile_photo_path}}" alt="">
-                                    @else
-                                    <img class="w-8 h-8 rounded-full"
-                                        src="{{$service->freelance->user->profile_photo_url }}" alt="">
-                                    @endif
+                        <div class="">
+                            <p class="mb-4 text-lg font-bold text-gray-800 dark:text-gray-200">À propos du freelance
+                            </p>
+                            <div class="flex items-center mb-8">
 
-                                    <div>
-                                        <p class="font-bold text-gray-800 dark:text-gray-300">
-                                            {{$service->freelance->user->name}}</p>
-                                        <p class="block text-gray-700 truncate dark:text-gray-300">
-                                            {{$service->freelance->category->name}}</p>
-                                    </div>
+
+
+                                <img class="w-8 h-8 rounded-full"
+                                    src="{{$service->freelance->user->profile_photo_url }}" alt="">
+
+
+                                <div>
+                                    <p class="font-bold text-gray-800 dark:text-gray-300">
+                                        {{$service->freelance->user->name}}</p>
+                                    <p class="block text-gray-700 truncate dark:text-gray-300">
+                                        {{$service->freelance->category->name}}</p>
                                 </div>
                             </div>
                         </div>

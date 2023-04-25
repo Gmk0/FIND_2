@@ -56,7 +56,7 @@
             @click="linkActive=!linkActive" aria-haspopup="true">
             <span class="inline-flex items-center">
 
-                <ion-icon name="bookmarks-outline" class="w-6 h-6"></ion-icon>
+                <ion-icon name="cart-outline" class="w-6 h-6"></ion-icon>
                 <span class="ml-4">Commande</span>
             </span>
             <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -186,7 +186,7 @@
         @endif
 
         <x-asideLinkNav href="{{route('transactionUser')}}" :active="request()->routeIs('transactionUser')">
-            <ion-icon name="card-outline" class="w-6 h-6"></ion-icon>
+            <ion-icon name="card-outline" class="w-6 h-6 text-gray-400"></ion-icon>
             <span class="ml-4">Portefolio</span>
         </x-asideLinkNav>
 
