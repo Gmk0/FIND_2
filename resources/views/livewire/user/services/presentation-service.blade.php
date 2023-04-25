@@ -78,30 +78,41 @@
                         <div class="mx-auto md:mx-0 splide__slide ">
                             <div
                                 class="flex flex-col mb-2 overflow-hidden bg-white rounded-lg shadow-md w-72 dark:bg-gray-800 md:mb-0">
-                                <div x-data="{ swiper: null }"
-                                    x-init="swiper = new Swiper($refs.container, { slidesPerView: 'auto', spaceBetween: 10, pagination: { el: '.swiper-pagination', clickable: true } })"
-                                    x-ref="container"
-                                    class="w-auto h-auto bg-center bg-cover swiper-container2 md:w-full md:h-48">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="https://source.unsplash.com/200x200/?fashion?1" alt=""
-                                                class="object-cover w-full h-full">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://source.unsplash.com/200x200/?fashion?2" alt=""
-                                                class="object-cover w-full h-full">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://source.unsplash.com/200x200/?fashion?3" alt=""
-                                                class="object-cover w-full h-full">
-                                        </div>
-                                        <div class="swiper-pagination"></div>
 
+
+                                <div x-data="{
+                                slide: 0,
+                                maxSlides: {{ count($servicesBest->files) }},
+                                showButton: false
+                            }" class="relative w-full h-48 overflow-hidden" @mouseover="showButton = true"
+                                    @mouseleave="showButton = false">
+                                    <div class="absolute inset-0 cursor-pointer">
+                                        <template x-for="(image, index) in {{ json_encode($servicesBest->files) }}"
+                                            :key="index">
+                                            <div x-show="slide === index"
+                                                class="absolute top-0 left-0 w-full h-full transition duration-500 ease-out bg-center bg-cover"
+                                                :style="'background-image: url(/storage/service/' + image + ')'">
+                                            </div>
+                                        </template>
                                     </div>
 
+                                    <div class="absolute flex justify-between transform -translate-y-1/2 top-1/2 left-5 right-5"
+                                        x-show="showButton">
+                                        <a href="#" class="btn btn-circle btn-sm"
+                                            @click.prevent="slide = (slide - 1 + maxSlides) % maxSlides">❮</a>
+                                        <a href="#" class="btn btn-circle btn-sm"
+                                            @click.prevent="slide = (slide + 1) % maxSlides">❯</a>
+                                    </div>
                                 </div>
-                                <div class="px-4 py-2 mt-2 md:mt-2 max-h-[10rem]">
-                                    <h3 class="mb-2 text-lg font-bold text-gray-800">{{$servicesBest->title}}</h3>
+
+
+
+                                <div x-data="{linkHover: false}" style="" @mouseover="linkHover = true"
+                                    @mouseleave="linkHover = false" class="px-4 py-2 mt-2 md:mt-2 max-h-[10rem]">
+                                    <a href="{{route('ServicesViewOne',['id'=>$servicesBest->id,'category'=>$servicesBest->category->name])}}"
+                                        class="mb-2 text-sm font-semibold md:text-base "
+                                        :class="linkHover ? 'text-amber-600' : 'text-gray-800 dark:text-gray-200'">{{$servicesBest->title}}
+                                    </a>
                                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-200">
                                         {{$servicesBest->freelance->user->name}} • {{$servicesBest->category->name}}
                                     </p>
@@ -112,28 +123,22 @@
                                                 <path
                                                     d="M10 14.155L4.284 17.84l.828-5.076L.898 7.865l5.059-.736L10 2l2.043 5.129 5.059.736-3.215 3.9.828 5.076z" />
                                             </svg>
-                                            <span class="font-semibold text-gray-700 dark:text-gray-200">4.9
-                                                (142)</span>
+                                            <span
+                                                class="font-semibold text-gray-700 dark:text-gray-200">{{$servicesBest->averageFeedback()}}
+                                                ({{$servicesBest->orderCount()}})</span>
                                         </div>
-                                        <span class="text-sm text-gray-500 dark:text-gray-200">Top</span>
+                                        <span class="text-sm text-gray-500 dark:text-gray-200">basic</span>
                                     </div>
 
 
 
                                 </div>
                                 <div class="flex justify-between border-t border-gray-300">
-                                    <div class="flex gap-1 py-2">
-
-                                        <x-dropdown>
-
-                                        </x-dropdown>
 
 
-                                    </div>
-
-                                    <p class="px-4 py-2">
-                                        <span
-                                            class="text-gray-500 dark:text-gray-200 text-md">${{$servicesBest->basic_price}}</span>
+                                    <p class="px-4 py-4">
+                                        <span class="text-gray-500 dark:text-gray-200 text-md"> a partir de
+                                            ${{$servicesBest->basic_price}}</span>
                                     </p>
                                 </div>
                             </div>
@@ -146,21 +151,19 @@
                     </div>
                 </div>
 
-                <div class="splide__arrows splide__arrows--ltr">
-                    <button class="text-gray-800 bg-transparent splide__arrow splide__arrow--prev" type="button"
-                        aria-label="Previous slide" aria-controls="splide01-track">
+                <div class="splide__arrows">
+                    <button class="bg-gray-900 shadow splide__arrow splide__arrow--prev">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-8 h-8">
+                            stroke="currentColor" class="w-6 h-6 text-white">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                         </svg>
                     </button>
-                    <button class="splide__arrow splide__arrow--next" type="button" aria-label="Next slide"
-                        aria-controls="splide01-track">
+                    <button class="bg-gray-900 shadow splide__arrow splide__arrow--next">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
+                            stroke="currentColor" class="w-6 h-6 text-white">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                         </svg>
                     </button>
                 </div>
@@ -383,7 +386,8 @@
         focus : 'center',
         perPage: 3,
         autoplay: true,
-        pagination: false,
+        pagination: true,
+
 
 
 
@@ -392,10 +396,10 @@
               perPage: 1,
             },
             768: {
-              perPage: 4,
+              perPage: 2,
             },
             1024: {
-              perPage: 5,
+              perPage: 4,
             },
           },
         }).mount();
