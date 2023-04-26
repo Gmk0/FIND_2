@@ -191,9 +191,10 @@ class Checkout extends Component
             'Telephone' => $telephone,
             'Language' => 'fr',
             "Reference" => $reference,
-            "SuccessURL" =>  env('SuccessURL'),
-            "FailureURL" =>  env('FailureURL'),
-            "CancelURL" =>  env('CancelURL'),
+            "SuccessURL" =>  "https://83-229-67-85.cloud-xip.com/checkout/status",
+            "FailureURL" =>  "https://83-229-67-85.cloud-xip.com/checkout/status",
+            "CancelURL" =>  "https://83-229-67-85.cloud-xip.com/commande",
+
 
             // Ajouter d'autres données de requête nécessaires
         ];
@@ -205,7 +206,7 @@ class Checkout extends Component
 
 
         // Construire l'URL de redirection avec les données du formulaire
-        $url = 'https://api-testbed.maxicashapp.com/PayEntry?data=' . json_encode($requestData);
+        $url = 'https://api-testbed.maxicashapp.com/PayEntry?data=' . urlencode(json_encode($requestData));
 
         // Effectuer la redirection
         dd($url);
