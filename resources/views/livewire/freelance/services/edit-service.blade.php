@@ -1,6 +1,6 @@
 <div class="min-h-screen">
     <div>
-        @include('include.breadcumbFreelance',['serviceName'=>'service'])
+        @include('include.breadcumbFreelance',['serviceName'=>'service','serviceEdit'=>$service->id])
     </div>
     <div class="px-2 py-4 mx-auto max-w-7xl lg:px-8">
 
