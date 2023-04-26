@@ -205,7 +205,7 @@ class Checkout extends Component
 
 
         // Construire l'URL de redirection avec les données du formulaire
-        $url = 'https://api-testbed.maxicashapp.com/PayEntry?data=' . json_encode($requestData);
+        $url = 'https://api-testbed.maxicashapp.com/PayEntry?data=' . urlencode(json_encode($requestData));
 
         // Effectuer la redirection
         dd($url);
