@@ -23,12 +23,15 @@ use Filament\Forms\Components\FormComponent;
 use App\Models\SubCategory;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TagsInput;
+use WireUi\Traits\Actions;
 
 
 class EditService extends Component implements Forms\Contracts\HasForms
 {
 
     use WithFileUploads;
+
+    use actions;
 
     use Forms\Concerns\InteractsWithForms;
 
@@ -38,6 +41,7 @@ class EditService extends Component implements Forms\Contracts\HasForms
     public $description;
     public $basic_support;
     public $samples;
+    public $images;
 
     protected $listeners = ['refresh' => '$refresh'];
 
@@ -47,6 +51,8 @@ class EditService extends Component implements Forms\Contracts\HasForms
         $this->serviceEdit
             = Service::find($id)->toArray();
         $this->serviceId = $id;
+
+
         $this->form->fill([
             //'title' => $this->service->title,
             'description' => $this->serviceEdit['description'],
@@ -79,6 +85,36 @@ class EditService extends Component implements Forms\Contracts\HasForms
 
     public function effacerImage($key)
     {
+
+
+        $file = $this->service->files[$key];
+
+
+        $data = $this->service->files;
+        unset($data[$key]);
+
+        $data = array_values($data);
+
+        $datal = Storage::disk('local')->exists('public/service/' . $file);
+        if ($datal) {
+
+            Storage::disk('local')->delete('public/service/' . $file);
+
+            $this->service->files = $data;
+            $this->service->update();
+
+            $this->notification()->success(
+                $title = "Modifcation reussi ",
+                $description = 'Votre service  ete creer avec success',
+            );
+
+            $this->emitSelf('refresh');
+        } else {
+            $this->notification()->error(
+                $title = "Erreur ",
+                $description = 'le fichier existe pas',
+            );
+        }
     }
     public function modifierFirst()
     {
@@ -96,8 +132,43 @@ class EditService extends Component implements Forms\Contracts\HasForms
             'basic_revision' => $this->serviceEdit['basic_revision'],
         ]);
 
+
+        $this->notification()->success(
+            $title = "Modifcation reussi ",
+            $description = 'Votre service  ete creer avec success',
+        );
+
         $this->emitSelf('refresh');
     }
+
+    public function saveImage()
+    {
+        $this->validate([
+            'images' => 'file|mimes:jpg,png,gif,jpeg',
+
+        ]);
+
+
+        $fileName = $this->images->getClientOriginalName();
+
+
+        $files =  $this->images->storeAs('public/service/', $fileName);
+
+
+
+        $data = $this->service->files;
+        $data[] = $fileName;
+        $this->service->files = $data;
+        $this->service->update();
+
+        $this->notification()->success(
+            $title = "Modifcation reussi ",
+            $description = 'Votre service  ete creer avec success',
+        );
+
+        $this->emitSelf('refresh');
+    }
+
 
     protected function getFormSchema(): array
     {

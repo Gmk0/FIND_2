@@ -2,7 +2,7 @@
     <div>
         @include('include.breadcumbUser',['transation'=>'transation'])
     </div>
-    <div class="px-6 py-4 mx-auto max-w-7xl lg:px-8">
+    <div class="px-2 py-4 mx-auto max-w-7xl lg:px-8">
 
 
         <div class="max-w-3xl mb-8">
@@ -13,7 +13,7 @@
 
         <div class="my-3 overflow-auto md:mx-12">
 
-            <form class="p-4 mb-4 rounded-md dark:text-gray-100 dark:bg-gray-800 ">
+            <div class="p-4 mb-4 rounded-md dark:text-gray-100 dark:bg-gray-800 ">
 
 
                 <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2">
@@ -37,7 +37,7 @@
 
                     <div class="flex items-end">
 
-                        <x-button wire:click="submit" label="Modifcation"></x-button>
+                        <x-button wire:click="submit" label="Modifier"></x-button>
 
                     </div>
                 </div>
@@ -52,7 +52,7 @@
 
                         <div class="flex items-start justify-between mt-4 space-x-2">
                             @foreach ($service->files as $key=>$value)
-                            <img src="/storage/service/'.{{$value}}" alt="Product Name"
+                            <img src="{{ url('/storage/service/' . $value) }}" alt="Product Name"
                                 class="w-16 h-full border cursor-pointer xl:w-16 2xl:w-24 hover:opacity-80">
 
                             <x-button icon="trash" wire:click="effacerImage({{$key}})"></x-button>
@@ -61,18 +61,18 @@
                         </div>
                     </div>
 
-                    <x-input type="file"></x-input>
+                    <x-input wire:model="images" type="file"></x-input>
 
 
                 </div>
 
 
                 <div>
-                    <x-button label='Modifcation' type="submit"></x-button>
+                    <x-button spinner="images" wire:click="saveImage()" label='Modifier' type="submit"></x-button>
                 </div>
 
 
-            </form>
+            </div>
 
 
 
