@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Freelance;
 use App\Models\Conversation;
 
-use Wireui\Traits\Actions;
+use WireUi\Traits\Actions;
 
 class ConversationComponent extends Component
 {

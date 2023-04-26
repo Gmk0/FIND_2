@@ -100,7 +100,7 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
                         RichEditor::make('samples')->label('Quelques Realisation lier')
                             ->fileAttachmentsDisk('local')
                             ->fileAttachmentsDirectory('attachments'),
-                        MarkdownEditor::make('basic_support')
+                        RichEditor::make('basic_support')
                             ->disableAllToolbarButtons()
                             ->enableToolbarButtons(['orderedList', 'bulletList'])
 

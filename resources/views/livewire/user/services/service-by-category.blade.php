@@ -65,21 +65,24 @@
 
 
                         </div>
+                        <div class="flex gap-4 md:hidden">
+                            <x-button label="Resultat ({{$count}})" @click="isOpen=false" />
+                            <x-button @click="isOpen=false" label="Fermer" />
+
+                        </div>
                     </form>
                 </div>
-                <div class="flex gap-4 md:hidden">
-                    <x-button label="Resultat ({{$count}})" @click="isOpen=false" />
-                    <x-button @click="isOpen=false" label="Fermer" />
 
-                </div>
             </div>
 
             <button x-on:click="isOpen=!isOpen"
-                class="inline-block pl-3 no-underline dark:text-white md:hidden hover:text-amber-600" href="#">
+                class="flex pl-3 no-underline dark:text-white md:hidden hover:text-amber-600" href="#">
                 <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     viewBox="0 0 24 24">
                     <path d="M7 11H17V13H7zM4 7H20V9H4zM10 15H14V17H10z" />
-                </svg>
+                </svg> <span>
+                    filtre
+                </span>
             </button>
 
         </div>
@@ -97,8 +100,8 @@
                         <div class="flex flex-row md:flex-col">
                             @foreach ($service->files as $key=>$value)
 
-                            <div class="w-48 h-auto bg-center bg-cover md:w-full md:h-48"
-                                style="background-image: url('{{$value}}');">
+                            <div class="w-56 h-auto bg-center bg-cover md:w-full md:h-48"
+                                style="background-image: url('{{ url('/storage/service/' . $value) }}');">
                             </div>
                             @break
                             @endforeach
@@ -133,7 +136,14 @@
                                 </div>
                                 <div class="flex items-center justify-between dark:text-gray-200">
                                     <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                                        {{$service->basic_price}} $</h4>
+                                        <span class="text-sm">a partir de</span> {{$service->basic_price}} $
+                                    </h4>
+
+                                </div>
+                                <div class="flex items-center justify-between pt-2 dark:text-gray-200">
+                                    <x-button wire:click="add_cart({{$service->id}})" spinner="" flat primary sm
+                                        label="ajouter" />
+
                                     @auth
                                     <div x-data="{ like: @json($service->isFavorite()) }" class="flex items-center">
                                         <button class="mr-2" x-on:click="like=!like"
@@ -164,10 +174,6 @@
 
                                     </div>
                                     @endauth
-                                </div>
-                                <div class="flex items-center justify-between pt-2 dark:text-gray-200">
-                                    <x-button wire:click="add_cart({{$service->id}})" spinner="" flat primary sm
-                                        label="ajouter" />
                                 </div>
                             </div>
                         </div>

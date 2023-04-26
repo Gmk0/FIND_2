@@ -64,7 +64,7 @@
 
 
 
-<section x-show="isLoading" x-cloak id="features" class=" dark:bg-gray-900">
+<section id="features" class=" dark:bg-gray-900">
 
     <div data-aos="" class="z-10 px-8 py-8 mx-auto overflow-hidden max-w-7xl md:px-6">
         <div class="flex ">
@@ -126,7 +126,7 @@
 </section>
 
 
-<section x-show="isLoading" x-cloak id="talkAbout" class="bg-gray-100 dark:bg-gray-800 md:min-h-screen">
+<section id="talkAbout" class="bg-gray-100 dark:bg-gray-800 md:min-h-screen">
 
     <div class="container max-w-6xl p-4 m-4 mx-auto md:p-6">
         <div class="mb-10 text-center">
@@ -152,7 +152,7 @@
                             </div>
                             <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
                                 <div class="w-20 mx-auto">
-                                    <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />s
+                                    <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />
                                 </div>
                                 <p class="dark:text-gray-200">
                                     <span class="font-serif "></span> Find est une plateforme incontournable pour tous
@@ -181,7 +181,7 @@
                             </div>
                             <div class="p-6 mx-auto space-y-6 text-center md:col-span-3 sm:p-8">
                                 <div class="w-20 mx-auto">
-                                    <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />s
+                                    <img src="images/brand/influnet.jpg" alt="company logo" loading="lazy" />
                                 </div>
                                 <p class="dark:text-gray-200">
                                     <span class="font-serif "></span> Find est un outil essentiel pour tous ceux qui
@@ -217,7 +217,7 @@
 </section>
 
 
-<section x-show="isLoading" x-cloak id="monde2" class="min-h-screen bg-white dark:bg-gray-800">
+<section x-show="loading" x-cloak id="monde2" class="min-h-screen bg-white dark:bg-gray-800">
 
     <div class="py-16">
         <div class="px-6 m-auto text-gray-600 xl:container md:px-12 xl:px-16">
@@ -305,7 +305,7 @@
 
 </section>
 
-<section x-show="isLoading" x-cloak id="Services" class="min-h-screen bg-gray-100 dark:bg-gray-900">
+<section id="Services" class="min-h-screen bg-gray-100 dark:bg-gray-900">
 
     <div class="px-8 py-6 mx-auto max-w-7xl md:px-6">
         <!-- heading text -->
@@ -397,7 +397,7 @@
 
 </section>
 
-<section x-show="isLoading" x-cloak id="confiance" class="bg-white">
+<section id="confiance" class="bg-white">
     <div class="px-4 py-4 mx-auto sm:mx-2 md:px-auto">
         <div class="container text-gray-600 dark:text-gray-300 ">
             <div class="mb-10 text-center">
@@ -517,7 +517,7 @@
 
 </section>
 
-<section x-show="isLoading" x-cloak id="getStarted" class="min-h-screen bg-gray-900">
+<section id="getStarted" class="min-h-screen bg-gray-900">
 
 
 
@@ -573,7 +573,7 @@
 
 </section>
 
-<section x-show="isLoading" x-cloak id="presentation" class="bg-gray-100 md:min-h-screen ">
+<section id="presentation" class="bg-gray-100 md:min-h-screen ">
     <div class="px-8 py-6 mx-auto max-w-7xl md:px-4">
 
         <!-- heading text -->
@@ -662,7 +662,7 @@
 </section>
 
 
-<section x-show="isLoading" x-cloak id="faqs" class="bg-white md:min-h-screen dark:bg-gray-800 dark:text-white">
+<section id="faqs" class="bg-white md:min-h-screen dark:bg-gray-800 dark:text-white">
 
     <div class="px-8 py-6 mx-auto max-w-7xl md:px-6">
 

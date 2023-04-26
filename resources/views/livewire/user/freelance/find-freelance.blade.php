@@ -193,8 +193,10 @@
 
 
 
-                        <div class="w-full md:hidden ">
+                        <div class="flex justify-between w-full md:hidden ">
                             <x-button x-on:click="showFilters=!showFilters" label="appliquer"></x-button>
+
+                            <x-button x-on:click="showFilters=!showFilters" label="Fermer"></x-button>
 
                         </div>
 
@@ -319,80 +321,68 @@
 
 
 
-                    @forelse($freelancers as $freelancer)
-                    <div class="mx-auto max-w-64 md:mx-2 ">
-                        <div class="relative h-48 bg-center bg-cover rounded-t-lg w-72"
-                            style="background-image: url('https://randomuser.me/api/portraits/women/77.jpg')">
-                            <div class="absolute bottom-0 left-0 p-2 bg-gray-500 bg-opacity-50 ">
-                                <h2 class="text-base font-thin tracking-wide text-white md:text-lg">{{$freelancer->nom}}
-                                </h2>
-                            </div>
-                            <div class="absolute top-0 right-0 flex items-center p-2">
-                                <svg class="w-3 h-3 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <circle cx="10" cy="10" r="10" />
-                                </svg>
+                    @forelse($freelancers as $freelance)
+                    <div class="card swiper-slide">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+
+
+                            <div class="card-image">
+
+
+                                <img src="{{$freelance->user->profile_photo_url}}" alt=""
+                                    class="border-2 {{$freelance->isOnline() ? 'border-green-600':'border-gray-600'}}  card-img">
 
                             </div>
-                            <div class="absolute top-0 left-0 flex items-center p-2">
-                                <button wire:click.prevent="favoris({{$freelancer->id}})"
-                                    class="text-gray-500 hover:text-green-500 focus:outline-none">
-
-
-                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                    </svg>
-
-                                </button>
 
 
 
-                            </div>
+
                         </div>
-                        <div class="p-4 overflow-hidden bg-white rounded-b-lg shadow-md h-60 dark:bg-gray-800 w-72">
 
+                        <div class="p-4 ">
                             <div class="flex justify-between">
-                                <p class="mb-2 text-base text-gray-700 text-start dark:text-gray-100">
-                                    {{$freelancer->category->name}}
-                                </p>
-                                <span class="mb-2 text-base text-gray-700 text-start dark:text-gray-100">
+                                <h2 class="name">{{$freelance->getName()}}</h2>
 
-                                    {{$freelancer->level}}
-                                </span>
+
                             </div>
 
+                            <div class="flex flex-col mt-2">
+                                <span class="mb-2 text-sm text-gray-500 dark:text-gray-200">
+                                    {{$freelance->category->name}} • {{$freelance->level}}</span>
+
+                                <ul class="text-base">
+                                    @forelse ($freelance->competences as $key => $value)
+                                    <li class="text-gray-900 badge badge-success">#{{$value['skill']}}</li>
+                                    @empty
+
+                                    @endforelse
+
+                                </ul>
+
+                                <span class="mb-2 text-sm text-gray-500 dark:text-gray-200">
+                                    Experience: {{$freelance->experience}} ans</span>
+                            </div>
+
+                            <p class="description">
 
 
-                            <div class="px-4 py-1 rounded-md ">
-                                <div class="flex gap-1">
+                            </p>
+                            <div class="flex justify-between">
+                                <div class="mt-4">
+                                    <x-button href="{{route('profile.freelance',[$freelance->identifiant])}}" primary
+                                        outline label="profil" />
 
-                                    @foreach($freelancer->Sub_categorie as $value)
-                                    <span
-                                        class="px-3    text-[10px] font-semibold text-gray-700 bg-gray-200 rounded-lg">#
-                                        {{$value}}</span>
+                                </div>
+                                <div class="mt-4">
+                                    <x-button wire:click="conversations({{$freelance->id}})" flat primary
+                                        label="contacter" />
 
-                                    @endforeach
                                 </div>
 
-                            </div>
-
-                            <div class="pt-3">
-                                <div class="flex items-center mb-3">
-                                    <svg class="w-6 h-6 mr-2 text-gray-500 fill-current"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 0a12 12 0 1 0 12 12A12 12 0 0 0 12 0zM6.25 12a5.75 5.75 0 1 1 5.75-5.75A5.75 5.75 0 0 1 6.25 12zm9.71 0a4.71 4.71 0 1 1-4.71 4.71 4.71 4.71 0 0 1 4.71-4.71z" />
-                                    </svg>
-                                    <p class="text-sm text-gray-700 dark:text-gray-100">3 years of experience</p>
-                                </div>
 
                             </div>
-                            <div class="flex justify-end mt-4">
-                                <a href="{{route('profile.freelance',[$freelancer->identifiant])}}"
-                                    class="mr-4 font-medium text-indigo-500">Voir mon profil</a>
-                                <x-button wire:click="conversations({{$freelancer->id}})" icon="chat-alt-2" primary />
-                            </div>
+
                         </div>
                     </div>
 

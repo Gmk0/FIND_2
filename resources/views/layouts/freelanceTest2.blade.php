@@ -22,7 +22,7 @@
         <x-asideF />
 
         <div class="flex flex-col flex-1 h-full overflow-hidden bg-gray-100 dark:bg-gray-900">
-            <header class="flex-shrink-0 bg-white border-b md:relative">
+            <header class="flex-shrink-0 py-2 bg-white border-b md:relative">
                 <div class="flex items-center justify-between p-2">
                     <!-- Navbar left -->
                     <div class="flex items-center space-x-3">

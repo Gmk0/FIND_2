@@ -133,12 +133,20 @@ class Service extends Model
         $orders = $this->orders;
 
         // Récupérer les feedbacks associés à ces commandes
-        $feedbacks = feedback::whereIn('order_id', $orders->pluck('id'))->get();
+        $feedbacks = feedback::whereIn('order_id', $orders->pluck('id'))->exists();
 
+        if ($feedbacks) {
+            $feedback2 = feedback::whereIn('order_id', $orders->pluck('id'))->get();
+            $averageFeedback = $feedback2->avg('satisfaction');
+
+            $averageFeedbackArrondi = round($averageFeedback, 1);
+
+            return $averageFeedbackArrondi;
+        } else {
+            return 0;
+        }
         // Calculer la moyenne des feedbacks
-        $averageFeedback = $feedbacks->avg('satisfaction');
 
-        return $averageFeedback;
     }
 
 

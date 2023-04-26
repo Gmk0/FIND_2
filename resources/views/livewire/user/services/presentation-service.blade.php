@@ -90,17 +90,18 @@
                                         <template x-for="(image, index) in {{ json_encode($servicesBest->files) }}"
                                             :key="index">
                                             <div x-show="slide === index"
-                                                class="absolute top-0 left-0 w-full h-full transition duration-500 ease-out bg-center bg-cover"
+                                                class="absolute top-0 left-0 w-full h-48 transition duration-500 ease-out bg-center bg-cover"
                                                 :style="'background-image: url(/storage/service/' + image + ')'">
+
                                             </div>
                                         </template>
                                     </div>
 
                                     <div class="absolute flex justify-between transform -translate-y-1/2 top-1/2 left-5 right-5"
                                         x-show="showButton">
-                                        <a href="#" class="btn btn-circle btn-sm"
+                                        <a href="#" class="btn btn-outline btn-circle btn-sm"
                                             @click.prevent="slide = (slide - 1 + maxSlides) % maxSlides">❮</a>
-                                        <a href="#" class="btn btn-circle btn-sm"
+                                        <a href="#" class="btn btn-outline btn-circle btn-sm"
                                             @click.prevent="slide = (slide + 1) % maxSlides">❯</a>
                                     </div>
                                 </div>
@@ -198,14 +199,20 @@
                                 </div>
                             </div>
 
-                            <div class="card-content">
-                                <h2 class="name">{{$freelance->getName()}}</h2>
-                                <div class="flex flex-col">
-                                    <span>{{$freelance->category->name}}</span>
+                            <div class="p-4 ">
+                                <div class="flex justify-between">
+                                    <h2 class="name">{{$freelance->getName()}}</h2>
 
-                                    <ul>
+
+                                </div>
+
+                                <div class="flex flex-col mt-2">
+                                    <span class="mb-2 text-sm text-gray-500 dark:text-gray-200">
+                                        {{$freelance->category->name}} • {{$freelance->level}}</span>
+
+                                    <ul class="text-base">
                                         @forelse ($freelance->competences as $key => $value)
-                                        <li>{{$value['skill']}}</li>
+                                        <li class="text-gray-900 badge badge-success">#{{$value['skill']}}</li>
                                         @empty
 
                                         @endforelse
@@ -217,7 +224,21 @@
 
 
                                 </p>
-                                <button class="button">View More</button>
+                                <div class="flex justify-between">
+                                    <div class="mt-4">
+                                        <x-button href="{{route('profile.freelance',[$freelance->identifiant])}}"
+                                            primary outline label="profil" />
+
+                                    </div>
+                                    <div class="mt-4">
+                                        <x-button wire:click="conversations({{$freelance->id}})" flat primary
+                                            label="contacter" />
+
+                                    </div>
+
+
+                                </div>
+
                             </div>
                         </div>
                         @endforeach
@@ -250,7 +271,7 @@
                     <div class="flex flex-row md:flex-col">
                         @foreach ($service->files as $key=>$value)
 
-                        <div class="h-auto bg-center bg-cover w-44 md:w-full md:h-48"
+                        <div class="w-48 h-auto bg-center bg-cover md:w-full md:h-48"
                             style="background-image: url('{{Storage::disk('local')->url('public/service/'.$value) }}');">
                         </div>
                         @break

@@ -725,7 +725,7 @@
                                     {{ __('Certification') }}
                                 </h3>
 
-                                <p class="text-sm italic text-slate-600">facultatif</p>
+                                <p class="text-sm italic text-slate-800">facultatif</p>
 
                                 <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
                                     {{ __('Ajoutez tous les détails de certification pertinents qui aideront les
@@ -851,7 +851,7 @@
                                     {{ __('Sites Web') }}
                                 </h3>
 
-                                <p class="text-sm italic text-slate-600">facultatif</p>
+                                <p class="text-sm italic text-slate-800">facultatif</p>
 
                                 <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
                                     {{ __('Incluez un lien vers votre site Web personnel ou votre
@@ -946,11 +946,6 @@
 
 
 
-                                <label for="google">Facebook</label>
-
-                                <div>
-                                    <x-input wire:model.defer="comptes.facebbok" id="google" label="lien du compte" />
-                                </div>
 
 
 
@@ -1007,7 +1002,7 @@
 
                                         <div class="grid gap-4 mb-4 md:grid-cols-3">
                                             <x-select label="" placeholder="Choisissez un niveau"
-                                                :options="['Tiktok', 'instagram', 'twitter', 'youtube', 'whatsapp']"
+                                                :options="['Tiktok', 'instagram', 'twitter', 'youtube','Facebook', 'whatsapp']"
                                                 wire:model.defer="newComptes.comptes" />
                                             <x-input placeholder="ajouter le lien du compte"
                                                 wire:model.defer="newComptes.lien" />
@@ -1081,8 +1076,7 @@
                                 <x-input wire:model.defer="userAuth.email" />
                                 @if (empty($userAuth['email_verified_at']))
                                 <div>
-                                    <x-button wire:click="sendEmail()" spinner="sendMail" label="Verifier" outline gray
-                                        sm icon="check-circle" />
+                                    <x-button spinner="sendMail" label="Verifier" outline gray sm icon="check-circle" />
                                 </div>
                                 @else
                                 <div class="italic text-gray-600">Email verifier</div>
@@ -1142,15 +1136,14 @@
 
                             <div class="grid gap-4 md:grid-cols-2">
 
-                                <x-inputs.phone wire:model.defer="userAuth.phone" placeholder="(243)0844720350"
-                                    mask="['(###) ####-######', '(###) #####-#####']" />
+                                <x-input wire:model.defer="userAuth.phone" placeholder="(243)0844720350" />
 
 
 
                                 <div>
                                     <x-button wire:click="" spinner="" label="verifier" outline gray sm
                                         icon="check-circle" />
-                                    <p class="text-sm italic text-red-600">fonctionalites no disponible</p>
+                                    <p class="hidden text-sm italic text-red-600">fonctionalites no disponible</p>
                                 </div>
 
 

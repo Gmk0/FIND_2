@@ -99,9 +99,9 @@
                                         <!-- Colors -->
                                         <div>
                                             <h4 class="text-sm font-medium text-gray-900">Support</h4>
-                                            <ul>
-                                                {{$service->basic_support}}
-                                            </ul>
+
+                                            {!! $service->basic_support !!}
+
                                         </div>
 
                                         <!-- Sizes -->
@@ -176,10 +176,11 @@
                             <div class="grid grid-cols-2 gap-4 mb-4">
                                 <div>
                                     <p class="font-bold text-gray-500 dark:text-gray-200">Support :</p>
-                                    <ul class="text-gray-700 dark:text-gray-300">
-                                        <li>{{$service->basic_support}}</li>
+                                    <div class="text-gray-800">
+                                        {!! $service->basic_support !!}
 
-                                    </ul>
+                                    </div>
+
 
                                 </div>
 
@@ -213,10 +214,13 @@
                             </div>
 
                             <div class="grid grid-cols-2 gap-4 mb-4">
+
+                                @if($service->category->name=="Photographie")
                                 <div>
                                     <p class="font-bold text-gray-500 dark:text-gray-200">Format :</p>
                                     <p class="text-gray-700 dark:text-gray-300">Jpg , jepg</p>
                                 </div>
+                                @endif
                                 <div>
                                     <p class="font-bold text-gray-500 dark:text-gray-200">Source :</p>
                                     <p class="text-gray-700 dark:text-gray-300">Fichier source inclus</p>
@@ -301,7 +305,7 @@
         <div x-show="!isLoading">
 
             <p class="text-lg font-bold text-gray-800 dark:text-gray-200">Du meme Categorie</p>
-            <div class="grid gap-4 px-4 py-4 mx-auto md:grid-cols-5">
+            <div class="grid gap-4 px-4 py-4 mx-auto md:grid-cols-4">
 
                 @forelse ($servicesOther as $serviceOther)
 
@@ -310,8 +314,8 @@
                     style="width: 300px;">
                     <div class="flex flex-row md:flex-col">
                         @foreach ($serviceOther->files as $key=>$value)
-                        <div class="w-48 h-auto bg-center bg-cover md:w-full md:h-48"
-                            style="background-image: url('{{$value}}');">
+                        <div class="object-contain w-48 h-auto bg-center bg-cover md:w-auto md:h-48"
+                            style="background-image: url('{{ url('/storage/service/' . $value) }}');">
                         </div>
                         @break
                         @endforeach

@@ -4,7 +4,7 @@
 @include('include.head')
 
 <body class="flex flex-col justify-between overflow-x-hidden bg-gray-50 custom-scrollbar dark:bg-gray-900"
-    x-data="setup()" :class="{
+    x-data="{navOpen: false,notificationActive: false, loading: true, scrolledFromTop: false}" :class="{
             'overflow-hidden': navOpen,
             'overflow-scroll': !navOpen
 
@@ -40,7 +40,6 @@
             return {
             loading: true,
             navOpen: false,
-            i
             notificationActive:false,
             scrolledFromTop:false,
             toggleSidbarMenu() {

@@ -40,7 +40,7 @@
                         <a class="flex w-full gap-2" x-on:click="linkActive=false"
                             href="{{route('freelance.service.list')}}">
                             <span>
-                                <ion-icon name="bookmarks-outline" class="w-6 h-6"></ion-icon>
+                                <ion-icon name="bookmarks-outline" class="w-4 h-4"></ion-icon>
                             </span>
                             <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Mes services</span>
                         </a>

@@ -97,8 +97,8 @@
             {{ __('profiles.Saved') }}
         </x-action-message>
 
-        <x-button wire:loading.attr="disabled" wire:target="photo">
+        <x-jet-button wire:loading.attr="disabled" wire:target="photo">
             {{ __('profiles.Save') }}
-        </x-button>
+        </x-jet-button>
     </x-slot>
 </x-form-section>
