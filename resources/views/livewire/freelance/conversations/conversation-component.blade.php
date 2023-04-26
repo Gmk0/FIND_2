@@ -81,7 +81,7 @@
 
 
                         <div x-data="{message:''}" x-bind:class="{'hidden': sidebarOpen, 'md:flex': !sidebarOpen}"
-                            class="chat-area flex-1 bg-white  p-2 rounded-md flex md:h-[500px] mr-3 h-fit   flex-col">
+                            class="chat-area flex-1 bg-white  p-2 rounded-md flex md:h-[500px] mr-3 h-[550px]   flex-col">
 
                             <div x-data="" class="flex gap-3 bg-gray-100 z-5 dark:bg-gray-800">
                                 <button wire:ignore @click="sidebarOpen = true" class="block md:hidden ">
@@ -100,7 +100,7 @@
                                     class="flex justify-between flex-grow py-1 mx-4 mb-2 text-lg text-gray-800 border-b-2 border-gray-200 md:text-xl dark:text-white md:mb-4">
 
                                     <div class="flex flex-col">
-                                        <b>{{$selectedConversation->name}}</b>
+                                        <b>{{$selectedConversation->user->name}}</b>
                                         @if($selectedConversation->user->is_online)
                                         <span class="mt-1 text-sm text-green->600">
                                             online<span>
@@ -118,9 +118,8 @@
                                                 <x-dropdown.item label="Envoyer un fichier " />
                                                 <x-dropdown.item label="Maquer non lue" />
                                                 <x-dropdown.item label="Favoris" />
-                                                <x-dropdown.item wire:click="effacerConversation()" label="Effacer" />
-                                                <x-dropdown.item wire:click="BloquerConversation()"
-                                                    label="Bloquer l'utilisateur" />
+                                                <x-dropdown.item wire:click="" label="Effacer" />
+                                                <x-dropdown.item wire:click="" label="Bloquer l'utilisateur" />
                                             </x-dropdown>
                                         </div>
 

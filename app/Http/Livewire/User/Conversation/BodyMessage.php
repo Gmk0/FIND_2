@@ -134,7 +134,7 @@ class BodyMessage extends Component
 
     function broadcastedMessageReceived($event)
     {
-        ///here 
+        ///here
 
 
         $this->emitTo('user.conversation.conversation-component', 'refresh');
@@ -143,7 +143,7 @@ class BodyMessage extends Component
         $broadcastedMessage = Message::find($event['message']);
 
 
-        #check if any selected conversation is set 
+        #check if any selected conversation is set
         if ($this->selectedConversation) {
             #check if Auth/current selected conversation is same as broadcasted selecetedConversationgfg
             if ((int) $this->selectedConversation->id  === (int)$event['conversation_id']) {

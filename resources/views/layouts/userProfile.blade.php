@@ -5,7 +5,7 @@
 
 @php
 if(request()->routeIs('MessageUser')){
-$overflow="overflow-y-auto md:overflow-y-hidden";
+$overflow="overflow-y-auto overflow-y-hidden";
 }else{
 $overflow="overflow-y-auto";
 }
@@ -132,7 +132,7 @@ $overflow="overflow-y-auto";
             <div class="flex flex-col flex-1">
                 <x-headerUserTest />
 
-                <main class="h-full pb-16 {{$overflow}}">
+                <main class="h-full pb-16 overflow-y-auto">
                     <!-- Main -->
                     @yield('content')
 

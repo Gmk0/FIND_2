@@ -5,7 +5,7 @@ namespace App\Http\Livewire\User\Conversation;
 use Livewire\Component;
 use App\Models\Freelance;
 use App\Models\Conversation;
-
+use App\Models\Message;
 use WireUi\Traits\Actions;
 
 class ConversationComponent extends Component
@@ -44,7 +44,7 @@ class ConversationComponent extends Component
             $data = Conversation::where('freelance_id', $this->freelance)->where('user_id', auth()->user()->id)->first();
 
 
-            if ($data == null) {
+            if (empty($data)) {
 
 
                 $conversation = new Conversation();
@@ -52,7 +52,16 @@ class ConversationComponent extends Component
                 $conversation->last_time_message = now();
                 $conversation->status = 'pending';
                 $conversation->save();
-                $this->chatUserSelected($conversation, $this->freelance);
+
+                $createdMessage = Message::create([
+                    'sender_id' => auth()->user()->id,
+                    'receiver_id' => $this->freelance,
+                    'conversation_id' => $conversation->id,
+                    'body' => "Hi",
+                    'is_read' => '0',
+                    'type' => "text",
+
+                ]);
             } else {
                 $this->chatUserSelected($data, $this->freelance);
             }
@@ -69,6 +78,7 @@ class ConversationComponent extends Component
 
         $this->emitTo('user.conversation.body-message', 'loadConversation', $this->selectedConversation, $receiverId);
         $this->emitTo('user.conversation.send-message-u', 'updateSendMessage', $this->selectedConversation, $receiverId);
+
         $this->emitSelf('loadConversation', $this->selectedConversation);
     }
 
@@ -134,9 +144,10 @@ class ConversationComponent extends Component
 
         );
 
+        $this->emitSelf('refresh');
+
         $this->emitTo('user.conversation.body-message', 'refresh');
         $this->emitTo('user.conversation.send-message-u', 'refresh');
-        $this->emitSelf('refresh');
     }
 
     public function deleteConversation()
@@ -144,6 +155,8 @@ class ConversationComponent extends Component
         //dd($this->selectedConversation);
 
         $data = $this->selectedConversation->delete();
+
+        $this->selectedConversation = null;
 
         $this->notification()->success(
 
@@ -154,6 +167,8 @@ class ConversationComponent extends Component
         $this->emitTo('user.conversation.body-message', 'refresh');
         $this->emitTo('user.conversation.send-message-u', 'refresh');
         $this->emitSelf('refresh');
+
+        return redirect()->route('MessageUser');
     }
 
 
