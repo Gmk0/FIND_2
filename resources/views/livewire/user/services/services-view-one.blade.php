@@ -365,7 +365,7 @@
 
 
         <div x-show="!navOpen"
-            class="fixed bottom-0 left-0 z-50 flex items-center p-2 m-4 bg-white shadow-lg rounded-xl dark:bg-gray-800">
+            class="fixed bottom-0 left-0 z-40 flex items-center p-2 m-4 bg-white shadow-lg rounded-xl dark:bg-gray-800">
             <div class="w-10 h-10 mr-4 overflow-hidden rounded-full md:w-12 md:h-12">
 
                 @if (!empty($service->freelance->user->profile_photo_path))

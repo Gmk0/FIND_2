@@ -100,6 +100,12 @@ class CommandeUser extends Component implements Tables\Contracts\HasTable
                 // ->openUrlInNewTab()
                 ->icon('heroicon-s-pencil')
                 ->tooltip('Voir les services'),
+            Action::make('Facture')
+                ->url(fn (Order $record): string => route('facturation', $record->transaction->transaction_numero))
+                ->openUrlInNewTab()
+                ->icon('heroicon-s-printer')
+                ->tooltip('Voir les services'),
+
 
 
 

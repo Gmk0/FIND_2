@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Freelance\Services;
 
 use Livewire\Component;
 use App\Models\freelance;
-use App\Models\service;
+use App\Models\Service;
 
 use Illuminate\Support\Facades\Storage;
 
