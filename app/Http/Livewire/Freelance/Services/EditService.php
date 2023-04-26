@@ -110,6 +110,10 @@ class EditService extends Component implements Forms\Contracts\HasForms
 
             $this->emitSelf('refresh');
         } else {
+
+            $this->service->files = $data;
+            $this->service->update();
+
             $this->notification()->error(
                 $title = "Erreur ",
                 $description = 'le fichier existe pas',

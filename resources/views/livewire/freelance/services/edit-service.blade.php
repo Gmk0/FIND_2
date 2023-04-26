@@ -1,6 +1,6 @@
 <div class="min-h-screen">
     <div>
-        @include('include.breadcumbUser',['transation'=>'transation'])
+        @include('include.breadcumbFreelance',['serviceName'=>'service'])
     </div>
     <div class="px-2 py-4 mx-auto max-w-7xl lg:px-8">
 
@@ -20,7 +20,7 @@
 
                     <x-input wire:model.defer="serviceEdit.title" label="titre" />
 
-                    <x-inputs.currency label="prix" icon="currency-dollar" thousands="." decimal="," precision="2"
+                    <x-inputs.currency label="prix" icon="currency-dollar" thousands="." decimal="," precision="1"
                         wire:model.defer="serviceEdit.basic_price" />
                     <x-input type="number" wire:model.defer="serviceEdit.basic_delivery_time" label="delivery_time" />
                     <x-input wire:model.defer="serviceEdit.basic_revision" label="revision" />
