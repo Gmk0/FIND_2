@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\transaction;
 use App\Events\ServiceOrdered;
 use App\Models\feedback;
+use App\Models\Like;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -207,6 +208,7 @@ class Checkout extends Component
         $url = 'https://api-testbed.maxicashapp.com/PayEntry?data=' . urlencode(json_encode($requestData));
 
         // Effectuer la redirection
+        dd($url);
         return redirect($url);
     }
 
