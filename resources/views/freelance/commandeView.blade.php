@@ -1,4 +1,4 @@
-@extends('layouts.freelanceTest')
+@extends('layouts.freelanceTest2')
 
 
 @section('content')
