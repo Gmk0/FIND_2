@@ -109,7 +109,7 @@
 
 
                     <div x-data="{message:''}" x-bind:class="{'hidden': sidebarOpen, 'md:flex': !sidebarOpen}"
-                        class="chat-area flex-1 bg-white  p-2 rounded-md flex md:h-[500px] h-[600px]  flex-col">
+                        class="chat-area flex-1 bg-white  p-2 rounded-md flex md:h-[500px] h-[550px]  flex-col">
 
                         <div x-data="" class="flex gap-3 bg-gray-100 z-5 dark:bg-gray-800">
                             <button wire:ignore @click="sidebarOpen = true" class="block md:hidden ">

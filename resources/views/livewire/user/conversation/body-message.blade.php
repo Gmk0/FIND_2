@@ -151,9 +151,6 @@ window.livewire.emit('loadmore');
                 let height = $('.messages').scrollTop(newHeight - old);
 
 
-                window.livewire.emit('updateHeight', {
-                    height: height,
-                });
 
 
             });
