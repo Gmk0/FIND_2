@@ -10,7 +10,7 @@ use App\Models\SubCategory;
 use Livewire\WithPagination;
 use App\Tools\Cart;
 use Illuminate\Support\Facades\Session;
-use Wireui\Traits\Actions;
+use WireUi\Traits\Actions;
 
 class ServiceByCategory extends Component
 {
