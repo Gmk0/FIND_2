@@ -98,13 +98,31 @@
                         @mouseleave="linkHover = false"
                         class="overflow-hidden bg-white rounded-lg shadow-md dark:text-gray-200 dark:bg-gray-800">
                         <div class="flex flex-row md:flex-col">
-                            @foreach ($service->files as $key=>$value)
+                            <div x-data="{
+                                                                                            slide: 0,
+                                                                                            maxSlides: {{ count($service->files) }},
+                                                                                            showButton: false
+                                                                                            }"
+                                class="relative w-full h-48 overflow-hidden" @mouseover="showButton = true"
+                                @mouseleave="showButton = false">
+                                <div class="absolute inset-0 cursor-pointer">
+                                    <template x-for="(image, index) in {{ json_encode($service->files) }}" :key="index">
+                                        <div x-show="slide === index"
+                                            class="absolute top-0 left-0 w-full h-48 transition duration-500 ease-out bg-center bg-cover"
+                                            :style="'background-image: url(/storage/service/' + image + ')'">
 
-                            <div class="w-56 h-auto bg-center bg-cover md:w-full md:h-48"
-                                style="background-image: url('{{ url('/storage/service/' . $value) }}');">
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <div class="absolute flex justify-between transform -translate-y-1/2 top-1/2 left-5 right-5"
+                                    x-show="showButton">
+                                    <a href="#" class="btn btn-outline btn-circle btn-sm"
+                                        @click.prevent="slide = (slide - 1 + maxSlides) % maxSlides">❮</a>
+                                    <a href="#" class="btn btn-outline btn-circle btn-sm"
+                                        @click.prevent="slide = (slide + 1) % maxSlides">❯</a>
+                                </div>
                             </div>
-                            @break
-                            @endforeach
 
 
                             <div class="max-h-[14rem] flex flex-col justify-between p-2 dark:text-gray-200 md:p-6">
