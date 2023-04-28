@@ -120,7 +120,7 @@
                                     </svg>
                                 </button>
 
-                                <div @click.away="isOpen = false" x-show.transition.opacity="isOpen"
+                                <div x-cloak @click.away="isOpen = false" x-show.transition.opacity="isOpen"
                                     class="absolute z-50 w-48 max-w-md mt-3 transform bg-white rounded-md shadow-lg -translate-x-3/4 min-w-max">
                                     <div class="p-4 text-lg font-medium border-b">Web apps & services</div>
                                     <ul class="flex flex-col p-2 my-3 space-y-3">
@@ -171,7 +171,21 @@
                                     </div>
                                 </div>
                             </div>
-                            @livewire("user.navigation.notifications-component")
+
+                            <div @click="isSettingsPanelOpen = !isSettingsPanelOpen" class="flex cursor-pointer">
+                                <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                </svg>
+                                <sub>
+                                    <span
+                                        class="bg-red-600 text-gray-100 px-1.5 py-0.5 rounded-full -ml-1 animate-pulse">
+                                        0
+                                    </span>
+                                </sub>
+                            </div>
+
 
                             <!-- Options Menu -->
 
