@@ -677,7 +677,9 @@
 
                     </div>
                     <div class="order-2 w-full h-64 mx-2 my-4 aspect-w-16 aspect-h-9 md:col-span-3 rounded-2xl">
-                        <iframe class="w-full h-full aspect-video" src="https://www.youtube.com/embed/8560CAdA0Ys"
+
+
+                        <iframe class="w-full h-full aspect-video" src="https://www.youtube.com/embed/rw_3Yv-rhZM"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen></iframe>
