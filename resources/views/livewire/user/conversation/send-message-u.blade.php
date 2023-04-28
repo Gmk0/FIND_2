@@ -1,4 +1,4 @@
-<div class="">
+<div x-data="{photoName: null, photoPreview: null}" class="">
     <div class="mt-2 mb-2" x-show="photoPreview" style="display: none;">
         <span class="block w-20 h-20 bg-center bg-no-repeat bg-cover rounded-lg "
             x-bind:style="'background-image: url(\'' + photoPreview + '\');'">

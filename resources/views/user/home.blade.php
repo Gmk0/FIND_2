@@ -36,7 +36,7 @@
         </svg>
     </div>
 
-    <div class="z-20 col-span-6 px-4 py-16 mt-8 mb-8 xl:place-self-center xl:mt-0 lg:mb-0">
+    <div class="z-20 col-span-6 px-4 py-8 mt-8 lg:py-16 md:mb-8 xl:place-self-center xl:mt-0 lg:mb-0">
         <h1 class="text-3xl font-bold text-center md:text-3xl xl:text-5xl lg:text-left">
             Votre satisfaction dans nos services Freelance <br />
 
@@ -53,12 +53,44 @@
 
         </div>
     </div>
-    <div class="relative z-20 hidden col-span-6 md:flex">
-        <picture>
-            <source srcset="/images/hero/hero_women.webp" type="image/webp" />
-            <source srcset="/images/hero/hero_women.png" type="image/png" />
-            <img class="z-50 w-full h-full" src="/images/hero/women.png" alt="" />
-        </picture>
+    <div class="relative z-20 col-span-6 md:flex">
+        <div class="flex flex-wrap gap-2" x-data="{ splide: null }" x-init="() => {
+                splide = new Splide('.splide', {
+                    type: 'loop',
+                    perPage: 1,
+                    perMove: 1,
+                    autoplay: true,
+                    interval: 4000,
+                    transition: 'fade',
+                    arrows: false,
+                    pagination: {
+                    el: '.splide__pagination',
+                    bulletClass: 'splide__pagination-bullet',
+                    bulletActiveClass: 'is-active',
+                    }
+                }).mount();
+                }">
+            <div class="w-full splide">
+                <div class="splide__track">
+                    <div class="splide__list">
+                        <picture class="splide__slide">
+                            <source srcset="/images/hero/hero.png" type="image/png" />
+                            <img class="z-50 w-full h-full" src="/images/hero/hero.png" alt="" />
+                        </picture>
+
+
+
+                        <picture class="splide__slide">
+                            <source srcset="/images/hero/hero2.png" type="image/png" />
+                            <img class="z-50 w-full h-full" src="/images/hero/hero2.png" alt="" />
+                        </picture>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
 </section>
 

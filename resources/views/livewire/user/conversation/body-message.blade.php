@@ -27,9 +27,25 @@
             @endif
         </div>
         <div class="flex-1 px-2">
+            @if ($message->service_id != null)
+            <div
+                class="mb-2 rounded-xl {{auth()->id() == $message->sender_id ? 'bg-green-500 rounded-br-none text-gray-100 ':'bg-green-500 rounded-bl-none text-gray-700'}}  inline-block px-4 py-3 ">
 
-            <div x-data="{linkHover:false}">
 
+
+
+                <a
+                    href="{{route('ServicesViewOne',['id'=>$message->service->id,'category'=>$message->service->category->name])}}">{{$message->service->title}}
+                    /${{$message->service->basic_price}}</a>
+
+
+
+
+
+            </div>
+            @endif
+
+            <div class="" x-data="{linkHover:false}">
 
 
                 <div
@@ -43,8 +59,10 @@
                     </a>
 
                     @else
-                    <span class="cursor-pointer" @mouseover="linkHover = true"
-                        @mouseleave="linkHover = false">{{$message->body}}</span>
+
+                    <span class="cursor-pointer">{{$message->body}}</span>
+
+
                     @endif
 
                     <span class="text-white {{auth()->id() == $message->sender_id ? 'flex':'hidden'}}"
@@ -69,7 +87,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
                     </svg>
                     @if($message->is_read==1)
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3    w-3 -ml-1.5" fill="none" viewBox="0 0 24 24"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 -ml-1.5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
                     </svg>

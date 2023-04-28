@@ -81,10 +81,10 @@
 
 
                                 <div x-data="{
-                                slide: 0,
-                                maxSlides: {{ count($servicesBest->files) }},
-                                showButton: false
-                            }" class="relative w-full h-48 overflow-hidden" @mouseover="showButton = true"
+                                        slide: 0,
+                                        maxSlides: {{ count($servicesBest->files) }},
+                                        showButton: false
+                                        }" class="relative w-full h-48 overflow-hidden" @mouseover="showButton = true"
                                     @mouseleave="showButton = false">
                                     <div class="absolute inset-0 cursor-pointer">
                                         <template x-for="(image, index) in {{ json_encode($servicesBest->files) }}"

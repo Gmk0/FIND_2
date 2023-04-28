@@ -4,6 +4,7 @@ namespace App\Http\Livewire\User\Services;
 
 use App\Models\Conversation;
 use App\Models\feedback;
+use App\Models\Like;
 use App\Models\Message;
 use App\Models\Service;
 use Livewire\Component;
@@ -51,9 +52,11 @@ class ServicesViewOne extends Component
             $sousCategorie = $subCategorie;
 
             $services = Service::where('Sub_categorie', 'like', '%' . $sousCategorie . '%')
+                ->whereNotIn('id', [$this->service->id])
                 ->limit(5)->get();
         } else {
             $services = Service::where('category_id', $this->service->category_id)
+                ->whereNotIn('id', [$this->service->id])
                 ->limit(5)->get();
         }
         //dd($sousCategorie);
@@ -76,6 +79,29 @@ class ServicesViewOne extends Component
         return $images;
     }
 
+    public function toogleFavorite($serviceId)
+    {
+
+
+        $favorite = Like::where('user_id', auth()->id())
+            ->where('service_id', $serviceId)
+            ->first();
+
+        if ($favorite) {
+            $favorite->delete();
+        } else {
+            Like::create([
+                'user_id' => auth()->id(),
+                'service_id' => $serviceId,
+            ]);
+
+            $this->notification()->success(
+                $title = "le Service a ete ajouté au favoris",
+
+            );
+        }
+    }
+
 
 
     public function contacter()
@@ -89,13 +115,15 @@ class ServicesViewOne extends Component
             ->first();
 
 
+
+
         // Si une conversation est trouvée, afficher la vue de la conversation
         if ($conversation) {
 
 
             $createdMessage = Message::create([
                 'sender_id' => auth()->user()->id,
-                'receiver_id' => $this->freelance_id,
+                'receiver_id' => $freelanceId,
                 'conversation_id' => $conversation->id,
                 'service_id' => $this->service->id,
                 'body' => "salut je suis interrser par ce service",

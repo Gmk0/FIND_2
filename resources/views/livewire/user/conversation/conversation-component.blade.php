@@ -1,20 +1,15 @@
 <div class="flex max-h-screen overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
     x-init="setTimeout(() => { isLoading = false }, 3000)">
-
     <div x-show="isLoading">
 
-        <div class="flex flex-row h-screen p-8 overflow-y-hidden">
+        <div class="flex flex-col flex-1 h-screen p-8 overflow-y-hidden md:flex-row">
             <div
-                class="order-first hidden w-64 h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse custom-scrollbar md:flex ">
+                class="order-first hidden w-screen h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-400 rounded-md animate-pulse md:flex ">
                 <div>
 
                 </div>
             </div>
-            <div
-                class="flex-1 h-screen p-4 md:w-[24rem] overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
 
-
-            </div>
         </div>
     </div>
     <div x-cloak x-show="!isLoading" class="flex-1 w-full h-full ">
@@ -27,7 +22,7 @@
                 <div class="flex flex-1 h-full">
 
                     <div x-bind:class="{'hidden ': !sidebarOpen, 'md:block': sidebarOpen}"
-                        class="sidebar   w-full lg:flex md:w-1/3 flex-2 h-[550px] custom-scrollbar overflow-x-hidden flex-col pt-2 rounded-md md:pr-6">
+                        class="sidebar   w-full lg:flex md:w-1/3 flex-2 h-[550px] custom-scrollbar overflow-x-hidden overflow-y-auto flex-col pt-2 rounded-md md:pr-6">
                         <div class="px-2 pb-6 search flex-2">
                             <x-select label="Search a User" wire:model.debounce.500ms="freelance"
                                 placeholder="Selectionner un freelance" :async-data="route('api.freelance.users')"
@@ -114,7 +109,7 @@
 
 
                     <div x-data="{message:''}" x-bind:class="{'hidden': sidebarOpen, 'md:flex': !sidebarOpen}"
-                        class="chat-area flex-1 bg-white  p-2 rounded-md flex md:h-[500px] h-[550px] flex-col">
+                        class="chat-area flex-1 bg-white  p-2 rounded-md flex md:h-[500px] h-[550px]  flex-col">
 
                         <div x-data="" class="flex gap-3 bg-gray-100 z-5 dark:bg-gray-800">
                             <button wire:ignore @click="sidebarOpen = true" class="block md:hidden ">
@@ -130,7 +125,7 @@
                             </h2>
                             @else
                             <h2
-                                class="flex justify-between flex-grow py-1 mx-4 mb-2 text-lg text-gray-800 border-b-2 border-gray-200 md:text-xl dark:text-white md:mb-4">
+                                class="flex justify-between flex-grow py-1 mx-2 mb-2 text-lg text-gray-800 border-b-2 border-gray-200 md:mx-4 md:text-xl dark:text-white md:mb-4">
 
                                 <div class="flex flex-col">
                                     <b>{{$selectedConversation->freelance?->nom}}</b>
@@ -148,7 +143,7 @@
 
                                     <div>
                                         <x-dropdown>
-                                            <x-dropdown.item label="Envoyer un fichier " />
+
                                             <x-dropdown.item label="Maquer non lue" />
                                             <x-dropdown.item label="Favoris" />
                                             <x-dropdown.item wire:click="effacerConversation()" label="Effacer" />

@@ -1,4 +1,4 @@
-<div class="p-4">
+<div class="min-h-screen">
 
     <div>
         @include('include.breadcumbFreelance',['profile'=>'profile'])
@@ -6,7 +6,7 @@
     <div class="container mx-auto">
 
 
-        <h2 class="mb-4 text-xl font-semibold tracking-wide text-indigo-600 uppercase">Profil</h2>
+        <h2 class="mb-4 text-xl font-semibold tracking-wide text-indigo-600 uppercase">Informations</h2>
 
 
         <div class="md:px-6 ">
@@ -19,9 +19,7 @@
                             {{ __('Nom & Prenom') }}
                         </h3>
 
-                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">
-                            {{ __('Prive*') }}
-                        </p>
+
                     </div>
 
 
@@ -50,7 +48,7 @@
                         </div>
 
                         <div
-                            class="flex items-center justify-end px-4 py-3 text-right shadow bg-gray-50 dark:bg-gray-800 sm:rounded-bl-md sm:rounded-br-md">
+                            class="flex items-center justify-end px-4 py-3 mt-2 text-right shadow bg-gray-50 dark:bg-gray-800 sm:rounded-bl-md sm:rounded-br-md">
                             <x-action-message class="mr-3 " on="updateFirts">
                                 {{ __('profiles.Saved') }}
                             </x-action-message>
@@ -77,14 +75,10 @@
                 <div class="flex justify-between md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Photo de Profile') }} <span class="text-red-600">*</span>
+                            {{ __('Localisaction') }} <span class="text-red-600">*</span>
                         </h3>
 
-                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">
-                            {{ __('Ajoutez une photo de profil de vous-même afin que les clients sachent
-                            exactement
-                            avec qui ils travailleront.') }}
-                        </p>
+
                     </div>
 
 
@@ -107,7 +101,7 @@
                             </div>
 
                             <div
-                                class="flex items-center justify-end px-4 py-3 text-right shadow bg-gray-50 dark:bg-gray-800 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
+                                class="flex items-center justify-end px-4 py-3 mt-4 text-right shadow bg-gray-50 dark:bg-gray-800 sm:px-6 sm:rounded-bl-md sm:rounded-br-md">
                                 <x-action-message class="mr-3 " on="saved">
                                     {{ __('profiles.Saved') }}
                                 </x-action-message>
@@ -133,14 +127,9 @@
                 <div class="flex justify-between md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Photo de Profile') }} <span class="text-red-600">*</span>
+                            {{ __('Education') }} <span class="text-red-600">*</span>
                         </h3>
 
-                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">
-                            {{ __('Ajoutez une photo de profil de vous-même afin que les clients sachent
-                            exactement
-                            avec qui ils travailleront.') }}
-                        </p>
                     </div>
 
 
@@ -161,20 +150,14 @@
                                                     <tr>
                                                         <th scope="col"
                                                             class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Certificat
+                                                            Information
                                                         </th>
                                                         <th scope="col"
                                                             class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Delivrer par
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Annee
-                                                        </th>
-                                                        <th scope="col" class="relative px-6 py-3">
-
 
                                                         </th>
+
+
                                                     </tr>
                                                 </thead>
                                                 <tbody class="bg-white divide-y divide-gray-400">
@@ -184,31 +167,26 @@
 
                                                     <tr>
                                                         <td
-                                                            class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                                                            class="grid grid-cols-1 gap-1 py-4 text-sm font-medium text-gray-500 md:px-6 dark:text-gray-400 whitespace-nowrap">
 
 
-                                                            <x-input
+                                                            <x-input label="certificat"
                                                                 wire:model.defer="freelance.certificat.{{$key}}.certificate" />
 
-                                                        </td>
-                                                        <td
-                                                            class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
-
-
-                                                            <x-input
+                                                            <x-input label="delivrer "
                                                                 wire:model.defer="freelance.certificat.{{$key}}.delivrer" />
-                                                        </td>
-                                                        <td
-                                                            class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400whitespace-nowrap">
-
-                                                            <x-input
+                                                            <x-input label="annee"
                                                                 wire:model.defer="freelance.certificat.{{$key}}.annee" />
+                                                            <div>
+                                                                <x-button label="Modifier"
+                                                                    wire:click="modifierCertificate({{$key}})">
+                                                                </x-button>
+
+                                                            </div>
+
+
                                                         </td>
 
-                                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                                            <x-button label="Modifier"
-                                                                wire:click="modifierCertificate({{$key}})"></x-button>
-                                                        </td>
                                                     <tr>
                                                         @empty
 
@@ -261,61 +239,54 @@
 
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                        <div class="overflow-hidden border-b border-gray-400 shadow sm:rounded-lg">
+                                        <div class="border-b border-gray-400 shadow sm:rounded-lg">
                                             <table class="min-w-full divide-y divide-gray-400">
                                                 <thead class="bg-gray-50 dark:bg-gray-800">
                                                     <tr>
                                                         <th scope="col"
                                                             class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Certificat
+                                                            Diplome
                                                         </th>
                                                         <th scope="col"
                                                             class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Delivrer par
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Annee
-                                                        </th>
-                                                        <th scope="col" class="relative px-6 py-3">
-
 
                                                         </th>
+
                                                     </tr>
                                                 </thead>
-                                                <tbody class="bg-white divide-y divide-gray-400">
+                                                <tbody class="overflow-auto bg-white divide-y divide-gray-400">
 
 
-                                                    @forelse ($freelance['diplome'] as $key=> $value )
+
+                                                    @forelse ($freelance['diplome'] as $key=>$value )
 
                                                     <tr>
                                                         <td
-                                                            class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                                                            class="grid grid-cols-1 gap-1 py-4 text-sm font-medium text-gray-500 md:px-6 dark:text-gray-400 whitespace-nowrap">
 
-                                                            <x-input
+
+                                                            <x-input label="Diplome en"
                                                                 wire:model.defer="freelance.diplome.{{$key}}.diplome" />
-                                                        </td>
-                                                        <td
-                                                            class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
 
-                                                            <x-input
+                                                            <x-input label="Institut "
                                                                 wire:model.defer="freelance.diplome.{{$key}}.universite" />
-                                                        </td>
-                                                        <td
-                                                            class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400whitespace-nowrap">
-
-                                                            <x-input
+                                                            <x-input label="annee"
                                                                 wire:model.defer="freelance.diplome.{{$key}}.annee" />
+                                                            <div>
+                                                                <x-button label="Modifier"
+                                                                    wire:click="modifierDiplome({{$key}})">
+                                                                </x-button>
+
+                                                            </div>
+
+
                                                         </td>
 
-                                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                                            <x-button label="modifier"
-                                                                wire:click="modifierDiplome({{$key}})"></x-button>
-                                                        </td>
                                                     <tr>
                                                         @empty
 
                                                         @endforelse
+
 
 
 
@@ -337,19 +308,17 @@
 
             </div>
 
+
+
             <x-section-border />
             <div class='mt-4 md:grid md:grid-cols-3 md:gap-6'>
                 <div class="flex justify-between md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Photo de Profile') }} <span class="text-red-600">*</span>
+                            {{ __('Vos competences') }} <span class="text-red-600">*</span>
                         </h3>
 
-                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">
-                            {{ __('Ajoutez une photo de profil de vous-même afin que les clients sachent
-                            exactement
-                            avec qui ils travailleront.') }}
-                        </p>
+
                     </div>
 
 
@@ -407,7 +376,8 @@
 
                                                         <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
 
-                                                            <x-button wire:click="modifierCompentences({{$key}})">
+                                                            <x-button label="Modifier" spinner="modifierCompentences"
+                                                                wire:click="modifierCompentences({{$key}})">
                                                             </x-button>
                                                         </td>
                                                     <tr>
@@ -440,14 +410,9 @@
                 <div class="flex justify-between md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Photo de Profile') }} <span class="text-red-600">*</span>
+                            {{ __('Langue') }} <span class="text-red-600">*</span>
                         </h3>
 
-                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">
-                            {{ __('Ajoutez une photo de profil de vous-même afin que les clients sachent
-                            exactement
-                            avec qui ils travailleront.') }}
-                        </p>
                     </div>
 
 
@@ -529,34 +494,7 @@
 
                                             </table>
 
-                                            <div>
 
-
-                                                <div class="grid gap-4 mb-4 md:grid-cols-3">
-
-                                                    <x-select wire:model.defer="selected.name"
-                                                        placeholder="Choisissez une langue">
-
-                                                        <x-select.option label="Français" value="Français" />
-                                                        <x-select.option label="Lingala" value="Lingala" />
-                                                        <x-select.option label="Anglais" value="Anglais" />
-                                                        <x-select.option label="Swahili" value="Swahili" />
-                                                        <x-select.option label="Kikongo" value="Kikongo" />
-                                                        <x-select.option label="Tshiluba" value="Tshiluba" />
-
-                                                    </x-select>
-
-
-                                                    <x-select label="" placeholder="Choisissez un niveau"
-                                                        :options="['Débutant', 'Intermédiaire', 'Avancé']"
-                                                        wire:model.defer="selected.level" />
-                                                    <div>
-                                                        <x-button stone outline wire:click="addLanguage()"
-                                                            icon="plus-circle" spinner="addLanguage" label="Ajouter" />
-                                                    </div>
-                                                </div>
-
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -575,14 +513,10 @@
                 <div class="flex justify-between md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Photo de Profile') }} <span class="text-red-600">*</span>
+                            {{ __('Comptes lie') }}
                         </h3>
 
-                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">
-                            {{ __('Ajoutez une photo de profil de vous-même afin que les clients sachent
-                            exactement
-                            avec qui ils travailleront.') }}
-                        </p>
+
                     </div>
 
 
@@ -603,16 +537,16 @@
                                                     <tr>
                                                         <th scope="col"
                                                             class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Langue
+                                                            Comptes
                                                         </th>
                                                         <th scope="col"
                                                             class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Niveau
+                                                            Username
                                                         </th>
 
                                                         <th scope="col"
                                                             class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Niveau
+
                                                         </th>
 
                                                     </tr>

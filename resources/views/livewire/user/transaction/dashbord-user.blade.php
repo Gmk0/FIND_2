@@ -4,7 +4,7 @@
         <!-- start::Stats -->
         <div class="grid grid-cols-1 gap-4 px-auto md:grid-cols-2 lg:grid-cols-4">
             <a href="{{route('commandeUser')}}"
-                class="px-4 py-6 bg-white rounded-lg shadow-xl cursor-pointer hover:scale-50 lg:px-6 lg:py-6">
+                class="px-4 py-6 bg-white rounded-lg shadow-xl cursor-pointer lg:px-6 lg:py-6">
                 <div class="flex items-center justify-between">
                     <span class="text-sm font-bold text-indigo-600">Total Depense</span>
                     <span
@@ -186,7 +186,7 @@
         <!-- end::Activities -->
 
         <!-- start::Table -->
-        <div class="px-8 py-6 overflow-auto bg-white rounded-lg hidden custom-scrollbar">
+        <div class="hidden px-8 py-6 overflow-auto bg-white rounded-lg custom-scrollbar">
             <h4 class="text-xl font-semibold text-gray-800">Recent transactions</h4>
             <table class="w-full my-8 overflow-auto whitespace-nowrap">
                 <thead class="font-bold text-gray-100 bg-blue-400">

@@ -19,6 +19,8 @@
 
         <li x-data="{ linkHover: false, linkActive: false }" class="">
 
+
+
             <a @click="linkActive=!linkActive" href="#"
                 class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
                 :class="{'justify-center': !isSidebarOpen}">
@@ -49,11 +51,7 @@
                         <a class="flex w-full gap-2" x-on:click="linkActive=false"
                             href="{{route('freelance.service.create')}}">
                             <span>
-                                <svg class="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                </svg>
+                                <ion-icon class="w-4 h-4" name="add-circle-outline"></ion-icon>
                             </span>
                             <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Creer</span>
                         </a>
@@ -130,7 +128,8 @@
                 class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
                 :class="{'justify-center': !isSidebarOpen}">
                 <span>
-                    <ion-icon name="bookmarks-outline" class="w-6 h-6 text-gray-400"></ion-icon>
+
+                    <ion-icon name="file-tray-outline" class="w-6 h-6 text-gray-400"></ion-icon>
                 </span>
                 <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Mission</span>
             </a>
@@ -227,11 +226,7 @@
             <a href="#" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
                 :class="{'justify-center': !isSidebarOpen}">
                 <span>
-                    <svg class="w-6 h-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
+                    <ion-icon class="w-6 h-6 text-gray-400" name="person-circle-outline"></ion-icon>
                 </span>
                 <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Portefolio</span>
             </a>
@@ -240,11 +235,9 @@
             <a href="#" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
                 :class="{'justify-center': !isSidebarOpen}">
                 <span>
-                    <svg class="w-6 h-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
+                    <ion-icon class="w-6 h-6 text-gray-400" name="wallet-outline">
+                    </ion-icon>
+
                 </span>
                 <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Paiment</span>
             </a>
@@ -256,7 +249,11 @@
                 class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
                 :class="{'justify-center': !isSidebarOpen}">
                 <span>
-                    <ion-icon name="bookmarks-outline" class="w-6 h-6"></ion-icon>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6 text-gray-400">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                    </svg>
                 </span>
                 <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Profile</span>
             </a>

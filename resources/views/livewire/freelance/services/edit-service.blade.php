@@ -35,9 +35,10 @@
 
                     {{ $this->form }}
 
-                    <div class="flex items-end">
+                    <div class="flex items-end mt-4">
 
-                        <x-button wire:click="submit" label="Modifier"></x-button>
+
+                        <x-button wire:click="submit" spinner="submit" label="Modifier"></x-button>
 
                     </div>
                 </div>
@@ -67,8 +68,17 @@
                 </div>
 
 
-                <div>
-                    <x-button spinner="images" wire:click="saveImage()" label='Modifier' type="submit"></x-button>
+                <div class="mt-4">
+
+                    <div wire:loading wire:target='images'>
+                        <x-button spinner="images" label='Chargement du fichier' disabled></x-button>
+                    </div>
+                    <div wire:loading.remove wire:target='images'>
+                        <x-button spinner="saveImage" wire:click="saveImage()" label='Modifier' type="submit">
+                        </x-button>
+
+                    </div>
+
                 </div>
 
 

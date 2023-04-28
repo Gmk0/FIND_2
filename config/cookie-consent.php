@@ -2,6 +2,8 @@
 
 return [
     'cookie_name' => 'Find_Cookies',
+    'cookie_value_analytics' => '2',
+    'cookie_value_marketing' => '3',
 
     'consent_value' => 'yes',
     'refuse_value' => 'no',

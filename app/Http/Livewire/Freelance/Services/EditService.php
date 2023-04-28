@@ -79,6 +79,10 @@ class EditService extends Component implements Forms\Contracts\HasForms
             'samples' => $this->samples,
 
         ]);
+        $this->notification()->success(
+            $title = "Modifcation reussi ",
+            $description = 'Votre service  ete creer avec success',
+        );
 
         $this->emitSelf('refresh');
     }
@@ -182,12 +186,12 @@ class EditService extends Component implements Forms\Contracts\HasForms
 
 
 
-            MarkdownEditor::make('description'),
+            RichEditor::make('description'),
 
             RichEditor::make('samples')->label('Quelques Realisation lier')
                 ->fileAttachmentsDisk('local')
                 ->fileAttachmentsDirectory('attachments'),
-            MarkdownEditor::make('basic_support')
+            RichEditor::make('basic_support')
                 ->disableAllToolbarButtons()
                 ->enableToolbarButtons(['orderedList', 'bulletList'])
 
