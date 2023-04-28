@@ -10,7 +10,7 @@ use App\Models\SubCategory;
 use Livewire\WithPagination;
 use App\Tools\Cart;
 use Illuminate\Support\Facades\Session;
-use WireUi\Traits\Actions;
+use wireui\Traits\Actions;
 
 class ServiceByCategory extends Component
 {
@@ -62,7 +62,7 @@ class ServiceByCategory extends Component
     public function add_cart($id)
     {
 
-        if (auth()->check()) {
+        if (auth()->user() != null) {
             $service = Service::find($id);
             $files = $service->files;
             foreach ($files as $key => $file) {

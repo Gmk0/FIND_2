@@ -90,7 +90,7 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
                             ])
                             ->columns(2),
 
-                        MarkdownEditor::make('description'),
+                        RichEditor::make('description'),
                         // ...
                     ]),
                 Step::make('Support du Service')
