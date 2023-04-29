@@ -101,7 +101,7 @@ $overflow="overflow-y-auto";
                     x-transition:leave="transform transition-transform duration-300"
                     x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
                     x-show="isSidebarOpen" x-cloak
-                    class="fixed inset-y-0 left-0 z-10 flex-shrink-0 w-64 bg-white border-r-2 border-blue-400 shadow-lg sm:left-16 rounded-tr-3xl rounded-br-3xl sm:w-64 lg:static lg:w-64">
+                    class="fixed inset-y-0 left-0 z-50 flex-shrink-0 w-64 bg-white border-r-2 border-blue-400 shadow-lg sm:left-16 rounded-tr-3xl rounded-br-3xl sm:w-64 lg:static lg:w-64">
                     <nav x-show="currentSidebarTab == 'linksTab'" aria-label="Main"
                         class="flex flex-col h-full pl-5 overflow-y-auto custom-scrollbar">
                         <!-- Logo -->
@@ -132,7 +132,7 @@ $overflow="overflow-y-auto";
             <div class="flex flex-col flex-1">
                 <x-headerUserTest />
 
-                <main class="h-full pb-16 overflow-y-auto">
+                <main class="h-full pb-12 pt-20 md:pt-0 overflow-y-auto">
                     <!-- Main -->
                     @yield('content')
 
@@ -178,7 +178,7 @@ $overflow="overflow-y-auto";
             x-transition:leave="transition transform duration-300"
             x-transition:leave-start="translate-x-0 opacity-100 ease-out"
             x-transition:leave-end="translate-x-full opacity-0 ease-in"
-            class="fixed inset-y-0 right-0 flex flex-col bg-white shadow-lg bg-opacity-20 w-80"
+            class="fixed inset-y-0 right-0 flex z-50 flex-col bg-white shadow-lg bg-opacity-20 w-80"
             style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
             <div class="flex items-center justify-between flex-shrink-0 p-2">
                 <h6 class="p-2 text-gray-800">Notification</h6>

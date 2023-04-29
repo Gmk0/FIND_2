@@ -7,6 +7,10 @@
 
 
         <h2 class="mb-8 text-xl font-semibold tracking-wide text-indigo-600 uppercase">Mes Projet</h2>
+        <div>
+
+            <x-button href="{{route('createProject')}}" label="Soumettre"></x-button>
+        </div>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 
             @forelse($projets as $projet)

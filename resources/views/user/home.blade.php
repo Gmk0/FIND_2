@@ -53,7 +53,7 @@
 
         </div>
     </div>
-    <div class="relative z-20 col-span-6 md:flex">
+    <div class="relative hidden  z-20 col-span-6 md:flex">
         <div class="flex flex-wrap gap-2" x-data="{ splide: null }" x-init="() => {
                 splide = new Splide('.splide', {
                     type: 'loop',

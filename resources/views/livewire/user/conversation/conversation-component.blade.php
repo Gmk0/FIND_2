@@ -1,4 +1,4 @@
-<div class="flex max-h-screen overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
+<div class="flex max-h-screen overflow-hidden  " x-data="{sidebarOpen:false, isLoading:true}"
     x-init="setTimeout(() => { isLoading = false }, 3000)">
     <div x-show="isLoading">
 
