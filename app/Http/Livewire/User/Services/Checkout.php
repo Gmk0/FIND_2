@@ -9,7 +9,6 @@ use App\Models\transaction;
 use App\Events\ServiceOrdered;
 use App\Models\feedback;
 use App\Models\Like;
-
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -192,15 +191,13 @@ class Checkout extends Component
             'Telephone' => $telephone,
             'Language' => 'fr',
             "Reference" => $reference,
-            "SuccessURL" =>  env('SuccessURL', 'http://localhost:8000/checkout/status'),
-            "FailureURL" => env('FailureURL', 'http://localhost:8000/checkout/status'),
-            "CancelURL" => env('CancelURL', 'http://localhost:8000/checkout/status'),
-            "NotifyURL" => env('NotifyURL', 'http://localhost:8000/checkout/status'),
+            "SuccessURL" =>  "https://83-229-67-85.cloud-xip.com/checkout/status",
+            "FailureURL" =>  "https://83-229-67-85.cloud-xip.com/checkout/status",
+            "CancelURL" =>  "https://83-229-67-85.cloud-xip.com/commande",
 
 
             // Ajouter d'autres données de requête nécessaires
         ];
-
 
 
 
@@ -209,10 +206,9 @@ class Checkout extends Component
 
 
         // Construire l'URL de redirection avec les données du formulaire
-        $url = 'https://api-testbed.maxicashapp.com/PayEntry?data=' . json_encode($requestData);
+        $url = 'https://api-testbed.maxicashapp.com/PayEntry?data=' . urlencode(json_encode($requestData));
 
         // Effectuer la redirecti
-        dd($url);
         return redirect($url);
     }
 
@@ -231,8 +227,6 @@ class Checkout extends Component
         // Concaténer le compteur à la fin de l'ID unique
         return  $finalId = 'PM' . $uniqueId . $counter;
     }
-
-
 
 
     /*  public function effectuerPaiementGroupé(Request $request)
