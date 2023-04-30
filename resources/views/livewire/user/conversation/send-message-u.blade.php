@@ -1,4 +1,4 @@
-<div x-data="{photoName: null, photoPreview: null, pos: 0}" class="">
+<div x-data="{photoName: null, photoPreview: null}" class="">
     <div class="mt-2 mb-2" x-show="photoPreview" style="display: none;">
         <span class="block w-20 h-20 bg-center bg-no-repeat bg-cover rounded-lg "
             x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
@@ -33,8 +33,7 @@
 
         </div>
         <input wire:model.defer="body" id="input" type="text" placeholder="Écrire un message" x-ref="myInput"
-            x-on:focus="pos= $refs.myInput.selectionStart" x-on:blur='resetPosition'
-            x-bind:style="'caret-color: red; text-indent: ' + pos +'ch;'"
+            x-on:blur='resetPosition'
             class="flex-1 p-2 mr-1 bg-white border border-gray-300 rounded-full md:mr-4 focus:outline-none focus:ring focus:border-blue-300">
 
         <button type="submit" class="" wire:loading.attr='disabled' @click="photoPreview=null">
