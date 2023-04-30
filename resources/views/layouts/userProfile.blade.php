@@ -132,7 +132,7 @@ $overflow="overflow-y-auto";
             <div class="flex flex-col flex-1">
                 <x-headerUserTest />
 
-                <main class="h-full md:pb-12 sm:pt-16 md:pt-0 overflow-y-auto">
+                <main id="main" class="h-full pb-12 p-2  overflow-y-auto">
                     <!-- Main -->
                     @yield('content')
 

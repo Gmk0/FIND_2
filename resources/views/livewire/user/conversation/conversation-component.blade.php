@@ -1,10 +1,10 @@
-<div x-data="{ parentX: 0, parentY: 0 }" class="parent overflow-auto custom-scrollbar">
+<div x-data="{ parentX: 0, parentY: 0 }" class="parent  custom-scrollbar">
 
-    <div class="flex max-h-screen overflow-auto  " x-data="{sidebarOpen:false, isLoading:true}"
+    <div class="flex md:max-h-screen h-screen md:overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
         x-init="setTimeout(() => { isLoading = false }, 3000)">
         <div x-show="isLoading">
 
-            <div class="flex flex-col flex-1 h-screen  overflow-y-hidden md:flex-row">
+            <div class="flex flex-col flex-1 h-screen bg-gray-300 animate-pulse w-full  overflow-y-hidden md:flex-row">
                 <div
                     class="order-first hidden w-72 h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse md:flex ">
                     <div>
@@ -14,7 +14,7 @@
 
             </div>
         </div>
-        <div x-cloak x-show="!isLoading" class="flex-1 w-full h-full ">
+        <div x-cloak x-show="!isLoading" class="flex-1 w-full  ">
             <div class="container flex flex-col w-11/12 h-full p-4 m-auto main-body">
 
 
@@ -179,9 +179,16 @@
     function resetPosition() {
 
 
-         let parentDiv = document.querySelector('.parent');
-                parentDiv.scrollTop = 0;
-          }
+        const div = document.getElementById("main");
+
+
+
+
+        // Ramener la scrollbar au haut de la div
+        div.scrollTop = 0;
+     }
+
+
 </script>
 
 @endpush
