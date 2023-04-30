@@ -4,7 +4,7 @@
 
         <div class="flex flex-col flex-1 h-screen p-8 overflow-y-hidden md:flex-row">
             <div
-                class="order-first hidden w-screen h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-400 rounded-md animate-pulse md:flex ">
+                class="order-first hidden w-72 h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse md:flex ">
                 <div>
 
                 </div>
@@ -22,7 +22,7 @@
                 <div class="flex flex-1 h-full">
 
                     <div x-bind:class="{'hidden ': !sidebarOpen, 'md:block': sidebarOpen}"
-                        class="sidebar   w-full lg:flex md:w-1/3 flex-2 h-[550px] custom-scrollbar overflow-x-hidden overflow-y-auto flex-col pt-2 rounded-md md:pr-6">
+                        class="sidebar   w-full lg:flex md:w-1/3 flex-2 md:h-[550px] h-screen custom-scrollbar overflow-x-hidden overflow-y-auto flex-col pt-2 rounded-md md:pr-6">
                         <div class="px-2 pb-6 search flex-2">
                             <x-select label="Search a User" wire:model.debounce.500ms="freelance"
                                 placeholder="Selectionner un freelance" :async-data="route('api.freelance.users')"

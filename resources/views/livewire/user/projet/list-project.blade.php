@@ -7,7 +7,7 @@
 
 
         <h2 class="mb-8 text-xl font-semibold tracking-wide text-indigo-600 uppercase">Mes Projet</h2>
-        <div>
+        <div class="my-4">
 
             <x-button href="{{route('createProject')}}" label="Soumettre"></x-button>
         </div>

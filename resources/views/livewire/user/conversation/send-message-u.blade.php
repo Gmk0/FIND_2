@@ -1,10 +1,10 @@
-<div x-data="{photoName: null, photoPreview: null}" class="">
+<div x-data="{photoName: null, photoPreview: null, pos: 0}" class="">
     <div class="mt-2 mb-2" x-show="photoPreview" style="display: none;">
         <span class="block w-20 h-20 bg-center bg-no-repeat bg-cover rounded-lg "
             x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
         </span>
     </div>
-    <form wire:submit.prevent='sendMessage' class="flex items-center p-4 bg-gray-100 ">
+    <form wire:submit.prevent='sendMessage' class="flex items-center p-4 bg-gray-100  dark:bg-gray-700">
         <div class="relative" class="mr-2 md:mr-4">
 
 
@@ -32,13 +32,16 @@
             </button>
 
         </div>
-        <input wire:model.defer="body" type="text" placeholder="Écrire un message"
+        <input wire:model.defer="body" id="input" type="text" placeholder="Écrire un message" x-ref="myInput"
+            x-on:focus="pos= $refs.myInput.selectionStart" x-on:blur='resetPosition'
+            x-bind:style="'caret-color: red; text-indent: ' + pos +'ch;'"
             class="flex-1 p-2 mr-1 bg-white border border-gray-300 rounded-full md:mr-4 focus:outline-none focus:ring focus:border-blue-300">
 
         <button type="submit" class="" wire:loading.attr='disabled' @click="photoPreview=null">
 
-            <svg fill="#000000" class="w-5 h-5" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.001 512.001" xml:space="preserve">
+            <svg fill="#000000" class="w-5 h-5 dark:text-blue-700" version="1.1" id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 512.001 512.001" xml:space="preserve">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -52,5 +55,19 @@
                 </g>
             </svg>
         </button>
+
+        <script>
+            const input = document.getElementById('input');
+
+            function resetPosition(){
+
+                input.selectionStart = input.selectionEnd = input.value.length;
+                input.scrollLet=0;
+
+            }
+        </script>
     </form>
+
+
+
 </div>
