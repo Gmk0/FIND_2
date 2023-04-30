@@ -1,7 +1,7 @@
 <div x-data="{ parentX: 0, parentY: 0 }" class="parent  custom-scrollbar">
 
-    <div class="flex md:max-h-screen h-screen md:overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
-        x-init="setTimeout(() => { isLoading = false }, 3000)">
+    <div class="flex md:max-h-screen   pt-4 sm:pt-20 h-screen md:overflow-hidden "
+        x-data="{sidebarOpen:false, isLoading:true}" x-init="setTimeout(() => { isLoading = false }, 3000)">
         <div x-show="isLoading">
 
             <div class="flex flex-col flex-1 h-screen bg-gray-300 animate-pulse w-full  overflow-y-hidden md:flex-row">

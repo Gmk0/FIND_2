@@ -1,4 +1,13 @@
-<div class="md:relative   w-full  z-40 bg-white">
+@php
+if(request()->routeIs('MessageUser')){
+$fixed=" md:relative";
+}else{
+$fixed="";
+}
+@endphp
+
+
+<div class="w-full {{$fixed}} z-40 bg-white">
     <header class="py-4 bg-white w-full  mx-auto shadow-md  dark:bg-gray-800">
         <div class="container flex items-center justify-between h-full px-6 mx-auto text-amber-600 dark:text-amber-300">
             <!-- Mobile hamburger -->
