@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\User\Commande;
 
 use App\Events\FeedbackSend;
-use App\Models\feedback;
+use App\Models\FeedbackService;
 use Livewire\Component;
 use App\Models\Order;
 use WireUi\Traits\Actions;
@@ -47,17 +47,15 @@ class CommandeOneView extends Component
 
     public function openConfirmModal()
     {
-        $this->modalC=true;
+        $this->modalC = true;
     }
-    
+
     public function confirmed()
     {
-        
-        
-        $this->modalC=false;
-        $this->notification()->error($title="impossible d Annuller la commande");
-        
-        
+
+
+        $this->modalC = false;
+        $this->notification()->error($title = "impossible d Annuller la commande");
     }
 
 
@@ -69,7 +67,7 @@ class CommandeOneView extends Component
     public function sendFeedback()
     {
         $this->validate(['feedback.description' => 'required']);
-        $data = feedback::where('order_id', $this->order_id)->first();
+        $data = FeedbackService::where('order_id', $this->order_id)->first();
         $data->satisfaction = $this->satisfaction;
         $data->commentaires = $this->feedback['description'];
 
