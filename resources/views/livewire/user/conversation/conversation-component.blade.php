@@ -178,7 +178,7 @@
 
 
          let parentDiv = document.querySelector('.parent');
-        parentDiv.scrollTop = parentDiv.scrollHeight;
+                parentDiv.scrollTop = 0;
           }
     </script>
 
