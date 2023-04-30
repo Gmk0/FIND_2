@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Freelance\Commande;
 
-use App\Models\feedback;
+use App\Models\FeedbackService;
 use App\Models\Order;
 use App\Models\rapport;
 use Livewire\Component;
@@ -74,7 +74,7 @@ class ViewCommande extends Component
 
             $id = $this->Order->id;
 
-            $data = feedback::where('order_id', $id)->first();
+            $data = FeedbackService::where('order_id', $id)->first();
 
             $data->etat = $this->status;
             $data->delai_livraison_estimee = $this->jour;

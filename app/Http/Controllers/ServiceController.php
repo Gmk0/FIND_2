@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\ServiceOrdered;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Models\feedback;
+use App\Models\FeedbackService;
 use App\Models\Service;
 use App\Models\Freelance;
 use App\Models\Order;
@@ -166,7 +166,7 @@ class ServiceController extends Controller
             }
 
             foreach ($datas as $order) {
-                $feedback = feedback::create(['order_id' => $order->id]);
+                $feedback = FeedbackService::create(['order_id' => $order->id]);
             }
 
             DB::commit();

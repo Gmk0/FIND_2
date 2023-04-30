@@ -19,6 +19,7 @@
         "league/flysystem-aws-s3-v3": "^3.12",
         "livewire/livewire": "^2.11",
         "martinschenk/livewire-cookie-consent": "^1.0",
+        "phpseclib/phpseclib": "^3.0",
         "pusher/pusher-php-server": "^7.2",
         "wireui/wireui": "^1.17"
     },

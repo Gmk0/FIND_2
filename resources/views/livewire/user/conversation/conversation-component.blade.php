@@ -1,10 +1,10 @@
-<div x-data="{ parentX: 0, parentY: 0 }" class="parent">
+<div x-data="{ parentX: 0, parentY: 0 }" class="parent overflow-auto custom-scrollbar">
 
-    <div class="flex max-h-screen overflow-hidden  " x-data="{sidebarOpen:false, isLoading:true}"
+    <div class="flex max-h-screen overflow-auto  " x-data="{sidebarOpen:false, isLoading:true}"
         x-init="setTimeout(() => { isLoading = false }, 3000)">
         <div x-show="isLoading">
 
-            <div class="flex flex-col flex-1 h-screen p-8 overflow-y-hidden md:flex-row">
+            <div class="flex flex-col flex-1 h-screen  overflow-y-hidden md:flex-row">
                 <div
                     class="order-first hidden w-72 h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse md:flex ">
                     <div>
@@ -172,15 +172,16 @@
         </div>
     </div>
 
+</div>
 
-    <script>
-        function resetPosition() {
+@push('script')
+<script>
+    function resetPosition() {
 
 
          let parentDiv = document.querySelector('.parent');
                 parentDiv.scrollTop = 0;
           }
-    </script>
+</script>
 
-
-</div>
+@endpush

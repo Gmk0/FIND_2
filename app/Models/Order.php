@@ -79,7 +79,7 @@ class Order extends Model
 
     public function feedback(): HasOne
     {
-        return $this->hasOne(feedback::class);
+        return $this->hasOne(FeedbackService::class);
     }
     public function notification()
     {

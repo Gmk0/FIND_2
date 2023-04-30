@@ -98,6 +98,13 @@ class ServiceList extends Component implements Tables\Contracts\HasTable
                 ->icon('heroicon-s-pencil'),
             Tables\Actions\DeleteAction::make(),
 
+            Action::make('Feedback')
+                ->url(fn (ModelService $record): string => route('freelance.service.feedback', $record->id))
+                // ->openUrlInNewTab()
+                ->icon('heroicon-s-pencil'),
+            Tables\Actions\DeleteAction::make(),
+
+
 
         ];
     }

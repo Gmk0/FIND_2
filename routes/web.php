@@ -84,6 +84,10 @@ Route::middleware([
 
     Route::get('/user/paiement', App\Http\Livewire\User\Paiement\PaiementUser::class)->name('paiementUser');
 
+    Route::view('/user/assistance', 'user.assistance')->name('assistanceUser');
+
+    Route::get('/user/parametres', App\Http\Livewire\User\Config\Parametre::class)->name('parametreUser');
+
     //favoris
 
     Route::get('/user/favoris', App\Http\Livewire\User\Favoris\FavorisService::class)->name('favorisUser');

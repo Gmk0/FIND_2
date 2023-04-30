@@ -22,8 +22,12 @@ Route::group(['prefix' => "freelance"], function () {
 
         Route::group(['prefix' => "service"], function () {
             Route::get('/', \App\Http\Livewire\Freelance\Services\ServiceList::class)->name('freelance.service.list');
+
+
             Route::get('/create', \App\Http\Livewire\Freelance\Services\ServicesCreate::class)->name('freelance.service.create');
             Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
+
+            Route::get('/feedback/{id}', App\Http\Livewire\Freelance\Services\FeedBackView::class)->name('freelance.service.feedback');
         });
         Route::group(['prefix' => "commande"], function () {
             Route::get('/', \App\Http\Livewire\Freelance\Commande\ListCommande::class)->name('freelance.commande.list');

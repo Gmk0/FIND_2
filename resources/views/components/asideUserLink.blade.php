@@ -154,6 +154,34 @@
         </x-asideLinkNav>
     </li>
 
+    <li class="relative px-6 py-3">
+
+
+        @if(request()->routeIs('paiementUser'))
+        <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-amber-600" aria-hidden="true"></span>
+        @endif
+
+        <x-asideLinkNav href="{{route('assistanceUser')}}" :active="request()->routeIs('assistanceUser')">
+
+            <ion-icon name="support-outline" class="w-6 h-6"></ion-icon>
+            <span class="ml-4">Assistance</span>
+        </x-asideLinkNav>
+    </li>
+
+    <li class="relative px-6 py-3">
+
+
+        @if(request()->routeIs('paiementUser'))
+        <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-amber-600" aria-hidden="true"></span>
+        @endif
+
+        <x-asideLinkNav href="{{route('parametreUser')}}" :active="request()->routeIs('parametreUser')">
+
+            <ion-icon name="tools-outline" class="w-6 h-6"></ion-icon>
+            <span class="ml-4">Configuration</span>
+        </x-asideLinkNav>
+    </li>
+
     <li x-data="{ linkHover: false, linkActive: false }" class="relative px-6 py-3">
 
         @if(request()->routeIs('securiteUser')|| request()->routeIs('profile.show'))
