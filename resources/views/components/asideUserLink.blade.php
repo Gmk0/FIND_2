@@ -163,7 +163,9 @@
 
         <x-asideLinkNav href="{{route('assistanceUser')}}" :active="request()->routeIs('assistanceUser')">
 
-            <ion-icon name="support-outline" class="w-6 h-6"></ion-icon>
+
+            <ion-icon name="call-outline" class="w-6 h-6"></ion-icon>
+
             <span class="ml-4">Assistance</span>
         </x-asideLinkNav>
     </li>
@@ -177,7 +179,8 @@
 
         <x-asideLinkNav href="{{route('parametreUser')}}" :active="request()->routeIs('parametreUser')">
 
-            <ion-icon name="tools-outline" class="w-6 h-6"></ion-icon>
+
+            <ion-icon name="build-outline" class="w-6 h-6"></ion-icon>
             <span class="ml-4">Configuration</span>
         </x-asideLinkNav>
     </li>
