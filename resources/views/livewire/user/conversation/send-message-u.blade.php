@@ -1,5 +1,5 @@
 <div x-data="{photoName: null, photoPreview: null}" class="">
-    <div class="mt-2 mb-2" x-show="photoPreview" style="display: none;">
+    <div class="mt-2 mb-2 " x-show="photoPreview" style="display: none;">
         <span class="block w-20 h-20 bg-center bg-no-repeat bg-cover rounded-lg "
             x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
         </span>
@@ -55,16 +55,7 @@
             </svg>
         </button>
 
-        <script>
-            const input = document.getElementById('input');
 
-            function resetPosition(){
-
-                input.selectionStart = input.selectionEnd = input.value.length;
-                input.scrollLet=0;
-
-            }
-        </script>
     </form>
 
 
