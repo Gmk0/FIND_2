@@ -1,10 +1,10 @@
-<div x-data="{ parentX: 0, parentY: 0 }" class="parent  custom-scrollbar">
+<div id="parent" class="  custom-scrollbar">
 
-    <div class="flex   pt-4 sm:pt-20 h-screen md:overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
+    <div class="flex    py-4 sm:pt-20 h-screen md:overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
         x-init="setTimeout(() => { isLoading = false }, 2000)">
         <div x-show="isLoading">
 
-            <div class="flex flex-col flex-1 h-screen bg-gray-300 animate-pulse w-full  overflow-y-hidden md:flex-row">
+            <div class="flex flex-col  h-screen bg-gray-300 animate-pulse w-full  overflow-y-hidden md:flex-row">
                 <div
                     class="order-first hidden w-full h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse md:flex ">
                     <div>
@@ -15,16 +15,16 @@
             </div>
         </div>
         <div x-cloak x-show="!isLoading" class="flex-1 w-full  ">
-            <div class="container flex flex-col w-11/12 h-full p-4 m-auto main-body">
+            <div class="container flex flex-col w-11/12 h-full p-2 m-2 main-body">
 
 
-                <div class="flex flex-col flex-1 main">
+                <div class="flex flex-col flex-1 my-auto  lg:my-0  main">
 
 
-                    <div class="flex flex-1 h-full">
+                    <div class="flex py-2 md:py-0  flex-1 h-full">
 
-                        <div x-bind:class="{'hidden ': !sidebarOpen, 'md:block': sidebarOpen}"
-                            class="sidebar   w-full lg:flex md:w-1/3 flex-2 md:h-[550px] h-screen custom-scrollbar overflow-x-hidden overflow-y-auto flex-col pt-2 rounded-md md:pr-6">
+                        <div x-bind:class="{'hidden ': !sidebarOpen, 'lg:block': sidebarOpen}"
+                            class="sidebar   w-full lg:flex lg:w-1/3 flex-2 lg:h-[550px] h-screen custom-scrollbar overflow-x-hidden overflow-y-auto flex-col pt-2 rounded-md md:pr-6">
                             <div class="px-2 pb-6 search flex-2">
                                 <x-select label="Search a User" wire:model.debounce.500ms="freelance"
                                     placeholder="Selectionner un freelance" :async-data="route('api.freelance.users')"
@@ -110,11 +110,11 @@
                         </div>
 
 
-                        <div x-data="{message:''}" x-bind:class="{'hidden': sidebarOpen, 'md:flex': !sidebarOpen}"
-                            class="chat-area flex-1 bg-white  p-2 rounded-md flex md:h-[500px] max-h-screen  flex-col">
+                        <div x-bind:class="{'hidden': sidebarOpen, 'md:flex': !sidebarOpen}"
+                            class="chat-area flex-1 bg-white  p-2 rounded-md flex lg:h-[500px] h-[550px]  flex-col">
 
                             <div x-data="" class="flex gap-3 bg-gray-100 z-5 dark:bg-gray-800">
-                                <button wire:ignore @click="sidebarOpen = true" class="block md:hidden ">
+                                <button wire:ignore @click="sidebarOpen = true" class="block lg:hidden ">
                                     <ion-icon class="w-8 h-8 text-gray-800" name="arrow-back-circle-outline"></ion-icon>
                                 </button>
 
@@ -127,7 +127,7 @@
                                 </h2>
                                 @else
                                 <h2
-                                    class="flex justify-between flex-grow py-1 mx-2 mb-2 text-lg text-gray-800 border-b-2 border-gray-200 md:mx-4 md:text-xl dark:text-white md:mb-4">
+                                    class="flex justify-between flex-grow py-1 mx-2 mb-2 text-lg text-gray-800 border-b-2 border-gray-200 md:mx-4 md:text-xl dark:text-white lg:mb-4">
 
                                     <div class="flex flex-col">
                                         <b>{{$selectedConversation->freelance?->nom}}</b>
@@ -181,6 +181,8 @@
 
         var div = document.getElementById("main");
 
+        var parent = document.getElementById('parent');
+
         const body= document.getElementById("body");
 
         const header= document.getElementById("header");
@@ -188,8 +190,11 @@
 
         div.scrollTop = 0;
 
-
-        body.scrollTop = 0;
+        window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+        });
 
 
 
