@@ -46,22 +46,26 @@ class ConversationComponent extends Component
 
             if (empty($data)) {
 
+                try {
 
-                $conversation = new Conversation();
-                $conversation->freelance_id = $this->freelance;
-                $conversation->last_time_message = now();
-                $conversation->status = 'pending';
-                $conversation->save();
 
-                $createdMessage = Message::create([
-                    'sender_id' => auth()->user()->id,
-                    'receiver_id' => $this->freelance,
-                    'conversation_id' => $conversation->id,
-                    'body' => "Hi",
-                    'is_read' => '0',
-                    'type' => "text",
+                    $conversation = new Conversation();
+                    $conversation->freelance_id = $this->freelance;
+                    $conversation->last_time_message = now();
+                    $conversation->status = 'pending';
+                    $conversation->save();
 
-                ]);
+                    $createdMessage = Message::create([
+                        'sender_id' => auth()->user()->id,
+                        'receiver_id' => $this->freelance,
+                        'conversation_id' => $conversation->id,
+                        'body' => "Hi",
+                        'is_read' => '0',
+                        'type' => "text",
+
+                    ]);
+                } catch (Exception $e) {
+                }
             } else {
                 $this->chatUserSelected($data, $this->freelance);
             }
@@ -154,19 +158,23 @@ class ConversationComponent extends Component
     {
         //dd($this->selectedConversation);
 
-        $data = $this->selectedConversation->delete();
+        try {
 
-        $this->selectedConversation = null;
+            $data = $this->selectedConversation->delete();
 
-        $this->notification()->success(
 
-            $title = "succees",
+            $this->notification()->success(
 
-        );
+                $title = "succees",
 
-        $this->emitTo('user.conversation.body-message', 'refresh');
-        $this->emitTo('user.conversation.send-message-u', 'refresh');
-        $this->emitSelf('refresh');
+            );
+
+            $this->emitTo('user.conversation.body-message', 'refresh');
+            $this->emitTo('user.conversation.send-message-u', 'refresh');
+            $this->emitSelf('refresh');
+        } catch (\Exception $e) {
+        }
+
 
         return redirect()->route('MessageUser');
     }
