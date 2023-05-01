@@ -1,12 +1,12 @@
 <div x-data="{ parentX: 0, parentY: 0 }" class="parent  custom-scrollbar">
 
-    <div class="flex md:max-h-screen   pt-4 sm:pt-20 h-screen md:overflow-hidden "
-        x-data="{sidebarOpen:false, isLoading:true}" x-init="setTimeout(() => { isLoading = false }, 3000)">
+    <div class="flex   pt-4 sm:pt-20 h-screen md:overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
+        x-init="setTimeout(() => { isLoading = false }, 2000)">
         <div x-show="isLoading">
 
             <div class="flex flex-col flex-1 h-screen bg-gray-300 animate-pulse w-full  overflow-y-hidden md:flex-row">
                 <div
-                    class="order-first hidden w-72 h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse md:flex ">
+                    class="order-first hidden w-full h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse md:flex ">
                     <div>
 
                     </div>
@@ -111,7 +111,7 @@
 
 
                         <div x-data="{message:''}" x-bind:class="{'hidden': sidebarOpen, 'md:flex': !sidebarOpen}"
-                            class="chat-area flex-1 bg-white  p-2 rounded-md flex md:h-[500px] h-[550px]  flex-col">
+                            class="chat-area flex-1 bg-white  p-2 rounded-md flex md:h-[500px] max-h-screen  flex-col">
 
                             <div x-data="" class="flex gap-3 bg-gray-100 z-5 dark:bg-gray-800">
                                 <button wire:ignore @click="sidebarOpen = true" class="block md:hidden ">
@@ -179,21 +179,22 @@
     function resetPosition() {
 
 
-        const div = document.getElementById("main");
+        var div = document.getElementById("main");
 
         const body= document.getElementById("body");
 
         const header= document.getElementById("header");
 
 
+        div.scrollTop = 0;
 
 
         body.scrollTop = 0;
-        header.scrollTop = 0;
+
 
 
         // Ramener la scrollbar au haut de la div
-        div.scrollTop = 0;
+
      }
 
 
