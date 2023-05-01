@@ -181,7 +181,15 @@
 
         const div = document.getElementById("main");
 
+        const body= document.getElementById("body");
 
+        const header= document.getElementById("header");
+
+
+
+
+        body.scrollTop = 0;
+        header.scrollTop = 0;
 
 
         // Ramener la scrollbar au haut de la div

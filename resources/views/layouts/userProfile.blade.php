@@ -12,11 +12,11 @@ $overflow="overflow-y-auto";
 @endphp
 
 
-<body x-data="setup()" x-init="$refs.loading.classList.add('hidden');" @resize.window="watchScreen()"
+<body id="body" x-data="setup()" x-init="$refs.loading.classList.add('hidden');" @resize.window="watchScreen()"
     class="flex flex-col justify-between overflow-x-hidden overflow-y-hidden bg-gray-100 custom-scrollbar dark:text-gray-100 dark:bg-gray-900">
     <x-notifications z-index="z-50" position='top-left' />
     <div>
-        <div class="flex h-screen overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar">
+        <div id="header" class="flex min-h-screen overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar">
             <!-- Loading screen -->
             <div x-ref="loading"
                 class="fixed inset-0 z-50 flex items-center justify-center text-2xl font-semibold text-white ">
