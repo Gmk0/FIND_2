@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\User\Paiement;
 
 use App\Models\PaimentMethod;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 use WireUi\Traits\Actions;
@@ -19,6 +20,7 @@ class PaiementUser extends Component
     public $methodePaiment = null;
     public $editModal = false;
     public  $idMobile;
+    public $pays;
     protected $listeners = ['refresh' => '$refresh'];
 
     public function openModalMobile()
@@ -31,6 +33,9 @@ class PaiementUser extends Component
     {
         $this->methodePaiment
             = PaimentMethod::where('user_id', auth()->id())->first();
+
+        $response = Http::get('https://restcountries.com/v3.1/all?fields=name,idd');
+        $this->pays = $response->json();
     }
 
     public function removeMobile(int $id)

@@ -36,7 +36,8 @@
         </svg>
     </div>
 
-    <div class="z-20 col-span-6 px-4 py-8 mt-8 lg:py-16 md:mb-8 xl:place-self-center xl:mt-0 lg:mb-0">
+    <div data-aos="fade-right" data-aos-duration="800"
+        class="z-20 col-span-6 px-4 py-8 mt-8 lg:py-16 md:mb-8 xl:place-self-center xl:mt-0 lg:mb-0">
         <h1 class="text-3xl font-bold text-center md:text-3xl xl:text-5xl lg:text-left">
             Votre satisfaction dans nos services Freelance <br />
 
@@ -74,8 +75,8 @@
                 <div class="splide__track">
                     <div class="splide__list">
                         <picture class="splide__slide">
-                            <source srcset="/images/hero/hero.png" type="image/png" />
-                            <img class="z-50 w-full h-full" src="/images/hero/hero.png" alt="" />
+                            <source srcset="/images/hero/womanHero3.png" type="image/png" />
+                            <img class="z-50 w-full h-full" src="/images/hero/womanHero3.png" alt="" />
                         </picture>
 
 
@@ -249,7 +250,7 @@
 </section>
 
 
-<section x-show="loading" x-cloak id="monde2" class="min-h-screen bg-white dark:bg-gray-800">
+<section x-show="loading" x-cloak id="monde2" class="min-h-screen bg-gray-50 dark:bg-gray-900">
 
     <div class="py-16">
         <div class="px-6 m-auto text-gray-600 xl:container md:px-12 xl:px-16">
@@ -259,7 +260,7 @@
                     <img src="/images/services/presentation3.png" alt="image"
                         class="rounded-lg dark:bg-gray-800 bg-skin-fill" loading="lazy" width="" height="" />
                 </div>
-                <div class="md:7/12 lg:w-1/2">
+                <div data-aos="fade-right" data-aos-duration="800" class="md:7/12 lg:w-1/2">
                     <h2 class="text-2xl font-bold text-gray-900 md:text-4xl dark:text-white">
                         Trouvez dès aujourd'hui la personne idéale pour votre projet !
                     </h2>

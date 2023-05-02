@@ -1,4 +1,5 @@
-<div class="min-h-screen">
+<div x-data="{ isOpen:false,isLoading: true }" x-init="setTimeout(() => { isLoading = false }, 2000) "
+    class="min-h-screen">
     <div>
         @include('include.breadcumbUser',['transation'=>'transation'])
     </div>
@@ -9,22 +10,17 @@
             <h2 class="text-xl text-indigo-600 mb-8 font-semibold tracking-wide uppercase">Mes transactions</h2>
         </div>
 
-        <div class="flex   md:flex-wrap gap-4 mb-4">
-            <div class="w-1/2 md:w-1/2 lg:w-1/4 mb-4 md:mb-0">
-                <label for="sort-by-date" class="block text-sm font-medium text-gray-700">Trier par date</label>
-                <div class="relative">
+        <div x-show="isLoading">
 
-                    <x-select :options="['Plus récentes en premier','Plus anciennes en premier']" />
-
+            <div class="flex flex-col gap-4 p-8 overflow-y-hidden">
+                <div class="grid grid-cols-1 gap-4 mt-6 md:grid-cols-3">
+                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
+                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
+                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
                 </div>
-            </div>
-            <div class="w-1/2 md:w-1/2 lg:w-1/4 mb-4 md:mb-0">
-                <label for="sort-by-amount" class="block text-sm font-medium text-gray-700">Trier par
-                    montant</label>
-                <div class="relative">
 
-                    <x-select :options="['Du plus petit au plus grand','Du plus grand au plus petit']" />
-
+                <div
+                    class="flex-1 w-full min-h-screen p-4 mb-2 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
 
 
 
@@ -32,47 +28,20 @@
             </div>
         </div>
 
-        <ul class="space-y-4">
-            <!-- Example transaction item -->
 
-            @forelse($transactions as $transaction)
-            <li x-data="{open:false}">
-                <div
-                    class="block dark:bg-gray-800 bg-white cursor-pointer hover:bg-gray-400 focus:outline-none focus:bg-gray-200 transition duration-150 ease-in-out">
-                    <div class="px-4 py-4 sm:px-6 flex flex-col md:flex-row  md:items-center justify-between">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0 bg-gray-200 rounded-md p-2">
-                                <!-- Transaction icon -->
-                                <svg class="h-8 w-8 text-gray-600" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M3 5h3v3H3V5zm0 6h3v3H3v-3zm4-6h10v10H7V5zm1 1v8h8V6H8z" />
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-lg font-semibold text-gray-900 dark:text-white">
-                                    Paiment_token:{{$transaction->payment_token}}</p>
-                                <p class="text-sm font-medium text-gray-500 dark:text-gray-200">Transaction effectuée le
-                                    {{$transaction->created_at}}
-                                </p>
-                            </div>
-                        </div>
+        <!-- Example transaction item -->
 
-                        <div class="flex justify-between mt-4 md:mt-0  items-center">
-                            <p class="text-lg font-semibold text-gray-900 dark:text-white">{{$transaction->amount}}</p>
-                            <p class="text-sm font-medium text-gray-500 ml-2 text-green">paiement
-                                :{{$transaction->status}}</p>
-                        </div>
-                    </div>
+        <div x-show="!isLoading" x-cloak class="pt-4">
 
-                    <div x-show="open" x-cloak class="p-2">
-                        <x-input />
 
-                    </div>
-                </div>
-            </li>
-            @empty
-            @endforelse
-            <!-- Ajoutez ici les éléments de transaction pour chaque transaction effectuée par l'utilisateur -->
-        </ul>
+            {{ $this->table }}
+
+
+
+
+
+
+        </div>
+
     </div>
 </div>

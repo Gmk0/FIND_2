@@ -4,10 +4,28 @@ namespace App\Http\Livewire\User\Transaction;
 
 use Livewire\Component;
 use App\Models\Transaction;
+use App\Models\Order;
+use App\Models\service;
 
-class TransactionUser extends Component
+use Filament\Tables;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\Layout\Panel;
+use Filament\Tables\Columns\{ToggleColumn, BadgeColumn, TextColumn};
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Columns\Layout\Stack;
+use Filament\Forms;
+use Filament\Tables\Filters\Filter;
+
+use Filament\Tables\Actions\{BulkAction, Action};
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
+
+class TransactionUser extends Component implements Tables\Contracts\HasTable
 {
 
+    use Tables\Concerns\InteractsWithTable;
     public $transaction;
 
 
@@ -20,16 +38,109 @@ class TransactionUser extends Component
         })->get();
     }
 
-    public function mount()
+    protected function getTableQuery(): Builder
     {
+
+        // $freelance = freelance::where('user_id', Auth::user()->id)->first();
+
+
+        $order = Order::query();
+        // Créer une requête pour la table "Service"
+        $order->where('user_id', auth()->user()->id)
+
+            ->get();
+
+
+        // Ajouter une condition pour l'utilisateur connecté
+
+        // Retourner la requête
+        return $order;
     }
+
+    protected function getTableColumns(): array
+    {
+        return [
+
+            Split::make([
+                Tables\Columns\TextColumn::make('transaction.transaction_numero')->description('Transaction'),
+                Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('lg'),
+                Tables\Columns\TextColumn::make('total_amount')->description('Montant'),
+                BadgeColumn::make('status')
+                    ->enum([
+                        'completed' => 'Payer',
+                        'pending' => 'en Attente',
+                        'rejeted' => 'Rejeter',
+                    ])->colors([
+
+                        'warning' => static fn ($state): bool => $state === 'pending',
+                        'success' => static fn ($state): bool => $state === 'completed',
+                        'danger' => static fn ($state): bool => $state === 'rejeted',
+                    ]),
+            ]),
+            Panel::make([
+                Stack::make([
+                    Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('md'),
+                    Tables\Columns\TextColumn::make('user.name')->description('client'),
+                    Tables\Columns\TextColumn::make('created_at')->description('date'),
+
+                ]),
+            ])->collapsible(),
+
+
+
+
+
+        ];
+    }
+
+
+
+    protected function getTableFilters(): array
+    {
+        return [
+            SelectFilter::make('status')
+                ->options([
+                    'completed' => 'completed',
+                    'pending' => 'pending',
+                    'rejeted' => 'rejeted',
+                ])
+                ->attribute('status'),
+
+        ];
+    }
+    public function isTableSearchable(): bool
+    {
+        return true;
+    }
+
+    protected function getTableActions(): array
+    {
+        return [
+            // ...
+            Action::make('Voir')
+                ->url(fn (Order $record): string => route('freelance.Order.view', $record->id))
+                ->openUrlInNewTab()
+                ->tooltip('Voir transaction')
+                ->icon('heroicon-s-pencil'),
+
+
+
+
+
+
+        ];
+    }
+
+    protected function getTableRecordsPerPageSelectOptions(): array
+    {
+        return [5, 15, 25, 100];
+    }
+
 
     public function render()
     {
-        return view('livewire.user.transaction.transaction-user', [
-            'transactions' => Transaction::whereHas('orders', function ($query) {
-                $query->where('user_id', auth()->user()->id);
-            })->get(),
-        ])->extends('layouts.userProfile')->section('content');
+        return view(
+            'livewire.user.transaction.transaction-user'
+        )->extends('layouts.userProfile')->section('content');
     }
 }

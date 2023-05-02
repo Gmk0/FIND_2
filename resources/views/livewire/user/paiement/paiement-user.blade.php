@@ -5,14 +5,14 @@
     <div>
         @include('include.breadcumbUser',['paiment'=>'Paiement'])
     </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 
 
-        <div class="max-w-3xl  mb-8">
-            <h2 class="text-xl text-indigo-600 mb-8 font-semibold tracking-wide uppercase">Méthodes de paiement
+        <div class="max-w-3xl mb-8">
+            <h2 class="mb-8 text-xl font-semibold tracking-wide text-indigo-600 uppercase">Méthodes de paiement
                 enregistrées</h2>
 
-            <p class="mt-4  md:text-xl  text-gray-500 dark:text-gray-100 lg:mx-auto">
+            <p class="mt-4 text-gray-500 md:text-xl dark:text-gray-100 lg:mx-auto">
                 Vous pouvez ajouter ou supprimer des méthodes de paiement à tout moment dans votre profil
                 utilisateur.
             </p>
@@ -21,11 +21,11 @@
 
         <div class="mt-10">
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2">
-                <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="overflow-hidden bg-white rounded-lg shadow">
                     <div class="px-4 py-5 sm:p-6">
                         <div class="flex items-center justify-between">
-                            <h3 class="text-lg leading-6 font-medium text-gray-800">Carte de crédit</h3>
-                            <span class="bg-red-600 text-white py-1 px-2 rounded-full text-xs">Désactivé</span>
+                            <h3 class="text-lg font-medium leading-6 text-gray-800">Carte de crédit</h3>
+                            <span class="px-2 py-1 text-xs text-white bg-red-600 rounded-full">Désactivé</span>
                         </div>
                         <div class="mt-4">
                             <p class="text-sm text-gray-500 dark:text-gray-100">Nom du titulaire de la carte</p>
@@ -35,19 +35,19 @@
                 </div>
 
 
-                <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="overflow-hidden bg-white rounded-lg shadow">
                     <div class="px-4 py-5 sm:p-6">
                         <div class="flex items-center justify-between">
-                            <h3 class="text-lg leading-6 font-medium text-gray-800">Mobile</h3>
-                            <span class="bg-green-400 text-green-800 py-1 px-2 rounded-full text-xs">Activer</span>
+                            <h3 class="text-lg font-medium leading-6 text-gray-800">Mobile</h3>
+                            <span class="px-2 py-1 text-xs text-green-800 bg-green-400 rounded-full">Activer</span>
                         </div>
                         <div class="mt-4 divide-y ">
 
                             @empty(!$methodePaiment)
                             @forelse ($methodePaiment->mobile as $key => $value)
-                            <div x-data="{linkHover:false}" class="flex gap-4 justify-between">
+                            <div x-data="{linkHover:false}" class="flex justify-between gap-4">
 
-                                <p class="mt-2 flex text-lg font-semibold text-gray-800"><span
+                                <p class="flex mt-2 text-lg font-semibold text-gray-800"><span
                                         class=''>{{$value['operateur']}} :</span>
                                     +{{$value['mobile']}}</p>
 
@@ -66,6 +66,34 @@
 
                             @endempty
 
+
+
+
+
+                            {{-- <div x-data="{ selected: '' }">
+                                <div class="flex items-center">
+                                    <select x-model="selected"
+                                        class="w-24 py-2 px-3 border border-gray-300 bg-white rounded-l-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option value="">+</option>
+                                        @foreach ($pays as $p)
+                                        <option
+                                            value="{{ $p['idd']['root'] }}{{ isset($p['idd']['suffixes'][0]) ? $p['idd']['suffixes'][0] : '' }}">
+                                            {{
+                                            $p['name']['common'] }} ({{ $p['idd']['root'] }}{{
+                                            isset($p['idd']['suffixes'][0]) ?
+                                            $p['idd']['suffixes'][0] : ''
+                                            }})</option>
+                                        @endforeach
+                                    </select>
+
+
+
+                                    <input x-bind:value="selected"
+                                        class="flex-1 py-2 px-3 border border-gray-300 bg-white rounded-r-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        placeholder="Numéro de téléphone">
+                                </div>
+                            </div>
+                            --}}
 
                         </div>
 
