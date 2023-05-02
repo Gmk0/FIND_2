@@ -79,6 +79,9 @@ class ConversationComponent extends Component
         $this->selectedConversation = $conversation;
         $this->freelance_id = $conversation->freelance_id;
 
+        Message::where('conversation_id', $this->selectedConversation->id)
+            ->where('receiver_id', auth()->user()->id)->update(['is_read' => 1]);
+
 
         $this->emitTo('user.conversation.body-message', 'loadConversation', $this->selectedConversation, $receiverId);
         $this->emitTo('user.conversation.send-message-u', 'updateSendMessage', $this->selectedConversation, $receiverId);

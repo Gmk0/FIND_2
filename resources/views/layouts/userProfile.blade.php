@@ -16,7 +16,7 @@ $overflow="overflow-y-auto";
     class="flex flex-col justify-between overflow-x-hidden overflow-y-hidden bg-gray-100 custom-scrollbar dark:text-gray-100 dark:bg-gray-900">
     <x-notifications z-index="z-50" position='top-left' />
     <div>
-        <div class="flex h-auto overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar">
+        <div class="flex h-screen overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar">
             <!-- Loading screen -->
             <div x-ref="loading"
                 class="fixed inset-0 z-50 flex items-center justify-center text-2xl font-semibold text-white ">
@@ -132,7 +132,7 @@ $overflow="overflow-y-auto";
             <div class="flex flex-col flex-1">
                 <x-headerUserTest />
 
-                <main id="main" class="lg:h-full h-auto mt-16 md:mt-0  p-2  overflow-y-auto">
+                <main id="main" class="h-full  mt-16 md:mt-0  p-2  overflow-y-auto">
                     <!-- Main -->
                     @yield('content')
 
@@ -217,25 +217,6 @@ $overflow="overflow-y-auto";
 
     <script>
         // Détection du focus sur mobile
-            function isMobileFocus() {
-                return window.innerWidth <= 640 && document.activeElement && document.activeElement.classList.contains('mobile-focus');
-            }
-
-            // Déclenchement de l'animation de déplacement
-            function moveElement() {
-                if (isMobileFocus()) {
-                    document.getElementById('main').classList.add('mt-0');
-                }
-            }
-
-            // Annulation de l'animation de déplacement
-            function resetElement() {
-                document.getElementById('main').classList.remove('mt-0');
-            }
-
-            // Écouteur d'événements pour le focus
-            document.addEventListener('focusin', moveElement);
-            document.addEventListener('focusout', resetElement);
 
     </script>
 

@@ -1,8 +1,8 @@
-{{--<div class="flex    py-4 sm:pt-20 h-screen md:overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
+{{--<div class="flex h-screen py-4 sm:pt-20 md:overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
     x-init="setTimeout(() => { isLoading = false }, 2000)">
     <div x-show="isLoading">
 
-        <div class="flex flex-col  h-screen bg-gray-300 animate-pulse w-full  overflow-y-hidden md:flex-row">
+        <div class="flex flex-col w-full h-screen overflow-y-hidden bg-gray-300 animate-pulse md:flex-row">
             <div
                 class="order-first hidden w-full h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse md:flex ">
                 <div>
@@ -12,14 +12,14 @@
 
         </div>
     </div>
-    <div x-cloak x-show="!isLoading" class="flex-1 w-full  ">
+    <div x-cloak x-show="!isLoading" class="flex-1 w-full ">
         <div class="container flex flex-col w-11/12 h-full p-2 m-2 main-body">
 
 
-            <div class="flex flex-col flex-1 my-auto  lg:my-0  main">
+            <div class="flex flex-col flex-1 my-auto lg:my-0 main">
 
 
-                <div class="flex py-2 md:py-0  flex-1 h-full">
+                <div class="flex flex-1 h-full py-2 md:py-0">
 
                     <div x-bind:class="{'hidden ': !sidebarOpen, 'lg:block': sidebarOpen}"
                         class="sidebar   w-full lg:flex lg:w-1/3 flex-2 lg:h-[550px] h-screen custom-scrollbar overflow-x-hidden overflow-y-auto flex-col pt-2 rounded-md md:pr-6">
@@ -170,9 +170,10 @@
     </div>
 </div>--}}
 
-<div class="container mx-auto">
-    <div class="min-w-full lg:h-screen h-auto border rounded lg:grid lg:grid-cols-3">
-        <div class="border-r hidden lg:block border-gray-300 lg:col-span-1">
+<div x-data="{sidebarOpen:false, isLoading:true}" class="container mx-auto overflow-y-auto custom-scrollbar">
+    <div class="h-auto min-w-full overflow-y-auto border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
+        <div x-bind:class="{'md:block hidden': sidebarOpen, 'md:block ': !sidebarOpen}"
+            class="border-r border-gray-300 dark:border-gray-400 lg:col-span-1">
             <div class="mx-3 my-3">
                 <div class="relative text-gray-600">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -188,117 +189,139 @@
 
             <ul class="overflow-auto h-[32rem]">
                 <h2 class="my-2 mb-2 ml-2 text-lg text-gray-600">Chats</h2>
+
                 <li>
-                    <a
-                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer hover:bg-gray-100 focus:outline-none">
+                    @if (count($conversations) > 0)
+                    @foreach ($conversations as $conversation)
+                    <a wire:key='{{$conversation->id}}' href="#" @click="sidebarOpen=!sidebarOpen"
+                        wire:click="chatUserSelected({{$conversation}},{{$conversation->freelance_id }})"
+                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none">
+
+                        @if (!empty($conversation->freelance->user->profile_photo_path))
                         <img class="object-cover w-10 h-10 rounded-full"
-                            src="https://cdn.pixabay.com/photo/2018/09/12/12/14/man-3672010__340.jpg" alt="username" />
+                            src="{{Storage::disk('local')->url('public/profiles-photos/'.$conversation->freelance->user->profile_photo_path) }}"
+                            alt="">
+                        @else
+                        <img class="object-cover w-10 h-10 rounded-full"
+                            src="{{$conversation->freelance->user->profile_photo_url }}" alt="">
+                        @endif
+
+                        @if ($conversation->freelance->user->is_online)
+                        <span
+                            class="absolute bottom-0 right-0 w-2 h-2 bg-green-600 border-2 border-white rounded-full"></span>
+                        @else
+
+                        @endif
+
+
                         <div class="w-full pb-2">
                             <div class="flex justify-between">
-                                <span class="block ml-2 font-semibold text-gray-600">Jhon Don</span>
-                                <span class="block ml-2 text-sm text-gray-600">25 minutes</span>
+                                <span
+                                    class="block ml-2 font-semibold text-gray-600 dark:text-gray-200">{{$conversation->freelance->user->name}}</span>
+                                <span class="block ml-2 text-sm text-gray-600 dark:text-gray-300">{{
+                                    $conversation->messages->last()?->created_at->shortAbsoluteDiffForHumans()
+                                    }} </span>
                             </div>
-                            <span class="block ml-2 text-sm text-gray-600">bye</span>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    @if ($conversation->messages->last()?->sender_id == auth()->user()->id)
+                                    <span class="text-sm text-gray-600 dark:text-gray-400">vous:</span>
+                                    @endif
+
+                                    <span
+                                        class="block ml-2 text-sm text-gray-600 dark:bg-gray-300">{{$conversation->messages->last()?->body}}</span>
+
+                                </div>
+                                <div>
+                                    @if(count($conversation->messages->where('is_read',0)->where('sender_id',$conversation->freelance->user->id)))
+                                    <small
+                                        class="inline-block w-5 h-5 text-xs leading-6 text-center text-white bg-red-500 rounded-full">
+                                        {{count($conversation->messages->where('is_read',0)->where('sender_id',$conversation->freelance->user->id))}}
+                                    </small>
+
+                                    @endif
+
+                                </div>
+
+                            </div>
+
+
                         </div>
                     </a>
-                    <a
-                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out bg-gray-100 border-b border-gray-300 cursor-pointer focus:outline-none">
-                        <img class="object-cover w-10 h-10 rounded-full"
-                            src="https://cdn.pixabay.com/photo/2016/06/15/15/25/loudspeaker-1459128__340.png"
-                            alt="username" />
-                        <div class="w-full pb-2">
-                            <div class="flex justify-between">
-                                <span class="block ml-2 font-semibold text-gray-600">Same</span>
-                                <span class="block ml-2 text-sm text-gray-600">50 minutes</span>
-                            </div>
-                            <span class="block ml-2 text-sm text-gray-600">Good night</span>
-                        </div>
-                    </a>
-                    <a
-                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer hover:bg-gray-100 focus:outline-none">
-                        <img class="object-cover w-10 h-10 rounded-full"
-                            src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
-                            alt="username" />
-                        <div class="w-full pb-2">
-                            <div class="flex justify-between">
-                                <span class="block ml-2 font-semibold text-gray-600">Emma</span>
-                                <span class="block ml-2 text-sm text-gray-600">6 hour</span>
-                            </div>
-                            <span class="block ml-2 text-sm text-gray-600">Good Morning</span>
-                        </div>
-                    </a>
+
+                    @endforeach
+
+
+                    @endif
                 </li>
             </ul>
         </div>
-        <div class=" lg:col-span-2 lg:block">
+        <div x-bind:class="{'md:block': sidebarOpen, ' hidden md:block ': !sidebarOpen}"
+            class=" lg:col-span-2 lg:block">
             <div class="w-full">
-                <div class="relative flex items-center p-3 border-b border-gray-300">
-                    <img class="object-cover w-10 h-10 rounded-full"
-                        src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg" alt="username" />
-                    <span class="block ml-2 font-bold text-gray-600">Emma</span>
-                    <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
-                    </span>
-                </div>
-                <div class="relative w-full p-4 overflow-y-auto h-[500px]">
-                    <ul class="space-y-2">
-                        <li class="flex justify-start">
-                            <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
-                                <span class="block">Hi</span>
+                <div class="relative flex justify-between border-b border-gray-300 dark:bg-gray-400">
+                    <div class="flex items-center gap-1 p-3 border-b border-gray-300">
+
+                        <div>
+                            <button wire:ignore @click="sidebarOpen = false" class="block lg:hidden ">
+                                <ion-icon class="w-8 h-8 text-gray-800" name="arrow-back-circle-outline"></ion-icon>
+                            </button>
+                        </div>
+
+                        @empty(!$selectedConversation)
+                        <div class="flex">
+
+                            @if (!empty($selectedConversation->freelance?->user->profile_photo_path))
+                            <img class="object-cover w-10 h-10 rounded-full"
+                                src="{{Storage::disk('local')->url('public/profiles-photos/'.$selectedConversation->freelance?->user->profile_photo_path) }}"
+                                alt="">
+                            @else
+                            <img class="object-cover w-10 h-10 rounded-full"
+                                src="{{$selectedConversation->freelance?->user->profile_photo_url }}" alt="">
+                            @endif
+                            <div class="flex flex-col">
+                                <span
+                                    class="block ml-2 font-bold text-gray-600">{{$selectedConversation->freelance?->user->name}}</span>
+                                @if($selectedConversation->freelance->user->is_online)
+                                <span class="mt-1 text-sm text-green->600">online<span>
+                                        @else
+                                        <span
+                                            class="mt-1 text-sm text-gray-600">{{$selectedConversation->freelance?->user->last_activity?->DiffForHumans()}}<span>
+                                                @endif
                             </div>
-                        </li>
-                        <li class="flex justify-end">
-                            <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
-                                <span class="block">Hiiii</span>
-                            </div>
-                        </li>
-                        <li class="flex justify-end">
-                            <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
-                                <span class="block">how are you?</span>
-                            </div>
-                        </li>
-                        <li class="flex justify-start">
-                            <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
-                                <span class="block">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
+
+                            @if($selectedConversation->freelance->user->is_online)
+                            <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
+                            </span>
+                            @endif
+
+                        </div>
+
+                        @endempty
+                    </div>
+
+                    <div class="flex px-6 py-3">
+
+                        <div>
+                            <x-dropdown>
+
+                                <x-dropdown.item label="Maquer non lue" />
+                                <x-dropdown.item label="Favoris" />
+                                <x-dropdown.item wire:click="effacerConversation()" label="Effacer" />
+                                <x-dropdown.item wire:click="BloquerConversation()" label="Bloquer l'utilisateur" />
+                            </x-dropdown>
+                        </div>
+
+                    </div>
+
+
+
                 </div>
 
-                <div class="flex items-center justify-between w-full p-3 border-t border-gray-300">
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </button>
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-                        </svg>
-                    </button>
 
-                    <input type="text" placeholder="Message"
-                        class="block w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
-                        name="message" required />
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                        </svg>
-                    </button>
-                    <button type="submit">
-                        <svg class="w-5 h-5 text-gray-500 origin-center transform rotate-90"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                            <path
-                                d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                        </svg>
-                    </button>
-                </div>
+                @livewire('user.conversation.body-message')
+                @livewire('user.conversation.send-message-u')
+
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<div class="flex-1 mt-4 overflow-auto messages custom-scrollbar">
+{{--<div class="flex-1 mt-4 overflow-auto messages custom-scrollbar">
     @if($selectedConversation)
     @forelse ($messages as $message)
     <div class="message mb-4   flex flex-2 {{auth()->id() == $message->sender_id ? 'text-right items-end':''}}">
@@ -116,7 +116,132 @@
 
     @endif
 
+</div>--}}
+
+<div>
+    <div class=" w-full p-4 overflow-y-auto h-[500px] messages custom-scrollbar">
+
+        @if($selectedConversation)
+
+        <ul class="space-y-2">
+
+            @forelse ($messages as $message)
+
+            <div class="chat  {{auth()->id() == $message->sender_id ? 'chat-end':'chat-start'}}  ">
+                <div class="chat-image avatar">
+
+                    @if(auth()->id() == $message->sender_id)
+
+
+                    @if (!empty($message->senderUser->profile_photo_path))
+                    <div class="w-10 rounded-full">
+                        <img class=""
+                            src="{{Storage::disk('local')->url('profiles-photos/'.$message->senderUser->profile_photo_path) }}"
+                            alt="chat-user" />
+
+                    </div>
+
+                    @else
+                    <div class="w-10 rounded-full">
+                        <img class="" src="{{ $message->senderUser->profile_photo_url }}" alt="">
+                    </div>
+
+                    @endif
+
+                    @elseif(auth()->id() != $message->sender_id)
+                    @if (!empty($message->senderUser->profile_photo_path))
+                    <div class="w-10 rounded-full">
+                        <img class=""
+                            src="{{Storage::disk('local')->url('profiles-photos/'.$message->senderUser->profile_photo_path) }}"
+                            alt="chat-user" />
+
+                    </div>
+
+                    @else
+                    <div class="w-10 rounded-full">
+                        <img class="" src="{{ $message->senderUser->profile_photo_url }}" alt="">
+                    </div>
+
+                    @endif
+
+                    @endif
+                </div>
+                <div class="chat-header">
+
+                    <time class="text-xs opacity-50">{{ $message->created_at->format('m: i a') }}</time>
+                </div>
+
+                @if ($message->service_id != null)
+                <div
+                    class="mb-2 rounded-xl {{auth()->id() == $message->sender_id ? 'bg-green-500 rounded-br-none text-gray-100 ':'bg-green-500 rounded-bl-none text-gray-700'}}  inline-block px-4 py-3 ">
+
+
+
+
+                    <a
+                        href="{{route('ServicesViewOne',['id'=>$message->service->id,'category'=>$message->service->category->name])}}">{{$message->service->title}}
+                        /${{$message->service->basic_price}}</a>
+
+
+
+
+
+                </div>
+                @endif
+
+
+                @if(!empty($message->file))
+                <a @mouseover="linkHover = true" @mouseleave="linkHover = false"
+                    href="{{ url('/storage/messages/' . $message->file) }}" download>
+                    <img src="/storage/messages/{{$message->file }}" alt="Image" class="h-24 max-w-24">
+                </a>
+
+                @endif
+                <div class="chat-bubble dark:chat-bubble-primary">{{$message->body}}</div>
+
+                @if($message->is_read==1)
+                <div class="opacity-50 chat-footer">
+                    vu
+                </div>
+                @else
+                <div class="opacity-50 chat-footer">
+                    Delivered
+                </div>
+
+                @endif
+
+
+
+            </div>
+
+
+            @empty
+            <div class="mx-6 my-auto">
+                <h1 class="flex items-center justify-center my-16 text-xl text-gray-800">Ecrivez lui un message</h1>
+
+            </div>
+            @endforelse
+
+
+        </ul>
+
+
+
+        @else
+        <div class="flex items-center px-6 py-8 my-auto ">
+            <h1 wire:loading.remove wire:target='selectedConversation' class="text-xl text-gray-800">Pas de Conversation
+                Selectionnées</h1>
+
+        </div>
+
+
+        @endif
+    </div>
+
 </div>
+
+
+
 
 @push('script')
 
@@ -125,21 +250,25 @@
     window.addEventListener('rowChatToBottom', event => {
 
             $('.messages').scrollTop($('.messages')[0].scrollHeight);
+            $('#main').scrollTop($('#main')[0].scrollHeight);
+
+
 
         });
 </script>
 
 <script>
-    $(".messages").on('scroll', function() {
+    var messages = document.querySelector(".messages");
 
-var top = $('.messages').scrollTop();
+        messages.addEventListener("scroll", function() {
 
-if (top == 0) {
+        var top = messages.scrollTop;
 
-window.livewire.emit('loadmore');
-}
+        if (top == 0) {
 
-});
+        window.livewire.emit("loadmore");
+        }
+        });
 </script>
 
 <script>

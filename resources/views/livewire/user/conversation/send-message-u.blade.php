@@ -1,39 +1,40 @@
-<div x-data="{photoName: null, photoPreview: null}" class="">
+<div x-data="{photoName: null, photoPreview: null}">
     <div class="mt-2 mb-2 " x-show="photoPreview" style="display: none;">
         <span class="block w-20 h-20 bg-center bg-no-repeat bg-cover rounded-lg "
             x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
         </span>
+        <x-button.circle @click="photoPreview=null" onclick="deletePhoto()" icon='trash'>
+            </x-button>
     </div>
-    <form wire:submit.prevent='sendMessage' class="flex items-center p-4 bg-gray-100  dark:bg-gray-700">
-        <div class="relative" class="mr-2 md:mr-4">
+    <form wire:submit.prevent='sendMessage'
+        class=" flex items-center justify-between w-full p-3 border-t border-gray-300">
 
 
-            <input wire:model.defer="attachment" type="file" class="hidden" id="attachment" x-ref="photo" x-on:change="
-                                            photoName = $refs.photo.files[0].name;
-                                            const reader = new FileReader();
-                                            reader.onload = (e) => {
-                                                photoPreview = e.target.result;
-                                            };
-                                            reader.readAsDataURL($refs.photo.files[0]);
-                                    " />
-            <button type="button"
-                class="flex items-center justify-center p-2 mr-2 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-                onclick="document.getElementById('attachment').click()">
-                <svg class="w-5 h-5 text-blue-500" viewBox="0 0 24.00 24.00" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <path
-                            d="M20 10.9696L11.9628 18.5497C10.9782 19.4783 9.64274 20 8.25028 20C6.85782 20 5.52239 19.4783 4.53777 18.5497C3.55315 17.6211 3 16.3616 3 15.0483C3 13.7351 3.55315 12.4756 4.53777 11.547L12.575 3.96687C13.2314 3.34779 14.1217 3 15.05 3C15.9783 3 16.8686 3.34779 17.525 3.96687C18.1814 4.58595 18.5502 5.4256 18.5502 6.30111C18.5502 7.17662 18.1814 8.01628 17.525 8.63535L9.47904 16.2154C9.15083 16.525 8.70569 16.6989 8.24154 16.6989C7.77738 16.6989 7.33224 16.525 7.00403 16.2154C6.67583 15.9059 6.49144 15.4861 6.49144 15.0483C6.49144 14.6106 6.67583 14.1907 7.00403 13.8812L14.429 6.88674"
-                            stroke="#009dff" stroke-width="0.624" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </g>
-                </svg>
-            </button>
+        <input wire:model.defer="attachment" type="file" class="hidden" id="attachment" x-ref="photo" x-on:change="
+                                                photoName = $refs.photo.files[0].name;
+                                                const reader = new FileReader();
+                                                reader.onload = (e) => {
+                                                    photoPreview = e.target.result;
+                                                };
+                                                reader.readAsDataURL($refs.photo.files[0]);
+                                        " />
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </button>
+        <button onclick="document.getElementById('attachment').click()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+            </svg>
+        </button>
 
-        </div>
         <input wire:model.defer="body" id="input" type="text" placeholder="Écrire un message" x-ref="myInput"
-            x-on:blur='resetPosition'
+            x-on:blur='resetPosition' required
             class="flex-1 p-2 mr-1 bg-white border border-gray-300 rounded-full md:mr-4 focus:outline-none focus:ring focus:border-blue-300">
 
         <button type="submit" class="" wire:loading.attr='disabled' @click="photoPreview=null">
@@ -54,10 +55,16 @@
                 </g>
             </svg>
         </button>
-
-
     </form>
-
-
-
 </div>
+@push('script')
+
+<script>
+    function deletePhoto() {
+    // réinitialiser la variable de prévisualisation photoPreview
+
+    document.getElementById('attachment').value = '';
+    }
+</script>
+
+@endpush
