@@ -3,12 +3,12 @@
 
 @section('content')
 
-<div class="min-h-screen p-8 ">
+<div class="min-h-screen  ">
 
 
 
 
-    <div class="container mx-aut px-6 lg:px-8">
+    <div class="container mx-auto px-3 lg:px-8">
         <h2 class="text-xl text-indigo-600 mb-8 font-semibold tracking-wide uppercase">Securite</h2>
 
 
