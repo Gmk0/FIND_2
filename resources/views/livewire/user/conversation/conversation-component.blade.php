@@ -171,7 +171,7 @@
 </div>--}}
 
 <div class="container mx-auto">
-    <div class="min-w-full h-screen border rounded lg:grid lg:grid-cols-3">
+    <div class="min-w-full lg:h-screen h-auto border rounded lg:grid lg:grid-cols-3">
         <div class="border-r hidden lg:block border-gray-300 lg:col-span-1">
             <div class="mx-3 my-3">
                 <div class="relative text-gray-600">
