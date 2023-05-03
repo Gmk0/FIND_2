@@ -114,13 +114,18 @@ class BodyMessage extends Component
 
     public function broadcastedMessageRead($event)
     {
-        //dd($event);
+        //evenement lorsque le  message est lue
+
+
 
         if ($this->selectedConversation) {
 
 
 
             if ((int) $this->selectedConversation->id === (int) $event['conversation_id']) {
+
+
+
 
                 $this->dispatchBrowserEvent('markMessageAsRead');
             }
@@ -136,18 +141,26 @@ class BodyMessage extends Component
     {
         ///here
 
+        //evenement lorsque le  message est recuu
+
+
 
         $this->emitTo('user.conversation.conversation-component', 'refresh');
+
         # code...
+
+
 
         $broadcastedMessage = Message::find($event['message']);
 
 
         #check if any selected conversation is set
         if ($this->selectedConversation) {
-            #check if Auth/current selected conversation is same as broadcasted selecetedConversationgfg
+            #check if Auth/current selected conversation is same as broadcasted selecetedConversationg
             if ((int) $this->selectedConversation->id  === (int)$event['conversation_id']) {
                 # if true  mark message as read
+
+
                 $broadcastedMessage->is_read = 1;
                 $broadcastedMessage->save();
 

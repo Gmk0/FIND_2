@@ -24,28 +24,28 @@ class MessageSent implements ShouldBroadcast
      */
 
 
-     public $user;
-     public $message;
-     public $conversation;
-     public $receiver;
+    public $user;
+    public $message;
+    public $conversation;
+    public $receiver;
 
-   public function __construct(User $user,Message $message,Conversation $conversation,User $receiver)
+    public function __construct(User $user, Message $message, Conversation $conversation, User $receiver)
     {
 
-        $this->user= $user;
+        $this->user = $user;
         $this->message = $message;
-        $this->conversation= $conversation;
-        $this->receiver= $receiver;
+        $this->conversation = $conversation;
+        $this->receiver = $receiver;
     }
 
-     public function broadcastWith( )
+    public function broadcastWith()
     {
 
         return [
-             'sender_id'=>$this->user->id,
-             'message'=>$this->message->id,
-             'conversation_id'=>$this->conversation->id,
-             'receiver_id'=>$this->receiver->id,
+            'sender_id' => $this->user->id,
+            'message' => $this->message->id,
+            'conversation_id' => $this->conversation->id,
+            'receiver_id' => $this->receiver->id,
         ];
         # code...
     }
@@ -58,9 +58,9 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-         error_log($this->user);
-        error_log($this->receiver);
-     
-        return new PrivateChannel('chat.' .$this->receiver->id);
+        //error_log($this->user);
+        //error_log($this->receiver);
+
+        return new PrivateChannel('chat.' . $this->receiver->id);
     }
 }

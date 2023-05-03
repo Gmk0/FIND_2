@@ -21,8 +21,9 @@ class ApiFreelanceGet extends Controller
             ->orderBy('users.name')
             ->when(
                 $request->search,
-                fn (Builder $query) => $query
-                    ->where('name', 'like', "%{$request->search}%")
+                fn (Builder $query) =>
+                $query->where('users.name', 'like', "%{$request->search}%")
+                    ->orWhere('categories.name', 'like', "%{$request->search}%")
 
             )
             ->when(

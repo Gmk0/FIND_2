@@ -10,18 +10,18 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageRead
+class MessageRead implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
- 
+
     public $conversation_id;
     public $receiver_id;
 
-    public function __construct($conversation_id,$receiver_id)
+    public function __construct($conversation_id, $receiver_id)
     {
 
-        $this->conversation_id= $conversation_id;
-        $this->receiver_id= $receiver_id;
+        $this->conversation_id = $conversation_id;
+        $this->receiver_id = $receiver_id;
 
         //
     }
@@ -29,11 +29,11 @@ class MessageRead
     public function  broadcastWith()
     {
 
-         return [
+        return [
 
-            'conversation_id'=>$this->conversation_id,
-            'receiver_id'=> $this->receiver_id,
-         ];
+            'conversation_id' => $this->conversation_id,
+            'receiver_id' => $this->receiver_id,
+        ];
         # code..
     }
     /**
@@ -44,8 +44,8 @@ class MessageRead
     public function broadcastOn()
     {
 
-        error_log($this->receiver_id);
-        return new PrivateChannel('chat.'. $this->receiver_id);
+        //error_log($this->receiver_id);
 
+        return new PrivateChannel('chat.' . $this->receiver_id);
     }
 }

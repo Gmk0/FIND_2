@@ -171,13 +171,14 @@
     </div>
 </div>--}}
 
-<div x-data="{sidebarOpen:false, isLoading:true}" class="container mx-auto overflow-y-auto custom-scrollbar">
+<div x-data="{sidebarOpen:false, isLoading:true ,isPanelOpen:false}"
+    class="container mx-auto overflow-y-auto custom-scrollbar">
     <div
-        class="h-screen min-w-full  overflow-y-hidden border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
+        class="h-screen min-w-full overflow-y-hidden border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
         <div x-bind:class="{'md:block hidden': sidebarOpen, 'md:block ': !sidebarOpen}"
             class="border-r border-gray-500 dark:border-gray-400 lg:col-span-1">
             <div class="mx-3 my-3">
-                <div class="relative text-gray-600">
+                {{--<div class="relative text-gray-600">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6 text-gray-300">
@@ -186,7 +187,12 @@
                     </span>
                     <input type="search" class="block w-full py-2 pl-10 bg-gray-100 rounded outline-none" name="search"
                         placeholder="Search" required />
-                </div>
+                </div>--}}
+                <x-select label="Search a freealance" wire:model="freelance" x-on:selected="sidebarOpen=true"
+                    placeholder="Select some user" :async-data="route('api.freelance.users')" :template="[
+            'name'   => 'user-option',
+            'config' => ['src' => 'profile_photo_url']
+        ]" option-label="name" option-value="id" option-description="category_name" />
             </div>
 
             <ul class="overflow-auto h-[32rem]">
@@ -227,7 +233,7 @@
                             <div class="flex items-center justify-between">
                                 <div class="flex gap-1">
                                     @if ($conversation->messages->last()?->sender_id == auth()->user()->id)
-                                    <span class=" pl-3 text-sm text-gray-600 dark:text-gray-400">vous:</span>
+                                    <span class="pl-3 text-sm text-gray-600 dark:text-gray-400">vous:</span>
                                     @endif
 
                                     <span
@@ -260,7 +266,7 @@
         </div>
         <div x-bind:class="{'md:block': sidebarOpen, ' hidden md:block ': !sidebarOpen}"
             class=" lg:col-span-2 lg:block">
-            <div class=" h-screen w-full">
+            <div class="w-full h-screen ">
                 <div class="relative flex justify-between border-b border-gray-500 dark:border-gray-500">
                     <div wire:target='chatUserSelected' wire:loading.remove class="flex items-center gap-1 p-3 ">
 
@@ -273,7 +279,7 @@
                         </div>
 
                         @empty(!$selectedConversation)
-                        <div class="flex">
+                        <div @click="isPanelOpen=true" class="flex cursor-pointer ">
 
                             @if (!empty($selectedConversation->freelance?->user->profile_photo_path))
                             <img class="object-cover w-10 h-10 rounded-full"
@@ -351,6 +357,100 @@
             </div>
         </div>
     </div>
+
+    <x-confirmation-modal wire:model.defer="deleteUserModal">
+
+        <x-slot name="title">
+            Effacer conversation
+
+        </x-slot>
+
+        <x-slot name="content">
+            Voulez-vous supprimer cette conversation ?
+
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$toggle('deleteUserModal')" wire:loading.attr="disabled">
+                {{ __('Annuler') }}
+            </x-secondary-button>
+
+            <x-danger-button class="ml-3" wire:click="deleteConversation" wire:loading.attr="disabled">
+                {{ __('Effacer conversation') }}
+            </x-danger-button>
+        </x-slot>
+
+    </x-confirmation-modal>
+
+
+    <div x-cloak x-show="isPanelOpen" @click.away="isPanelOpen = false"
+        x-transition:enter="transition transform duration-300"
+        x-transition:enter-start="translate-x-full opacity-30  ease-in"
+        x-transition:enter-end="translate-x-0 opacity-100 ease-out"
+        x-transition:leave="transition transform duration-300"
+        x-transition:leave-start="translate-x-0 opacity-100 ease-out"
+        x-transition:leave-end="translate-x-full opacity-0 ease-in"
+        class="fixed inset-y-0 right-0 z-50 flex flex-col bg-white shadow-lg bg-opacity-20 w-80"
+        style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
+        <div class="flex items-center justify-between flex-shrink-0 p-2">
+            <h6 class="p-2 text-gray-800">INFORMATION</h6>
+            <button @click="isPanelOpen = false" class="p-2 rounded-md focus:outline-none focus:ring">
+                <svg class="w-6 h-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="flex flex-col flex-1 max-h-full p-4 overflow-hidden overflow-y-auto">
+            <span></span>
+
+            @empty(!$selectedConversation)
+
+            <div class="flex items-center justify-center ">
+                @if (!empty($selectedConversation->freelance?->user->profile_photo_path))
+                <img class="object-cover w-20 h-20 border rounded-full border-slate-700"
+                    src="{{Storage::disk('local')->url('public/profiles-photos/'.$selectedConversation->freelance?->user->profile_photo_path) }}"
+                    alt="">
+                @else
+                <img class="object-cover w-20 h-20 rounded-full"
+                    src="{{$selectedConversation->freelance?->user->profile_photo_url }}" alt="">
+                @endif
+
+
+
+            </div>
+            <div>
+                <h1 class="mt-4 text-xl font-bold text-gray-800">{{$selectedConversation->freelance->prenom}}
+                    {{$selectedConversation->freelance->nom}}</h1>
+                <h2 class="mt-2 text-base font-medium text-gray-700 dark:text-gray-200">Freelance en
+                    {{$selectedConversation->freelance?->category->name}}</h2>
+
+                <h2 class="mt-2 text-xl font-medium text-gray-700 dark:text-gray-200">Niveau :
+                    {{$selectedConversation->freelance->level}}</h2>
+                <div class="mt-4">
+                    <p class="text-gray-700 dark:text-gray-200">Email :
+                        {{$selectedConversation->freelance->user->email}}
+                    </p>
+
+                </div>
+                <div>
+                    <x-button href="{{route('profile.freelance',[$selectedConversation->freelance->identifiant])}}"
+                        primary outline label="profil" />
+                </div>
+            </div>
+
+
+            @endempty
+
+
+
+
+            <!-- Settings Panel Content ... -->
+        </div>
+    </div>
+
+
+
 </div>
 
 

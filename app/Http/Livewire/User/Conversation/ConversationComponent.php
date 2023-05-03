@@ -13,6 +13,8 @@ class ConversationComponent extends Component
 {
     use Actions;
     public $conversations;
+    public $deleteUserModal;
+    public $confirmConversation;
 
     public $selectedConversation = null;
     public $receiver;
@@ -40,6 +42,7 @@ class ConversationComponent extends Component
     public function updatedFreelance()
     {
 
+
         if ($this->freelance != null) {
 
             $data = Conversation::where('freelance_id', $this->freelance)->where('user_id', auth()->user()->id)->first();
@@ -56,15 +59,11 @@ class ConversationComponent extends Component
                     $conversation->status = 'pending';
                     $conversation->save();
 
-                    $createdMessage = Message::create([
-                        'sender_id' => auth()->user()->id,
-                        'receiver_id' => $this->freelance,
-                        'conversation_id' => $conversation->id,
-                        'body' => "Hi",
-                        'is_read' => '0',
-                        'type' => "text",
 
-                    ]);
+
+                    $data = Conversation::where('freelance_id', $this->freelance)->where('user_id', auth()->user()->id)->first();
+
+                    $this->chatUserSelected($data, $this->freelance);
                 } catch (Exception $e) {
                 }
             } else {
@@ -92,20 +91,7 @@ class ConversationComponent extends Component
     {
 
 
-        $this->notification()->confirm([
-            'title'       => 'etes  vous Sur?',
-            'description' => 'etes vous sure de supprimer la conversation?',
-            'icon'        => 'question',
-            'accept'      => [
-                'label'  => 'Yes, effacer ',
-                'method' => 'deleteConversation',
-
-            ],
-            'reject' => [
-                'label'  => 'No, cancel',
-                'method' => 'cancel',
-            ],
-        ]);
+        $this->deleteUserModal = true;
     }
 
     public function cancel()
@@ -118,6 +104,9 @@ class ConversationComponent extends Component
 
         );
     }
+
+
+
 
     public function BloquerConversation()
     {
@@ -169,10 +158,6 @@ class ConversationComponent extends Component
                 $title = "succees",
 
             );
-
-            $this->emitTo('user.conversation.body-message', 'refresh');
-            $this->emitTo('user.conversation.send-message-u', 'refresh');
-            $this->emitSelf('refresh');
         } catch (\Exception $e) {
         }
 

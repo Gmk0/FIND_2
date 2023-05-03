@@ -204,8 +204,11 @@
                     vu
                 </div>
                 @else
-                <div class="opacity-50 chat-footer">
-                    Delivered
+                <div class="opacity-50 deliver chat-footer">
+                    sent
+                </div>
+                <div class="hidden opacity-50 vu chat-footer">
+                    vu
                 </div>
 
                 @endif
@@ -289,15 +292,18 @@
 </script>
 
 <script>
-    window.addEventListener('markMessageAsRead',event=>{
-    var value= document.querySelectorAll('.status_tick');
-
-    value.array.forEach(element, index => {
+    window.addEventListener('markMessageAsRead', event => {
 
 
-    element.classList.remove('bi bi-check2');
-    element.classList.add('bi bi-check2-all','text-primary');
-    });
+        var elements = document.querySelectorAll('.deliver');
+
+        elements.forEach(function(element) {
+        // Ajouter du texte à l'élément
+        element.textContent = 'ouiii';
+
+        // Modifier les classes CSS de l'élément
+
+        });
 
     });
 

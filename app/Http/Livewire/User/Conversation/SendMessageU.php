@@ -8,12 +8,14 @@ use App\Models\Conversation;
 use App\Events\MessageSent;
 use App\Models\Freelance;
 use App\Models\Message;
+use Exception;
 use Livewire\WithFileUploads;
 
 class SendMessageU extends Component
 {
 
     use WithFileUploads;
+
     public $selectedConversation;
     public $receiverInstance;
     public $body;
@@ -50,29 +52,26 @@ class SendMessageU extends Component
     }
 
 
-
-    public function sendMessage()
+    public function sendPhoto()
     {
-        if (empty($this->attachment)) {
 
-            $this->validate([
-                'body' => 'required'
-            ]);
-        }
+        $this->validate([
+            'attachment' => 'required'
+        ]);
+
 
 
         $filename = $this->attachment ? $this->addFiles($this->attachment) : null;
 
 
 
-        //dd($this->selectedConversation);
 
 
         $this->createdMessage = Message::create([
             'sender_id' => auth()->user()->id,
             'receiver_id' => $this->receiverInstance->user->id,
             'conversation_id' => $this->selectedConversation->id,
-            'body' => $this->body,
+            'body' => null,
             'file' => $filename,
             'is_read' => '0',
             'type' => "text",
@@ -84,10 +83,56 @@ class SendMessageU extends Component
         $this->emitTo('user.conversation.body-message', 'pushMessage', $this->createdMessage->id);
 
 
-        //reshresh coversation list 
+        //reshresh coversation list
         $this->emitTo('user.conversation.conversation-component', 'refresh');
         $this->reset('body', 'attachment');
         $this->emitSelf('dispatchMessageSent');
+    }
+
+    public function sendMessage()
+    {
+
+
+        try {
+
+
+
+            $this->validate([
+                'body' => 'required'
+            ]);
+
+
+
+
+
+
+            //dd($this->selectedConversation);
+
+
+            $this->createdMessage = Message::create([
+                'sender_id' => auth()->user()->id,
+                'receiver_id' => $this->receiverInstance->user->id,
+                'conversation_id' => $this->selectedConversation->id,
+                'body' => $this->body,
+                'file' => null,
+                'is_read' => '0',
+                'type' => "text",
+
+            ]);
+
+            $this->selectedConversation->last_time_message = $this->createdMessage->created_at;
+            $this->selectedConversation->save();
+            $this->emitTo('user.conversation.body-message', 'pushMessage', $this->createdMessage->id);
+
+
+            //reshresh coversation list
+            $this->emitTo('user.conversation.conversation-component', 'refresh');
+            $this->reset('body', 'attachment');
+            $this->emitSelf('dispatchMessageSent');
+        } catch (Exception $e) {
+
+            dd($e->getMessage());
+        }
     }
 
     public function dispatchMessageSent()
