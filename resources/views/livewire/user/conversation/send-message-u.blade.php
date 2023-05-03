@@ -1,5 +1,5 @@
-<div x-data="{photoName: null, photoPreview: null}">
-    <div class="mt-2 mb-2 " x-show="photoPreview" style="display: none;">
+<div class="fixed bottom-0 w-full  lg:relative" x-data="{photoName: null, photoPreview: null}">
+    <div class="mt-2 absolute top-12 mb-2 " x-show="photoPreview" style="display: none;">
         <span class="block w-20 h-20 bg-center bg-no-repeat bg-cover rounded-lg "
             x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
         </span>
@@ -18,14 +18,8 @@
                                                 };
                                                 reader.readAsDataURL($refs.photo.files[0]);
                                         " />
-        <button>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-        </button>
-        <button onclick="document.getElementById('attachment').click()">
+
+        <button class="mr-2" onclick="document.getElementById('attachment').click()">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -34,12 +28,12 @@
         </button>
 
         <input wire:model.defer="body" id="input" type="text" placeholder="Écrire un message" x-ref="myInput"
-            x-on:blur='resetPosition' required
+            x-on:blur='resetPosition'
             class="flex-1 p-2 mr-1 bg-white border border-gray-300 rounded-full md:mr-4 focus:outline-none focus:ring focus:border-blue-300">
 
-        <button type="submit" class="" wire:loading.attr='disabled' @click="photoPreview=null">
+        <button type="submit" wire:loading.attr='disabled' @click="photoPreview=null">
 
-            <svg fill="#000000" class="w-5 h-5 dark:text-blue-700" version="1.1" id="Layer_1"
+            <svg fill="#000000" class="w-6 h-6 dark:text-blue-700" version="1.1" id="Layer_1"
                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 viewBox="0 0 512.001 512.001" xml:space="preserve">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -63,6 +57,7 @@
     function deletePhoto() {
     // réinitialiser la variable de prévisualisation photoPreview
 
+    alert('ok');
     document.getElementById('attachment').value = '';
     }
 </script>

@@ -32,23 +32,16 @@ class Freelance extends Model
         'comptes',
         'Sub_categorie',
         'localisation',
-        'user_id',
+
         'category_id',
         'level',
     ];
 
-    public static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model) {
-            $model->user_id = auth()->user()->id;
-        });
-    }
 
     public function getName()
     {
 
-        return $this->nom . '-' . $this->prenom;
+        return $this->nom . $this->prenom;
     }
 
     /**

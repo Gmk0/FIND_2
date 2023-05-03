@@ -172,6 +172,9 @@
         </div>
 
 
+
+
+
         <div class="p-4 mx-6 mt-4 bg-gray-100 rounded-lg dark:bg-gray-900 justify-beetwen">
 
 
@@ -201,7 +204,7 @@
 
                             <div class="p-4 ">
                                 <div class="flex justify-between">
-                                    <h2 class="name">{{$freelance->getName()}}</h2>
+                                    <h2 class="name">{{$freelance->user->name}}</h2>
 
 
                                 </div>
@@ -262,20 +265,41 @@
 
 
 
-            <div class="grid grid-cols-1 gap-4 p-4 mx-2 md:grid-cols-4 md:gap-4">
+            <div class="grid grid-cols-1 gap-4 p-4 mx-2 max-w-5xl md:grid-cols-4 md:gap-4">
                 @forelse ($services as $service)
 
 
                 <div x-data="{linkHover: false}" style="" @mouseover="linkHover = true" @mouseleave="linkHover = false"
                     class="overflow-hidden bg-white rounded-lg shadow-md dark:text-gray-200 dark:bg-gray-900">
                     <div class="flex flex-row md:flex-col">
-                        @foreach ($service->files as $key=>$value)
 
-                        <div class="w-48 h-auto bg-center bg-cover md:w-full md:h-48"
-                            style="background-image: url('{{Storage::disk('local')->url('public/service/'.$value) }}');">
+
+
+                        <div x-data="{
+                                                                                            slide: 0,
+                                                                                            maxSlides: {{ count($service->files) }},
+                                                                                            showButton: false
+                                                                                            }"
+                            class="relative w-full h-48 overflow-hidden" @mouseover="showButton = true"
+                            @mouseleave="showButton = false">
+                            <div class="absolute inset-0 cursor-pointer">
+                                <template x-for="(image, index) in {{ json_encode($service->files) }}" :key="index">
+                                    <div x-show="slide === index"
+                                        class="absolute top-0 left-0 w-full h-48 transition duration-500 ease-out bg-center bg-cover"
+                                        :style="'background-image: url(/storage/service/' + image + ')'">
+
+                                    </div>
+                                </template>
+                            </div>
+
+                            <div class="absolute flex justify-between transform -translate-y-1/2 top-1/2 left-5 right-5"
+                                x-show="showButton">
+                                <a href="#" class="btn btn-outline btn-circle btn-sm"
+                                    @click.prevent="slide = (slide - 1 + maxSlides) % maxSlides">❮</a>
+                                <a href="#" class="btn btn-outline btn-circle btn-sm"
+                                    @click.prevent="slide = (slide + 1) % maxSlides">❯</a>
+                            </div>
                         </div>
-                        @break
-                        @endforeach
 
 
                         <div class="max-h-[14rem] flex flex-col justify-between p-2 dark:text-gray-200 md:p-6">
@@ -365,6 +389,7 @@
 
 
 
+
         <div
             class="flex flex-col items-center justify-center p-6 mx-6 mt-4 bg-white rounded-lg shadow-lg min-h-64 lg:flex-row lg:justify-start">
             <img src="/images/services/projet.jpg" alt="Illustration de projet"
@@ -408,10 +433,6 @@
         perPage: 3,
         autoplay: true,
         pagination: true,
-
-
-
-
           breakpoints: {
             640: {
               perPage: 1,

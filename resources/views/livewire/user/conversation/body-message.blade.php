@@ -119,7 +119,7 @@
 </div>--}}
 
 <div>
-    <div class=" w-full p-4 overflow-y-auto h-[500px] messages custom-scrollbar">
+    <div class=" w-full p-4 overflow-y-auto lg:h-[400px] h-[500px]   messages custom-scrollbar">
 
         @if($selectedConversation)
 

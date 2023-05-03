@@ -1,4 +1,5 @@
-{{--<div class="flex h-screen py-4 sm:pt-20 md:overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
+{{--
+<div class="flex h-screen py-4 sm:pt-20 md:overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
     x-init="setTimeout(() => { isLoading = false }, 2000)">
     <div x-show="isLoading">
 
@@ -171,9 +172,10 @@
 </div>--}}
 
 <div x-data="{sidebarOpen:false, isLoading:true}" class="container mx-auto overflow-y-auto custom-scrollbar">
-    <div class="h-auto min-w-full overflow-y-auto border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
+    <div
+        class="h-screen min-w-full  overflow-y-hidden border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
         <div x-bind:class="{'md:block hidden': sidebarOpen, 'md:block ': !sidebarOpen}"
-            class="border-r border-gray-300 dark:border-gray-400 lg:col-span-1">
+            class="border-r border-gray-500 dark:border-gray-400 lg:col-span-1">
             <div class="mx-3 my-3">
                 <div class="relative text-gray-600">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -188,14 +190,14 @@
             </div>
 
             <ul class="overflow-auto h-[32rem]">
-                <h2 class="my-2 mb-2 ml-2 text-lg text-gray-600">Chats</h2>
+                <h2 class="my-2 mb-2 ml-2 text-lg text-gray-600">Freelance</h2>
 
                 <li>
                     @if (count($conversations) > 0)
                     @foreach ($conversations as $conversation)
                     <a wire:key='{{$conversation->id}}' href="#" @click="sidebarOpen=!sidebarOpen"
                         wire:click="chatUserSelected({{$conversation}},{{$conversation->freelance_id }})"
-                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none">
+                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-500 cursor-pointer dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none">
 
                         @if (!empty($conversation->freelance->user->profile_photo_path))
                         <img class="object-cover w-10 h-10 rounded-full"
@@ -223,9 +225,9 @@
                                     }} </span>
                             </div>
                             <div class="flex items-center justify-between">
-                                <div>
+                                <div class="flex gap-1">
                                     @if ($conversation->messages->last()?->sender_id == auth()->user()->id)
-                                    <span class="text-sm text-gray-600 dark:text-gray-400">vous:</span>
+                                    <span class=" pl-3 text-sm text-gray-600 dark:text-gray-400">vous:</span>
                                     @endif
 
                                     <span
@@ -258,13 +260,16 @@
         </div>
         <div x-bind:class="{'md:block': sidebarOpen, ' hidden md:block ': !sidebarOpen}"
             class=" lg:col-span-2 lg:block">
-            <div class="w-full">
-                <div class="relative flex justify-between border-b border-gray-300 dark:bg-gray-400">
-                    <div class="flex items-center gap-1 p-3 border-b border-gray-300">
+            <div class=" h-screen w-full">
+                <div class="relative flex justify-between border-b border-gray-500 dark:bg-gray-400">
+                    <div wire:target='chatUserSelected' wire:loading.remove
+                        class="flex items-center gap-1 p-3 border-b border-gray-500">
 
                         <div>
                             <button wire:ignore @click="sidebarOpen = false" class="block lg:hidden ">
-                                <ion-icon class="w-8 h-8 text-gray-800" name="arrow-back-circle-outline"></ion-icon>
+                                <ion-icon class="w-6 h-6 text-gray-600 dark:text-gray-300" name="arrow-undo-outline">
+                                </ion-icon>
+
                             </button>
                         </div>
 
@@ -297,20 +302,33 @@
 
                         </div>
 
+
+
                         @endempty
+
+
+                    </div>
+
+                    <div wire:target='chatUserSelected' wire:loading
+                        class="flex flex-col w-full bg-gray-400 animate-pulse">
+
+                        <div class="bg-gray-500 rounded-full w-14 animate-pulse">
+
+                        </div>
+
                     </div>
 
                     <div class="flex px-6 py-3">
 
-                        <div>
-                            <x-dropdown>
 
-                                <x-dropdown.item label="Maquer non lue" />
-                                <x-dropdown.item label="Favoris" />
-                                <x-dropdown.item wire:click="effacerConversation()" label="Effacer" />
-                                <x-dropdown.item wire:click="BloquerConversation()" label="Bloquer l'utilisateur" />
-                            </x-dropdown>
-                        </div>
+                        <x-dropdown>
+
+                            <x-dropdown.item label="Maquer non lue" />
+                            <x-dropdown.item label="Favoris" />
+                            <x-dropdown.item wire:click="effacerConversation()" label="Effacer" />
+                            <x-dropdown.item wire:click="BloquerConversation()" label="Bloquer l'utilisateur" />
+                        </x-dropdown>
+
 
                     </div>
 
@@ -318,8 +336,17 @@
 
                 </div>
 
+                <div wire:target='chatUserSelected' wire:loading
+                    class=" h-[500px] lg:h-[400px] w-full bg-gray-400 animate-pulse">
 
-                @livewire('user.conversation.body-message')
+                </div>
+
+                <div wire:target='chatUserSelected' wire:loading.remove>
+
+                    @livewire('user.conversation.body-message')
+                </div>
+
+
                 @livewire('user.conversation.send-message-u')
 
             </div>

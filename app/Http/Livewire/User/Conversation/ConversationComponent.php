@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Freelance;
 use App\Models\Conversation;
 use App\Models\Message;
+use Exception;
 use WireUi\Traits\Actions;
 
 class ConversationComponent extends Component
@@ -78,9 +79,6 @@ class ConversationComponent extends Component
         // dd($conversation);
         $this->selectedConversation = $conversation;
         $this->freelance_id = $conversation->freelance_id;
-
-        Message::where('conversation_id', $this->selectedConversation->id)
-            ->where('receiver_id', auth()->user()->id)->update(['is_read' => 1]);
 
 
         $this->emitTo('user.conversation.body-message', 'loadConversation', $this->selectedConversation, $receiverId);

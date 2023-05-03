@@ -112,14 +112,14 @@
 
                 <div class="grid grid-cols-1 gap-2 mx-auto md:mx-0 md:grid-cols-2">
 
-                    <a href="{{url('find-freelancer')}}"
+                    <a href="{{url('find_freelance')}}"
                         class="w-10/12 rounded-md mx-auto text-center bg-amber-600 px-8 py-2.5 font-semibold text-white shadow-md shadow-amber-500/20 hover:bg-amber-700 duration-200 sm:w-auto">Trouver
-                        un freelancer</a>
+                        un freelance</a>
 
-                    <a href="{{url('register.begin')}}"
+                    <a href="{{url('/registration')}}"
                         class="mt-4 md:mt-0 mx-auto text-center box-border w-10/12   rounded-md border border-amber-500/20 px-8 py-2.5 font-semibold text-amber-600 shadow-md shadow-amber-500/10 hover:bg-gray-100 duration-200   ">Dévenir
 
-                        freelancer</a>
+                        freelance</a>
 
                 </div>
 

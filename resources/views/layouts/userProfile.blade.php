@@ -18,8 +18,10 @@ $overflow="overflow-y-auto";
     <div>
         <div class="flex h-screen overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar">
             <!-- Loading screen -->
+
             <div x-ref="loading"
-                class="fixed inset-0 z-50 flex items-center justify-center text-2xl font-semibold text-white ">
+                class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-50"
+                style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
                 Chargement.....
             </div>
 
@@ -132,7 +134,7 @@ $overflow="overflow-y-auto";
             <div class="flex flex-col flex-1">
                 <x-headerUserTest />
 
-                <main id="main" class="h-full  mt-16 md:mt-0  p-2  overflow-y-auto">
+                <main id="main" class="h-full  mt-16 md:mt-0  p-2 custom-scrollbar  overflow-y-auto">
                     <!-- Main -->
                     @yield('content')
 
