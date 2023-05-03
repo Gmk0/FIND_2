@@ -231,7 +231,7 @@
                                     @endif
 
                                     <span
-                                        class="block ml-2 text-sm text-gray-600 dark:bg-gray-300">{{$conversation->messages->last()?->body}}</span>
+                                        class="block ml-2 text-sm text-gray-600 dark:text-gray-300">{{$conversation->messages->last()?->body}}</span>
 
                                 </div>
                                 <div>
@@ -261,9 +261,8 @@
         <div x-bind:class="{'md:block': sidebarOpen, ' hidden md:block ': !sidebarOpen}"
             class=" lg:col-span-2 lg:block">
             <div class=" h-screen w-full">
-                <div class="relative flex justify-between border-b border-gray-500 dark:bg-gray-400">
-                    <div wire:target='chatUserSelected' wire:loading.remove
-                        class="flex items-center gap-1 p-3 border-b border-gray-500">
+                <div class="relative flex justify-between border-b border-gray-500 dark:border-gray-500">
+                    <div wire:target='chatUserSelected' wire:loading.remove class="flex items-center gap-1 p-3 ">
 
                         <div>
                             <button wire:ignore @click="sidebarOpen = false" class="block lg:hidden ">
@@ -318,7 +317,7 @@
 
                     </div>
 
-                    <div class="flex px-6 py-3">
+                    <div wire:target='chatUserSelected' wire:loading.remove class="flex px-6 py-3">
 
 
                         <x-dropdown>
