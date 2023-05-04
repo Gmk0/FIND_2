@@ -119,7 +119,7 @@ class ServiceController extends Controller
                 // Retourner une réponse de succès
                 Session::forget('cart');
                 // return view('status.success', ['order' => $payment->transaction_numero]);
-                return redirect()->route('status_payement')->with('order', $payment->transaction_numero);
+                return redirect()->route('status_payement')->with('order', $payment);
                 //return response()->json(['success' => 'Paiement traité avec succès']);
             } catch (\Exception $e) {
                 // En cas d'erreur, annuler la transaction de base de données

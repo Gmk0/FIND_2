@@ -213,7 +213,7 @@
                     <div class="px-3 md:w-5/12">
 
                         <div
-                            class="sticky w-full mx-auto mb-6 font-light text-gray-800 bg-white border border-gray-200 rounded-lg top-8 dark:bg-gray-900">
+                            class="w-full mx-auto mb-6 font-light text-gray-800 bg-white border border-gray-200 rounded-lg top-8 dark:bg-gray-900">
                             <div class="w-full p-3 border-b border-gray-200 ">
                                 <div class="mb-5">
                                     <label for="type1" class="flex items-center cursor-pointer">
@@ -223,84 +223,61 @@
                                             class="h-6 ml-3">
                                     </label>
                                 </div>
-                                <div x-collapse x-cloak x-show="isCard">
+                                <div x-collapse class="px-2" x-cloak x-show="isCard">
                                     <div class="mb-3">
                                         <label class="mb-2 ml-1 text-sm font-semibold text-gray-600 dark:text-gray-200">
-                                            on
-                                            card</label>
+                                            Nom sur la carte
+                                        </label>
                                         <div>
-                                            <input
-                                                class="w-full px-3 py-2 mb-1 transition-colors border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500"
-                                                placeholder="John Smith" type="text" />
+                                            <x-input wire:model.defer="card.cardName" />
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label
-                                            class="mb-2 ml-1 text-sm font-semibold text-gray-600 dark:text-gray-200">Card
-                                            number</label>
+
                                         <div>
-                                            <x-input placeholder="0000 0000 0000 0000" />
+
+
+
+                                            <x-inputs.maskable wire:model.defer="card.cardNumber" label="Card"
+                                                mask="['####-####-####-####']" placeholder="424242442424242" />
                                         </div>
                                     </div>
-                                    <div class="flex items-end mb-3 -mx-2">
-                                        <div class="w-1/4 px-2">
-                                            <label
-                                                class="mb-2 ml-1 text-sm font-semibold text-gray-600 dark:text-gray-200">Expiration
-                                                date</label>
-                                            <div>
-                                                <select
-                                                    class="w-full px-3 py-2 mb-1 transition-colors border border-gray-200 rounded-md cursor-pointer form-select dark:text-gray-800 focus:outline-none focus:border-indigo-500">
-                                                    <option value="01">01 - January</option>
-                                                    <option value="02">02 - February</option>
-                                                    <option value="03">03 - March</option>
-                                                    <option value="04">04 - April</option>
-                                                    <option value="05">05 - May</option>
-                                                    <option value="06">06 - June</option>
-                                                    <option value="07">07 - July</option>
-                                                    <option value="08">08 - August</option>
-                                                    <option value="09">09 - September</option>
-                                                    <option value="10">10 - October</option>
-                                                    <option value="11">11 - November</option>
-                                                    <option value="12">12 - December</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="w-1/4 px-2">
-                                            <select
-                                                class="w-full px-3 py-2 mb-1 transition-colors border border-gray-200 rounded-md cursor-pointer form-select dark:text-gray-800 focus:outline-none focus:border-indigo-500">
+                                    <div class="relative grid grid-cols-3 gap-2 mb-3 ">
 
-                                                <option value="2023">2023</option>
-                                                <option value="2024">2024</option>
-                                                <option value="2025">2025</option>
-                                                <option value="2026">2026</option>
-                                                <option value="2027">2027</option>
-                                                <option value="2028">2028</option>
-                                                <option value="2029">2029</option>
-                                            </select>
-                                        </div>
-                                        <div class="w-1/4 px-2">
-                                            <label
-                                                class="mb-2 ml-1 text-sm font-semibold text-gray-600 dark:text-gray-200">Security
-                                                code</label>
-                                            <div>
-                                                <input
-                                                    class="w-full px-3 py-2 mb-1 transition-colors border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500"
-                                                    placeholder="000" type="text" />
-                                            </div>
-                                        </div>
+
+
+                                        <x-select label="Mois" placeholder="02"
+                                            :options="['01', '02', '03', '05', '06', '07', '08', '09', '10', '11', '12']"
+                                            wire:model.defer="card.cardExpiryMonth" />
+
+
+
+                                        <x-select label="Mois" placeholder="2024"
+                                            :options="['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030']"
+                                            wire:model.defer="card.cardExpiryYear" />
+
+
+
+
+                                        <x-inputs.maskable wire:model.defer="card.cardCvc" label="CVV" mask="['###']"
+                                            placeholder="123" />
 
                                     </div>
+
                                     <div>
-                                        <button wire:click="payer()" wire:loading.attr='disabled'
+                                        <button wire:click="pay()" wire:loading.attr='disabled'
                                             class="block w-full max-w-xs px-3 py-2 mx-auto font-semibold text-white bg-indigo-500 rounded-lg hover:bg-indigo-700 focus:bg-indigo-700"><i
-                                                class="mr-1 mdi mdi-lock-outline"></i> <span
-                                                wire:loading.remove>PAYER</span>
-                                            <span wire:loading wire:target='payer'>PAIEMENT...</span>
+                                                class="mr-1 mdi mdi-lock-outline"></i> <span wire:loading.remove>PAYER
+                                                ({{$priceTotal}}$)</span>
+                                            <span wire:loading wire:target='pay'>PAIEMENT...</span>
                                         </button>
 
                                     </div>
+
                                 </div>
+
                             </div>
+
                             <div class="w-full p-6 border-b border-gray-200">
                                 <div class="mb-5">
                                     <label for="type2" class="flex items-center cursor-pointer">
@@ -334,25 +311,27 @@
 
                                 </div>
                             </div>
-
                         </div>
 
 
-
-
                     </div>
+
+
+
+
                 </div>
             </div>
         </div>
-
-
-
-        @else
-
-        @endif
-
     </div>
-    {{-- Because she competes with no one, no one can compete with her. --}}
+
+
+
+    @else
+
+    @endif
+
+</div>
+{{-- Because she competes with no one, no one can compete with her. --}}
 </div>
 
 

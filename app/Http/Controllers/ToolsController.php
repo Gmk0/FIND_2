@@ -78,4 +78,16 @@ class ToolsController extends Controller
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'attachment; filename="mon-pdf.pdf"');
     }
+
+    public function paiment_status($transaction_numero)
+    {
+
+        $transaction = Transaction::where('transaction_numero', $transaction_numero)->first();
+
+        if (!$transaction) {
+            return redirect()->back()->withErrors(['message' => 'Une erreur s\'est produite.']);
+        }
+
+        return view('status.success', ['transaction' => $transaction]);
+    }
 }

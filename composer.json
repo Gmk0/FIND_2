@@ -21,6 +21,7 @@
         "martinschenk/livewire-cookie-consent": "^1.0",
         "phpseclib/phpseclib": "^3.0",
         "pusher/pusher-php-server": "^7.2",
+        "stripe/stripe-php": "^10.12",
         "wireui/wireui": "^1.17"
     },
     "require-dev": {

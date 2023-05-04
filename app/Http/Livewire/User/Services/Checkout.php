@@ -8,11 +8,18 @@ use App\Models\Order;
 use App\Models\transaction;
 use App\Events\ServiceOrdered;
 use App\Models\feedback;
+use App\Models\FeedbackService;
 use App\Models\Like;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Stripe\Stripe;
+use Stripe\Token;
+use Stripe\charge;
+
+
+
 
 class Checkout extends Component
 {
@@ -23,9 +30,25 @@ class Checkout extends Component
     public $amount;
     public $currency = "maxiDollar";
     public $isLiked = false;
+    public $errorMessage;
+    public $priceTotal = null;
+    public $card = [
+        'cardName' => '',
+        'cardNumber' => '',
+        'cardExpiryMonth' => '',
+        'cardExpiryYear' => '',
+        'cardCvc' => '',
+    ];
 
     public function mount()
     {
+    }
+
+    function totalPrice()
+    {
+        $priceTotal = Session::has('cart') ? Session::get('cart') : null;
+
+        return $priceTotal->totalPrice * 100;
     }
 
     public function remove($id)
@@ -119,6 +142,7 @@ class Checkout extends Component
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $this->products = $cart->items;
+        $this->priceTotal = $this->totalPrice() / 100;
 
         return view('livewire.user.services.checkout')->extends('layouts.user')->section('content');
     }
@@ -146,7 +170,7 @@ class Checkout extends Component
             }
 
             foreach ($datas as $order) {
-                $feedback = feedback::create(['order_id' => $order->id]);
+                $feedback = FeedbackService::create(['order_id' => $order->id]);
             }
 
             DB::commit();
@@ -171,12 +195,12 @@ class Checkout extends Component
             'name' => 'required'
         ]);
 
-        $cart = Session::has('cart') ? Session::get('cart') : null;
+
 
 
         // Récupérer les valeurs des propriétés du composant
         $payType = $this->payType;
-        $amount = $cart->totalPrice * 100;
+        $amount = $this->totalPrice();
         $currency = $this->currency;
         $telephone = $this->telephone;
         $reference = $this->references();
@@ -227,6 +251,140 @@ class Checkout extends Component
         // Concaténer le compteur à la fin de l'ID unique
         return  $finalId = 'PM' . $uniqueId . $counter;
     }
+
+
+
+    public function createToken()
+    {
+        $card = [
+            'number' => $this->card['cardNumber'],
+            'exp_month' => $this->card['cardExpiryMonth'],
+            'exp_year' => $this->card['cardExpiryYear'],
+            'cvc' => $this->card['cardCvc'],
+            'name' => $this->card['cardName'],
+        ];
+
+        $token = Token::create([
+            'card' => $card,
+        ]);
+
+        return $token->id;
+    }
+
+
+
+
+
+    public function pay()
+    {
+        $this->validate([
+            'card.cardName' => 'required',
+            'card.cardNumber' => 'required',
+            'card.cardExpiryMonth' => 'required',
+            'card.cardExpiryYear' => 'required',
+            'card.cardCvc' => 'required',
+        ]);
+
+
+
+
+
+
+
+        DB::beginTransaction();
+
+        try {
+
+            Stripe::setApiKey(env('STRIPE_KEY_SECRET'));
+
+            $token = $this->createToken();
+
+            $charge = Charge::create([
+                'amount' => $this->totalPrice(),
+                'currency' => 'usd',
+                'description' => 'Paiment Service',
+                'source' => $token,
+            ]);
+
+
+            $datas = $this->saveService();
+
+            // Enregistrer les informations de paiement dans la table "paiements"
+            $payment = new transaction();
+            $payment->amount = $charge->amount;
+            $payment->payment_method = "CC";
+            $payment->payment_token = $charge->id;
+            $payment->status = 'successfull';
+            // $payment->transaction_id = 'mmmmmmmmmmm';
+
+            $payment->save();
+
+            // Parcourir toutes les commandes pour les mettre à jour
+            foreach ($datas as $order) {
+
+                // Mettre à jour le statut de la commande dans la table "commandes"
+                $orderToUpdate = Order::findOrFail($order->id);
+                $orderToUpdate->status = 'completed';
+                $orderToUpdate->transaction_id = $payment->id; // Lier la commande au paiement effectué
+                $orderToUpdate->save();
+
+                event(new ServiceOrdered($order));
+            }
+
+            /* Sauvegarder la réponse de Stripe dans la base de données
+            $payment = Payment::create([
+                'charge_id' => $charge->id,
+                'amount' => $charge->amount,
+                'currency' => $charge->currency,
+                'description' => $charge->description,
+                'card_last_four' => $charge->source->last4,
+                'card_brand' => $charge->source->brand,
+            ]); */
+
+
+
+            DB::commit();
+
+
+            // Rediriger l'utilisateur vers une page de confirmation de paiement
+            session()->flash('success', 'Paiement effectué avec succès!');
+
+            Session::forget('cart');
+
+            return redirect()->route('status_payement', $payment->transaction_numero);
+        } catch (\Exception $e) {
+            // En cas d'erreur, annuler la transaction de base de données
+            DB::rollback();
+            dd($e->getMessage());
+            // Retourner une réponse d'erreur
+
+        } catch (\Stripe\Exception\CardException $e) {
+            // Gérer l'erreur liée à la carte de crédit
+            DB::rollback();
+            dd($e->getMessage());
+        } catch (\Stripe\Exception\RateLimitException $e) {
+            // Gérer l'erreur liée à la limite de taux
+            DB::rollback();
+            dd($e->getMessage());
+        } catch (\Stripe\Exception\InvalidRequestException $e) {
+            // Gérer l'erreur liée à une requête invalide
+            DB::rollback();
+            dd($e->getMessage());
+        } catch (\Stripe\Exception\AuthenticationException $e) {
+            // Gérer l'erreur liée à une authentification invalide
+            DB::rollback();
+            dd($e->getMessage());
+        } catch (\Stripe\Exception\ApiConnectionException $e) {
+            // Gérer l'erreur liée à une connexion API
+            DB::rollback();
+            dd($e->getMessage());
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            // Gérer toutes les autres erreurs API
+            DB::rollback();
+            dd($e->getMessage());
+        }
+    }
+
 
 
     /*  public function effectuerPaiementGroupé(Request $request)
