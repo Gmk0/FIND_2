@@ -148,7 +148,7 @@ $overflow="overflow-y-auto";
 
                 @else
 
-                <footer class="bottom-0 text-center text-white bg-gray-300 dark:bg-gray-800" style="">
+                <footer class="bottom-0 hidden text-center text-white bg-gray-300 dark:bg-gray-800" style="">
 
 
                     <!--Copyright section-->
