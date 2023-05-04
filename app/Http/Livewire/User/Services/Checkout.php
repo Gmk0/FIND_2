@@ -5,7 +5,7 @@ namespace App\Http\Livewire\User\Services;
 use Livewire\Component;
 use App\Tools\Cart;
 use App\Models\Order;
-use App\Models\transaction;
+use App\Models\Transaction;
 use App\Events\ServiceOrdered;
 use App\Models\feedback;
 use App\Models\FeedbackService;
@@ -98,7 +98,7 @@ class Checkout extends Component
             //$stripeTransaction = Stripe::createTransaction($paymentData['total_amount']);
 
             // Enregistrer les informations de paiement dans la table "paiements"
-            $payment = new transaction();
+            $payment = new Transaction();
             $payment->amount = $cart->totalPrice;
             $payment->payment_method = "cart";
             $payment->payment_token = "dddddddd";
