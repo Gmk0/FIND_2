@@ -2,6 +2,10 @@
 
 @livewire('notifications')
 @wireUiScripts
+
+
+
+@vite(['resources/js/app.js'])
 @livewireScripts
 
 
@@ -9,7 +13,26 @@
 
 
 
-<script src="/build/assets/app.js" defer></script>
+<script>
+    function playSound(soundPath) {
+    var sound = new Howl({
+    src: [soundPath],
+    autoplay: true,
+    loop: false,
+   volume: 1.0, // Définir le volume à fond
+    rate: 1.0
+    });
+
+    sound.play();
+    }
+
+
+
+
+
+</script>
+
+
 <script src="/js/script.js" defer></script>
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

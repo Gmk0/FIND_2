@@ -5,6 +5,7 @@ import AOS from 'aos';
 // ..
 
 
+import { Howl, Howler } from 'howler';
 
 import collapse from '@alpinejs/collapse'
 

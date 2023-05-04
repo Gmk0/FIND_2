@@ -148,6 +148,7 @@
 
                                         <div class="flex">
                                             <button wire:click="add_cart()" type="button"
+                                                onclick="event.preventDefault(); playSound('/sound/sound.wav');"
                                                 class="flex items-center justify-center w-full gap-1 px-8 py-3 mt-4 text-base font-medium text-white bg-indigo-600 border border-transparent hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
