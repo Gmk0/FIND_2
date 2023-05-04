@@ -134,7 +134,7 @@ $overflow="overflow-y-auto";
             <div class="flex flex-col flex-1">
                 <x-headerUserTest />
 
-                <main id="main" class="h-full  mt-16 md:mt-0  p-2 custom-scrollbar  overflow-y-auto">
+                <main id="main" class="h-full p-2 mt-16 overflow-y-auto md:mt-0 custom-scrollbar">
                     <!-- Main -->
                     @yield('content')
 
@@ -154,7 +154,7 @@ $overflow="overflow-y-auto";
                     <!--Copyright section-->
                     <div class="p-2 text-center text-gray-800">
                         © 2023 Copyright:
-                        <a class="text-white" href="https://tailwind-elements.com/">FIND</a>
+                        <a class="text-white" href="{{url('/')}}">FIND</a>
                     </div>
                 </footer>
                 @endif
@@ -180,7 +180,7 @@ $overflow="overflow-y-auto";
             x-transition:leave="transition transform duration-300"
             x-transition:leave-start="translate-x-0 opacity-100 ease-out"
             x-transition:leave-end="translate-x-full opacity-0 ease-in"
-            class="fixed inset-y-0 right-0 flex z-50 flex-col bg-white shadow-lg bg-opacity-20 w-80"
+            class="fixed inset-y-0 right-0 z-50 flex flex-col bg-white shadow-lg bg-opacity-20 w-80"
             style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
             <div class="flex items-center justify-between flex-shrink-0 p-2">
                 <h6 class="p-2 text-gray-800">Notification</h6>

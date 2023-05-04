@@ -152,11 +152,21 @@
 
                         @endif
 
-                        @if($Order->feedback->statut=="Livré")
+                        @if($Order->feedback->etat=="Livré")
+
+                        @if(empty($Order->feedback->satisfaction) || empty($Order->feedback->commentaires))
                         <div class="w-full">
-                            <x-button wire:click='openModal()' class="mr-2" label='Evaluer' />
+                            <x-button wire:click='openModal()' positive class="mr-2" label='Evaluer' />
 
                         </div>
+
+                        @else
+
+                        <div class="w-full">
+                            <x-button wire:click='openModal()' positive class="mr-2" label='REvaluer' />
+
+                        </div>
+                        @endif
 
                         @endif
                         <div>

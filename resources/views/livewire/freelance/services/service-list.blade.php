@@ -1,10 +1,10 @@
 <div>
 
-    <div class="flex flex-col min-h-screen px-6 pt-8 ">
+    <div class="flex flex-col min-h-screen px-2 pt-8 md:px-6 ">
 
-        <div class="flex items-center justify-between mb-6 ">
+        <div class="flex items-end justify-end mb-6 ">
 
-            <x-button primary label="creer" href="" />
+            <x-button primary label="creer" href="{{route('freelance.service.create')}}" />
 
         </div>
         <div class="w-full">

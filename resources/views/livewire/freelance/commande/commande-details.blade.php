@@ -56,6 +56,36 @@
 
                     <h2 class="mb-4 text-lg font-semibold">Gestion de projet</h2>
 
+
+                    @if($order->feedback->etat=="Livré")
+
+                    <div>
+                        <h1>Vous avez deja livrer(realiser) la commande</h1>
+
+                        <div>
+                            <h1>Le Feedback du client</h1>
+                        </div>
+                        <div>
+
+                            <h1>Satifisfation: {{$order->feedback->satisfaction}}/5</h1>
+
+                            <h1>Commentaires</h1>
+
+                            <p>{{$order->feedback->commentaires? $order->feedback->commentaires:'pas de commentaire'}}
+                            </p>
+
+                            <div>
+
+                                <x-toggle wire:model="publier" x-on:change='$wire.toogle()' label="Publier" />
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    @else
+
                     <div class="grid gap-4 md:grid-cols-3 ">
                         <div>
 
@@ -71,7 +101,8 @@
                             </x-select>
                         </div>
                         <div>
-                            <x-datetime-picker wire:model.defer='jour' parse-format="YYYY-MM-DD HH:mm:ss"  label='Date de livraison' />
+                            <x-datetime-picker wire:model.defer='jour' parse-format="YYYY-MM-DD HH:mm:ss"
+                                label='Date de livraison' />
 
 
                         </div>
@@ -86,6 +117,11 @@
 
                     </div>
 
+
+                    @endif
+
+
+
                 </div>
 
                 <!-- Avancement de la order -->
@@ -96,7 +132,9 @@
 
                     <!-- Barre de progression -->
 
+                    @if($order->feedback->etat=="Livré")
 
+                    @else
                     <!-- Formulaire de rapport d'avancement -->
                     <div class="flex flex-col space-y-4">
                         <label class="text-sm font-semibold" for="progress">Rapport d'avancement</label>
@@ -108,6 +146,7 @@
                                 wire:target='SendRapport'>Soumission...</span></button>
                     </div>
 
+                    @endif
 
 
 

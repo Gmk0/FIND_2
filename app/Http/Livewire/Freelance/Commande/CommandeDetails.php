@@ -8,6 +8,7 @@ use App\Models\feedback;
 use App\Models\rapport;
 use WireUi\Traits\Actions;
 use App\Events\notificationOrder;
+use App\Models\FeedbackService;
 
 class CommandeDetails extends Component
 {
@@ -17,12 +18,38 @@ class CommandeDetails extends Component
     public $progress;
     public $jour;
     public $description;
+    public $publier;
 
     public $status;
     protected $listeners = ['refresh' => '$refresh'];
 
 
 
+    public function mount()
+    {
+        $this->publier = $this->order->feedback->is_publish ? $this->order->feedback->is_publish : 0;
+    }
+
+
+
+    public function toogle()
+    {
+
+
+        $id = $this->order->id;
+
+        $data = FeedbackService::where('order_id', $id)->first();
+        $data->is_publish = $this->publier;
+        $data->update();
+
+        if ($data) {
+
+            $this->notification()->success(
+                $title = "Feedback modifier",
+
+            );
+        }
+    }
 
 
     public function modLivre()
@@ -36,7 +63,7 @@ class CommandeDetails extends Component
 
             $id = $this->order->id;
 
-            $data = feedback::where('order_id', $id)->first();
+            $data = FeedbackService::where('order_id', $id)->first();
 
             //dd($data);
 

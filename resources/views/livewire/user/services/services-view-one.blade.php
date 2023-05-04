@@ -138,7 +138,7 @@
 
                                     <div>
                                         <!-- Colors -->
-                                        <div class="md:hidden">
+                                        <div class="hidden">
                                             <h4 class="mb-2 text-lg font-medium text-gray-900 dark:text-gray-200">
                                                 Support</h4>
                                             {!! $service->basic_support !!}
@@ -374,12 +374,28 @@
                             @if(!empty($commentaires))
                             @foreach ($commentaires as $commentaire)
                             <div class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-600">
+                                <div>
+
+
+                                </div>
                                 <p class="text-sm text-gray-700 md:text-base dark:text-gray-300">
                                     {{$commentaire->commentaires}}.</p>
+
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 mr-1 text-yellow-500 fill-current"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path
+                                            d="M10 14.155L4.284 17.84l.828-5.076L.898 7.865l5.059-.736L10 2l2.043 5.129 5.059.736-3.215 3.9.828 5.076z" />
+                                    </svg>
+
+                                    <span
+                                        class="text-sm font-semibold text-gray-700 dark:text-gray-100">({{$commentaire->satisfaction}})
+                                    </span>
+                                </div>
                                 <div class="flex items-center">
                                     @if (!empty($commentaire->order->user->profile_photo_path))
-                                    <img class="w-8 h-8 rounded-full"
-                                        src="{{$commentaire->order->user->profile_photo_path}}" alt="">
+                                    <img class="w-8 h-8 rounded-full" src="{{Storage::disk('local')->url('public/profiles-photos/'.$commentaire->order->user->profile_photo_path)
+                    }}" alt="">
                                     @else
                                     <img class="w-8 h-8 rounded-full"
                                         src="{{$commentaire->order->user->profile_photo_url }}" alt="">
@@ -392,6 +408,7 @@
 
 
                             @else
+
                             <div class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-700">
                                 <p class="text-sm text-gray-700 md:text-base dark:text-gray-300">
                                     Pas de commentaires .</p>
@@ -414,9 +431,16 @@
                             <div class="flex items-center mb-8">
 
 
-
+                                @if (!empty($commentaire->order->user->profile_photo_path))
+                                <img class="w-8 h-8 rounded-full"
+                                    src="{{Storage::disk('local')->url('public/profiles-photos/'.$service->freelance->user->profile_photo_path)}}"
+                                    alt="">
+                                @else
                                 <img class="w-8 h-8 rounded-full"
                                     src="{{$service->freelance->user->profile_photo_url }}" alt="">
+                                @endif
+
+
 
 
                                 <div>

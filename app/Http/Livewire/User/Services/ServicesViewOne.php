@@ -4,6 +4,7 @@ namespace App\Http\Livewire\User\Services;
 
 use App\Models\Conversation;
 use App\Models\feedback;
+use App\Models\FeedbackService;
 use App\Models\Like;
 use App\Models\Message;
 use App\Models\Service;
@@ -29,13 +30,13 @@ class ServicesViewOne extends Component
         // dd($this->service->averageFeedback());
         $this->images = $this->images();
         // dd($this->images);
-        $this->commentaires = feedback::whereHas('Order', function ($query) {
+        $this->commentaires = FeedbackService::whereHas('Order', function ($query) {
             $query->whereHas('service', function ($q) {
                 $q->where('id', $this->service->id);
             });
         })->where('is_publish', 1)->get();
 
-        //dd($this->commentaires);
+
 
         $this->servicesOther = $this->GetOther();
     }
