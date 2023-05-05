@@ -7,7 +7,7 @@ $fixed="";
 @endphp
 
 
-<div class="relative z-40 w-full bg-white">
+<div class="relative w-full bg-white">
     <header class="w-full py-4 mx-auto bg-white shadow-md dark:bg-gray-800">
         <div class="container flex items-center justify-between h-full px-6 mx-auto text-amber-600 dark:text-amber-300">
             <!-- Mobile hamburger -->

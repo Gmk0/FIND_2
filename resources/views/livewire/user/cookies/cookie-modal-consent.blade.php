@@ -25,7 +25,7 @@
             Preferences
         </button>
 
-        <button wire:click="refuseConsent()"
+        <button @click="open!open" wire:click="refuseConsent()"
             class=" text-xs border text-gray-800 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 font-medium rounded-lg px-4 py-2.5 duration-300 transition-colors focus:outline-none">
             fermer
         </button>

@@ -1,4 +1,4 @@
-<div class="fixed bottom-0 w-full px-6 top-4 lg:relative" x-data="{photoName: null, photoPreview: null}">
+<div class="w-full px-6 lg:relative" x-data="{photoName: null, photoPreview: null}">
 
     <div @click.away="theme = false" x-cloak x-show="attachement" class="fixed inset-0 z-50 overflow-y-auto"
         id="theme-modal">
