@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\User\Paiement;
 
 use App\Models\PaimentMethod;
+use App\Notifications\ServicePaid;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
@@ -141,6 +143,25 @@ class PaiementUser extends Component
 
         $this->clear();
         $this->emitSelf('refresh');
+    }
+
+
+    public function sendNotification()
+    {
+
+
+
+
+        try {
+            $user = Auth::user();
+
+
+            $notification = new ServicePaid();
+            $data = $user->notify($notification);
+        } catch (Exception $e) {
+
+            dd($e->getMessage());
+        }
     }
 
 

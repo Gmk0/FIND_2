@@ -1,182 +1,57 @@
-{{--
-<div class="flex h-screen py-4 sm:pt-20 md:overflow-hidden " x-data="{sidebarOpen:false, isLoading:true}"
-    x-init="setTimeout(() => { isLoading = false }, 2000)">
-    <div x-show="isLoading">
-
-        <div class="flex flex-col w-full h-screen overflow-y-hidden bg-gray-300 animate-pulse md:flex-row">
-            <div
-                class="order-first hidden w-full h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse md:flex ">
-                <div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div x-cloak x-show="!isLoading" class="flex-1 w-full ">
-        <div class="container flex flex-col w-11/12 h-full p-2 m-2 main-body">
-
-
-            <div class="flex flex-col flex-1 my-auto lg:my-0 main">
-
-
-                <div class="flex flex-1 h-full py-2 md:py-0">
-
-                    <div x-bind:class="{'hidden ': !sidebarOpen, 'lg:block': sidebarOpen}"
-                        class="sidebar   w-full lg:flex lg:w-1/3 flex-2 lg:h-[550px] h-screen custom-scrollbar overflow-x-hidden overflow-y-auto flex-col pt-2 rounded-md md:pr-6">
-                        <div class="px-2 pb-6 search flex-2">
-                            <x-select label="Search a User" wire:model.debounce.500ms="freelance"
-                                placeholder="Selectionner un freelance" :async-data="route('api.freelance.users')"
-                                :template="[
-                                            'name'   => 'user-option',
-                                            'config' => ['src' => 'profile_photo_url']
-                                        ]" option-label="name" option-value="id" option-description="category_name" />
-                        </div>
-                        <div class="flex-1  overflow-auto px-2 h-[500px] custom-scrollbar">
-
-                            @if (count($conversations) > 0)
-                            @foreach ($conversations as $conversation)
-
-
-
-                            <div wire:key='{{$conversation->id}}'
-                                wire:click="chatUserSelected({{$conversation}},{{$conversation->freelance_id }})"
-                                @click="sidebarOpen=false" class="flex p-4 mb-4 transition-transform duration-300 transform {{$freelance_id == $conversation->freelance_id? 'bg-amber-600 text-white scale-105':'bg-white'}} rounded-md shadow-md cursor-pointer entry  focus:border-amber-600
-                                    hover:scale-105 dark:text-white">
-                                <div class="flex-2">
-                                    <div class="relative w-12 h-12">
-
-                                        @if (!empty($conversation->freelance->user->profile_photo_path))
-                                        <img class="w-12 h-12 mx-auto rounded-full"
-                                            src="{{Storage::disk('local')->url('public/profiles-photos/'.$conversation->freelance->user->profile_photo_path) }}"
-                                            alt="">
-                                        @else
-                                        <img class="w-12 h-12 mx-auto rounded-full"
-                                            src="{{$conversation->freelance->user->profile_photo_url }}" alt="">
-                                        @endif
-
-                                        @if ($conversation->freelance->user->is_online)
-                                        <span
-                                            class="absolute bottom-0 right-0 w-2 h-2 bg-green-600 border-2 border-white rounded-full"></span>
-                                        @else
-
-                                        @endif
-
-                                    </div>
-                                </div>
-                                <div class="flex-1 px-2">
-                                    <div class="w-32 truncate"><span
-                                            class="{{$freelance_id == $conversation->freelance_id? 'text-white':'text-gray-800'}}">{{$conversation->freelance->nom}}</span>
-                                    </div>
-                                    <div class="w-32 truncate">
-                                        <small
-                                            class="{{$freelance_id == $conversation->freelance_id? 'text-gray-50':'text-gray-600'}} truncate dark:text-gray-200">
-
-                                            @if ($conversation->messages->last()?->sender_id == auth()->user()->id)
-                                            <span>vous:</span>
-                                            @endif
-
-                                            {{$conversation->messages->last()?->body}}</small>
-                                    </div>
-                                </div>
-                                <div class="text-right flex-2">
-                                    <div><small
-                                            class=" {{$freelance_id == $conversation->freelance_id? 'text-gray-50':'text-gray-700'}} dark:text-gray-200">{{
-                                            $conversation->messages->last()?->created_at->shortAbsoluteDiffForHumans()
-                                            }}</small></div>
-                                    <div>
-                                        @if(count($conversation->messages->where('is_read',0)->where('sender_id',$conversation->freelance->user->id)))
-                                        <small
-                                            class="inline-block w-6 h-6 text-xs leading-6 text-center text-white bg-red-500 rounded-full">
-                                            {{count($conversation->messages->where('is_read',0)->where('sender_id',$conversation->freelance->user->id))}}
-                                        </small>
-
-                                        @endif
-
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-
-                            @else
-                            <div>
-                                Pas De Conversation
-                            </div>
-
-                            @endif
-
-                        </div>
-                    </div>
-
-
-                    <div x-bind:class="{'hidden': sidebarOpen, 'md:flex': !sidebarOpen}"
-                        class="chat-area flex-1 bg-white  p-2 rounded-md flex lg:h-[500px] h-[550px]  flex-col">
-
-                        <div x-data="" class="flex gap-3 bg-gray-100 z-5 dark:bg-gray-800">
-                            <button wire:ignore @click="sidebarOpen = true" class="block lg:hidden ">
-                                <ion-icon class="w-8 h-8 text-gray-800" name="arrow-back-circle-outline"></ion-icon>
-                            </button>
-
-                            @empty($selectedConversation)
-                            <h2
-                                class="py-1 mb-4 text-base text-center text-gray-800 border-b-2 border-gray-200 md:text-xl dark:text-white md:mb-8">
-
-                                <b>Selectionnez une Conversation
-                                </b>
-                            </h2>
-                            @else
-                            <h2
-                                class="flex justify-between flex-grow py-1 mx-2 mb-2 text-lg text-gray-800 border-b-2 border-gray-200 md:mx-4 md:text-xl dark:text-white lg:mb-4">
-
-                                <div class="flex flex-col">
-                                    <b>{{$selectedConversation->freelance?->nom}}</b>
-                                    @if($selectedConversation->freelance->user->is_online)
-                                    <span class="mt-1 text-sm text-green->600">
-                                        online<span>
-                                            @else
-                                            <span class="mt-1 text-sm text-gray-600">
-
-                                                {{$selectedConversation->freelance?->user->last_activity?->DiffForHumans()}}<span>
-
-                                                    @endif
-                                </div>
-                                <div class="flex items-end gap-4">
-
-                                    <div>
-                                        <x-dropdown>
-
-                                            <x-dropdown.item label="Maquer non lue" />
-                                            <x-dropdown.item label="Favoris" />
-                                            <x-dropdown.item wire:click="effacerConversation()" label="Effacer" />
-                                            <x-dropdown.item wire:click="BloquerConversation()"
-                                                label="Bloquer l'utilisateur" />
-                                        </x-dropdown>
-                                    </div>
-
-                                </div>
-
-
-                            </h2>
-                            @endempty
-
-                        </div>
-
-                        @livewire('user.conversation.body-message')
-                        @livewire('user.conversation.send-message-u')
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>--}}
-
-<div x-data="{sidebarOpen:false, isLoading:true ,isPanelOpen:false}"
-    class="container mx-auto overflow-y-auto custom-scrollbar">
+<div x-data="{
+    sidebarOpen:false,
+     isLoading:true,
+     isPanelOpen:false,
+     theme:false,
+     attachement:false,
+    }" class="container mx-auto overflow-y-auto custom-scrollbar">
     <div
         class="h-screen min-w-full overflow-y-hidden border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
         <div x-bind:class="{'md:block hidden': sidebarOpen, 'md:block ': !sidebarOpen}"
             class="border-r border-gray-500 dark:border-gray-400 lg:col-span-1">
+
+            <div class="flex flex-row items-center justify-between px-3 py-2 bg-grey-lighter">
+                <div>
+                    @if (!empty(Auth::user()->profile_photo_path))
+                    <img class="w-10 h-10 rounded-full""
+                        src=" {{Storage::disk('local')->url('profiles-photos/'.Auth::user()->profile_photo_path) }}"
+                    alt="">
+                    @else
+                    <img class="w-10 h-10 rounded-full"" src=" {{ Auth::user()->profile_photo_url }}" alt="">
+                    @endif
+
+                </div>
+
+                <div class="flex">
+
+                    <div class="ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+
+                        <x-dropdown>
+                            <x-slot name="trigger">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 dark:text-gray-200">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                </svg>
+
+                            </x-slot>
+
+                            <x-dropdown.item @click="theme=!theme" separator label="Configuration" />
+                            <x-dropdown.item label="Favoris" />
+
+                            <x-dropdown.item wire:click="BloquerConversation()" label="l'utilisateur bloquer" />
+                        </x-dropdown>
+
+                    </div>
+                </div>
+            </div>
             <div class="mx-3 my-3">
                 {{--<div class="relative text-gray-600">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -188,7 +63,7 @@
                     <input type="search" class="block w-full py-2 pl-10 bg-gray-100 rounded outline-none" name="search"
                         placeholder="Search" required />
                 </div>--}}
-                <x-select label="Search a freealance" wire:model="freelance" x-on:selected="sidebarOpen=true"
+                <x-select label="" wire:model="freelance" x-on:selected="sidebarOpen=true"
                     placeholder="Select some user" :async-data="route('api.freelance.users')" :template="[
             'name'   => 'user-option',
             'config' => ['src' => 'profile_photo_url']
@@ -196,7 +71,7 @@
             </div>
 
             <ul class="overflow-auto h-[32rem]">
-                <h2 class="my-2 mb-2 ml-2 text-lg text-gray-600">Freelance</h2>
+
 
                 <li>
                     @if (count($conversations) > 0)
@@ -266,9 +141,11 @@
         </div>
         <div x-bind:class="{'md:block': sidebarOpen, ' hidden md:block ': !sidebarOpen}"
             class=" lg:col-span-2 lg:block">
-            <div class="w-full h-screen ">
-                <div class="relative flex justify-between border-b border-gray-500 dark:border-gray-500">
-                    <div wire:target='chatUserSelected' wire:loading.remove class="flex items-center gap-1 p-3 ">
+            <div class="w-full h-full ">
+
+
+                <div class="flex flex-row items-center justify-between px-3 py-2 bg-grey-lighter">
+                    <div class="flex items-center">
 
                         <div>
                             <button wire:ignore @click="sidebarOpen = false" class="block lg:hidden ">
@@ -278,7 +155,9 @@
                             </button>
                         </div>
 
+
                         @empty(!$selectedConversation)
+
                         <div @click="isPanelOpen=true" class="flex cursor-pointer ">
 
                             @if (!empty($selectedConversation->freelance?->user->profile_photo_path))
@@ -289,57 +168,71 @@
                             <img class="object-cover w-10 h-10 rounded-full"
                                 src="{{$selectedConversation->freelance?->user->profile_photo_url }}" alt="">
                             @endif
-                            <div class="flex flex-col">
-                                <span
-                                    class="block ml-2 font-bold text-gray-600">{{$selectedConversation->freelance?->user->name}}</span>
-                                @if($selectedConversation->freelance->user->is_online)
-                                <span class="mt-1 text-sm text-green->600">online<span>
-                                        @else
-                                        <span
-                                            class="mt-1 text-sm text-gray-600">{{$selectedConversation->freelance?->user->last_activity?->DiffForHumans()}}<span>
-                                                @endif
-                            </div>
+
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-grey-darkest">
+                                {{$selectedConversation->freelance?->user->name}}
+                            </p>
 
                             @if($selectedConversation->freelance->user->is_online)
-                            <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
-                            </span>
-                            @endif
-
+                            <p class="mt-1 text-xs text-grey-darker">
+                                online
+                            </p>
+                            @else
+                            <span
+                                class="mt-1 text-sm text-gray-600">{{$selectedConversation->freelance?->user->last_activity?->DiffForHumans()}}<span>
+                                    @endif
                         </div>
 
 
 
                         @endempty
 
-
                     </div>
 
-                    <div wire:target='chatUserSelected' wire:loading
-                        class="flex flex-col w-full bg-gray-400 animate-pulse">
-
-                        <div class="bg-gray-500 rounded-full w-14 animate-pulse">
+                    @empty(!$selectedConversation)
+                    <div class="flex">
+                        <div class="hidden md:flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="#263238" fill-opacity=".5"
+                                    d="M15.9 14.3H15l-.3-.3c1-1.1 1.6-2.7 1.6-4.3 0-3.7-3-6.7-6.7-6.7S3 6 3 9.7s3 6.7 6.7 6.7c1.6 0 3.2-.6 4.3-1.6l.3.3v.8l5.1 5.1 1.5-1.5-5-5.2zm-6.2 0c-2.6 0-4.6-2.1-4.6-4.6s2.1-4.6 4.6-4.6 4.6 2.1 4.6 4.6-2 4.6-4.6 4.6z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="ml-6">
+                            <button x-on:click="attachement=!attachement">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 dark:text-gray-200">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+                                </svg>
+                            </button>
 
                         </div>
+                        <div class="ml-6 ">
+                            <x-dropdown>
+                                <x-slot name="trigger">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6 dark:text-gray-200">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                    </svg>
 
+                                </x-slot>
+
+                                <x-dropdown.item label="Maquer non lue" />
+                                <x-dropdown.item label="Favoris" />
+                                <x-dropdown.item wire:click="effacerConversation()" label="Effacer" />
+                                <x-dropdown.item wire:click="BloquerConversation()" label="Bloquer l'utilisateur" />
+                            </x-dropdown>
+
+                        </div>
                     </div>
-
-                    <div wire:target='chatUserSelected' wire:loading.remove class="flex px-6 py-3">
-
-
-                        <x-dropdown>
-
-                            <x-dropdown.item label="Maquer non lue" />
-                            <x-dropdown.item label="Favoris" />
-                            <x-dropdown.item wire:click="effacerConversation()" label="Effacer" />
-                            <x-dropdown.item wire:click="BloquerConversation()" label="Bloquer l'utilisateur" />
-                        </x-dropdown>
-
-
-                    </div>
-
-
-
+                    @endempty
                 </div>
+
+
 
                 <div wire:target='chatUserSelected' wire:loading
                     class=" h-[500px] lg:h-[400px] w-full bg-gray-400 animate-pulse">
@@ -450,8 +343,64 @@
     </div>
 
 
+    {{--<div @click.away="theme = false" x-cloak x-show="theme" class="fixed inset-0 z-50 overflow-y-auto"
+        id="theme-modal">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+
+            <div class="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+                role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                <div>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-headline">
+                        Choisir le thème du composant conversation
+                    </h3>
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input type="radio" id="theme-light" name="theme" value="light"
+                                    class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                                <label for="theme-light" class="block ml-3 text-sm font-medium text-gray-700">
+                                    Clair
+                                </label>
+                            </div>
+                            <div class="w-4 h-4 bg-gray-200 rounded-full"></div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <input type="radio" id="theme-dark" name="theme" value="dark"
+                                        class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                                    <label for="theme-dark" class="block ml-3 text-sm font-medium text-gray-700">
+                                        Foncé
+                                    </label>
+                                </div>
+                                <div class="w-4 h-4 bg-gray-800 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 sm:mt-6">
+                    <button type="button"
+                        class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                        onclick="saveTheme()">
+                        Enregistrer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    --}}
+
+
+
+
 
 </div>
+
+
+
 
 
 

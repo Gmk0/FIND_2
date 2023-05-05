@@ -1,8 +1,8 @@
-<div class="p-2">
+<div x-data="{ isOpen:false,isLoading: true }" x-init="setTimeout(() => { isLoading = false }, 2000)" class="p-2">
     <div
-        class="flex flex-col min-h-screen gap-6 md:p-6 mx-auto bg-gray-100 md:max-w-7xl md:container px-auto dark:bg-gray-900">
+        class="flex flex-col min-h-screen gap-6 mx-auto bg-gray-100 md:p-6 md:max-w-7xl md:container px-auto dark:bg-gray-900">
         <!-- start::Stats -->
-        <div class="grid grid-cols-1 gap-4 px-auto md:grid-cols-2 lg:grid-cols-4">
+        <div x-show="!isLoading" class="grid grid-cols-1 gap-4 px-auto md:grid-cols-2 lg:grid-cols-4">
             <a href="{{route('commandeUser')}}"
                 class="px-4 py-6 bg-white rounded-lg shadow-xl cursor-pointer lg:px-6 lg:py-6">
                 <div class="flex items-center justify-between">
@@ -186,68 +186,30 @@
         <!-- end::Activities -->
 
         <!-- start::Table -->
-        <div class="hidden px-8 py-6 overflow-auto bg-white rounded-lg custom-scrollbar">
-            <h4 class="text-xl font-semibold text-gray-800">Recent transactions</h4>
-            <table class="w-full my-8 overflow-auto whitespace-nowrap">
-                <thead class="font-bold text-gray-100 bg-blue-400">
 
-                    <td class="py-2 pl-2 text-gray-800">
-                        Order ID
-                    </td>
-                    <td class="hidden py-2 pl-2 text-gray-800 md:flex">
-                        Services
-                    </td>
-                    <td class="py-2 pl-2 text-gray-800">
-                        Price
-                    </td>
-                    <td class="py-2 pl-2 text-gray-800">
-                        status
-                    </td>
-                    <td class="py-2 pl-2 text-gray-800">
-                        view
-                    </td>
+        <div x-show="isLoading">
 
-                </thead>
-                <tbody class="text-sm">
-                    @forelse ($order as $order )
-                    <tr
-                        class="transition duration-200 bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-900 hover:bg-opacity-20">
+            <div class="flex flex-col gap-4 p-8 overflow-y-hidden">
+                <div class="grid grid-cols-1 gap-4 mt-6 lg:grid-cols-4">
+                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
+                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
+                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
+                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
+                </div>
 
-                        <td class="py-3 pl-2">
-                            {{$order->order_numero}}
-                        </td>
-                        <td class="hidden py-3 pl-2 capitalize truncate md:flex">
-                            {{$order->service->title}}
-                        </td>
-                        <td class="py-3 pl-2">
-                            {{$order->total_amount}}
-                        </td>
-                        <td class="py-3 pl-2">
-
-                            @if($order->status =="pending")
-                            <span class="bg-red-300 px-1.5 py-0.5 rounded-lg ">en Attente</span>
-                            @elseif ($order->status =="completed")
-                            <span class="bg-green-500 px-1.5 py-0.5 rounded-lg text-gray-100">Payé</span>
-                            @else
-                            <span class="bg-red-500 px-1.5 py-0.5 rounded-lg text-gray-100">Rejeter</span>
-                            @endif
-                        </td>
-                        <td class="py-3 pl-2">
-                            <x-button href="{{route('commandeOneView',[$order->id])}}" sm primary icon="eye"></x-button>
-                        </td>
-
-                    </tr>
-                    @empty
-
-                    <h1>Pas de Trnsactions pour l'instant</h1>
-
-                    @endforelse
+                <div
+                    class="flex-1 w-full min-h-screen p-4 mb-2 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
 
 
-                </tbody>
-            </table>
+
+                </div>
+            </div>
         </div>
+        <div x-show="!isLoading" x-cloak class="pt-4">
 
+            {{ $this->table }}
+
+        </div>
 
 
 

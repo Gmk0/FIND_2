@@ -32,6 +32,7 @@ Route::controller(home::class)->group(function () {
     Route::view('/registration', 'user.beginner')->name('register.begin');
     Route::view('/registration/info', 'user.register_info')->name('register.etape.1');
     Route::view('/apropos', 'user.about')->name('about');
+    Route::view('/faq', 'user.faq')->name('faq');
 });
 
 Route::controller(ServiceController::class)->group(function () {

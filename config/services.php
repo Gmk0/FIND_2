@@ -45,5 +45,10 @@ return [
         env('GOOGLE_REDIRECT'),
     ],
 
+    'pusher' => [
+        'beams_instance_id' => env('BEAMS_INSTANCE_ID'),
+        'beams_secret_key' => env('BEAMS_INSTANCE_KEY'),
+    ],
+
 
 ];

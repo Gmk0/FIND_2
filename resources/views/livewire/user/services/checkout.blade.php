@@ -359,6 +359,19 @@
 
     });
 
+    window.addEventListener('error', event=> {
+    Swal.fire({
+    // position: 'top-end',
+    icon:'error',
+    //toast: true,
+    title:"operation echoue",
+    text:event.detail.message,
+    showConfirmButton: true,
+    //timer:5000
+    })
+
+    });
+
 
     function app() {
         return {

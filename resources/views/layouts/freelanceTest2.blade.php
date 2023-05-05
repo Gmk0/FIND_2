@@ -194,7 +194,7 @@
 
                         <!-- User Menu -->
                         <div class="relative" x-data="{ isOpen: false }">
-                            <x-user-info />
+                            <x-freelance-info />
 
 
                         </div>
@@ -269,6 +269,7 @@
 
 
 
+    @livewire('livewire-ui-spotlight')
 
 
     @include('include.script')

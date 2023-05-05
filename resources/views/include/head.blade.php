@@ -25,7 +25,11 @@
     <title>{{ config('app.name') }}</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" href="/build/assets/app2.css">
+
+    <link rel="stylesheet" href="/build/assets/app.css">
+
+
+    {{-- @vite(['resources/css/app.css'])--}}
 
 
     <link rel="stylesheet" href="/css/style.css">

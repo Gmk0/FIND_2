@@ -119,7 +119,8 @@
 </div>--}}
 
 <div>
-    <div class=" w-full p-4 overflow-y-auto lg:h-[400px] h-[500px]   messages custom-scrollbar">
+    <div
+        class=" w-full p-4 overflow-y-auto lg:h-[400px] h-[500px]  bg-[#DAD3CC] dark:bg-gray-700  messages custom-scrollbar">
 
         @if($selectedConversation)
 
@@ -197,7 +198,11 @@
                 </a>
 
                 @endif
-                <div class="chat-bubble dark:chat-bubble-primary">{{$message->body}}</div>
+
+                <div class="chat-bubble {{auth()->id() == $message->sender_id ? 'bg-[#E2F7CB]':'bg-[#FCF4CB]'}}">
+                    {{$message->body}}</div>
+
+
 
                 @if($message->is_read==1)
                 <div class="opacity-50 chat-footer">

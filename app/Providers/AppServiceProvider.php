@@ -2,7 +2,14 @@
 
 namespace App\Providers;
 
+use App\Spotlight\User\Commande;
+use App\Spotlight\User\Message;
+use App\Spotlight\User\Parametre;
+use App\Spotlight\User\Profile;
+use App\Spotlight\User\Securite;
+use App\Spotlight\User\Transaction;
 use Illuminate\Support\ServiceProvider;
+use LivewireUI\Spotlight\Spotlight;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,5 +27,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        Spotlight::registerCommandIf(true, Message::class);
+        Spotlight::registerCommandIf(true, Profile::class);
+        Spotlight::registerCommandIf(true, Transaction::class);
+        Spotlight::registerCommandIf(true, Commande::class);
+        Spotlight::registerCommandIf(true, Securite::class);
+        Spotlight::registerCommandIf(true, Parametre::class);
     }
 }

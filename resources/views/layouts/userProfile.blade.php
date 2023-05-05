@@ -39,7 +39,7 @@ $overflow="overflow-y-auto";
                     class="z-20 flex-col items-center flex-shrink-0 hidden py-2 bg-white border-r-2 shadow-md w-14 sm:flex rounded-tr-xl rounded-br-xl border-primary-100">
                     <!-- Logo -->
                     <div class="flex-shrink-0 pb-4">
-                        <a href="#">
+                        <a href="{{url('/')}}">
                             <img class="w-10 h-auto" src="/images/logo/find_01.png" alt="FIND" />
                         </a>
                     </div>
@@ -108,7 +108,7 @@ $overflow="overflow-y-auto";
                         class="flex flex-col h-full pl-5 overflow-y-auto custom-scrollbar">
                         <!-- Logo -->
                         <div class="flex items-center justify-center flex-shrink-0 py-2">
-                            <a href="#">
+                            <a href="{{url('/')}}">
                                 <img src="/images/logo/find_02.png" alt="logo-find" class="h-12 ">
                             </a>
                         </div>
@@ -120,6 +120,15 @@ $overflow="overflow-y-auto";
 
                     <section x-show="currentSidebarTab == 'messagesTab'" class="px-4 py-6">
                         <h2 class="text-xl">Messages</h2>
+
+                        <div>
+
+                            @livewire("user.conversation.messages-profile")
+
+
+                        </div>
+
+
                     </section>
 
                     <section x-show="currentSidebarTab == 'notificationsTab'" class="px-4 py-6">
@@ -134,7 +143,7 @@ $overflow="overflow-y-auto";
             <div class="flex flex-col flex-1">
                 <x-headerUserTest />
 
-                <main id="main" class="h-full p-2 mt-16 overflow-y-auto md:mt-0 custom-scrollbar">
+                <main id="main" class="h-full p-2 overflow-y-auto md:mt-0 custom-scrollbar">
                     <!-- Main -->
                     @yield('content')
 
@@ -222,7 +231,10 @@ $overflow="overflow-y-auto";
 
     </script>
 
+    @livewire('livewire-ui-spotlight')
 
     @include('include.script')
+
+
 
 </html>

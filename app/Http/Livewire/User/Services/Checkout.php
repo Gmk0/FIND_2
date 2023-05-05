@@ -10,6 +10,7 @@ use App\Events\ServiceOrdered;
 use App\Models\feedback;
 use App\Models\FeedbackService;
 use App\Models\Like;
+use App\Notifications\ServicePaid;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -349,39 +350,59 @@ class Checkout extends Component
             // Rediriger l'utilisateur vers une page de confirmation de paiement
             session()->flash('success', 'Paiement effectué avec succès!');
 
+            $user = auth()->user();
+
+            $user->notify(new ServicePaid($payment));
+
             Session::forget('cart');
 
             return redirect()->route('status_payement', $payment->transaction_numero);
         } catch (\Exception $e) {
             // En cas d'erreur, annuler la transaction de base de données
             DB::rollback();
-            dd($e->getMessage());
+            $this->dispatchBrowserEvent('error', [
+                'message' => $e->getMessage()
+            ]);
             // Retourner une réponse d'erreur
 
         } catch (\Stripe\Exception\CardException $e) {
             // Gérer l'erreur liée à la carte de crédit
             DB::rollback();
-            dd($e->getMessage());
+
+
+            $this->dispatchBrowserEvent('error', [
+                'message' => $e->getMessage()
+            ]);
         } catch (\Stripe\Exception\RateLimitException $e) {
             // Gérer l'erreur liée à la limite de taux
             DB::rollback();
-            dd($e->getMessage());
+            $this->dispatchBrowserEvent('error', [
+                'message' => $e->getMessage()
+            ]);
         } catch (\Stripe\Exception\InvalidRequestException $e) {
             // Gérer l'erreur liée à une requête invalide
             DB::rollback();
-            dd($e->getMessage());
+            $this->dispatchBrowserEvent('error', [
+                'message' => $e->getMessage()
+            ]);
         } catch (\Stripe\Exception\AuthenticationException $e) {
             // Gérer l'erreur liée à une authentification invalide
             DB::rollback();
-            dd($e->getMessage());
+            $this->dispatchBrowserEvent('error', [
+                'message' => $e->getMessage()
+            ]);
         } catch (\Stripe\Exception\ApiConnectionException $e) {
             // Gérer l'erreur liée à une connexion API
             DB::rollback();
-            dd($e->getMessage());
+            $this->dispatchBrowserEvent('error', [
+                'message' => $e->getMessage()
+            ]);
         } catch (\Stripe\Exception\ApiErrorException $e) {
             // Gérer toutes les autres erreurs API
             DB::rollback();
-            dd($e->getMessage());
+            $this->dispatchBrowserEvent('error', [
+                'message' => $e->getMessage()
+            ]);
         }
     }
 

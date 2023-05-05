@@ -31,6 +31,8 @@
                             <p class="text-sm text-gray-500 dark:text-gray-100">Nom du titulaire de la carte</p>
                             <p class="mt-2 text-xl font-semibold text-gray-800">**** **** **** 1234</p>
                         </div>
+
+
                     </div>
                 </div>
 
@@ -73,7 +75,7 @@
                             {{-- <div x-data="{ selected: '' }">
                                 <div class="flex items-center">
                                     <select x-model="selected"
-                                        class="w-24 py-2 px-3 border border-gray-300 bg-white rounded-l-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        class="w-24 px-3 py-2 bg-white border border-gray-300 shadow-sm rounded-l-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <option value="">+</option>
                                         @foreach ($pays as $p)
                                         <option
@@ -89,7 +91,7 @@
 
 
                                     <input x-bind:value="selected"
-                                        class="flex-1 py-2 px-3 border border-gray-300 bg-white rounded-r-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        class="flex-1 px-3 py-2 bg-white border border-gray-300 shadow-sm rounded-r-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                         placeholder="Numéro de téléphone">
                                 </div>
                             </div>

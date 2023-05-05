@@ -1,14 +1,14 @@
 <div class="min-h-screen" x-data="{message:@entangle('openMessage')}">
 
     <!-- Exemple de section pour afficher les détails d'une commande avec options supplémentaires -->
-    <section class="px-4 py-6 md:px-6 lg:px-12 xl:px-20">
+    <section class="px-2 py-6 md:px-6 lg:px-8 xl:px-20">
         <div>
             @include('include.breadcumbUser',['commande'=>'commande','commandeID'=>'1'])
         </div>
         <div class="max-w-6xl mx-auto">
 
             <!-- Titre de la section -->
-            <h2 class="mb-4 text-3xl font-semibold text-gray-800 dark:text-gray-300">Détails de la commande</h2>
+            <h2 class="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-300">Détails de la commande</h2>
 
             <!-- Contenu de la section -->
             <div class="overflow-hidden bg-white rounded-lg shadow-md">

@@ -10,17 +10,21 @@ use App\Models\Freelance;
 use App\Models\Message;
 use Exception;
 use Livewire\WithFileUploads;
+use Filament\Forms\Components\{FileUpload};
+use Filament\Forms;
 
-class SendMessageU extends Component
+class SendMessageU extends Component implements Forms\Contracts\HasForms
 {
 
     use WithFileUploads;
+    use Forms\Concerns\InteractsWithForms;
 
     public $selectedConversation;
     public $receiverInstance;
     public $body;
-    public $attachment = null;
+    public $attachment;
     public $createdMessage;
+
     protected $listeners = ['updateSendMessage', 'dispatchMessageSent', 'resetComponent'];
 
     public function resetComponent()
@@ -34,6 +38,15 @@ class SendMessageU extends Component
 
 
 
+    protected function getFormSchema(): array
+    {
+        return [
+            FileUpload::make('attachment'),
+            // ...
+        ];
+    }
+
+
     function updateSendMessage(Conversation $conversation, Freelance $receiver)
     {
 
@@ -45,10 +58,73 @@ class SendMessageU extends Component
 
     public function addFiles($image)
     {
-        $fileName = $image->getClientOriginalName();
 
-        $image->storeAs('public/messages', $fileName);
-        return $fileName;
+
+        foreach ($image as $file) {
+            $fileName = $file->getClientOriginalName();
+            $file->storeAs('public/messages', $fileName);
+            $AllFilename = $fileName;
+            break;
+        }
+
+        return $AllFilename;
+    }
+
+    public function sendFile()
+    {
+
+
+        $this->validate([
+            'attachment' => 'required'
+        ]);
+
+        try {
+
+            $filename = $this->attachment ? $this->addFiles($this->attachment) : null;
+
+
+            foreach ($this->attachment as $file) {
+                if (is_string($file) && file_exists($file) && getimagesize($file)) {
+                    // Le fichier est une image
+
+                    $this->createdMessage = Message::create([
+                        'sender_id' => auth()->user()->id,
+                        'receiver_id' => $this->receiverInstance->user->id,
+                        'conversation_id' => $this->selectedConversation->id,
+                        'body' => 'images',
+                        'file' => $filename,
+                        'is_read' => '0',
+                        'type' => "image",
+
+                    ]);
+                    $this->selectedConversation->last_time_message = $this->createdMessage->created_at;
+                    $this->selectedConversation->save();
+                    $this->attachment = null;
+
+                    $this->emitTo('user.conversation.body-message', 'pushMessage', $this->createdMessage->id);
+                } else {
+                    // Le fichier n'est pas une image
+
+                    $this->createdMessage = Message::create([
+                        'sender_id' => auth()->user()->id,
+                        'receiver_id' => $this->receiverInstance->user->id,
+                        'conversation_id' => $this->selectedConversation->id,
+                        'body' => 'document',
+                        'file' => $filename,
+                        'is_read' => '0',
+                        'type' => "doc",
+
+                    ]);
+                    $this->selectedConversation->last_time_message = $this->createdMessage->created_at;
+                    $this->selectedConversation->save();
+                    $this->attachment = null;
+                    $this->emitTo('user.conversation.body-message', 'pushMessage', $this->createdMessage->id);
+                }
+
+                break;
+            }
+        } catch (Exception $e) {
+        }
     }
 
 
@@ -62,6 +138,7 @@ class SendMessageU extends Component
 
 
         $filename = $this->attachment ? $this->addFiles($this->attachment) : null;
+
 
 
 
