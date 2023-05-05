@@ -3,11 +3,11 @@
     <div>
         @include('include.breadcumbUser',['transation'=>'transation'])
     </div>
-    <div class="max-w-7xl mx-auto py-4 px-6 lg:px-8">
+    <div class="px-6 py-4 mx-auto max-w-7xl lg:px-8">
 
 
-        <div class="max-w-3xl  mb-8">
-            <h2 class="text-xl text-indigo-600 mb-8 font-semibold tracking-wide uppercase">Mes transactions</h2>
+        <div class="max-w-3xl mb-8">
+            <h2 class="mb-8 text-xl font-semibold tracking-wide text-indigo-600 uppercase">Mes transactions</h2>
         </div>
 
         <div x-show="isLoading">
@@ -33,13 +33,7 @@
 
         <div x-show="!isLoading" x-cloak class="pt-4">
 
-
             {{ $this->table }}
-
-
-
-
-
 
         </div>
 

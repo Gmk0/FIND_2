@@ -41,7 +41,8 @@ class SendMessageU extends Component implements Forms\Contracts\HasForms
     protected function getFormSchema(): array
     {
         return [
-            FileUpload::make('attachment'),
+            FileUpload::make('attachment')
+                ->maxSize(10024),
             // ...
         ];
     }
