@@ -3,7 +3,7 @@
     <div @click.away="theme = false" x-cloak x-show="attachement" class="fixed inset-0 z-50 overflow-y-auto"
         id="theme-modal">
         <form wire:submit.prevent="sendFile"
-            class="flex items-center justify-center min-h-screen px-2 pt-4 pb-20 text-center  sm:p-0">
+            class="flex items-center justify-center min-h-screen px-2 pt-4 pb-20 text-center sm:p-0">
             <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                 <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
@@ -33,21 +33,58 @@
     <form wire:submit.prevent='sendMessage'
         class="flex items-center justify-between w-full p-3 border-t border-gray-300 ">
 
+        <div>
+
+            <button type="button" id="emoji-picker-btn"
+                class="items-center justify-center hidden text-gray-400 lg:flex hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                    </path>
+                </svg>
+            </button>
+
+
+
+        </div>
+
+
+
+        <div class="flex-grow ml-1">
+
+
+            <div class="relative w-full">
+
+
+                <input contenteditable="true" wire:model.defer="body" id="input" type="text"
+                    placeholder="Écrire un message" x-ref="myInput" required x-on:blur='resetPosition'
+                    class="flex w-full h-10 border -pl-4 rounded-xl focus:outline-none focus:border-indigo-300" />
+
+            </div>
+        </div>
 
 
 
 
 
-        <input wire:model.defer="body" id="input" type="text" placeholder="Écrire un message" x-ref="myInput" required
-            x-on:blur='resetPosition'
-            class="flex-1 p-2 mr-1 bg-white border border-gray-300 rounded-full md:mr-4 focus:outline-none focus:ring focus:border-blue-300">
-
-        <button type="submit" class="py-1.5 " wire:loading.attr='disabled' @click="photoPreview=null">
-
-            <i class="w-10 h-10 fa-regular fa-paper-plane"></i>
-        </button>
+        <div class="ml-2">
+            <button type="submit" wire:loading.attr='disabled'
+                class="flex justify-center flex-shrink-0 px-4 py-1 text-white bg-indigo-500 hover:bg-indigo-600 rounded-xl">
+                <span>Send</span>
+                <span class="ml-2">
+                    <svg class="w-4 h-4 -mt-px transform rotate-45" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
+                </span>
+            </button>
+        </div>
     </form>
 </div>
+
+
 @push('script')
 
 <script>
@@ -57,6 +94,26 @@
 
     document.getElementById('attachment').value = '';
     }
+</script>
+
+<script>
+    const button = document.querySelector('#emoji-picker-btn');
+    const input = document.getElementById('input');
+const picker = new EmojiButton();
+picker.on('emoji', emoji => {
+    input.value += emoji;
+    // Insérer l'emoji sélectionné dans un champ de texte ou un textarea
+});
+
+
+
+
+
+button.addEventListener('click', () => {
+    picker.togglePicker(button);
+});
+
+
 </script>
 
 @endpush

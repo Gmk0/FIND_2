@@ -10,7 +10,6 @@
 
 
 
-@stack('script')
 
 
 
@@ -47,8 +46,11 @@
 <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-tooltip@1.x.x/dist/cdn.min.js" defer></script>
 
 <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
 
-<script>
+
+@stack('script')
+{{--<script>
     const beamsClient = new PusherPushNotifications.Client({
     instanceId: '46c67427-dc94-472a-ad4d-622a32102ffd',
   });
@@ -57,4 +59,4 @@
     .then(() => beamsClient.addDeviceInterest('hello'))
     .then(() => console.log('Successfully registered and subscribed!'))
     .catch(console.error);
-</script>
+</script>--}}

@@ -148,7 +148,6 @@
 
                                         <div class="flex">
                                             <button wire:click="add_cart()" type="button"
-                                                onclick="event.preventDefault(); playSound('/sound/sound.wav');"
                                                 class="flex items-center justify-center w-full gap-1 px-8 py-3 mt-4 text-base font-medium text-white bg-indigo-600 border border-transparent hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -375,10 +374,7 @@
                             @if(!empty($commentaires))
                             @foreach ($commentaires as $commentaire)
                             <div class="p-4 mb-4 bg-gray-100 rounded-lg dark:bg-gray-600">
-                                <div>
 
-
-                                </div>
                                 <p class="text-sm text-gray-700 md:text-base dark:text-gray-300">
                                     {{$commentaire->commentaires}}.</p>
 
@@ -395,8 +391,8 @@
                                 </div>
                                 <div class="flex items-center">
                                     @if (!empty($commentaire->order->user->profile_photo_path))
-                                    <img class="w-8 h-8 rounded-full" src="{{Storage::disk('local')->url('public/profiles-photos/'.$commentaire->order->user->profile_photo_path)
-                    }}" alt="">
+                                    <img class="w-8 h-8 rounded-full"
+                                        src="{{$commentaire->order->user->profile_photo_path}}" alt="">
                                     @else
                                     <img class="w-8 h-8 rounded-full"
                                         src="{{$commentaire->order->user->profile_photo_url }}" alt="">
@@ -432,16 +428,9 @@
                             <div class="flex items-center mb-8">
 
 
-                                @if (!empty($commentaire->order->user->profile_photo_path))
-                                <img class="w-8 h-8 rounded-full"
-                                    src="{{Storage::disk('local')->url('public/profiles-photos/'.$service->freelance->user->profile_photo_path)}}"
-                                    alt="">
-                                @else
+
                                 <img class="w-8 h-8 rounded-full"
                                     src="{{$service->freelance->user->profile_photo_url }}" alt="">
-                                @endif
-
-
 
 
                                 <div>

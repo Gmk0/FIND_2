@@ -14,14 +14,8 @@ class UserObserver
     {
         //
 
-        try {
-
-            $user = $user->id;
-            $user = new UserSetting();
-            $user->user_id = $user;
-            $user->save();
-        } catch (Exception $e) {
-        }
+        $user = $user->id;
+        $user = new UserSetting();
     }
 
     /**

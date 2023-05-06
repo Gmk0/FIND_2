@@ -6,6 +6,7 @@ use App\Events\FeedbackSend;
 use Illuminate\Auth\Events\Registered;
 use App\Events\ServiceOrdered;
 use App\Events\ProjectResponse;
+
 use App\Listeners\FeedbackNotifaction;
 use App\Listeners\ProjetStatus;
 
@@ -34,6 +35,7 @@ class EventServiceProvider extends ServiceProvider
         ProjectResponse::class => [
             ProjetStatus::class,
         ],
+
     ];
 
     /**
