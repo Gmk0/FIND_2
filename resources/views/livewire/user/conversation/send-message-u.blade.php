@@ -1,9 +1,9 @@
-<div class="w-full px-6 lg:relative" x-data="{photoName: null, photoPreview: null}">
+<div class="w-full p-4 lg:relative" x-data="{photoName: null, photoPreview: null}">
 
     <div @click.away="theme = false" x-cloak x-show="attachement" class="fixed inset-0 z-50 overflow-y-auto"
         id="theme-modal">
         <form wire:submit.prevent="sendFile"
-            class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            class="flex items-center justify-center min-h-screen px-2 pt-4 pb-20 text-center  sm:p-0">
             <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                 <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
@@ -42,9 +42,9 @@
             x-on:blur='resetPosition'
             class="flex-1 p-2 mr-1 bg-white border border-gray-300 rounded-full md:mr-4 focus:outline-none focus:ring focus:border-blue-300">
 
-        <button type="submit" wire:loading.attr='disabled' @click="photoPreview=null">
+        <button type="submit" class="py-1.5 " wire:loading.attr='disabled' @click="photoPreview=null">
 
-            <i class="w-8 h-8 fa-regular fa-paper-plane"></i>
+            <i class="w-10 h-10 fa-regular fa-paper-plane"></i>
         </button>
     </form>
 </div>

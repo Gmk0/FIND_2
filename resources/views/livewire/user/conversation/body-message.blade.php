@@ -258,7 +258,8 @@
     window.addEventListener('rowChatToBottom', event => {
 
             $('.messages').scrollTop($('.messages')[0].scrollHeight);
-            $('#main').scrollTop($('#main')[0].scrollHeight);
+
+           // $('#main').scrollTop($('#main')[0].scrollHeight);
 
 
 
