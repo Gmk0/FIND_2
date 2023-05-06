@@ -428,7 +428,6 @@
         });
 
 
-
         // Ramener la scrollbar au haut de la div
 
      }
