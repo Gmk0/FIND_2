@@ -447,7 +447,7 @@
                                                 class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
 
 
-                                                {{$value['langue']}}
+                                                {{$value['name']}}
 
                                             </td>
                                             <td
