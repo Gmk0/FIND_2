@@ -14,7 +14,7 @@
                 <h3 class="mb-2 text-lg font-bold text-gray-800">{{$projet->title}}</h3>
                 <p class="mb-2 text-gray-600 dark:text-gray-200">{{$projet->description}}</p>
 
-                <p class="mb-2 text-gray-600 dark:text-gray-300">Budget: <span>{{$projet->bid_amount}}</span></p>
+                <p class="mb-2 text-gray-600 dark:text-gray-300">Budget: <span>{{$projet->bidAmount()}}</span></p>
                 <div class="flex justify-between">
                     <span class="text-gray-500 ">Client <span>{{$projet->user->name}}</span></span>
                     @if($projet->status=="active")

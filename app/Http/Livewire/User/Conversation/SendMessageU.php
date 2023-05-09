@@ -171,17 +171,19 @@ class SendMessageU extends Component implements Forms\Contracts\HasForms
     {
 
 
+
+
+
+
+        $this->validate([
+            'body' => 'required'
+        ]);
+
+
+
+
+
         try {
-
-
-
-            $this->validate([
-                'body' => 'required'
-            ]);
-
-
-
-
 
 
             //dd($this->selectedConversation);

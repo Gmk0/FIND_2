@@ -47,6 +47,10 @@
     </li>
     <li x-data="{ linkHover: false, linkActive: false }" class="relative px-6 py-3">
 
+        @if(request()->routeIs('favorisUser'))
+        <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-amber-600" aria-hidden="true"></span>
+        @endif
+
         <button
             class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
             @click="linkActive=!linkActive" aria-haspopup="true">
@@ -78,11 +82,7 @@
                         Service
                     </a>
                 </li>
-                <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                    <a class="w-full" x-on:click="linkActive=false" href="">
-                        Freelance
-                    </a>
-                </li>
+
 
             </ul>
         </div>
@@ -116,11 +116,7 @@
                         Messages
                     </a>
                 </li>
-                <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                    <a class="w-full" x-on:click="linkActive=false" href="">
-                        Messages Projet
-                    </a>
-                </li>
+
 
             </ul>
         </div>
@@ -157,7 +153,7 @@
     <li class="relative px-6 py-3">
 
 
-        @if(request()->routeIs('paiementUser'))
+        @if(request()->routeIs('assistanceUser'))
         <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-amber-600" aria-hidden="true"></span>
         @endif
 
@@ -173,7 +169,7 @@
     <li class="relative px-6 py-3">
 
 
-        @if(request()->routeIs('paiementUser'))
+        @if(request()->routeIs('parametreUser'))
         <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-amber-600" aria-hidden="true"></span>
         @endif
 

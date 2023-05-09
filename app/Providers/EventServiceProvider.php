@@ -6,10 +6,10 @@ use App\Events\FeedbackSend;
 use Illuminate\Auth\Events\Registered;
 use App\Events\ServiceOrdered;
 use App\Events\ProjectResponse;
-
+use App\Events\ProjectResponseFreelance;
 use App\Listeners\FeedbackNotifaction;
 use App\Listeners\ProjetStatus;
-
+use App\Listeners\SendNotificationProject;
 use App\Listeners\SendNotificationToFreelancer;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -34,6 +34,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ProjectResponse::class => [
             ProjetStatus::class,
+        ],
+        ProjectResponseFreelance::class => [
+            SendNotificationProject::class,
         ],
 
     ];

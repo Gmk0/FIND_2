@@ -67,17 +67,21 @@
                                 <p>{{$proposition->content}} </p>
                             </div>
                         </div>
-                        @if($proposition->status=="approved")
-                        <div class="flex gap-4 px-4 py-4 bg-gray-50">
+                        @if($proposition->status=="accepter")
+                        <div class="flex gap-4 px-4 py-4 bg-gray-50 dark:bg-gray-700">
                             <div>
-                                <h1>Vous avez accepter cette proposiotion </h1>
+                                <h1 class="text-gray-800">Vous avez accepter cette proposiotion </h1>
                             </div>
-                            <x-button href="" sm primary label="voir l'evolution" />
+                            <div>
+                                <x-button href="" sm primary label="l'evolution" />
+
+                            </div>
+
                         </div>
                         @else
 
 
-                        <div class="flex gap-4 px-4 py-4 bg-gray-50">
+                        <div class="flex gap-4 px-4 py-4 dark:bg-gray-800 bg-gray-50">
                             <x-button wire:click="refuser({{$proposition->id}})" sm danger label="Rejeter" />
                             <x-button wire:click="accepter({{$proposition->id}})" sm primary label="Accepter" />
                         </div>

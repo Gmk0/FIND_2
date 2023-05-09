@@ -6,6 +6,7 @@ use Livewire\Component;
 
 use App\Models\ProjectResponse;
 use App\Events\ProjectResponse as Response;
+use App\Models\Project;
 use WireUi\Traits\Actions;
 
 class PropositionProjet extends Component
@@ -25,13 +26,17 @@ class PropositionProjet extends Component
 
         // $Response = ProjectResponse::find($id)->update(['status' => 'approved']);
         $Response = ProjectResponse::find($id);
-        $Response->status = 'approved';
+        $Response->status = 'accepter';
+
         $Response->update();
+
 
         $this->notification()->success(
             $title = "Proposition",
             $description = "Vous avez approuver la proposition",
         );
+
+        event(new Response($Response));
     }
 
     public function refuser($id)
@@ -45,7 +50,7 @@ class PropositionProjet extends Component
             $title = "Proposition",
             $description = "Vous avez rejeter la proposition",
         );
-        broadcast(new Response($Response));
+        event(new Response($Response));
     }
 
     public function render()

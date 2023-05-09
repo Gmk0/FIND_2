@@ -3,17 +3,17 @@
 
     <div x-data="project()" x-on:success.window="step = 1" class="container flex px-2 py-3 ">
 
-        <div class="hidden w-6/12 md:block">
+        <div class="hidden w-6/12 lg:block">
 
             <h1>Lala</h1>
         </div>
-        <div class="flex flex-col md:w-6/12 ">
+        <div class="flex flex-col lg:w-6/12 ">
             <div x-cloak x-show.transition="step==1" class="flex flex-col w-full gap-4 px-2 ">
                 <div>
                     <div>
                         <h1 class="mb-4 text-xl text-gray-800 dark:text-gray-100">Donner un titre a votre projet
 
-                            (Facultatif)</h1>
+                        </h1>
                         <p class="text-sm text-gray-600 dark:text-gray-200">
                             Ex: Devellopement Site web.
                         </p>
@@ -110,18 +110,16 @@
                     <div>
                         <h1 class="mb-4 text-xl text-gray-800 dark:text-gray-200">Date
 
-                            (Facultatif)</h1>
-                        <p class="text-sm text-gray-600 dark:text-gray-200">
+                        </h1>
 
-                        </p>
                     </div>
 
-                    <div class="grid gap-6 p-2 md:grid-cols-2">
-                        <x-datetime-picker label=" Date Debut" wire:model.defer='dateD' parse-format="YYYY-MM-DD HH:mm:ss"
-                             placeholder="Date Debut" />
+                    <div class="grid gap-6 p-2 lg:grid-cols-2">
+                        <x-datetime-picker label=" Date Debut" wire:model.defer='dateD'
+                            parse-format="YYYY-MM-DD HH:mm:ss" placeholder="Date Debut" />
 
-                        <x-datetime-picker label=" Date Fin" without wire:model.defer='dateF' parse-format="YYYY-MM-DD HH:mm:ss"
-                            placeholder="Date Fin" />
+                        <x-datetime-picker label=" Date Fin" without wire:model.defer='dateF'
+                            parse-format="YYYY-MM-DD HH:mm:ss" placeholder="Date Fin" />
 
 
 
@@ -131,19 +129,17 @@
                 </div>
                 <div>
                     <div class="p-2">
-                        <h1 class="mb-4 text-xl text-gray-800 dark:text-gray-200">Parlez-nous un peu de vous
 
-                        </h1>
                         <p class="text-sm text-gray-600 dark:text-gray-200">
-                            Budjet
+                            Budget
                         </p>
                     </div>
 
-                    <div class="grid gap-6 p-2 md:grid-cols-2">
+                    <div class="grid gap-4 p-2 lg:grid-cols-2">
 
 
-                        <x-inputs.currency label="Budjet" placeholder="Budjet" icon="currency-dollar" thousands="."
-                            decimal="," precision="4" wire:model.defer="currency" />
+                        <x-inputs.currency placeholder="Budget" icon="currency-dollar" thousands="." decimal=","
+                            precision="4" wire:model.defer="currency" />
 
 
 
@@ -184,7 +180,7 @@
 @push('script')
 <script>
     window.addEventListener('success', event=> {
-    Swal.fire({
+     Swal.fire({
    // position: 'top-end',
     icon:'success',
     //toast: true,

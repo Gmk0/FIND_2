@@ -22,11 +22,10 @@ class SendNotificationToFreelancer
             'user_id' => $freelancerId,
             'type' => 'service_commande',
             'content' => 'Vous avez une nouvelle commande pour votre service.',
-            'data' => [
-                'order_id' => $event->order->id,
-                'order_numero' => $event->order->order_numero,
-                'client' => $event->order->user->name,
-            ],
+            'data' => [[
+                'id' => $event->order->id,
+                'user' => $event->order->user->name,
+            ]],
             'is_read' => false
         ]);
 

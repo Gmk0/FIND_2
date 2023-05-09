@@ -169,6 +169,9 @@ class ConversationComponent extends Component
     public function loadConversation(Conversation $conversation)
     {
         $this->selectedConversation = $conversation;
+
+        Message::where('conversation_id', $this->selectedConversation->id)
+            ->where('receiver_id', auth()->user()->id)->update(['is_read' => 1]);
     }
 
 

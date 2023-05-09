@@ -13,7 +13,7 @@
         <div x-ref="loading"
             class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-50"
             style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
-            Loading.....
+            Chargement.....
         </div>
         <!-- Sidebar backdrop -->
         <div x-show.in.out.opacity="isSidebarOpen" class="fixed inset-0 z-10 bg-black bg-opacity-20 lg:hidden"
@@ -62,7 +62,7 @@
                                     class="w-full px-4 py-3 text-gray-600 rounded-md focus:bg-gray-100 focus:outline-none" />
                             </div>
                             <!-- close button -->
-                            <button @click="isSearchBoxOpen = false" class="flex-shrink-0 p-4 rounded-md">
+                            <button @click="$dispatch('toggle-spotlight')" class="flex-shrink-0 p-4 rounded-md">
                                 <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -80,7 +80,7 @@
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
 
-                        <input type="text" placeholder="Search"
+                        <input type="text" placeholder="Search" x-on:focus="$dispatch('toggle-spotlight')"
                             class="px-4 py-3 rounded-md hover:bg-gray-100 lg:max-w-sm md:py-2 md:flex-1 focus:outline-none md:focus:bg-gray-100 md:focus:shadow md:focus:border" />
                     </div>
 
@@ -88,7 +88,7 @@
                     <div class="relative flex items-center space-x-3">
                         <!-- Search button -->
 
-                        <button @click="isSearchBoxOpen = true"
+                        <button @click="$dispatch('toggle-spotlight')"
                             class="p-2 bg-gray-100 rounded-full md:hidden focus:outline-none focus:ring hover:bg-gray-200">
                             <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -215,7 +215,7 @@
         <!-- Setting panel button -->
         <div>
             <button @click="isSettingsPanelOpen = true"
-                class="fixed right-0 px-4 py-2 text-sm font-medium text-white uppercase transform rotate-90 translate-x-8 bg-gray-600 top-1/2 rounded-b-md">
+                class="fixed right-0 px-4 py-2 hidden text-sm font-medium text-white uppercase transform rotate-90 translate-x-8 bg-gray-600 top-1/2 rounded-b-md">
                 Settings
             </button>
         </div>

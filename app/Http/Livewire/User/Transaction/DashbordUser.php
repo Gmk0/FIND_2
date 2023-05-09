@@ -133,7 +133,7 @@ class DashbordUser extends Component implements Tables\Contracts\HasTable
         return [
             // ...
             Action::make('Voir')
-                ->url(fn (Order $record): string => route('freelance.Order.view', $record->id))
+                ->url(fn (Order $record): string => route('commandeOneView', $record->id))
                 ->openUrlInNewTab()
                 ->tooltip('Voir transaction')
                 ->icon('heroicon-s-pencil'),

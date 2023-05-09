@@ -169,7 +169,8 @@
                 </div>
                 <div class="chat-header">
 
-                    <time class="text-xs opacity-50">{{ $message->created_at->format('m: i a') }}</time>
+                    <time class="text-xs  dark:text-gray-300 opacity-50">{{ $message->created_at->format('m: i a')
+                        }}</time>
                 </div>
 
                 @if ($message->service_id != null)
@@ -199,7 +200,8 @@
 
                 @endif
 
-                <div class="chat-bubble {{auth()->id() == $message->sender_id ? 'bg-[#E2F7CB]':'bg-[#FCF4CB]'}}">
+                <div
+                    class="text-gray-800 chat-bubble {{auth()->id() == $message->sender_id ? 'bg-[#E2F7CB] dark:bg-[#075E54]':'bg-[#FCF4CB] dark:bg-gray-900'}}">
                     {{$message->body}}</div>
 
 

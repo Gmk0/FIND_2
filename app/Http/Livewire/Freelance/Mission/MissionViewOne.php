@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Freelance\Mission;
 
+use App\Events\ProjectResponseFreelance;
 use App\Models\Project;
 use Livewire\Component;
 use App\Models\ProjectResponse;
@@ -16,6 +17,7 @@ class MissionViewOne extends Component
     public $modal = false;
     public $response = null;
     public $delai;
+    protected $listeners = ['refresh' => '$refresh'];
 
     public function mount($id)
     {
@@ -37,7 +39,7 @@ class MissionViewOne extends Component
 
         $this->validate([
             'content' => 'required',
-            'amount' => 'required'
+
         ]);
 
 
@@ -45,18 +47,27 @@ class MissionViewOne extends Component
             'project_id' => $this->projet->id,
             'freelance_id' => auth()->user()->getIdFreelance(),
             'content' => $this->content,
-            'bid_amount' => $this->amount
+            'bid_amount' => $this->amount ? $this->amount : $this->projet->bid_amount,
         ]);
+
+        $Project = Project::where('id', $data->project_id)->first();
+
+
         $this->reset('content', 'amount');
 
         $this->modal = false;
 
         if ($data) {
 
+
             $this->notification()->success(
                 $title = "Proposition",
                 $description = "Votre proposition a ete envoyer avec success vous recevrez des notifications sur l'etat de votre proposition",
             );
+
+            event(new ProjectResponseFreelance($data));
+
+            $this->emitSelf('refresh');
         }
     }
 

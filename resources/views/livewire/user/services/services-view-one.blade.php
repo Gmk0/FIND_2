@@ -365,6 +365,9 @@
 
                         <div x-show.transition="step==2" class="py-5 min-h-72">
 
+
+                            {!! $service->samples !!}
+
                         </div>
 
 

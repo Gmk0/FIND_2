@@ -29,13 +29,12 @@ class ProjetStatus
         // Créer une nouvelle notification pour le freelance
         $notification = new Notification([
             'user_id' => $freelancerId,
-            'type' => 'Proposition',
+            'type' => 'response',
             'content' => 'Vous avez recu la reponse a votre proposition.',
-            'data' => [
-                'ProjectResponse_id' => $event->response->id,
-                'status' => $event->response->status,
-                'client' => $event->response->project->user->name,
-            ],
+            'data' => [[
+                'id' => $event->response->id,
+                'user' => $event->response->project->user->name,
+            ]],
             'is_read' => false
         ]);
 

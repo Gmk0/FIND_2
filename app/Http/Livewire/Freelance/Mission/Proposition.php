@@ -50,7 +50,7 @@ class Proposition extends Component implements Tables\Contracts\HasTable
         // Créer une requête pour la table "Service"
         $project->whereHas('projectResponses', function ($query) use ($freelance) {
             $query->where('freelance_id', $freelance)
-                ->where('status', 'approved');
+                ->where('status', 'accepter');
         })->get();
 
         // Ajouter une condition pour l'utilisateur connecté

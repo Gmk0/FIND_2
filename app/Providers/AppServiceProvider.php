@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Spotlight\Freelance\CommandeF;
+use App\Spotlight\Freelance\MessageF;
+use App\Spotlight\Freelance\ParametreF;
+use App\Spotlight\Freelance\ProfileF;
+use App\Spotlight\Freelance\SecuriteF;
+use App\Spotlight\Freelance\TransactionF;
 use App\Spotlight\User\Commande;
 use App\Spotlight\User\Message;
 use App\Spotlight\User\Parametre;
@@ -33,5 +39,11 @@ class AppServiceProvider extends ServiceProvider
         Spotlight::registerCommandIf(true, Commande::class);
         Spotlight::registerCommandIf(true, Securite::class);
         Spotlight::registerCommandIf(true, Parametre::class);
+        Spotlight::registerCommandIf(true, MessageF::class);
+        Spotlight::registerCommandIf(true, ProfileF::class);
+        Spotlight::registerCommandIf(true, TransactionF::class);
+        Spotlight::registerCommandIf(true, CommandeF::class);
+        Spotlight::registerCommandIf(true, SecuriteF::class);
+        Spotlight::registerCommandIf(true, ParametreF::class);
     }
 }

@@ -72,6 +72,8 @@ class CreateProject extends  Component implements Forms\Contracts\HasForms
 
         $results = Project::create($data);
 
+        $this->resetAll();
+
         if ($results) {
 
             $this->dispatchBrowserEvent('success', [
@@ -83,9 +85,9 @@ class CreateProject extends  Component implements Forms\Contracts\HasForms
         }
     }
 
-    public function resetAll()
+    function resetAll()
     {
-        $this->project = null;
+        $this->project = [];
         $this->files = null;
         $this->category = null;
         $this->currency = null;

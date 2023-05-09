@@ -16,6 +16,30 @@ class Profile extends Component
     public $freelanceUpdate;
     public $userUpdate;
     public $selected = ['name' => "", "level" => ""];
+    public $langue = [
+        'langue' => "",
+        'level' => "",
+    ];
+
+    public $compentences = [
+        'skill' => "",
+        'level' => "",
+    ];
+    public $diplome = [
+        'universite' => "",
+        'diplome' => "",
+        'annee' => "",
+    ];
+    public $diplomeEdit = false;
+
+    public $certificate = [
+        'certificate' => "",
+        'delivrer' => "",
+        'annee' => "",
+    ];
+
+
+
 
     protected  $listeners = ['refresh' => '$refresh'];
 
@@ -148,6 +172,24 @@ class Profile extends Component
         // dd($key);
     }
 
+    public function modalLangue(Int $key)
+    {
+        $this->validate([
+            'freelance.langue.' . $key . '.name' => 'required|string',
+            'freelance.langue.' . $key . '.level' => 'required|string',
+
+        ]);
+
+
+        // dd($this->freelance['langue'][$key]['name']);
+
+
+        $this->freelanceUpdate->langue[$key]['name'] = $this->freelance['langue'][$key]['name'];
+        $this->freelanceUpdate->langue[$key]['level'] = $this->freelance['langue'][$key]['level'];
+    }
+
+
+
     public function addLanguage()
     {
 
@@ -187,22 +229,23 @@ class Profile extends Component
     {
 
         $this->validate([
-            'freelance.diplome.' . $key . '.diplome' => 'required|string',
-            'freelance.diplome.' . $key . '.universite' => 'required|string',
-            'freelance.diplome.' . $key . '.annee' => 'required|numeric',
+            'diplome.diplome' => 'required|string',
+            'diplome.universite' => 'required|string',
+            'diplome.annee' => 'required|numeric',
 
         ]);
         // dd($this->freelance['langue'][$key]['name']);
 
 
-        $this->freelanceUpdate->diplome[$key]['diplome'] = $this->freelance['diplome'][$key]['diplome'];
-        $this->freelanceUpdate->diplome[$key]['universite'] = $this->freelance['diplome'][$key]['universite'];
+        $this->freelanceUpdate->diplome[$key]['diplome'] = $this->diplome['diplome'];
+        $this->freelanceUpdate->diplome[$key]['universite'] = $this->diplome['universite'];
 
-        $this->freelanceUpdate->diplome[$key]['annee'] = $this->freelance['diplome'][$key]['annee'];
+        $this->freelanceUpdate->diplome[$key]['annee'] = $this->diplome['annee'];
         $this->freelanceUpdate->update();
 
         if ($this->freelanceUpdate) {
 
+            $this->diplomeEdit = false;
             $this->notification()->success(
                 $title = "Modifier",
                 $description = "Vos Modifications ont ete envoyer avec success",
@@ -216,22 +259,36 @@ class Profile extends Component
 
         $this->emitSelf('refresh');
     }
+
+    public function modalDiplome($key)
+    {
+
+        $this->diplome['diplome'] = $this->freelanceUpdate->diplome[$key]['diplome'];
+        $this->diplome['universite'] = $this->freelanceUpdate->diplome[$key]['universite'];
+
+        $this->diplome['annee'] = $this->freelanceUpdate->diplome[$key]['annee'];
+
+
+        $this->diplomeEdit = true;
+    }
+
+
     public function modifierCertificate(Int $key)
     {
 
         $this->validate([
-            'freelance.certificat.' . $key . '.certificate' => 'required|string',
-            'freelance.certificat.' . $key . '.delivrer' => 'required|string',
-            'freelance.certificat.' . $key . '.annee' => 'required|numeric',
+            'certificate.certificate' => 'required|string',
+            'certificate.delivrer' => 'required|string',
+            'certificate.annee' => 'required|numeric',
 
         ]);
         // dd($this->freelance['langue'][$key]['name']);
 
 
-        $this->freelanceUpdate->certificat[$key]['certificate'] = $this->freelance['certificat'][$key]['certificate'];
-        $this->freelanceUpdate->certificat[$key]['delivrer'] = $this->freelance['certificat'][$key]['delivrer'];
+        $this->freelanceUpdate->certificat[$key]['certificate'] = $this->certificate['certificate'];
+        $this->freelanceUpdate->certificat[$key]['delivrer'] = $this->certificate['delivrer'];
 
-        $this->freelanceUpdate->certificat[$key]['annee'] = $this->freelance['certificat'][$key]['annee'];
+        $this->freelanceUpdate->certificat[$key]['annee'] = $this->certificate['annee'];
         $this->freelanceUpdate->update();
 
         if ($this->freelanceUpdate) {
@@ -253,16 +310,16 @@ class Profile extends Component
     {
 
         $this->validate([
-            'freelance.competences.' . $key . '.skill' => 'required|string',
-            'freelance.competences.' . $key . '.level' => 'required|string',
+            'competences.skill' => 'required|string',
+            'competences.level' => 'required|string',
 
 
         ]);
         // dd($this->freelance['langue'][$key]['name']);
 
 
-        $this->freelanceUpdate->competences[$key]['skill'] = $this->freelance['competences'][$key]['skill'];
-        $this->freelanceUpdate->competences[$key]['level'] = $this->freelance['competences'][$key]['level'];
+        $this->freelanceUpdate->competences[$key]['skill'] = $this->competences['skill'];
+        $this->freelanceUpdate->competences[$key]['level'] = $this->competences['level'];
 
 
         $this->freelanceUpdate->update();

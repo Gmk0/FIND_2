@@ -16,7 +16,23 @@
 
         <div>
 
-
+            <div wire:offline class="flex items-center justify-between px-6 py-4 text-white bg-red-500 rounded-md">
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                    <p class="text-sm">vous etes hors ligne.</p>
+                </div>
+                <button @click="show=false" class="text-white" type="button">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
 
 
             @if ($errors->has('message'))

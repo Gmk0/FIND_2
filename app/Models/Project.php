@@ -48,13 +48,17 @@ class Project extends Model
         'sub_category' => 'array',
         'files' => 'array',
         'bid_amount' => 'decimal:2',
+        'begin_project' => 'datetime',
+        'end_project' => 'datetime',
     ];
 
 
-    public function getBidAmountAttribute($value)
+
+
+    public function bidAmount()
     {
         // Formater le prix avec le dollar direct
-        return '$' . number_format($value, 2, ',', ' ');
+        return '$' . number_format($this->bid_amount, 2, ',', ' ');
     }
 
     public function user(): BelongsTo
@@ -79,6 +83,7 @@ class Project extends Model
 
         return $project;
     }
+
 
     public function conversationProjects(): HasMany
     {

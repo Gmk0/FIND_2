@@ -1,6 +1,6 @@
 <div class="p-2">
     <div
-        class="flex flex-col min-h-screen gap-6 p-6 mx-auto bg-gray-100 md:max-w-7xl md:container px-auto dark:bg-gray-900">
+        class="flex flex-col min-h-screen gap-6 p-6 mx-auto bg-gray-100 md:max-w-7xl md:container md:px-auto px-2 dark:bg-gray-900">
         <!-- start::Stats -->
         <div class="grid grid-cols-1 gap-4 px-auto md:grid-cols-2 lg:grid-cols-4">
             <div class="px-4 py-6 bg-white rounded-lg shadow-xl lg:px-6 lg:py-6">

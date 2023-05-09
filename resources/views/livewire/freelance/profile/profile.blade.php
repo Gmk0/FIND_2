@@ -75,7 +75,7 @@
                 <div class="flex justify-between md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Localisaction') }} <span class="text-red-600">*</span>
+                            {{ __('Localisaction') }} <span class="text-red-600"></span>
                         </h3>
 
 
@@ -127,7 +127,7 @@
                 <div class="flex justify-between md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Education') }} <span class="text-red-600">*</span>
+                            {{ __('Education') }} <span class="text-red-600"></span>
                         </h3>
 
                     </div>
@@ -142,65 +142,60 @@
 
                             <div class="gap-6 md:grid ">
 
-                                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                        <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
-                                            <table class="min-w-full divide-y divide-gray-400">
-                                                <thead class="bg-gray-50 dark:bg-gray-800">
-                                                    <tr>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Information
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-
-                                                        </th>
 
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="bg-white divide-y divide-gray-400">
+                                <table id="table"
+                                    class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
+                                    <thead class="text-white">
+                                        @forelse ($freelance['certificat'] as $key=>$value )
+                                        <tr
+                                            class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                            <th class="p-3 text-left">certificat</th>
+                                            <th class="p-3 text-left">Delivrer par</th>
+                                            <th class="p-3 text-left">Annee</th>
+                                            <th class="p-3 text-left" width="110">Actions</th>
+                                        </tr>
+
+                                        @empty
+
+                                        @endforelse
+
+                                    </thead>
+                                    <tbody class="flex-1 sm:flex-none">
+                                        @forelse ($freelance['certificat'] as $key=>$value )
+                                        <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                                            <td
+                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
 
 
-                                                    @forelse ($freelance['certificat'] as $key=>$value )
+                                                {{$value['certificate']}}
 
-                                                    <tr>
-                                                        <td
-                                                            class="grid grid-cols-1 gap-1 py-4 text-sm font-medium text-gray-500 md:px-6 dark:text-gray-400 whitespace-nowrap">
+                                            </td>
+                                            <td
+                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
 
+                                                {{$value['delivrer']}}
+                                            </td>
+                                            <td
+                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100  p-3 truncate">
+                                                {{$value['annee']}}
+                                            </td>
+                                            <td
+                                                class="border-grey-light border flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
+                                                <x-button.circle sm icon="trash">
+                                                    </x-button>
+                                                    <x-button.circle wire:click='modifierCertificate({{$key}})' sm
+                                                        icon="pencil">
+                                                        </x-button>
+                                            </td>
+                                        </tr>
 
-                                                            <x-input label="certificat"
-                                                                wire:model.defer="freelance.certificat.{{$key}}.certificate" />
+                                        @empty
 
-                                                            <x-input label="delivrer "
-                                                                wire:model.defer="freelance.certificat.{{$key}}.delivrer" />
-                                                            <x-input label="annee"
-                                                                wire:model.defer="freelance.certificat.{{$key}}.annee" />
-                                                            <div>
-                                                                <x-button label="Modifier"
-                                                                    wire:click="modifierCertificate({{$key}})">
-                                                                </x-button>
+                                        @endforelse
 
-                                                            </div>
-
-
-                                                        </td>
-
-                                                    <tr>
-                                                        @empty
-
-                                                        @endforelse
-
-
-
-
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </tbody>
+                                </table>
 
                             </div>
 
@@ -217,7 +212,7 @@
                 <div class="flex justify-between md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Photo de Profile') }} <span class="text-red-600">*</span>
+                            {{ __('Photo de Profile') }} <span class="text-red-600"></span>
                         </h3>
 
                         <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">
@@ -237,66 +232,79 @@
 
                             <div class="gap-6 md:grid ">
 
-                                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                        <div class="border-b border-gray-400 shadow sm:rounded-lg">
-                                            <table class="min-w-full divide-y divide-gray-400">
-                                                <thead class="bg-gray-50 dark:bg-gray-800">
-                                                    <tr>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Diplome
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
 
-                                                        </th>
+                                <table id="table"
+                                    class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
+                                    <thead class="text-white">
+                                        @forelse ($freelance['diplome'] as $key=>$value )
+                                        <tr
+                                            class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                            <th class="p-3 text-left">universite</th>
+                                            <th class="p-3 text-left">Diplome</th>
+                                            <th class="p-3 text-left">Annee</th>
+                                            <th class="p-3 text-left" width="110">Actions</th>
+                                        </tr>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="overflow-auto bg-white divide-y divide-gray-400">
+                                        @empty
 
+                                        @endforelse
 
+                                    </thead>
+                                    <tbody class="flex-1 sm:flex-none">
+                                        @forelse ($freelance['diplome'] as $key=>$value )
+                                        <tr x-data="{open:@entangle('diplomeEdit')}"
+                                            class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                                            <td
+                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
 
-                                                    @forelse ($freelance['diplome'] as $key=>$value )
-
-                                                    <tr>
-                                                        <td
-                                                            class="grid grid-cols-1 gap-1 py-4 text-sm font-medium text-gray-500 md:px-6 dark:text-gray-400 whitespace-nowrap">
-
-
-                                                            <x-input label="Diplome en"
-                                                                wire:model.defer="freelance.diplome.{{$key}}.diplome" />
-
-                                                            <x-input label="Institut "
-                                                                wire:model.defer="freelance.diplome.{{$key}}.universite" />
-                                                            <x-input label="annee"
-                                                                wire:model.defer="freelance.diplome.{{$key}}.annee" />
-                                                            <div>
-                                                                <x-button label="Modifier"
-                                                                    wire:click="modifierDiplome({{$key}})">
-                                                                </x-button>
-
-                                                            </div>
+                                                <span x-show="!open">{{$value['universite']}}</span>
 
 
-                                                        </td>
+                                                <x-input x-show="open" wire:model.defer="diplome.universite" />
 
-                                                    <tr>
-                                                        @empty
-
-                                                        @endforelse
-
+                                            </td>
+                                            <td
+                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
 
 
+                                                <span x-show="!open">{{$value['diplome']}}</span>
+
+                                                <x-input x-show="open" wire:model.defer="diplome.diplome" />
+                                            </td>
+                                            <td
+                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100  p-3 truncate">
 
 
+                                                <span x-show="!open">{{$value['annee']}}</span>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                                                <x-input x-show="open" wire:model.defer="diplome.annee" />
+                                            </td>
+                                            <td
+                                                class="border-grey-light lg:border flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-2  hover:font-medium cursor-pointer">
+                                                <x-button.circle negative sm x-show="!open" icon="trash">
+                                                    </x-button>
+                                                    <x-button.circle x-show="!open" @click="open=true"
+                                                        wire:click='modalDiplome({{$key}})' sm icon="pencil">
+                                                        </x-button>
+
+                                                        <x-button x-show="open" spinner="modifierDiplome"
+                                                            wire:click='modifierDiplome({{$key}})' sm label="Edit"
+                                                            icon="pencil">
+                                                        </x-button>
+
+
+                                                        <x-button x-show="open" @click="open=false" sm label="annuler">
+                                                        </x-button>
+
+                                            </td>
+                                        </tr>
+
+                                        @empty
+
+                                        @endforelse
+
+                                    </tbody>
+                                </table>
 
                             </div>
 
@@ -315,7 +323,7 @@
                 <div class="flex justify-between md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Vos competences') }} <span class="text-red-600">*</span>
+                            {{ __('Vos competences') }} <span class="text-red-600"></span>
                         </h3>
 
 
@@ -331,69 +339,57 @@
 
                             <div class="gap-6 md:grid ">
 
-                                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                        <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
-                                            <table class="min-w-full divide-y divide-gray-400">
-                                                <thead class="bg-gray-50 dark:bg-gray-800">
-                                                    <tr>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Compentences
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Niveau
-                                                        </th>
+                                <table id="table"
+                                    class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
+                                    <thead class="text-white">
+                                        @forelse ($freelance['competences'] as $key=>$value )
+                                        <tr
+                                            class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                            <th class="p-3 text-left">Compentences</th>
+                                            <th class="p-3 text-left">Niveau</th>
 
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Niveau
-                                                        </th>
+                                            <th class="p-3 text-left" width="110">Actions</th>
+                                        </tr>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="bg-white divide-y divide-gray-400">
+                                        @empty
 
+                                        @endforelse
 
-                                                    @forelse ($freelance['competences'] as $key=> $value )
-
-                                                    <tr>
-                                                        <td
-                                                            class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
-
-                                                            <x-input
-                                                                wire:model.defer="freelance.competences.{{$key}}.skill">
-                                                            </x-input>
-                                                        </td>
-                                                        <td
-                                                            class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                                                            <x-select label="" placeholder="Choisissez un niveau"
-                                                                :options="['Débutant', 'Intermédiaire', 'expert']"
-                                                                wire:model.defer="freelance.competences.{{$key}}.level" />
-                                                        </td>
+                                    </thead>
+                                    <tbody class="flex-1 sm:flex-none">
+                                        @forelse ($freelance['competences'] as $key=>$value )
+                                        <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                                            <td
+                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
 
 
-                                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                {{$value['skill']}}
 
-                                                            <x-button label="Modifier" spinner="modifierCompentences"
-                                                                wire:click="modifierCompentences({{$key}})">
-                                                            </x-button>
-                                                        </td>
-                                                    <tr>
-                                                        @empty
+                                            </td>
+                                            <td
+                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
 
-                                                        @endforelse
+                                                {{$value['level']}}
+                                            </td>
+
+                                            <td
+                                                class="border-grey-light border flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
+                                                <x-button.circle sm icon="trash">
+                                                    </x-button>
+                                                    <x-button.circle wire:click='modifierCompentences({{$key}})' sm
+                                                        icon="pencil">
+                                                        </x-button>
+                                            </td>
+                                        </tr>
+
+                                        @empty
+
+                                        @endforelse
+
+                                    </tbody>
+                                </table>
 
 
-
-
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
 
                             </div>
 
@@ -410,7 +406,7 @@
                 <div class="flex justify-between md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Langue') }} <span class="text-red-600">*</span>
+                            {{ __('Langue') }} <span class="text-red-600"></span>
                         </h3>
 
                     </div>
@@ -425,79 +421,57 @@
 
                             <div class="gap-6 md:grid ">
 
-                                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                        <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
-                                            <table class="min-w-full divide-y divide-gray-400">
-                                                <thead class="bg-gray-50 dark:bg-gray-800">
-                                                    <tr>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Langue
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Niveau
-                                                        </th>
-
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Niveau
-                                                        </th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="bg-white divide-y divide-gray-400">
 
 
-                                                    @forelse ($freelance['langue'] as $key=> $value )
+                                <table id="table"
+                                    class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
+                                    <thead class="text-white">
+                                        @forelse ($freelance['langue'] as $key=>$value )
+                                        <tr
+                                            class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                            <th class="p-3 text-left">Langue</th>
+                                            <th class="p-3 text-left">Niveau</th>
 
-                                                    <tr>
-                                                        <td
-                                                            class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 ">
+                                            <th class="p-3 text-left" width="110">Actions</th>
+                                        </tr>
 
+                                        @empty
 
+                                        @endforelse
 
-                                                            <x-select label="" placeholder="Choisissez une langue"
-                                                                :options="['Français', 'Anglais', 'Lingala', 'Swahili', 'Kikongo','Tshiluba']"
-                                                                wire:model.defer='freelance.langue.{{$key}}.name' />
-
-
-
-
-                                                        </td>
-                                                        <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400 ">
-
-                                                            <x-select label="" placeholder="Choisissez un niveau"
-                                                                :options="['Débutant', 'Intermédiaire', 'Avancé']"
-                                                                wire:model.defer="freelance.langue.{{$key}}.level" />
-                                                        </td>
-
-
-                                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-
-                                                            <x-button label="modifier"
-                                                                wire:click="modifierLangue({{$key}})" />
-
-                                                        </td>
-                                                    <tr>
-                                                        @empty
-
-                                                        @endforelse
+                                    </thead>
+                                    <tbody class="flex-1 sm:flex-none">
+                                        @forelse ($freelance['langue'] as $key=>$value )
+                                        <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                                            <td
+                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
 
 
+                                                {{$value['langue']}}
 
+                                            </td>
+                                            <td
+                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
 
+                                                {{$value['level']}}
+                                            </td>
 
-                                                </tbody>
+                                            <td
+                                                class="border-grey-light border flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
+                                                <x-button.circle sm icon="trash">
+                                                    </x-button>
+                                                    <x-button.circle wire:click='modifierCompentences({{$key}})' sm
+                                                        icon="pencil">
+                                                        </x-button>
+                                            </td>
+                                        </tr>
 
+                                        @empty
 
-                                            </table>
+                                        @endforelse
 
-
-                                        </div>
-                                    </div>
-                                </div>
+                                    </tbody>
+                                </table>
 
                             </div>
 
@@ -529,41 +503,55 @@
 
                             <div class="gap-6 md:grid ">
 
-                                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                        <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
-                                            <table class="min-w-full divide-y divide-gray-400">
-                                                <thead class="bg-gray-50 dark:bg-gray-800">
-                                                    <tr>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Comptes
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
-                                                            Username
-                                                        </th>
+                                <table id="table"
+                                    class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
+                                    <thead class="text-white">
+                                        @forelse ($freelance['comptes'] as $key=>$value )
+                                        <tr
+                                            class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                            <th class="p-3 text-left">comptes</th>
+                                            <th class="p-3 text-left">lien</th>
 
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400">
+                                            <th class="p-3 text-left" width="110">Actions</th>
+                                        </tr>
 
-                                                        </th>
+                                        @empty
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="bg-white divide-y divide-gray-400">
+                                        @endforelse
 
+                                    </thead>
+                                    <tbody class="flex-1 sm:flex-none">
+                                        @forelse ($freelance['comptes'] as $key=>$value )
+                                        <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                                            <td
+                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
 
 
+                                                {{$value['comptes']}}
 
+                                            </td>
+                                            <td
+                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
 
+                                                {{$value['lien']}}
+                                            </td>
 
+                                            <td
+                                                class="border-grey-light border flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
+                                                <x-button.circle sm icon="trash">
+                                                    </x-button>
+                                                    <x-button.circle wire:click='modifierCompentences({{$key}})' sm
+                                                        icon="pencil">
+                                                        </x-button>
+                                            </td>
+                                        </tr>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                                        @empty
+
+                                        @endforelse
+
+                                    </tbody>
+                                </table>
 
                             </div>
 

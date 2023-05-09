@@ -5,7 +5,9 @@
 
 <div class="h-full custom-scrollbar">
 
-
+    <div>
+        @include('include.breadcumbUser',['profile'=>'profile'])
+    </div>
 
 
     <div class="container w-full h-screen px-3 py-8 mx-auto max-w-7xl lg:px-8">

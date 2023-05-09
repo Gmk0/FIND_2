@@ -59,7 +59,7 @@
 
                 <input contenteditable="true" wire:model.defer="body" id="input" type="text"
                     placeholder="Écrire un message" x-ref="myInput" required x-on:blur='resetPosition'
-                    class="flex w-full h-10 border -pl-4 rounded-xl focus:outline-none focus:border-indigo-300" />
+                    class="flex w-full h-10 border dark:bg-gray-800 dark:text-gray-300  rounded-xl focus:outline-none focus:border-indigo-300" />
 
             </div>
         </div>

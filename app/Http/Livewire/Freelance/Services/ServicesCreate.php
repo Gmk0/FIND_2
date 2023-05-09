@@ -47,6 +47,7 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
     public $delivery_time;
     public $sub_categorie;
     public $format;
+    public  $program;
     //public $step;
 
 
@@ -73,7 +74,7 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
                                     ->multiple()
                                     ->options(SubCategory::where('category_id', Auth::user()->freelance->category->id)->pluck('name', 'name')),
 
-                                TextInput::make('format')->label('Format'),
+
 
                             ]),
 
@@ -99,7 +100,7 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
                         FileUpload::make('images')->label('Image Decrivant le service')->multiple(),
                         RichEditor::make('samples')->label('Quelques Realisation lier')
                             ->fileAttachmentsDisk('local')
-                            ->fileAttachmentsDirectory('attachments'),
+                            ->fileAttachmentsDirectory('public/attachments'),
                         RichEditor::make('basic_support')
                             ->disableAllToolbarButtons()
                             ->enableToolbarButtons(['orderedList', 'bulletList'])
@@ -138,6 +139,8 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
             // ...
         ];
     }
+
+
 
 
 

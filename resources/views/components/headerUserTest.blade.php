@@ -8,7 +8,7 @@ $fixed="";
 
 
 
-<header class="w-full flex-shrink-0  borde-b md:relative py-4 mx-auto bg-white shadow-md dark:bg-gray-800">
+<header class="w-full flex-shrink-0  borde-b relative py-4 mx-auto bg-white shadow-md dark:bg-gray-800">
     <div class="container flex items-center justify-between h-full px-6 mx-auto text-amber-600 dark:text-amber-300">
         <!-- Mobile hamburger -->
         <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-amber"
@@ -46,7 +46,7 @@ $fixed="";
 
         <ul class="flex items-center flex-shrink-0 space-x-6">
             <!-- Theme toggler -->
-            <li class="flex md:hidden">
+            <li class="flex">
                 <div @click="isSettingsPanelOpen = !isSettingsPanelOpen" class="flex cursor-pointer">
                     <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">

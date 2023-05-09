@@ -9,6 +9,11 @@ import { Howl, Howler } from 'howler';
 
 import collapse from '@alpinejs/collapse'
 
+import Turbolinks from "turbolinks"
+
+
+
+
 import Splide from '@splidejs/splide';
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 
@@ -44,3 +49,4 @@ Alpine.plugin(collapse)
 Alpine.start();
 
 AOS.init();
+

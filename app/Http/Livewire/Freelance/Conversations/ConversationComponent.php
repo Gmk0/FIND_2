@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Freelance\Conversations;
 
 use App\Models\Conversation;
+use App\Models\Message;
 use Livewire\Component;
 
 class ConversationComponent extends Component
@@ -31,9 +32,14 @@ class ConversationComponent extends Component
         $this->user_id = $conversation->user_id;
 
 
+
+
         $this->emitTo('user.conversation.body-message', 'loadConversation', $this->selectedConversation, $receiverId);
         // $this->emitTo('freelancer.conversations.body', 'loadConversation', $this->selectedConversation);
         $this->emitTo('freelance.conversations.send-message-f', 'updateSendMessage', $this->selectedConversation, $receiverId);
+
+        Message::where('conversation_id', $this->selectedConversation->id)
+            ->where('receiver_id', auth()->user()->id)->update(['is_read' => 1]);
     }
     public function render()
     {
