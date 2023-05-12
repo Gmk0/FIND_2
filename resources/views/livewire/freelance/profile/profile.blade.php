@@ -559,7 +559,7 @@
                                             <td
                                                 class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
 
-                                                <span x-show="!open">{{$value['langue']}}</span>
+                                                <span x-show="!open">{{$value['name']}}</span>
 
 
 
@@ -567,7 +567,7 @@
                                                 <div x-bind:class="{ 'hidden': !open }">
                                                     <x-native-select label="" placeholder=" Choisissez une langue"
                                                         :options="['Français', 'Anglais', 'Lingala', 'Swahili', 'Kikongo','Tshiluba']"
-                                                        wire:model.defer="langue.langue" />
+                                                        wire:model.defer="langue.name" />
                                                 </div>
 
 
@@ -633,7 +633,7 @@
 
                                 <x-native-select label="" placeholder="Choisissez une langue"
                                     :options="['Français', 'Anglais', 'Lingala', 'Swahili', 'Kikongo','Tshiluba']"
-                                    wire:model.defer="langueSelected.langue" />
+                                    wire:model.defer="langueSelected.name" />
 
 
 

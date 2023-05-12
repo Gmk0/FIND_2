@@ -18,11 +18,11 @@ class Profile extends Component
     public $selected = ['name' => "", "level" => ""];
     public $langueEdit = false;
     public $langue = [
-        'langue' => "",
+        'name' => "",
         'level' => "",
     ];
     public $langueSelected = [
-        'langue' => "",
+        'name' => "",
         'level' => "",
     ];
 
@@ -162,7 +162,7 @@ class Profile extends Component
         try {
 
             $this->validate([
-                'langue.langue' => 'required',
+                'langue.name' => 'required',
                 'langue.level' => 'required',
 
             ]);
@@ -170,7 +170,7 @@ class Profile extends Component
 
 
 
-            $this->freelanceUpdate->langue[$key]['langue'] = $this->langue['langue'];
+            $this->freelanceUpdate->langue[$key]['name'] = $this->langue['name'];
             $this->freelanceUpdate->langue[$key]['level'] = $this->langue['level'];
             $this->freelanceUpdate->update();
 
@@ -202,7 +202,7 @@ class Profile extends Component
     public function modalLangue(Int $key)
     {
         $this->langue = [
-            'langue' => $this->freelanceUpdate->langue[$key]['langue'],
+            'name' => $this->freelanceUpdate->langue[$key]['name'],
             'level' => $this->freelanceUpdate->langue[$key]['level'],
         ];
 
@@ -217,7 +217,7 @@ class Profile extends Component
 
 
         $this->validate([
-            'langueSelected.langue' => 'required',
+            'langueSelected.name' => 'required',
             'langueSelected.level' => 'required',
 
         ]);
@@ -566,7 +566,7 @@ class Profile extends Component
 
 
         ]);
-        // dd($this->langue['name']);
+
 
 
         $this->freelanceUpdate->competences[$key]['skill'] = $this->competences['skill'];
