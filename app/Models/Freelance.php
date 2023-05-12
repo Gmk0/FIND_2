@@ -60,7 +60,8 @@ class Freelance extends Model
         'competences' =>
         AsArrayObject::class,
         'taux_journalier' => 'decimal:2',
-        'comptes' => 'array',
+        'comptes' =>
+        AsArrayObject::class,
         'Sub_categorie' => 'array',
         'localisation' =>
         AsArrayObject::class,

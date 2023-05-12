@@ -33,7 +33,7 @@
 
 
 
-    <link rel="stylesheet" href="/build/assets/app.css">
+    <link rel="stylesheet" href="/build/assets/app.3.css">
 
 
 
@@ -77,7 +77,7 @@
 
 
 
-
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']);--}}
 
 
 

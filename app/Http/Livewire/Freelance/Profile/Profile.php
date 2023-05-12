@@ -16,15 +16,21 @@ class Profile extends Component
     public $freelanceUpdate;
     public $userUpdate;
     public $selected = ['name' => "", "level" => ""];
+    public $langueEdit = false;
     public $langue = [
         'langue' => "",
         'level' => "",
     ];
+    public $langueSelected = [
+        'langue' => "",
+        'level' => "",
+    ];
 
-    public $compentences = [
+    public $competences = [
         'skill' => "",
         'level' => "",
     ];
+    public $compentencesEdit = false;
     public $diplome = [
         'universite' => "",
         'diplome' => "",
@@ -38,6 +44,14 @@ class Profile extends Component
         'annee' => "",
     ];
 
+    public $compte = [
+        'comptes',
+        'lien'
+    ];
+    public $modalCompte = false;
+    public $certificateEdit = false;
+    public $date;
+
 
 
 
@@ -49,7 +63,9 @@ class Profile extends Component
     {
         $this->freelanceUpdate = Freelance::Find(auth()->user()->getIdFreelance());
 
+
         $this->userUpdate = User::find(auth()->user()->id);
+        $this->date = $this->dateAnne();
         //dd($this->freelanceUpdate->localisation['avenue']);
     }
 
@@ -139,53 +155,58 @@ class Profile extends Component
     }
 
 
+    //Langue
+
     public function modifierLangue(Int $key)
     {
-        $this->validate([
-            'freelance.langue.' . $key . '.name' => 'required|string',
-            'freelance.langue.' . $key . '.level' => 'required|string',
+        try {
 
-        ]);
-        // dd($this->freelance['langue'][$key]['name']);
+            $this->validate([
+                'langue.langue' => 'required',
+                'langue.level' => 'required',
+
+            ]);
+            // dd($this->langue['name']);
 
 
-        $this->freelanceUpdate->langue[$key]['name'] = $this->freelance['langue'][$key]['name'];
-        $this->freelanceUpdate->langue[$key]['level'] = $this->freelance['langue'][$key]['level'];
-        $this->freelanceUpdate->update();
 
-        if ($this->freelanceUpdate) {
+            $this->freelanceUpdate->langue[$key]['langue'] = $this->langue['langue'];
+            $this->freelanceUpdate->langue[$key]['level'] = $this->langue['level'];
+            $this->freelanceUpdate->update();
 
-            $this->notification()->success(
-                $title = "Modifier",
-                $description = "Vos Modifications ont ete envoyer avec success",
-            );
-        } else {
-            $this->notification()->error(
-                $title = "Erreur",
-                $description = "Vos Modifications ont ete envoyer avec success",
-            );
+            if ($this->freelanceUpdate) {
+
+
+                $this->dispatchBrowserEvent('close');
+                $this->notification()->success(
+                    $title = "Modifier",
+                    $description = "Vos Modifications ont ete envoyer avec success",
+                );
+            } else {
+                $this->notification()->error(
+                    $title = "Erreur",
+                    $description = "Vos Modifications ont ete envoyer avec success",
+                );
+            }
+
+            $this->emitSelf('refresh');
+
+
+            // dd($key);
+        } catch (\Exception $e) {
+
+            dd($e->getMessage());
         }
-
-        $this->emitSelf('refresh');
-
-
-        // dd($key);
     }
 
     public function modalLangue(Int $key)
     {
-        $this->validate([
-            'freelance.langue.' . $key . '.name' => 'required|string',
-            'freelance.langue.' . $key . '.level' => 'required|string',
+        $this->langue = [
+            'langue' => $this->freelanceUpdate->langue[$key]['langue'],
+            'level' => $this->freelanceUpdate->langue[$key]['level'],
+        ];
 
-        ]);
-
-
-        // dd($this->freelance['langue'][$key]['name']);
-
-
-        $this->freelanceUpdate->langue[$key]['name'] = $this->freelance['langue'][$key]['name'];
-        $this->freelanceUpdate->langue[$key]['level'] = $this->freelance['langue'][$key]['level'];
+        // dd($this->langue['name']);
     }
 
 
@@ -196,19 +217,23 @@ class Profile extends Component
 
 
         $this->validate([
-            'selected.name' => 'required',
-            'selected.level' => 'required',
+            'langueSelected.langue' => 'required',
+            'langueSelected.level' => 'required',
 
         ]);
 
         //dd($this->selected['name']);
 
         $data = $this->freelanceUpdate->langue;
-        $data[] = $this->selected;
+        $data[] = $this->langueSelected;
         $this->freelanceUpdate->langue = $data;
         $this->freelanceUpdate->update();
 
-        $this->selected = null;
+        $this->dispatchBrowserEvent('close');
+
+        $this->reset('langue');
+
+        $this->emitSelf('refresh');
         if ($this->freelanceUpdate) {
 
             $this->notification()->success(
@@ -221,10 +246,211 @@ class Profile extends Component
                 $description = "Vos Modifications ont ete envoyer avec success",
             );
         }
+    }
+    public function addComptes()
+    {
+
+
+
+        $this->validate([
+            'compte.comptes' => 'required',
+            'compte.lien' => 'required',
+
+        ]);
+
+        //dd($this->selected['name']);
+
+        $data = $this->freelanceUpdate->comptes;
+        $data[] = $this->compte;
+        $this->freelanceUpdate->comptes = $data;
+        $this->freelanceUpdate->update();
+
+        $this->dispatchBrowserEvent('close');
+
+        $this->reset('compte');
 
         $this->emitSelf('refresh');
+        if ($this->freelanceUpdate) {
+
+            $this->notification()->success(
+                $title = "Modifier",
+                $description = "Vos Modifications ont ete envoyer avec success",
+            );
+        } else {
+            $this->notification()->error(
+                $title = "Erreur",
+                $description = "Vos Modifications ont ete envoyer avec success",
+            );
+        }
+    }
+    public function addDiplome()
+    {
+
+
+
+        $this->validate([
+            'diplome.universite' => "required",
+            'diplome.diplome' => "required",
+            'diplome.annee' => "required",
+
+        ]);
+
+        //dd($this->selected['name']);
+
+        $data = $this->freelanceUpdate->diplome;
+        $data[] = $this->diplome;
+        $this->freelanceUpdate->diplome = $data;
+        $this->freelanceUpdate->update();
+
+        $this->dispatchBrowserEvent('close');
+
+        $this->reset('diplome');
+
+        $this->emitSelf('refresh');
+        if ($this->freelanceUpdate) {
+
+            $this->notification()->success(
+                $title = "Modifier",
+                $description = "Vos Modifications ont ete envoyer avec success",
+            );
+        } else {
+            $this->notification()->error(
+                $title = "Erreur",
+                $description = "Vos Modifications ont ete envoyer avec success",
+            );
+        }
     }
 
+    public function addCertificate()
+    {
+
+
+
+        $this->validate([
+            'compte.compte' => 'required',
+            'compte.lien' => 'required',
+
+        ]);
+
+        //dd($this->selected['name']);
+
+        $data = $this->freelanceUpdate->comptes;
+        $data[] = $this->compte;
+        $this->freelanceUpdate->comptes = $data;
+        $this->freelanceUpdate->update();
+
+        $this->dispatchBrowserEvent('close');
+
+        $this->reset('langue');
+
+        $this->emitSelf('refresh');
+        if ($this->freelanceUpdate) {
+
+            $this->notification()->success(
+                $title = "Modifier",
+                $description = "Vos Modifications ont ete envoyer avec success",
+            );
+        } else {
+            $this->notification()->error(
+                $title = "Erreur",
+                $description = "Vos Modifications ont ete envoyer avec success",
+            );
+        }
+    }
+
+    public function remove($key, string $langue)
+    {
+
+
+        switch ($langue) {
+            case 'Langue':
+
+
+                $data = $this->freelanceUpdate->langue->toArray();
+
+
+
+                unset($data[$key]);
+                $data = array_values($data);
+                $this->freelanceUpdate->langue = $data;
+                $this->freelanceUpdate->update();
+                $this->emitSelf('refresh');
+
+                $this->notification()->success(
+                    $title = "Supprimmer",
+                    $description = "",
+                );
+
+
+                //unset($this->selectedLanguages[$key]);
+                //$this->selectedLanguages = array_values($this->selectedLanguages);
+
+                break;
+            case 'universite':
+
+                $data = $this->freelanceUpdate->diplome->toArray();
+
+                unset($data[$key]);
+                $data = array_values($data);
+                $this->freelanceUpdate->diplome = $data;
+                $this->freelanceUpdate->update();
+                $this->emitSelf('refresh');
+
+                $this->notification()->success(
+                    $title = "Supprimmer",
+                    $description = "",
+                );
+                break;
+            case 'certificate':
+
+                $data = $this->freelanceUpdate->certificate->toArray();
+
+                unset($data[$key]);
+                $data = array_values($data);
+                $this->freelanceUpdate->certificate = $data;
+                $this->freelanceUpdate->update();
+                $this->emitSelf('refresh');
+
+                $this->notification()->success(
+                    $title = "Supprimmer",
+                    $description = "",
+                );
+
+
+            case 'skill':
+
+                $data = $this->freelanceUpdate->competences->toArray();
+
+                unset($data[$key]);
+                $data = array_values($data);
+                $this->freelanceUpdate->competences = $data;
+                $this->freelanceUpdate->update();
+                $this->emitSelf('refresh');
+
+                $this->notification()->success(
+                    $title = "Supprimmer",
+                    $description = "",
+                );
+                break;
+            case 'Comptes':
+
+                $data = $this->freelanceUpdate->comptes->toArray();
+
+                unset($data[$key]);
+                $data = array_values($data);
+                $this->freelanceUpdate->Comptes = $data;
+                $this->freelanceUpdate->update();
+                $this->emitSelf('refresh');
+
+                $this->notification()->success(
+                    $title = "Supprimmer",
+                    $description = "",
+                );
+                break;
+        }
+    }
+
+    //Diplome
     public function modifierDiplome(Int $key)
     {
 
@@ -234,7 +460,7 @@ class Profile extends Component
             'diplome.annee' => 'required|numeric',
 
         ]);
-        // dd($this->freelance['langue'][$key]['name']);
+        // dd($this->langue['name']);
 
 
         $this->freelanceUpdate->diplome[$key]['diplome'] = $this->diplome['diplome'];
@@ -246,6 +472,8 @@ class Profile extends Component
         if ($this->freelanceUpdate) {
 
             $this->diplomeEdit = false;
+
+            $this->dispatchBrowserEvent('close');
             $this->notification()->success(
                 $title = "Modifier",
                 $description = "Vos Modifications ont ete envoyer avec success",
@@ -273,6 +501,9 @@ class Profile extends Component
     }
 
 
+
+    //Certificate
+
     public function modifierCertificate(Int $key)
     {
 
@@ -282,7 +513,7 @@ class Profile extends Component
             'certificate.annee' => 'required|numeric',
 
         ]);
-        // dd($this->freelance['langue'][$key]['name']);
+        // dd($this->langue['name']);
 
 
         $this->freelanceUpdate->certificat[$key]['certificate'] = $this->certificate['certificate'];
@@ -291,8 +522,10 @@ class Profile extends Component
         $this->freelanceUpdate->certificat[$key]['annee'] = $this->certificate['annee'];
         $this->freelanceUpdate->update();
 
+
         if ($this->freelanceUpdate) {
 
+            $this->dispatchBrowserEvent('close');
             $this->notification()->success(
                 $title = "Modifier",
                 $description = "Vos Modifications ont ete envoyer avec success",
@@ -305,6 +538,24 @@ class Profile extends Component
         }
 
         $this->emitSelf('refresh');
+    }
+
+    public function modalCertificate($key)
+    {
+        $this->certificate['certificate'] = $this->freelanceUpdate->certificat[$key]['certificate'];
+        $this->certificate['delivrer'] = $this->freelanceUpdate->certificat[$key]['delivrer'];
+
+        $this->certificate['annee'] = $this->freelanceUpdate->certificat[$key]['annee'];
+    }
+
+    //Compentencess
+    public function modaleCompentences($key)
+    {
+
+        $this->competences = [
+            'skill' => $this->freelanceUpdate->competences[$key]['skill'],
+            'level' => $this->freelanceUpdate->competences[$key]['level'],
+        ];
     }
     public function modifierCompentences(Int $key)
     {
@@ -315,7 +566,7 @@ class Profile extends Component
 
 
         ]);
-        // dd($this->freelance['langue'][$key]['name']);
+        // dd($this->langue['name']);
 
 
         $this->freelanceUpdate->competences[$key]['skill'] = $this->competences['skill'];
@@ -323,9 +574,14 @@ class Profile extends Component
 
 
         $this->freelanceUpdate->update();
+        $this->reset('competences');
 
         if ($this->freelanceUpdate) {
 
+
+
+
+            $this->dispatchBrowserEvent('close');
             $this->notification()->success(
                 $title = "Modifier",
                 $description = "Vos Modifications ont ete envoyer avec success",
@@ -340,6 +596,115 @@ class Profile extends Component
         $this->emitSelf('refresh');
     }
 
+    public function addCompetences()
+    {
+
+
+
+        if (!empty($this->competences['skill']) && !empty($this->competences['level'])) {
+            $data = $this->freelanceUpdate->competences;
+            $data[] = $this->competences;
+            $this->freelanceUpdate->competences = $data;
+            $this->freelanceUpdate->update();
+
+            $this->dispatchBrowserEvent('close');
+
+            $this->reset('competences');
+
+            $this->emitSelf('refresh');
+            if ($this->freelanceUpdate) {
+
+                $this->notification()->success(
+                    $title = "Modifier",
+                    $description = "Vos Modifications ont ete envoyer avec success",
+                );
+            } else {
+                $this->notification()->error(
+                    $title = "Erreur",
+                    $description = "Vos Modifications ont ete envoyer avec success",
+                );
+            }
+        } else {
+            $this->notification()->error(
+                $title = "Erreur",
+                $description = "Veuillez remplir tout les champs",
+            );
+        }
+
+        //dd($this->selected['name']);
+
+
+    }
+
+    public function  modifierCompte(int $key)
+    {
+
+        $this->validate([
+            'compte.comptes' => 'required',
+            'compte.lien' => 'required',
+        ]);
+
+        try {
+
+            $this->freelanceUpdate->comptes[$key]['comptes'] = $this->compte['comptes'];
+            $this->freelanceUpdate->comptes[$key]['lien'] = $this->compte['lien'];
+
+            $this->freelanceUpdate->update();
+            $this->reset('compte');
+
+            if ($this->freelanceUpdate) {
+
+
+                $this->dispatchBrowserEvent('close');
+                $this->notification()->success(
+                    $title = "Modifier",
+                    $description = "Vos Modifications ont ete envoyer avec success",
+                );
+            } else {
+                $this->notification()->error(
+                    $title = "Erreur",
+                    $description = "Vos Modifications ont ete envoyer avec success",
+                );
+            }
+
+            $this->emitSelf('refresh');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    public function modalComptes(int $key)
+    {
+        $this->compte = [
+            'comptes' => $this->freelanceUpdate->comptes[$key]['comptes'],
+            'lien' => $this->freelanceUpdate->comptes[$key]['lien'],
+        ];
+
+        $this->modalCompte = true;
+    }
+
+    public function resetAll()
+    {
+
+        $this->reset('selectedLangue');
+        $this->reset('comptes');
+        $this->reset('competences');
+        $this->reset('certificate');
+
+        $this->reset('diplome');
+    }
+
+    public function dateAnne()
+    {
+
+        $date = [];
+
+        for ($i = 2001; $i < 2023; $i++) {
+            # code...
+            $date[] = $i;
+        };
+        return $date;
+    }
 
 
     public function render()

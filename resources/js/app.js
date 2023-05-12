@@ -9,7 +9,6 @@ import { Howl, Howler } from 'howler';
 
 import collapse from '@alpinejs/collapse'
 
-import Turbolinks from "turbolinks"
 
 
 

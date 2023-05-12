@@ -34,8 +34,7 @@
 
 
 
-
-<script src="/build/assets/app.js" defer></script>
+<script src="/build/assets/app.3.js" defer></script>
 
 <script src="/js/script.js"></script>
 
