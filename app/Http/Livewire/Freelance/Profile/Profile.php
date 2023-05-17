@@ -326,34 +326,41 @@ class Profile extends Component
 
 
 
-        $this->validate([
-            'compte.compte' => 'required',
-            'compte.lien' => 'required',
+        if (!empty($this->certificate['delivrer']) && !empty($this->certificate['annee'])) {
 
-        ]);
 
-        //dd($this->selected['name']);
 
-        $data = $this->freelanceUpdate->comptes;
-        $data[] = $this->compte;
-        $this->freelanceUpdate->comptes = $data;
-        $this->freelanceUpdate->update();
 
-        $this->dispatchBrowserEvent('close');
 
-        $this->reset('langue');
+            //dd($this->selected['name']);
 
-        $this->emitSelf('refresh');
-        if ($this->freelanceUpdate) {
+            $data = $this->freelanceUpdate->certificat;
+            $data[] = $this->certificate;
+            $this->freelanceUpdate->certificat = $data;
+            $this->freelanceUpdate->update();
 
-            $this->notification()->success(
-                $title = "Modifier",
-                $description = "Vos Modifications ont ete envoyer avec success",
-            );
+            $this->dispatchBrowserEvent('close');
+
+            $this->reset('certificate');
+
+            $this->emitSelf('refresh');
+            if ($this->freelanceUpdate) {
+
+                $this->notification()->success(
+                    $title = "Modifier",
+                    $description = "Vos Modifications ont ete envoyer avec success",
+                );
+            } else {
+                $this->notification()->error(
+                    $title = "Erreur",
+                    $description = "Vos Modifications ont ete envoyer avec success",
+                );
+            }
         } else {
+
             $this->notification()->error(
                 $title = "Erreur",
-                $description = "Vos Modifications ont ete envoyer avec success",
+                $description = "Veuillez remplir tout les champs",
             );
         }
     }
@@ -403,11 +410,11 @@ class Profile extends Component
                 break;
             case 'certificate':
 
-                $data = $this->freelanceUpdate->certificate->toArray();
+                $data = $this->freelanceUpdate->certificat->toArray();
 
                 unset($data[$key]);
                 $data = array_values($data);
-                $this->freelanceUpdate->certificate = $data;
+                $this->freelanceUpdate->certificat = $data;
                 $this->freelanceUpdate->update();
                 $this->emitSelf('refresh');
 

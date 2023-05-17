@@ -126,6 +126,11 @@ class Service extends Model
 
 
 
+    public function getPublishedServices()
+    {
+        return Service::where('is_publish', true)->get();
+    }
+
 
     public function averageFeedback()
     {

@@ -26,7 +26,7 @@ class SendNotificationToFreelancer
                 'id' => $event->order->id,
                 'user' => $event->order->user->name,
             ]],
-            'is_read' => false
+            'read_at' => false
         ]);
 
         // Sauvegarder la notification dans la base de données

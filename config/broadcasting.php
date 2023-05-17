@@ -45,6 +45,12 @@ return [
             'client_options' => [
                 // Guzzle client options: https://docs.guzzlephp.org/en/stable/request-options.html
             ],
+
+            'beams' => [
+                'secret_key' => env('BEAMS_INSTANCE_KEY'),
+                'instance_id' => env('BEAMS_INSTANCE_ID'),
+            ],
+
         ],
         'pusher_beams' => [
             'driver' => 'pusher_beams',

@@ -326,10 +326,13 @@ class Checkout extends Component
                 // Mettre à jour le statut de la commande dans la table "commandes"
                 $orderToUpdate = Order::findOrFail($order->id);
                 $orderToUpdate->status = 'completed';
-                $orderToUpdate->transaction_id = $payment->id; // Lier la commande au paiement effectué
+                $orderToUpdate->transaction_id = $payment->id;
+                // Lier la commande au paiement effectué
                 $orderToUpdate->save();
+                $orderToUpdate->notifyUser();
 
-                event(new ServiceOrdered($order));
+
+                //event(new ServiceOrdered($order));
             }
 
             /* Sauvegarder la réponse de Stripe dans la base de données
@@ -352,7 +355,7 @@ class Checkout extends Component
 
             $user = auth()->user();
 
-            $user->notify(new ServicePaid($payment));
+            //$user->notify(new ServicePaid($payment));
 
             Session::forget('cart');
 

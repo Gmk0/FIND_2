@@ -1,24 +1,25 @@
-<div x-data="{search:false }">
+@php
+if (request()->routeIs('home')){
+$height = "h-20";
+$fixed="fixed";
+}else{
+$height = "h-16";
+$fixed="";
+}
+@endphp
 
-    @php
-    if (request()->routeIs('home')){
-    $height = "h-24";
-    $fixed="fixed";
-    }else{
-    $height = "h-20";
-    $fixed="sticky";
-    }
-    @endphp
+<header x-data="{isSearchBoxOpen:false,search:false}" class="w-full bg-skin-fill z-[80]">
 
-    <header x-data="{isSearchBoxOpen:false}" class="fixed z-50 w-full bg-skin-fill dark:bg-gray-800">
-        <div class="container flex items-center justify-between h-20 px-4 py-6 mx-auto ">
+
+    <nav class="z-[80] w-full bg-skin-fill dark:bg-gray-800">
+        <div class="container flex items-center justify-between {{$height}} px-4 py-6 mx-auto ">
             <div class="flex-shrink-0">
                 <h1 class="text-lg font-semibold tracking-widest text-white uppercase">
                     <a href="{{url('/')}}">
-                        <img src="/images/logo/find_03.png" alt="logo-find" class="h-20 dark:hidden">
+                        <img src="/images/logo/find_03.png" alt="logo-find" class="h-16 dark:hidden">
                     </a>
                     <a href="{{url('/')}}">
-                        <img src="/images/logo/find_02.png" alt="logo-find" class="hidden w-24 dark:block ">
+                        <img src="/images/logo/find_02.png" alt="logo-find" class="hidden w-20 dark:block ">
                     </a>
                 </h1>
 
@@ -159,6 +160,8 @@
                     </li>
 
 
+
+
                 </ul>
                 <div class="flex items-center justify-center">
 
@@ -203,7 +206,18 @@
                     @auth
                     {{-- @livewire('user.navigation.notifications-component')
                     --}}
-                    @livewire('user.navigation.card-component')
+                    <div class="relative px-3 py-2">
+                        <div @click="linkActive = !linkActive" class="flex cursor-pointer">
+                            <ion-icon wire:ignore name="cart-outline" class="w-5 h-5 text-white"></ion-icon>
+                            <sub>
+                                <span class="bg-red-600 text-gray-100 px-1.5 py-0.5 rounded-full -ml-1 animate-pulse">
+                                    {{Session::has('cart')?count($products):0}}
+                                </span>
+                            </sub>
+                        </div>
+
+                    </div>
+
                     @endauth
 
 
@@ -276,7 +290,16 @@
 
                 </div>
                 <div class="relative px-3 py-2 ">
-                    @livewire('user.navigation.card-component')
+
+
+                    <div @click="linkActive = !linkActive" class="flex cursor-pointer">
+                        <ion-icon wire:ignore name="cart-outline" class="w-5 h-5 text-white"></ion-icon>
+                        <sub>
+                            <span class="bg-red-600 text-gray-100 px-1.5 py-0.5 rounded-full -ml-1 animate-pulse">
+                                {{Session::has('cart')?count($products):0}}
+                            </span>
+                        </sub>
+                    </div>
 
 
                 </div>
@@ -297,21 +320,42 @@
                 </button>
             </div>
 
-            <div x-cloak x-show.in.out.opacity="navOpen" class="fixed inset-0 z-10 bg-black bg-opacity-20 lg:hidden"
-                style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"></div>
+
             @livewire('user.navigation.search-mobile')
-            @livewire('user.navigation.mobile-navigation')
+
         </div>
 
-        @livewire('user.services.search-component')
+    </nav>
 
-    </header>
+    @livewire('user.services.search-component')
+
+</header>
 
 
-</div>
+
 
 @push('script')
 
+<script>
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+    document.querySelector("header").classList.add("sticky", "top-0", "animate-slide-down");
+
+    } else {
+    document.querySelector("header").classList.add("animate-slide-up");
+
+    setTimeout(function() {
+
+    document.querySelector("header").classList.remove("sticky", "top-0", "animate-slide-down", "animate-slide-up");
+    }, 300); // Délai de 300 millisecondes pour l'animation
+    }
+    prevScrollpos = currentScrollPos;
+    }
+
+
+</script>
 
 
 

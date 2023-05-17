@@ -23,11 +23,11 @@ class ServiceController extends Controller
 
         $category = Category::all();
 
-        $servicesBest = Service::limit(20)->get();
+        $servicesBest = Service::limit(20)->where('is_publish', true)->get();
 
         $freelance = Freelance::paginate(20);
 
-        $services = Service::orderBy('basic_price', 'Asc')->paginate(8);
+        $services = Service::where('is_publish', true)->orderBy('basic_price', 'Asc')->paginate(8);
 
 
 

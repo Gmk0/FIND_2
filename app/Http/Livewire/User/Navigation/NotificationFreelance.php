@@ -6,16 +6,21 @@ use Livewire\Component;
 use App\Models\Notification;
 use App\Events\ProjectResponse;
 use WireUi\Traits\Actions;
+use App\Events\OrderCreated;
+
 
 class NotificationFreelance extends Component
 {
 
+    use Actions;
+    public $notifications;
     public function  getListeners()
     {
 
         $auth_id = auth()->user()->id;
         return [
             "echo-private:notify.{$auth_id},ProjectResponse" => 'broadcastedMessageReceived',
+            "echo-private:notify.{$auth_id},OrderCreated" => 'broadcastedMessageReceived',
             'ServiceOrdered' => '$refresh',
 
 
@@ -39,13 +44,18 @@ class NotificationFreelance extends Component
     public function remove($id)
     {
 
+        //dd($id);
         $data = Notification::destroy($id);
+
+        $this->emit('refreshComponent');
     }
 
     public function render()
     {
-        return view('livewire.user.navigation.notification-freelance', [
-            'notifications' => Notification::where('user_id', auth()->user()->id)->where('is_read', 0)->orderBy('created_at', 'DESC')->get(),
-        ]);
+        $this->notifications = auth()->user()->unreadNotifications;
+
+
+
+        return view('livewire.user.navigation.notification-freelance');
     }
 }

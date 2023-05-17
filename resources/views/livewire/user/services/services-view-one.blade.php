@@ -1,5 +1,23 @@
+@push('style')
+
+<style>
+    #support ul {
+        list-style-type: disc;
+        /* Type de puce */
+        padding-left: 20px;
+        /* Espacement à gauche */
+    }
+
+    #support li {
+        margin-bottom: 5px;
+        /* Espacement entre chaque élément de la liste */
+    }
+</style>
+
+@endpush
+
 <div>
-    <div class="min-h-screen pt-20 bg-gray-50 md:px-8 dark:bg-gray-900"
+    <div class="min-h-screen py-2 bg-gray-100 md:px-8 dark:bg-gray-900"
         x-data="{ isOpen:false,isLoading: true,showFilters: false,showSearch: false }"
         x-init="setTimeout(() => { isLoading = false }, 3000)">
 
@@ -13,13 +31,13 @@
 
                 <div class="flex flex-row flex-1 h-screen p-8 overflow-y-hidden">
                     <div
-                        class="order-first hidden w-full h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md md:w-2/3 animate-pulse custom-scrollbar md:flex ">
+                        class="order-first hidden w-full h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md dark:bg-gray-600 md:w-2/3 animate-pulse custom-scrollbar md:flex ">
                         <div>
 
                         </div>
                     </div>
                     <div
-                        class="flex-col flex-1 h-screen p-4 mx-4 mb-4 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md md:flex md:order-2 md:mb-0 md:w-1/3 animate-pulse custom-scrollbar">
+                        class="flex-col flex-1 h-screen p-4 mx-4 mb-4 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md dark:bg-gray-600 md:flex md:order-2 md:mb-0 md:w-1/3 animate-pulse custom-scrollbar">
 
 
                     </div>
@@ -138,7 +156,7 @@
 
                                     <div>
                                         <!-- Colors -->
-                                        <div class="hidden">
+                                        <div id="support" class="hidden">
                                             <h4 class="mb-2 text-lg font-medium text-gray-900 dark:text-gray-200">
                                                 Support</h4>
                                             {!! $service->basic_support !!}
@@ -319,7 +337,7 @@
                             <div class="grid grid-cols-2 gap-4 mb-4">
                                 <div>
                                     <p class="font-bold text-gray-500 dark:text-gray-200">Support :</p>
-                                    <div class="text-gray-800">
+                                    <div id="support" class="text-gray-800">
                                         {!! $service->basic_support !!}
 
                                     </div>
@@ -561,71 +579,7 @@
         </div>
 
 
-        {{-- <div x-cloak x-show="isOpen"
-            class="fixed inset-0 right-0 z-30 flex flex-col w-9/12 bg-gray-100 md:w-1/3 custom-scrollbar"
-            @click.away="isOpen = false">
-            <div class="flex items-center justify-between p-4 bg-white border-b border-gray-200">
-                <h2 class="text-lg font-semibold">Panier</h2>
-                <button @click="isOpen = false" class="text-gray-500 hover:text-gray-600 focus:outline-none">
-                    <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-            @if(Session::has('cart'))
-            <div class="flex-1 overflow-y-auto">
 
-
-                @foreach ($products as $item)
-
-                <div class="flex items-center p-4 space-x-4">
-
-                    <img class="object-cover w-16 h-16 rounded-lg"
-                        src="{{Storage::disk('local')->url('public/service/'.$item['image']) }}" alt="Service 1">
-                    <div class="flex-1">
-                        <h3 class="font-semibold text-gray-800">{{$item['title']}}</h3>
-                        <p class="text-gray-500 dark:text-gray-700">{{$item['basic_price']}} $</p>
-
-                        <p class="text-gray-500 dark:text-gray-700">{{$item['quantity']}}</p>
-                    </div>
-                    <button wire:click="remove({{$item['id']}})"
-                        class="text-gray-500 hover:text-gray-600 focus:outline-none">
-                        <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            viewBox="0 0 24 24" stroke="currentColor">
-
-                            <path d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                </div>
-                @endforeach
-                <div wire:loading wire:target='add_cart' class="">
-
-                    <h1 class="px-2">Chargement....</h1>
-
-                </div>
-            </div>
-            <div class="flex items-center justify-between p-4 bg-white border-t border-gray-200">
-                <p class="text-xl font-semibold text-gray-600 dark:text-gray-300">Total :
-                    {{Session('cart')->totalPrice}}
-                </p>
-                <a href="" class="px-4 py-2 font-semibold text-white bg-indigo-500 rounded hover:bg-indigo-600">
-                    Payer
-                </a>
-            </div>
-
-            @else
-            <div class="">
-                <div wire:loading wire:target='add_cart' class="">
-
-                    <h1 class="px-2">Chargement....</h1>
-
-                </div>
-                <h1>Votre Carte est vide</h1>
-
-            </div>
-            @endif
-        </div>--}}
 
 
 

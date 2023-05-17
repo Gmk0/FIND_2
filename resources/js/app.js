@@ -13,7 +13,7 @@ import collapse from '@alpinejs/collapse'
 
 
 
-import Splide from '@splidejs/splide';
+
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 
 import Alpine from 'alpinejs';

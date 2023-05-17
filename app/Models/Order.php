@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Events\OrderCreated;
+use App\Notifications\OrderNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -48,6 +50,29 @@ class Order extends Model
         'service_id' => 'integer',
         'total_amount' => 'decimal:2',
     ];
+
+    protected $dispatchesEvents = [
+        'created' => OrderCreated::class,
+    ];
+
+
+    public function notifyUser()
+    {
+        $service = $this->service;
+
+        if ($service) {
+            $freelance = $service->freelance;
+
+            if ($freelance) {
+                $user = $freelance->user;
+
+
+                $user->notify(new OrderNotification($this));
+            }
+        }
+    }
+
+
 
     public function getTotalAmountAttribute($value)
     {

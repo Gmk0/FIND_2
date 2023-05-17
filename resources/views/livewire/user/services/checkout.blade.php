@@ -1,6 +1,6 @@
-<div x-data="app()" class="min-h-screen py-5 pt-20 bg-gray-50 min-w-screen dark:bg-gray-900">
+<div x-data="app()" class="min-h-screen py-5 custom overflow-y-auto-scrollbar bg-gray-50 min-w-screen dark:bg-gray-900">
 
-    <div class="md:px-12">
+    <div class="px-6 md:px-12">
         <div>
             <div class="mb-2">
                 @include('include.breadcumb',['serviceAll'=>'services','checkout'=>'checkout'])
@@ -10,10 +10,6 @@
             </div>
 
         </div>
-        <div>
-
-        </div>
-
         <div>
 
             <div wire:offline class="flex items-center justify-between px-6 py-4 text-white bg-red-500 rounded-md">
@@ -82,9 +78,16 @@
                                                 </h3>
                                                 <p class="text-sm dark:text-gray-400">Basic</p>
                                             </div>
+                                            @php
+                                            $price = $item['basic_price'];
+
+                                            $reduction=$item['basic_price'] +35;
+
+                                            @endphp
                                             <div class="text-right">
                                                 <p class="text-lg font-semibold">{{$item['basic_price']}}€</p>
-                                                <p class="text-sm line-through dark:text-gray-600">75.50€</p>
+                                                <p class="text-sm line-through dark:text-gray-600">
+                                                    {{$reduction}}€</p>
                                             </div>
                                         </div>
                                         <div class="flex text-sm divide-x">
@@ -131,6 +134,12 @@
                                                 </button>
 
                                             </div>
+                                            <div>
+
+
+                                            </div>
+
+
 
                                         </div>
                                     </div>
@@ -228,6 +237,22 @@
                     </div>
                     <div class="px-3 md:w-5/12">
 
+                        <div class="w-full p-4 mb-4 font-semibold bg-white border border-gray-200 rounded-md">
+                            <div>
+                                <h1>Address de Facturation / Livraison</h1>
+
+                            </div>
+                            <div class="flex flex-col gap-2">
+
+                                <x-input placeholder="Rue" />
+                                <x-input placeholder="Quartier" />
+                                <x-input placeholder="Commune" />
+                                <x-input placeholder="Ville" />
+
+                            </div>
+
+                        </div>
+
                         <div
                             class="w-full mx-auto mb-6 font-light text-gray-800 bg-white border border-gray-200 rounded-lg top-8 dark:bg-gray-900">
                             <div class="w-full p-3 border-b border-gray-200 ">
@@ -262,13 +287,13 @@
 
 
 
-                                        <x-select label="Mois" placeholder="02"
+                                        <x-native-select label="Mois" placeholder="02"
                                             :options="['01', '02', '03', '05', '06', '07', '08', '09', '10', '11', '12']"
                                             wire:model.defer="card.cardExpiryMonth" />
 
 
 
-                                        <x-select label="Mois" placeholder="2024"
+                                        <x-native-select label="Mois" placeholder="2024"
                                             :options="['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030']"
                                             wire:model.defer="card.cardExpiryYear" />
 

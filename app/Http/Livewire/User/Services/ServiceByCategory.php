@@ -76,8 +76,7 @@ class ServiceByCategory extends Component
             $cart = new Cart($oldCart);
             $cart->add($service, $service->id, $images);
             Session::put('cart', $cart);
-            $this->emitTo('user.navigation.card-component', 'refreshComponent');
-            $this->dispatchBrowserEvent('success', ['message' => 'le service a ete ajouté']);
+            $this->emit('refreshComponent');
 
             $this->notification()->success(
                 $title = "le Service a ete ajouté dans le panier",
@@ -194,7 +193,7 @@ class ServiceByCategory extends Component
                         $query->whereBetween('basic_price', $range);
                     })->when($this->price_range, function ($query) {
                         $query->orderBy($this->orderBy, 'DESC');
-                    })
+                    })->where('is_publish', true)
 
 
                     ->paginate(12),

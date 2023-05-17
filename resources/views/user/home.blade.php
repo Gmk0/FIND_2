@@ -3,7 +3,7 @@
 @section('content')
 
 <section
-    class="relative grid min-h-screen grid-cols-1 gap-8 px-4 pt-20 overflow-hidden text-neutral-50 2xl:px-60 lg:grid-cols-12 bg-skin-fill dark:bg-gray-800">
+    class="relative grid min-h-screen grid-cols-1 gap-8 px-4 overflow-hidden text-neutral-50 2xl:px-60 lg:grid-cols-12 bg-skin-fill dark:bg-gray-800">
     <div
         class="[mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] absolute bottom-[-100px] md:w-[800px] md:h-[800px] lg:top-[120px] lg:right-[-100px] xl:right-0 w-[500px] h-[500px] 2xl:w-[1026px] 2xl:h-[1026px]">
         <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true"
@@ -37,7 +37,7 @@
     </div>
 
     <div data-aos="fade-right" data-aos-duration="800"
-        class="z-20 col-span-6 px-4 py-8 mt-8 lg:py-16 md:mb-8 xl:place-self-center xl:mt-0 lg:mb-0">
+        class="z-20 col-span-6 px-4 py-8 mt-8 lg:py-12 md:mb-8 xl:place-self-center xl:mt-0 lg:mb-0">
         <h1 class="text-3xl font-bold text-center md:text-3xl xl:text-5xl lg:text-left">
             Votre satisfaction dans nos services Freelance <br />
 
@@ -54,7 +54,7 @@
 
         </div>
     </div>
-    <div class="relative hidden  z-20 col-span-6 md:flex">
+    <div class="relative z-20 hidden col-span-6 md:flex">
         <div class="flex flex-wrap gap-2" x-data="{ splide: null }" x-init="() => {
                 splide = new Splide('.splide', {
                     type: 'loop',

@@ -1,4 +1,4 @@
-<div x-show="isSearch" x-cloak @click.away="isSearch = false" class="flex   z-50    gap-4 p-2 pt-8 mx-8">
+<div x-show="isSearch" x-cloak @click.away="isSearch = false" class="z-50 flex gap-4 p-2 pt-8 mx-8 bg-skin-fill">
 
     <div class="w-full md:w-3/4">
         <div class="relative">

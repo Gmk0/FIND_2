@@ -1,4 +1,4 @@
-<div x-cloak x-show.transition="isSearchBoxOpen" class="fixed inset-0 z-10 bg-black bg-opacity-20"
+<div x-cloak x-show.transition="isSearchBoxOpen" class="fixed inset-0 z-[90] bg-black bg-opacity-20"
     style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
     <div @click.away="isSearchBoxOpen = false"
         class="inset-x-0 flex items-center justify-between p-2 bg-white shadow-md ">

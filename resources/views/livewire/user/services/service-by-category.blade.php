@@ -1,5 +1,5 @@
 <div>
-    <div x-data="{isOpen:false}" class="min-h-screen pt-20 md:px-8">
+    <div x-data="{isOpen:false}" class="min-h-screen py-8 md:px-8">
 
         <div class="px-2">
             @include('include.breadcumb',['category'=>'cagegory','categoryName'=>$categoryName])
@@ -99,13 +99,13 @@
                         class="overflow-hidden bg-white rounded-lg shadow-md dark:text-gray-200 dark:bg-gray-800">
                         <div class="flex flex-row md:flex-col">
                             <div x-data="{
-                                                                                            slide: 0,
-                                                                                            maxSlides: {{ count($service->files) }},
-                                                                                            showButton: false
-                                                                                            }"
+                                    slide: 0,
+                                    maxSlides: {{ count($service->files) }},
+                                    showButton: false
+                                                                                        }"
                                 class="relative w-full h-48 overflow-hidden" @mouseover="showButton = true"
                                 @mouseleave="showButton = false">
-                                <div class="absolute inset-0 cursor-pointer">
+                                <div wire:ignore class="absolute inset-0 cursor-pointer">
                                     <template x-for="(image, index) in {{ json_encode($service->files) }}" :key="index">
                                         <div x-show="slide === index"
                                             class="absolute top-0 left-0 w-full h-48 transition duration-500 ease-out bg-center bg-cover"
@@ -114,14 +114,17 @@
                                         </div>
                                     </template>
                                 </div>
-
-                                <div class="absolute flex justify-between transform -translate-y-1/2 top-1/2 left-5 right-5"
-                                    x-show="showButton">
-                                    <a href="#" class="btn btn-outline btn-circle btn-sm"
-                                        @click.prevent="slide = (slide - 1 + maxSlides) % maxSlides">❮</a>
-                                    <a href="#" class="btn btn-outline btn-circle btn-sm"
-                                        @click.prevent="slide = (slide + 1) % maxSlides">❯</a>
+                                <div x-bind:class="{'hidden':!showButton}">
+                                    <div class="absolute flex justify-between transform -translate-y-1/2 top-1/2 left-5 right-5"
+                                        x-show="showButton">
+                                        <a href="#" class="btn btn-outline btn-circle btn-sm"
+                                            @click.prevent="slide = (slide - 1 + maxSlides) % maxSlides">❮</a>
+                                        <a href="#" class="btn btn-outline btn-circle btn-sm"
+                                            @click.prevent="slide = (slide + 1) % maxSlides">❯</a>
+                                    </div>
                                 </div>
+
+
                             </div>
 
 

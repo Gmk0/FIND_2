@@ -10,9 +10,13 @@ use App\Models\service;
 use App\Models\Transaction;
 use App\Models\Notification;
 use Carbon\Carbon;
+use WireUi\Traits\Actions;
+use App\Events\OrderCreated;
 
 class DashboardFreelance extends Component
 {
+
+    use Actions;
     public $service;
     public $orders;
     public $transaction;
@@ -22,9 +26,27 @@ class DashboardFreelance extends Component
     public function mount()
     {
         $this->freelance_id = auth()->user()->freelance->id;
-        // $donne = 
+        // $donne =
         // dd($donne);
     }
+
+
+
+    public function  getListeners()
+    {
+
+        $auth_id = auth()->user()->id;
+        return [
+            "echo-private:notify.{$auth_id},ProjectResponse" => 'broadcastedMessageReceived',
+            "echo-private:notify.{$auth_id},OrderCreated" => '$refresh',
+            'ServiceOrdered' => '$refresh',
+
+
+        ];
+    }
+
+
+
 
 
     public function total()

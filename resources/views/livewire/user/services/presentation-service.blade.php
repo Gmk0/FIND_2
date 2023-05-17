@@ -3,9 +3,9 @@
 
 
 
-    <section class="flex flex-col min-h-screen pt-20 mb-6">
+    <section class="flex flex-col min-h-screen pt-8 mb-6">
 
-        <div class="flex flex-col p-2 mx-6 mt-4 bg-white rounded-lg md:h-64 dark:bg-gray-800">
+        <div class="flex flex-col p-2 mx-6 mt-4 bg-white rounded-lg md:min-h-64 dark:bg-gray-800">
             <div class="mb-4">
                 <h3 class="mb-4 font-serif text-xl leading-snug text-center dark:text-gray-400 text-slate-800">
                     Découvrez une communauté de freelances talentueux prêts à donner vie à vos projets.
@@ -14,7 +14,7 @@
                     communauté de professionnels vous aider à réaliser vos rêves.
                 </h3>
             </div>
-            <div class="">
+            <div wire:ignore class="">
                 <div class="flex flex-wrap gap-2" x-data="{ splide: null }" x-init="() => {
                      splide = new Splide('.splide', {
                          type: 'loop',
@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="p-4 mx-6 mt-4 bg-white rounded-lg dark:bg-gray-900 justify-beetwen">
+        <div wire:ignore class="p-4 mx-6 mt-4 bg-white rounded-lg dark:bg-gray-900 justify-beetwen">
 
             <div class="flex justify-between mb-4">
                 <h1 class="text-base font-semibold text-gray-800 md:text-2xl dark:text-gray-300 "> Les Service populaire
@@ -265,22 +265,18 @@
 
 
 
-            <div class="grid grid-cols-1 gap-4 p-4 mx-2 max-w-5xl md:grid-cols-4 md:gap-4">
+            <div class="grid max-w-5xl grid-cols-1 gap-4 p-4 mx-2 md:grid-cols-4 md:gap-4">
                 @forelse ($services as $service)
 
 
-                <div x-data="{linkHover: false}" style="" @mouseover="linkHover = true" @mouseleave="linkHover = false"
+                <div x-data="{linkHover: false}" @mouseover="linkHover = true" @mouseleave="linkHover = false"
                     class="overflow-hidden bg-white rounded-lg shadow-md dark:text-gray-200 dark:bg-gray-900">
-                    <div class="flex flex-row md:flex-col">
+                    <div class="flex flex-row lg:flex-col">
 
 
 
-                        <div x-data="{
-                                                                                            slide: 0,
-                                                                                            maxSlides: {{ count($service->files) }},
-                                                                                            showButton: false
-                                                                                            }"
-                            class="relative w-full h-48 overflow-hidden" @mouseover="showButton = true"
+                        <div x-data="{slide: 0,maxSlides: {{ count($service->files) }},showButton: false}"
+                            class="relative h-48 overflow-hidden w-[50%] lg:w-full" @mouseover="showButton = true"
                             @mouseleave="showButton = false">
                             <div class="absolute inset-0 cursor-pointer">
                                 <template x-for="(image, index) in {{ json_encode($service->files) }}" :key="index">
@@ -292,17 +288,18 @@
                                 </template>
                             </div>
 
-                            <div class="absolute flex justify-between transform -translate-y-1/2 top-1/2 left-5 right-5"
-                                x-show="showButton">
-                                <a href="#" class="btn btn-outline btn-circle btn-sm"
-                                    @click.prevent="slide = (slide - 1 + maxSlides) % maxSlides">❮</a>
-                                <a href="#" class="btn btn-outline btn-circle btn-sm"
-                                    @click.prevent="slide = (slide + 1) % maxSlides">❯</a>
+                            <div x-bind:class="{'hidden':!showButton}">
+                                <div class="absolute flex justify-between transform -translate-y-1/2 top-1/2 left-5 right-5"
+                                    x-show="showButton">
+                                    <a href="#" class="btn btn-outline btn-circle btn-sm"
+                                        @click.prevent="slide = (slide - 1 + maxSlides) % maxSlides">❮</a>
+                                    <a href="#" class="btn btn-outline btn-circle btn-sm"
+                                        @click.prevent="slide = (slide + 1) % maxSlides">❯</a>
+                                </div>
                             </div>
                         </div>
 
-
-                        <div class="max-h-[14rem] flex flex-col justify-between p-2 dark:text-gray-200 md:p-6">
+                        <div class="max-h-[14rem] w-[50%] flex flex-col justify-between p-2 dark:text-gray-200 md:p-6">
                             <div>
                                 <a href="{{route('ServicesViewOne',['id'=>$service->id,'category'=>$service->category->name])}}"
                                     class="mb-2 text-sm font-semibold md:text-base "
@@ -446,9 +443,7 @@
           },
         }).mount();
       });
-</script>
 
-<script>
     document.addEventListener('DOMContentLoaded', function () {
         new Splide('.splide-2', {
 
@@ -479,6 +474,13 @@
         },
         }).mount();
       });
+
+      Livewire.hook('afterDomUpdate', function() {
+        swiper.destroy();
+        swiper = new Swiper('.swiper-container', {
+        // Options de Swiper
+        });
+        });
 </script>
 
 

@@ -58,7 +58,7 @@
                                   },
                               ]
                           }" class="relative z-20 overflow-hidden bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-4">
         <div class="flex flex-wrap -mx-4">
             <div class="w-full px-4">
                 <div class="mx-auto mb-[60px] max-w-[520px] text-center lg:mb-20">
@@ -99,7 +99,7 @@
                                 </svg>
                             </div>
                             <div class="w-full">
-                                <h4 x-text="faq.question" class="text-lg font-semibold text-black">
+                                <h4 x-text="faq.question" class="text-lg font-semibold text-gray-800">
 
                                 </h4>
                             </div>

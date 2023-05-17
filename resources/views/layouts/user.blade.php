@@ -4,11 +4,13 @@
 @include('include.head')
 
 <body class="flex flex-col justify-between overflow-x-hidden bg-gray-50 custom-scrollbar dark:bg-gray-900"
-    x-data="{navOpen: false,notificationActive: false, loading: true, scrolledFromTop: false}" :class="{
+    x-data="{navOpen: false,notificationActive: false, loading: true,linkActive: false, scrolledFromTop: false}" :class="{
             'overflow-hidden': navOpen,
             'overflow-scroll': !navOpen
 
         }" x-init="$refs.loading.classList.add('hidden')">
+
+    <x-notifications z-index="z-90" position='top-right' />
 
 
     <div x-ref="loading"
@@ -17,14 +19,24 @@
         Loading.....
     </div>
 
+    <div x-cloak x-show.in.out.opacity="navOpen" class="fixed inset-0 z-[85] bg-black bg-opacity-20 lg:hidden"
+        style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"></div>
 
     @livewire('user.navigation.navigation')
+    @livewire('user.navigation.card-component')
 
-    <x-notifications z-index="z-50" position='top-right' />
+    @livewire('user.navigation.mobile-navigation')
 
 
 
-    @yield('content')
+
+
+    <main class="">
+        @yield('content')
+    </main>
+
+
+
 
 
     @livewire('user.cookies.cookie-sent')

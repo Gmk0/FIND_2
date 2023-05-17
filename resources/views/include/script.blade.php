@@ -13,6 +13,8 @@
 
 
 
+
+
 <script>
     function playSound(soundPath) {
     var sound = new Howl({
@@ -34,7 +36,7 @@
 
 
 
-<script src="/build/assets/app.3.js" defer></script>
+
 
 <script src="/js/script.js"></script>
 
@@ -51,13 +53,8 @@
 
 
 @stack('script')
-{{--<script>
-    const beamsClient = new PusherPushNotifications.Client({
-    instanceId: '46c67427-dc94-472a-ad4d-622a32102ffd',
-  });
 
-  beamsClient.start()
-    .then(() => beamsClient.addDeviceInterest('hello'))
-    .then(() => console.log('Successfully registered and subscribed!'))
-    .catch(console.error);
-</script>--}}
+
+@auth
+@include('include.beams')
+@endauth

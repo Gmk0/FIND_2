@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Api\ApiFreelanceGet;
 use App\Http\Controllers\Api\ServicesApi;
+use App\Http\Controllers\BeamsAuthenticationController;
 use App\Http\Controllers\FacebookAuth;
+use App\Http\Controllers\FreelanceController;
 use App\Http\Controllers\GoogleAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home;
@@ -33,7 +35,10 @@ Route::controller(home::class)->group(function () {
     Route::view('/registration/info', 'user.register_info')->name('register.etape.1');
     Route::view('/apropos', 'user.about')->name('about');
     Route::view('/faq', 'user.faq')->name('faq');
+    Route::view('/contact', 'user.contact')->name('contact');
+    Route::view('/test', 'test.test')->name('test');
 });
+Route::get('/beams-auth', BeamsAuthenticationController::class)->middleware('auth:sanctum')->name('beams-auth');
 
 Route::controller(ServiceController::class)->group(function () {
 
@@ -95,7 +100,7 @@ Route::middleware([
 
     //freelance
 
-    Route::get('/find_freelance/profile/{identifiant}', \App\Http\Livewire\User\Freelance\ProfileFreelance::class)->name('profile.freelance');
+    Route::get('/find_freelance/profile/{identifiant}', [FreelanceController::class, 'portfolio'])->where('identifiant', '(.*)')->name('profile.freelance');
 
     //conversation
     Route::get('/user/messages', App\Http\Livewire\User\Conversation\ConversationComponent::class)->name('MessageUser');

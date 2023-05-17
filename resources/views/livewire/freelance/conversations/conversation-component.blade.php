@@ -156,7 +156,8 @@
      theme:false,
      attachement:false,
     }" class="container mx-auto overflow-y-auto custom-scrollbar">
-    <div class="h-screen min-w-full overflow-y-hidden  rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
+    <div
+        class="h-screen min-w-full overflow-y-hidden border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
         <div x-bind:class="{'md:block hidden': sidebarOpen, 'md:block ': !sidebarOpen}"
             class="border-r border-gray-500 dark:border-gray-400 lg:col-span-1">
 
@@ -326,7 +327,7 @@
                             </p>
 
                             @if($selectedConversation->user->is_online)
-                            <p class="mt-1 text-xs  dark:text-gray-200 text-grey-darker">
+                            <p class="mt-1 text-xs dark:text-gray-200 text-grey-darker">
                                 online
                             </p>
                             @else

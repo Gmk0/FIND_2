@@ -50,7 +50,7 @@ class ListCommande extends Component implements Tables\Contracts\HasTable
         // Créer une requête pour la table "Service"
         $order->whereHas('service', function ($query) use ($freelance) {
             $query->where('freelance_id', $freelance);
-        })->get();
+        })->orderBy('created_at', 'Desc')->get();
 
         // Ajouter une condition pour l'utilisateur connecté
 

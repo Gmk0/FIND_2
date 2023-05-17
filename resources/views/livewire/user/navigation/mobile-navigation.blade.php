@@ -1,5 +1,6 @@
-<div x-cloak x-show="navOpen" :class="{'block': navOpen, 'hidden': !navOpen}" @click.away="navOpen = false" x-cloak
-    class="fixed inset-0 bottom-0 left-0 z-30 w-10/12 overflow-auto origin-left transform shadow-lg bg-gray-50 dark:bg-gray-800 custom-scrollbar lg:hidden"
+<div x-cloak x-show="navOpen" :class="{'block': navOpen, 'hidden': !navOpen}" @click.away="navOpen = false"
+    style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"
+    class="fixed inset-0 bottom-0 left-0 z-[90] w-10/12 overflow-auto origin-left transform shadow-lg bg-gray-50 dark:bg-gray-800 custom-scrollbar lg:hidden"
     x-transition:enter=" transition ease-in duration-300" x-transition:enter-start="opacity-0 transform -translate-x-40"
     x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-out duration-300"
     x-transition:leave-start="opacity-0 transform translate-x-40"
@@ -158,6 +159,16 @@
                         <span class="ml-2">{{__('messages.profile')}}</span>
                     </a>
 
+                    @if(Auth::user()->freelance()->exists())
+
+
+                    <a href="{{route('freelance.dashboard')}}" @click="navOpen = false"
+                        class="flex flex-row items-center px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
+                        role="menuitem">
+                        <ion-icon name="person-outline" class="w-6 h-6"></ion-icon>
+                        <span class="ml-2">{{__('Dashboard Freelance')}}</span>
+                    </a>
+                    @endif
 
                     <a href="{{url('/user/messages')}}" @click="navOpen = false"
                         class="flex flex-row items-center px-4 py-2 text-gray-800 text-md focus:text-gray-900 hover:text-gray-900 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"

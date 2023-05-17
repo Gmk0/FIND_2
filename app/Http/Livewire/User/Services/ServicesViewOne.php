@@ -8,9 +8,14 @@ use App\Models\FeedbackService;
 use App\Models\Like;
 use App\Models\Message;
 use App\Models\Service;
+use App\Models\User;
+use App\Notifications\ServicePaid;
+use App\Notifications\testNotify;
 use Livewire\Component;
 use App\Tools\Cart;
 use Illuminate\Support\Facades\Session;
+use Pusher\PushNotifications\PushNotifications;
+use WireUi\Actions\Notification;
 use WireUi\Traits\Actions;
 
 
@@ -166,17 +171,80 @@ class ServicesViewOne extends Component
         $cart = new Cart($oldCart);
         $cart->add($items, $items->id, $this->images);
         Session::put('cart', $cart);
-        $this->emitTo('user.navigation.card-component', 'refreshComponent');
-        $this->dispatchBrowserEvent('success', ['message' => 'le service a ete ajouté']);
+        $this->emit('refreshComponent');
 
         $this->notification()->success(
             $title = "le Service a ete ajouté dans le panier",
 
         );
+        $this->notify2();
+
+
+
+
+
 
         // dd(Session::get('cart'));
     }
 
+
+    public function notify2()
+    {
+
+        try {
+
+            $user = User::find(3);
+
+            $user->notify(new testNotify());
+        } catch (\Exception $e) {
+
+            dd($e->getMessage());
+        }
+    }
+
+    public function notifications()
+    {
+
+        try {
+
+            $beamsClient = new PushNotifications(array(
+                "instanceId" => config('services.pusher.beams_instance_id'),
+                "secretKey" => config('services.pusher.beams_secret_key'),
+            ));
+
+
+            $userId = $this->service->freelance->user->id;
+            $userSendingNotification = auth()->user(); // L'utilisateur qui envoie la notification
+            $userReceivingNotification = User::find($userId);
+
+            // L'utilisateur qui reçoit la notification
+
+            $interests = "App.Models.User.3";
+
+            // Créer une liste d'intérêts basée sur l'ID de l'utilisateur
+
+            $data = array(
+                "web" => array(
+                    "notification" => array(
+                        "title" => "Test",
+                        "body" => "Vous avez une nouvelle notification",
+                        "deep_link" => "https://example.com/notification",
+                        "icon" => "https://example.com/icon.png",
+                        "data" => array(
+                            "foo" => "bar",
+                            "baz" => "qux",
+                        ),
+                    ),
+                ),
+            );
+            // Les données de la notification
+
+            $beamsClient->publishToInterests(array($interests), $data);
+        } catch (\Exception $e) {
+
+            dd($e->getMessage());
+        }
+    }
 
     public function render()
     {

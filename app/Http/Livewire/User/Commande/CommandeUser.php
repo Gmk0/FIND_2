@@ -38,7 +38,7 @@ class CommandeUser extends Component implements Tables\Contracts\HasTable
 
         $order = Order::query();
         // Créer une requête pour la table "Service"
-        $order->where('user_id', $user)->get();
+        $order->where('user_id', $user)->OrderBy('created_at', 'Desc')->get();
 
         // Ajouter une condition pour l'utilisateur connecté
 

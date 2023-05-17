@@ -6,11 +6,12 @@
      attachement:false,
     }" class="container mx-auto overflow-y-auto custom-scrollbar">
     <div
-        class="h-screen min-w-full overflow-y-hidden border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
+        class="h-screen min-w-full  overflow-y-hidden border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
         <div x-bind:class="{'md:block hidden': sidebarOpen, 'md:block ': !sidebarOpen}"
-            class="border-r border-gray-500 dark:border-gray-400 lg:col-span-1">
+            class="border border-gray-500 dark:border-gray-600 lg:col-span-1">
 
-            <div class="flex flex-row items-center justify-between px-3 py-2 bg-grey-lighter">
+            <div
+                class="flex flex-row border dark:border-gray-500 items-center justify-between px-3 py-2 bg-grey-lighter">
                 <div>
                     @if (!empty(Auth::user()->profile_photo_path))
                     <img class="w-10 h-10 rounded-full""

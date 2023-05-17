@@ -22,7 +22,7 @@ class Profile extends SpotlightCommand
 
     public function execute(Spotlight $spotlight): void
     {
-        $spotlight->redirect('/user/messages');
+        $spotlight->redirect('/user/profile');
     }
 
     /**

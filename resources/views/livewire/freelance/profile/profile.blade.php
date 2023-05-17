@@ -137,7 +137,7 @@
 
                 <div class="mt-5 md:mt-0 md:col-span-2">
                     <form>
-                        <div
+                        <div x-data="{form:false}" x-on:close.window="form=false"
                             class="px-4 py-5 bg-white dark:bg-gray-800 dark:border dark:border-gray-300 rounded-lg  sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
 
                             <div class="gap-6 md:grid ">
@@ -153,7 +153,7 @@
                                             <th class="p-3 text-left">certificat</th>
                                             <th class="p-3 text-left">Delivrer par</th>
                                             <th class="p-3 text-left">Annee</th>
-                                            <th class="p-3 text-left" width="110">Actions</th>
+                                            <th class="p-3 text-left" colspan="2">Actions</th>
                                         </tr>
 
                                         @empty
@@ -169,8 +169,12 @@
                                                 class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
 
                                                 <span x-show="!open">{{$value['certificate']}}</span>
+                                                <div x-bind:class="{ 'hidden': open }">
+                                                    <x-input x-show="open" wire:model.defer="certificate.certificate" />
 
-                                                <x-input x-show="open" wire:model.defer="certificate.certificate" />
+                                                </div>
+
+
 
                                             </td>
                                             <td
@@ -178,23 +182,34 @@
 
 
                                                 <span x-show="!open">{{$value['delivrer']}}</span>
-                                                <x-input x-show="open" wire:model.defer="certificate.delivrer" />
+
+                                                <div x-bind:class="{ 'hidden': open }">
+                                                    <x-input x-show="open" wire:model.defer="certificate.delivrer" />
+                                                </div>
+
                                             </td>
                                             <td
                                                 class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100  p-3 truncate">
 
                                                 <span x-show="!open">{{$value['annee']}}</span>
 
+                                                <div x-bind:class="{ 'hidden': open }">
+                                                    <x-native-select x-show="open" placeholder="Choisissez un niveau"
+                                                        :options="$date" wire:model.defer="certificate.annee" />
+
+                                                </div>
+
 
                                                 <x-input x-show="open" wire:model.defer="certificate.annee" />
                                             </td>
                                             <td
-                                                class="border-grey-light border flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
+                                                class="border-grey-light border-t md:border flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
 
 
 
                                                 <x-button.circle negative sm x-show="!open"
-                                                    wire:click="remove({{$key}},'certificate')" icon="trash">
+                                                    wire:click="remove({{$key}},'certificate')"
+                                                    spinner="remove({{$key}},'certificate')" icon="trash">
                                                     </x-button>
                                                     <x-button.circle x-show="!open" @click="open=true"
                                                         wire:click='modalCertificate({{$key}})' sm icon="pencil">
@@ -221,141 +236,16 @@
 
                             </div>
 
-                        </div>
-
-
-                    </form>
-                </div>
-
-            </div>
-
-            <x-section-border />
-            <div class='mt-4 md:grid md:grid-cols-3 md:gap-6'>
-                <div class="flex justify-between md:col-span-1">
-                    <div class="px-4 sm:px-0">
-                        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Photo de Profile') }} <span class="text-red-600"></span>
-                        </h3>
-
-                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-100">
-                            {{ __('Ajoutez une photo de profil de vous-même afin que les clients sachent
-                            exactement
-                            avec qui ils travailleront.') }}
-                        </p>
-                    </div>
-
-
-                </div>
-
-                <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form x-data="{form:false}" x-on:close.window="form=false">
-                        <div
-                            class="px-4 py-5 bg-white dark:bg-gray-800 dark:border dark:border-gray-300 rounded-lg  sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
-
-                            <div class="gap-6 md:grid ">
-
-
-                                <table id="table"
-                                    class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
-                                    <thead class="text-white">
-                                        @forelse ($freelance['diplome'] as $key=>$value )
-                                        <tr
-                                            class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                                            <th class="p-3 text-left">universite</th>
-                                            <th class="p-3 text-left">Diplome</th>
-                                            <th class="p-3 text-left">Annee</th>
-                                            <th class="p-3 text-left" width="110">Actions</th>
-                                        </tr>
-
-                                        @empty
-
-                                        @endforelse
-
-                                    </thead>
-                                    <tbody class="flex-1 sm:flex-none">
-                                        @forelse ($freelance['diplome'] as $key=>$value )
-                                        <tr x-data="{open:false}" x-on:close.window="open=false"
-                                            class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-                                            <td
-                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
-
-                                                <span x-show="!open">{{$value['universite']}}</span>
-
-
-                                                <div x-bind:class="{ 'hidden': !open }">
-                                                    <x-input wire:model.defer="diplome.universite" />
-
-                                                </div>
-
-
-                                            </td>
-                                            <td
-                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
-
-
-                                                <span x-show="!open">{{$value['diplome']}}</span>
-                                                <div x-bind:class="{ 'hidden': !open }">
-                                                    <x-input wire:model.defer="diplome.diplome" />
-
-                                                </div>
-
-                                            </td>
-                                            <td
-                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100  p-3 truncate">
-
-
-                                                <span x-show="!open">{{$value['annee']}}</span>
-                                                <div x-bind:class="{ 'hidden': !open }">
-
-
-                                                    <x-native-select placeholder="Choisissez un niveau" :options="$date"
-                                                        wire:model.defer="diplome.annee" />
-                                                </div>
-
-
-                                            </td>
-                                            <td
-                                                class="border-grey-light lg:border flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-3  hover:font-medium cursor-pointer">
-                                                <x-button.circle negative spinner="remove({{$key}},'universite')"
-                                                    wire:click="remove({{$key}},'universite')" sm x-show="!open"
-                                                    icon="trash">
-                                                    </x-button>
-                                                    <x-button.circle x-show="!open" @click="open=true"
-                                                        wire:click='modalDiplome({{$key}})' sm icon="pencil">
-                                                        </x-button>
-
-                                                        <x-button x-show="open" spinner="modifierDiplome"
-                                                            wire:click='modifierDiplome({{$key}})' sm label="Edit"
-                                                            icon="pencil">
-                                                        </x-button>
-
-
-                                                        <x-button wire:click="resetAll()" x-show="open"
-                                                            @click="open=false" sm label="annuler">
-                                                        </x-button>
-
-                                            </td>
-                                        </tr>
-
-                                        @empty
-
-                                        @endforelse
-
-                                    </tbody>
-                                </table>
-
-                            </div>
-
                             <div class="grid gap-3 md:grid-cols-3" x-collapse x-show="form">
 
 
-                                <x-input x-show="form" wire:model.defer="diplome.universite" />
+                                <x-input x-show="form" wire:model.defer="certificate.certificate" />
 
 
-                                <x-input x-show="open" wire:model.defer="diplome.diplome" />
+                                <x-input x-show="form" wire:model.defer="certificate.delivrer" />
 
                                 <x-native-select x-show="form" placeholder="Choisissez un niveau" :options="$date"
-                                    wire:model.defer="diplome.annee" />
+                                    wire:model.defer="certificate.annee" />
 
 
 
@@ -363,8 +253,9 @@
 
                             </div>
                             <div class="mt-4">
-                                <x-button x-show="!form" @click="form=true" label="New"></x-button>
-                                <x-button x-show="form" spinner="addDiplome" wire:click='addDiplome()' label="Ajouter">
+                                <x-button x-show="!form" @click="form=true" label="Ajouter"></x-button>
+                                <x-button x-show="form" spinner="addCertificate" wire:click='addCertificate()'
+                                    label="Ajouter">
                                 </x-button>
                                 <x-button x-show="form" @click="form=false" wire:click="resetAll" label="Annuler">
                                 </x-button>
@@ -379,426 +270,578 @@
 
             </div>
 
-
-
             <x-section-border />
             <div class='mt-4 md:grid md:grid-cols-3 md:gap-6'>
                 <div class="flex justify-between md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Vos competences') }} <span class="text-red-600"></span>
+                            {{ __('Education') }} <span class="text-red-600"></span>
                         </h3>
+
+                        < </div>
 
 
                     </div>
 
+                    <div class="mt-5 md:mt-0 md:col-span-2">
+                        <form x-data="{form:false}" x-on:close.window="form=false">
+                            <div
+                                class="px-4 py-5 bg-white dark:bg-gray-800 dark:border dark:border-gray-300 rounded-lg  sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
+
+                                <div class="gap-6 md:grid ">
+
+
+                                    <table id="table"
+                                        class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
+                                        <thead class="text-white">
+                                            @forelse ($freelance['diplome'] as $key=>$value )
+                                            <tr
+                                                class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                                <th class="p-3 text-left">universite</th>
+                                                <th class="p-3 text-left">Diplome</th>
+                                                <th class="p-3 text-left">Annee</th>
+                                                <th class="p-3 text-left" width="110">Actions</th>
+                                            </tr>
+
+                                            @empty
+
+                                            @endforelse
+
+                                        </thead>
+                                        <tbody class="flex-1 sm:flex-none">
+                                            @forelse ($freelance['diplome'] as $key=>$value )
+                                            <tr x-data="{open:false}" x-on:close.window="open=false"
+                                                class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                                                <td
+                                                    class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
+
+                                                    <span x-show="!open">{{$value['universite']}}</span>
+
+
+                                                    <div x-bind:class="{ 'hidden': !open }">
+                                                        <x-input wire:model.defer="diplome.universite" />
+
+                                                    </div>
+
+
+                                                </td>
+                                                <td
+                                                    class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
+
+
+                                                    <span x-show="!open">{{$value['diplome']}}</span>
+                                                    <div x-bind:class="{ 'hidden': !open }">
+                                                        <x-input wire:model.defer="diplome.diplome" />
+
+                                                    </div>
+
+                                                </td>
+                                                <td
+                                                    class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100  p-3 truncate">
+
+
+                                                    <span x-show="!open">{{$value['annee']}}</span>
+                                                    <div x-bind:class="{ 'hidden': !open }">
+
+
+                                                        <x-native-select placeholder="Choisissez un niveau"
+                                                            :options="$date" wire:model.defer="diplome.annee" />
+                                                    </div>
+
+
+                                                </td>
+                                                <td
+                                                    class="border-grey-light lg:border border-t flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-3  hover:font-medium cursor-pointer">
+                                                    <x-button.circle negative spinner="remove({{$key}},'universite')"
+                                                        wire:click="remove({{$key}},'universite')" sm x-show="!open"
+                                                        icon="trash">
+                                                        </x-button>
+                                                        <x-button.circle x-show="!open" @click="open=true"
+                                                            wire:click='modalDiplome({{$key}})' sm icon="pencil">
+                                                            </x-button>
+
+                                                            <x-button x-show="open" spinner="modifierDiplome"
+                                                                wire:click='modifierDiplome({{$key}})' sm label="Edit"
+                                                                icon="pencil">
+                                                            </x-button>
+
+
+                                                            <x-button wire:click="resetAll()" x-show="open"
+                                                                @click="open=false" sm label="annuler">
+                                                            </x-button>
+
+                                                </td>
+                                            </tr>
+
+                                            @empty
+
+                                            @endforelse
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                                <div class="grid gap-3 md:grid-cols-3" x-collapse x-show="form">
+
+
+                                    <x-input x-show="form" wire:model.defer="diplome.universite" />
+
+
+                                    <x-input x-show="open" wire:model.defer="diplome.diplome" />
+
+                                    <x-native-select x-show="form" placeholder="Choisissez un niveau" :options="$date"
+                                        wire:model.defer="diplome.annee" />
+
+
+
+
+
+                                </div>
+                                <div class="mt-4">
+                                    <x-button x-show="!form" @click="form=true" label="Ajouter"></x-button>
+                                    <x-button x-show="form" spinner="addDiplome" wire:click='addDiplome()'
+                                        label="Ajouter">
+                                    </x-button>
+                                    <x-button x-show="form" @click="form=false" wire:click="resetAll" label="Annuler">
+                                    </x-button>
+
+                                </div>
+
+                            </div>
+
+
+                        </form>
+                    </div>
 
                 </div>
 
-                <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form x-data="{form:false}" x-on:close.window="form=false">
-                        <div
-                            class="px-4 py-5 bg-white dark:bg-gray-800 dark:border dark:border-gray-300 rounded-lg  sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
-
-                            <div class="gap-6 md:grid ">
-
-                                <table id="table"
-                                    class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
-                                    <thead class="text-white">
-                                        @forelse ($freelance['competences'] as $key=>$value )
-                                        <tr
-                                            class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                                            <th class="p-3 text-left">Compentences</th>
-                                            <th class="p-3 text-left">Niveau</th>
-
-                                            <th class="p-3 text-left" width="110">Actions</th>
-                                        </tr>
-
-                                        @empty
-
-                                        @endforelse
-
-                                    </thead>
-                                    <tbody class="flex-1 sm:flex-none">
-                                        @forelse ($freelance['competences'] as $key=>$value )
-                                        <tr x-data="{open:false}" x-on:close.window="open=false"
-                                            class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-                                            <td
-                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
 
 
-
-                                                <span class="truncate"
-                                                    x-bind:class="{ 'hidden': open }">{{$value['skill']}}</span>
-
-                                                <div x-bind:class="{ 'hidden': !open }">
-                                                    <x-input wire:model.defer="competences.skill" />
-                                                </div>
-
-
-                                            </td>
-                                            <td
-                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
-
-                                                <span x-bind:class="{ 'hidden': open }">{{$value['level']}}</span>
-
-                                                <x-native-select x-bind:class="{ 'hidden': !open }"
-                                                    placeholder="Choisissez un niveau"
-                                                    :options="['Débutant', 'Intermédiaire', 'expert']"
-                                                    wire:model.defer="competences.level" />
+                <x-section-border />
+                <div class='mt-4 md:grid md:grid-cols-3 md:gap-6'>
+                    <div class="flex justify-between md:col-span-1">
+                        <div class="px-4 sm:px-0">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                {{ __('Vos competences') }} <span class="text-red-600"></span>
+                            </h3>
 
 
-                                            </td>
+                        </div>
 
-                                            <td
-                                                class="border-grey-light boder-t  flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
-                                                <x-button.circle negative sm x-show="!open"
-                                                    wire:click="remove({{$key}},'skill')"
-                                                    spinner="remove({{$key}},'skill')" icon="trash">
-                                                    </x-button>
+
+                    </div>
+
+                    <div class="mt-5 md:mt-0 md:col-span-2">
+                        <form x-data="{form:false}" x-on:close.window="form=false">
+                            <div
+                                class="px-4 py-5 bg-white dark:bg-gray-800 dark:border dark:border-gray-300 rounded-lg  sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
+
+                                <div class="gap-6 md:grid ">
+
+                                    <table id="table"
+                                        class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
+                                        <thead class="text-white">
+                                            @forelse ($freelance['competences'] as $key=>$value )
+                                            <tr
+                                                class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                                <th class="p-3 text-left">Compentences</th>
+                                                <th class="p-3 text-left">Niveau</th>
+
+                                                <th class="p-3 text-left" colspan="2">Actions</th>
+                                            </tr>
+
+                                            @empty
+
+                                            @endforelse
+
+                                        </thead>
+                                        <tbody class="flex-1 sm:flex-none">
+                                            @forelse ($freelance['competences'] as $key=>$value )
+                                            <tr x-data="{open:false}" x-on:close.window="open=false"
+                                                class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                                                <td
+                                                    class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
+
+
+
+                                                    <span class="truncate"
+                                                        x-bind:class="{ 'hidden': open }">{{$value['skill']}}</span>
+
+                                                    <div x-bind:class="{ 'hidden': !open }">
+                                                        <x-input wire:model.defer="competences.skill" />
+                                                    </div>
+
+
+                                                </td>
+                                                <td
+                                                    class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
+
+                                                    <span x-bind:class="{ 'hidden': open }">{{$value['level']}}</span>
+
+                                                    <x-native-select x-bind:class="{ 'hidden': !open }"
+                                                        placeholder="Choisissez un niveau"
+                                                        :options="['Débutant', 'Intermédiaire', 'expert']"
+                                                        wire:model.defer="competences.level" />
+
+
+                                                </td>
+
+                                                <td
+                                                    class="border-grey-light border-t md:border  flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
+                                                    <x-button.circle negative sm x-show="!open"
+                                                        wire:click="remove({{$key}},'skill')"
+                                                        spinner="remove({{$key}},'skill')" icon="trash">
+                                                        </x-button>
+                                                        <x-button.circle x-show="!open" @click="open=true"
+                                                            wire:click='modaleCompentences({{$key}})' sm icon="pencil">
+                                                            </x-button>
+
+                                                            <x-button x-show="open" spinner="modifierCompentences"
+                                                                wire:click='modifierCompentences({{$key}})' sm
+                                                                label="Edit" icon="pencil">
+                                                            </x-button>
+
+
+                                                            <x-button wire:click="resetAll()" x-show="open"
+                                                                @click="open=false" sm label="annuler">
+                                                            </x-button>
+                                                </td>
+                                            </tr>
+
+                                            @empty
+
+                                            @endforelse
+
+                                        </tbody>
+                                    </table>
+
+
+
+                                </div>
+
+                                <div class="grid gap-3 md:grid-cols-3" x-collapse x-show="form">
+
+
+                                    <x-input wire:model.defer="competences.skill" />
+
+                                    <x-native-select x-show="form" placeholder="Choisissez un niveau"
+                                        :options="['Débutant', 'Intermédiaire', 'expert']"
+                                        wire:model.defer="competences.level" />
+
+
+
+
+
+                                </div>
+                                <div class="mt-4">
+                                    <x-button x-show="!form" @click="form=true" label="Ajouter"></x-button>
+                                    <x-button x-show="form" spinner="addCompetences" wire:click='addCompetences()'
+                                        label="Ajouter"></x-button>
+                                    <x-button x-show="form" @click="form=false" label="Annuler"></x-button>
+
+                                </div>
+
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                </div>
+
+                <x-section-border />
+                <div class='mt-4 md:grid md:grid-cols-3 md:gap-6'>
+                    <div class="flex justify-between md:col-span-1">
+                        <div class="px-4 sm:px-0">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                {{ __('Langue') }} <span class="text-red-600"></span>
+                            </h3>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="mt-5 md:mt-0 md:col-span-2">
+                        <form x-data="{form:@entangle('langueEdit')}" x-on:close.window="form=false">
+                            <div
+                                class="px-4 py-5 bg-white dark:bg-gray-800 dark:border dark:border-gray-300 rounded-lg  sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
+
+                                <div class="gap-6 md:grid ">
+
+
+
+                                    <table id="table"
+                                        class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
+                                        <thead class="text-white">
+                                            @forelse ($freelance['langue'] as $key=>$value )
+                                            <tr
+                                                class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                                <th class="p-3 text-left">Langue</th>
+                                                <th class="p-3 text-left">Niveau</th>
+
+                                                <th class="p-3 text-left" width="110">Actions</th>
+                                            </tr>
+
+                                            @empty
+
+                                            @endforelse
+
+                                        </thead>
+                                        <tbody wire:ignore.self class="flex-1 sm:flex-none">
+                                            @forelse ($freelance['langue'] as $key=>$value )
+                                            <tr x-data="{open:false}" x-on:close.window="open=false"
+                                                class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                                                <td
+                                                    class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
+
+                                                    <span x-show="!open">{{$value['name']}}</span>
+
+
+
+
+                                                    <div x-bind:class="{ 'hidden': !open }">
+                                                        <x-native-select label="" placeholder=" Choisissez une langue"
+                                                            :options="['Français', 'Anglais', 'Lingala', 'Swahili', 'Kikongo','Tshiluba']"
+                                                            wire:model.defer="langue.name" />
+                                                    </div>
+
+
+
+                                                </td>
+                                                <td
+                                                    class="border-grey-light  border-t md:border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
+
+
+
+                                                    <span x-bind:class="{ 'hidden': open }">{{$value['level']}}</span>
+
+                                                    <div x-bind:class="{ 'hidden': !open }">
+                                                        <x-native-select placeholder="Choisissez un niveau"
+                                                            :options="['Débutant', 'Intermédiaire', 'Avancé']"
+                                                            wire:model.defer="langue.level" />
+                                                    </div>
+
+                                                </td>
+
+                                                <td
+                                                    class="border-grey-light border-t md:border  flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-2.5 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
+                                                    <x-button.circle wire:click="remove({{$key}},'Langue')"
+                                                        spinner="remove({{$key}},'Langue')"
+                                                        wire:click="remove({{$key}},'Langue')" negative sm
+                                                        x-show="!open" icon="trash" />
+
                                                     <x-button.circle x-show="!open" @click="open=true"
-                                                        wire:click='modaleCompentences({{$key}})' sm icon="pencil">
-                                                        </x-button>
+                                                        wire:click='modalLangue({{$key}})' sm icon="pencil" />
 
-                                                        <x-button x-show="open" spinner="modifierCompentences"
-                                                            wire:click='modifierCompentences({{$key}})' sm label="Edit"
-                                                            icon="pencil">
-                                                        </x-button>
 
-
-                                                        <x-button wire:click="resetAll()" x-show="open"
-                                                            @click="open=false" sm label="annuler">
-                                                        </x-button>
-                                            </td>
-                                        </tr>
-
-                                        @empty
-
-                                        @endforelse
-
-                                    </tbody>
-                                </table>
-
-
-
-                            </div>
-
-                            <div class="grid gap-3 md:grid-cols-3" x-collapse x-show="form">
-
-
-                                <x-input wire:model.defer="competences.skill" />
-
-                                <x-native-select x-show="form" placeholder="Choisissez un niveau"
-                                    :options="['Débutant', 'Intermédiaire', 'expert']"
-                                    wire:model.defer="competences.level" />
-
-
-
-
-
-                            </div>
-                            <div class="mt-4">
-                                <x-button x-show="!form" @click="form=true" label="New"></x-button>
-                                <x-button x-show="form" spinner="addCompetences" wire:click='addCompetences()'
-                                    label="Ajouter"></x-button>
-                                <x-button x-show="form" @click="form=false" label="Annuler"></x-button>
-
-                            </div>
-
-                        </div>
-
-
-                    </form>
-                </div>
-
-            </div>
-
-            <x-section-border />
-            <div class='mt-4 md:grid md:grid-cols-3 md:gap-6'>
-                <div class="flex justify-between md:col-span-1">
-                    <div class="px-4 sm:px-0">
-                        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Langue') }} <span class="text-red-600"></span>
-                        </h3>
-
-                    </div>
-
-
-                </div>
-
-                <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form x-data="{form:@entangle('langueEdit')}" x-on:close.window="form=false">
-                        <div
-                            class="px-4 py-5 bg-white dark:bg-gray-800 dark:border dark:border-gray-300 rounded-lg  sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
-
-                            <div class="gap-6 md:grid ">
-
-
-
-                                <table id="table"
-                                    class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
-                                    <thead class="text-white">
-                                        @forelse ($freelance['langue'] as $key=>$value )
-                                        <tr
-                                            class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                                            <th class="p-3 text-left">Langue</th>
-                                            <th class="p-3 text-left">Niveau</th>
-
-                                            <th class="p-3 text-left" width="110">Actions</th>
-                                        </tr>
-
-                                        @empty
-
-                                        @endforelse
-
-                                    </thead>
-                                    <tbody wire:ignore.self class="flex-1 sm:flex-none">
-                                        @forelse ($freelance['langue'] as $key=>$value )
-                                        <tr x-data="{open:false}" x-on:close.window="open=false"
-                                            class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-                                            <td
-                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
-
-                                                <span x-show="!open">{{$value['name']}}</span>
-
-
-
-
-                                                <div x-bind:class="{ 'hidden': !open }">
-                                                    <x-native-select label="" placeholder=" Choisissez une langue"
-                                                        :options="['Français', 'Anglais', 'Lingala', 'Swahili', 'Kikongo','Tshiluba']"
-                                                        wire:model.defer="langue.name" />
-                                                </div>
-
-
-
-                                            </td>
-                                            <td
-                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
-
-
-
-                                                <span x-bind:class="{ 'hidden': open }">{{$value['level']}}</span>
-
-                                                <div x-bind:class="{ 'hidden': !open }">
-                                                    <x-native-select placeholder="Choisissez un niveau"
-                                                        :options="['Débutant', 'Intermédiaire', 'Avancé']"
-                                                        wire:model.defer="langue.level" />
-                                                </div>
-
-                                            </td>
-
-                                            <td
-                                                class="border-grey-light border-t md:border  flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-2.5 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
-                                                <x-button.circle wire:click="remove({{$key}},'Langue')"
-                                                    spinner="remove({{$key}},'Langue')"
-                                                    wire:click="remove({{$key}},'Langue')" negative sm x-show="!open"
-                                                    icon="trash" />
-
-                                                <x-button.circle x-show="!open" @click="open=true"
-                                                    wire:click='modalLangue({{$key}})' sm icon="pencil" />
-
-
-                                                <x-button x-show="open" spinner="modifierLangue"
-                                                    wire:click='modifierLangue({{$key}})' sm label="Edit" icon="pencil">
-                                                </x-button>
-
-
-                                                <x-button wire:click="resetAll()" x-show="open" @click="open=false" sm
-                                                    label="annuler">
-                                                </x-button>
-                                            </td>
-                                        </tr>
-
-                                        @empty
-
-                                        <tr>
-                                            <td colspan="1" class="text-center py-4">Aucune langue ajoutée'
-                                            </td>
-                                        </tr>
-
-                                        @endforelse
-
-                                    </tbody>
-                                </table>
-
-                            </div>
-
-                            <div class="grid gap-3 md:grid-cols-3" x-collapse x-show="form">
-
-
-                                <x-native-select placeholder="Choisissez un niveau"
-                                    :options="['Débutant', 'Intermédiaire', 'Avancé']"
-                                    wire:model.defer="langueSelected.level" />
-
-                                <x-native-select label="" placeholder="Choisissez une langue"
-                                    :options="['Français', 'Anglais', 'Lingala', 'Swahili', 'Kikongo','Tshiluba']"
-                                    wire:model.defer="langueSelected.name" />
-
-
-
-
-
-                            </div>
-                            <div class="mt-4">
-                                <x-button x-show="!form" @click="form=true" label="New"></x-button>
-                                <x-button x-show="form" wire:click='addLanguage()' label="Ajouter"></x-button>
-                                <x-button x-show="form" @click="form=false" label="Annuler"></x-button>
-
-                            </div>
-
-
-
-
-
-                        </div>
-
-
-
-
-
-
-                    </form>
-                </div>
-
-            </div>
-            <x-section-border />
-            <div class='mt-4 md:grid md:grid-cols-3 md:gap-6'>
-                <div class="flex justify-between md:col-span-1">
-                    <div class="px-4 sm:px-0">
-                        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            {{ __('Comptes lie') }}
-                        </h3>
-
-
-                    </div>
-
-
-                </div>
-
-                <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form>
-                        <div x-data="{form:false}" x-on:close.window="form=false"
-                            class="px-4 py-5 bg-white dark:bg-gray-800 dark:border dark:border-gray-300 rounded-lg  sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
-
-                            <div class="gap-6 md:grid ">
-
-                                <table id="table"
-                                    class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
-                                    <thead class="text-white">
-                                        @forelse ($freelance['comptes'] as $key=>$value )
-                                        <tr
-                                            class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                                            <th class="p-3 text-left">comptes</th>
-                                            <th class="p-3 text-left">lien</th>
-
-                                            <th class="p-3 text-left" width="110">Actions</th>
-                                        </tr>
-
-                                        @empty
-
-                                        @endforelse
-
-                                    </thead>
-                                    <tbody class="flex-1 sm:flex-none">
-                                        @forelse ($freelance['comptes'] as $key=>$value )
-                                        <tr x-data="{open:false}" x-on:close.window="open=false"
-                                            class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-                                            <td
-                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
-
-
-
-                                                <span x-bind:class="{ 'hidden': open }">{{$value['comptes']}}</span>
-
-                                                <x-native-select x-bind:class="{ 'hidden': !open }"
-                                                    placeholder="Choisissez un niveau"
-                                                    :options="['Tiktok', 'instagram', 'twitter', 'youtube','Facebook', 'whatsapp']"
-                                                    wire:model.defer="compte.comptes" />
-
-
-
-
-
-
-                                            </td>
-                                            <td
-                                                class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
-                                                <span x-bind:class="{ 'hidden': open }">{{$value['lien']}}</span>
-
-                                                <x-input x-bind:class="{ 'hidden': !open }"
-                                                    wire:model.defer="compte.lien" />
-
-
-
-                                            </td>
-
-                                            <td
-                                                class="border-grey-light border flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
-                                                <x-button.circle negative wire:click="remove({{$key}},'Comptes')"
-                                                    spinner="remove({{$key}},'Comptes')" sm x-show="!open" icon="trash">
+                                                    <x-button x-show="open" spinner="modifierLangue"
+                                                        wire:click='modifierLangue({{$key}})' sm label="Edit"
+                                                        icon="pencil">
                                                     </x-button>
-                                                    <x-button.circle x-show="!open" @click="open=true"
-                                                        wire:click='modalComptes({{$key}})' sm icon="pencil">
-                                                        </x-button>
-
-                                                        <x-button x-show="open" spinner=""
-                                                            wire:click='modifierCompte({{$key}})' sm label="Edit"
-                                                            icon="pencil">
-                                                        </x-button>
 
 
-                                                        <x-button wire:click="resetAll()" x-show="open"
-                                                            @click="open=false" sm label="annuler">
-                                                        </x-button>
-                                            </td>
-                                        </tr>
+                                                    <x-button wire:click="resetAll()" x-show="open" @click="open=false"
+                                                        sm label="annuler">
+                                                    </x-button>
+                                                </td>
+                                            </tr>
 
-                                        @empty
+                                            @empty
 
-                                        @endforelse
+                                            <tr>
+                                                <td colspan="1" class="text-center py-4">Aucune langue ajoutée'
+                                                </td>
+                                            </tr>
 
-                                    </tbody>
-                                </table>
+                                            @endforelse
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                                <div class="grid gap-3 md:grid-cols-3" x-collapse x-show="form">
+
+
+                                    <x-native-select placeholder="Choisissez un niveau"
+                                        :options="['Débutant', 'Intermédiaire', 'Avancé']"
+                                        wire:model.defer="langueSelected.level" />
+
+                                    <x-native-select label="" placeholder="Choisissez une langue"
+                                        :options="['Français', 'Anglais', 'Lingala', 'Swahili', 'Kikongo','Tshiluba']"
+                                        wire:model.defer="langueSelected.name" />
+
+
+
+
+
+                                </div>
+                                <div class="mt-4">
+                                    <x-button x-show="!form" @click="form=true" label="Ajouter"></x-button>
+                                    <x-button x-show="form" spinner="addLanguage" wire:click='addLanguage()'
+                                        label="Ajouter"></x-button>
+                                    <x-button x-show="form" @click="form=false" label="Annuler"></x-button>
+
+                                </div>
+
+
+
+
 
                             </div>
 
-                            <div class="grid gap-3 md:grid-cols-3" x-collapse x-show="form">
-
-
-                                <x-native-select x-show="form" placeholder="Choisissez un niveau"
-                                    :options="['Tiktok', 'instagram', 'twitter', 'youtube','Facebook', 'whatsapp']"
-                                    wire:model.defer="compte.comptes" />
-
-                                <x-input x-show="form" wire:model.defer="compte.lien" />
 
 
 
 
 
-                            </div>
-                            <div class="mt-4">
-                                <x-button x-show="!form" @click="form=true" label="New"></x-button>
-                                <x-button x-show="form" wire:click='addComptes()' spinner="addComptes" label="Ajouter">
-                                </x-button>
-                                <x-button x-show="form" @click="form=false" label="Annuler"></x-button>
+                        </form>
+                    </div>
 
-                            </div>
+                </div>
+                <x-section-border />
+                <div class='mt-4 md:grid md:grid-cols-3 md:gap-6'>
+                    <div class="flex justify-between md:col-span-1">
+                        <div class="px-4 sm:px-0">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                {{ __('Comptes lie') }}
+                            </h3>
+
 
                         </div>
 
 
-                    </form>
+                    </div>
+
+                    <div class="mt-5 md:mt-0 md:col-span-2">
+                        <form>
+                            <div x-data="{form:false}" x-on:close.window="form=false"
+                                class="px-4 py-5 bg-white dark:bg-gray-800 dark:border dark:border-gray-300 rounded-lg  sm:p-6 shadow {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
+
+                                <div class="gap-6 md:grid ">
+
+                                    @if(!empty($freelance['comptes']))
+                                    <table id="table"
+                                        class="w-full flex flex-row flex-no-wrap sm:bg-white dark:bg-gray-700 rounded-lg overflow-hidden sm:shadow-lg my-5">
+                                        <thead class="text-white">
+                                            @forelse ($freelance['comptes'] as $key=>$value )
+                                            <tr
+                                                class=" bg-gray-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                                <th class="p-3 text-left">comptes</th>
+                                                <th class="p-3 text-left">lien</th>
+
+                                                <th class="p-3 text-left" width="110">Actions</th>
+                                            </tr>
+
+                                            @empty
+
+                                            @endforelse
+
+                                        </thead>
+                                        <tbody class="flex-1 sm:flex-none">
+                                            @forelse ($freelance['comptes'] as $key=>$value )
+                                            <tr x-data="{open:false}" x-on:close.window="open=false"
+                                                class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                                                <td
+                                                    class="border-grey-light border-t md:border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 ">
+
+
+
+                                                    <span x-bind:class="{ 'hidden': open }">{{$value['comptes']}}</span>
+
+                                                    <x-native-select x-bind:class="{ 'hidden': !open }"
+                                                        placeholder="Choisissez un niveau"
+                                                        :options="['Tiktok', 'instagram', 'twitter', 'youtube','Facebook', 'whatsapp']"
+                                                        wire:model.defer="compte.comptes" />
+
+
+
+
+
+
+                                                </td>
+                                                <td
+                                                    class="border-grey-light border dark:text-gray-200 text-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 p-3 truncate">
+                                                    <span x-bind:class="{ 'hidden': open }">{{$value['lien']}}</span>
+
+                                                    <x-input x-bind:class="{ 'hidden': !open }"
+                                                        wire:model.defer="compte.lien" />
+
+
+
+                                                </td>
+
+                                                <td
+                                                    class="border-grey-light border-t md:border flex gap-1 hover:bg-gray-100 dark:hover:bg-gray-800 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
+                                                    <x-button.circle negative wire:click="remove({{$key}},'Comptes')"
+                                                        spinner="remove({{$key}},'Comptes')" sm x-show="!open"
+                                                        icon="trash">
+                                                        </x-button>
+                                                        <x-button.circle x-show="!open" @click="open=true"
+                                                            wire:click='modalComptes({{$key}})' sm icon="pencil">
+                                                            </x-button>
+
+                                                            <x-button x-show="open" spinner="modifierCompte"
+                                                                wire:click='modifierCompte({{$key}})' sm label="Edit"
+                                                                icon="pencil">
+                                                            </x-button>
+
+
+                                                            <x-button wire:click="resetAll()" x-show="open"
+                                                                @click="open=false" sm label="annuler">
+                                                            </x-button>
+                                                </td>
+                                            </tr>
+
+                                            @empty
+
+                                            @endforelse
+
+                                        </tbody>
+                                    </table>
+                                    @endif
+
+                                </div>
+
+                                <div class="grid gap-3 md:grid-cols-3" x-collapse x-show="form">
+
+
+                                    <x-native-select x-show="form" placeholder="Choisissez un niveau"
+                                        :options="['Tiktok', 'instagram', 'twitter', 'youtube','Facebook', 'whatsapp']"
+                                        wire:model.defer="compte.comptes" />
+
+                                    <x-input x-show="form" wire:model.defer="compte.lien" />
+
+
+
+
+
+                                </div>
+                                <div class="mt-4">
+                                    <x-button x-show="!form" @click="form=true" label="Ajouter"></x-button>
+                                    <x-button x-show="form" wire:click='addComptes()' spinner="addComptes"
+                                        label="Ajouter">
+                                    </x-button>
+                                    <x-button x-show="form" @click="form=false" label="Annuler"></x-button>
+
+                                </div>
+
+                            </div>
+
+
+                        </form>
+                    </div>
+
                 </div>
+
+
 
             </div>
 
 
 
         </div>
-
-
-
+        {{-- The whole world belongs to you. --}}
     </div>
-    {{-- The whole world belongs to you. --}}
-</div>

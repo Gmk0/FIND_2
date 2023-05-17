@@ -53,15 +53,14 @@
                     <div class="overflow-hidden leading-normal tab-content">
                         <ul class="flex flex-col w-full p-0 text-left list-none text-gray-50">
                             <li><a href="{{url('/policy')}}"
-                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Privacy
+                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">Privacy
                                     Policy</a></li>
-                            <li><a href="#" class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Return
-                                    Policy</a></li>
-                            <li><a href="#"
-                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Shipping</a>
+                            <li><a href="{{url('/contact')}}"
+                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100 ">Contact</a>
                             </li>
+
                             <li><a href="{{url('/terms-of-service')}}"
-                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Terms
+                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">Terms
                                     of
                                     Service</a></li>
                         </ul>
@@ -73,7 +72,7 @@
                     <div class="relative label">
                         <label class="block px-3 py-2 text-lg font-medium cursor-pointer text-gray-50 "
                             for="tab-multi-three">
-                            Communaute
+                            Guides
                         </label>
                         <div class="absolute inset-0 flex items-center justify-end w-full pointer-events-none flex-end">
                             <svg class="w-8 icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -87,8 +86,14 @@
                         <ul class="flex flex-col w-full p-0 font-thin text-left list-none text-gray-50">
 
 
-                            <li><a href="#"
-                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Guides</a>
+                            <li><a href="{{url('/faq')}}"
+                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">FAQ</a>
+                            </li>
+                            <li><a href="{{url('/faq')}}"
+                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">Tutorial</a>
+                            </li>
+                            <li><a href="{{url('/faq')}}"
+                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">Support</a>
                             </li>
                         </ul>
                     </div>
@@ -111,16 +116,13 @@
                     </div>
                     <div class="overflow-hidden leading-normal tab-content">
                         <ul class="flex flex-col w-full p-0 font-thin text-left list-none text-gray-50">
-                            <li><a href="#"
-                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Pricing</a>
+                            <li><a href="{{url('/find_freelance')}}"
+                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">Freelance</a>
                             </li>
-                            <li><a href="#" class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Product
-                                    Series</a></li>
-                            <li><a href="#"
-                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">Support</a>
+                            <li><a href="{{url('/user/create_project')}}"
+                                    class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">Freelance</a>
                             </li>
-                            <li><a href="#" class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800">FAQ</a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -206,15 +208,15 @@
             </div>
             <div>
                 <span class="footer-title">Company</span>
-                <a href="{{url('/apropos')}}" class="link link-hover">Aprpos de nous </a>
+                <a href="{{url('/apropos')}}" class="link link-hover">Apropos de nous </a>
                 <a href="{{url('/contact')}}" class="link link-hover">Contact</a>
-                <a href="{{url('/jobs')}}" class="link link-hover">Jobs</a>
+                <a href="{{url('/faq')}}" class="link link-hover">FaQ</a>
 
             </div>
             <div>
                 <span class="footer-title">Legal</span>
                 <a href="{{url('/terms-of-services')}}" class="link link-hover">Terms of use</a>
-                <a href="{{url('/policy')}} class=" link link-hover">Privacy policy</a>
+                <a href="{{url('/policy')}}" class="link link-hover">Privacy policy</a>
 
                 <a class='link link-hover' href="#" onclick="Livewire.emit('openModal', 'cookie-consent-edit')">
                     {{ __('Cookie policy') }}
