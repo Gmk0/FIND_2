@@ -21,6 +21,7 @@ class DashboardFreelance extends Component
     public $orders;
     public $transaction;
     public $freelance_id;
+    public $notifications;
 
 
     public function mount()
@@ -176,13 +177,15 @@ class DashboardFreelance extends Component
     }
     public function render()
     {
+        $this->notifications = auth()->user()->unreadNotifications;
+
         return view('livewire.freelance.dashboard.dashboard-freelance', [
             'amount' => $this->total(),
             'order' => Order::whereHas('service', function ($query) {
                 $query->where('freelance_id', $this->freelance_id);
             })->paginate(10),
             'orderCount' => $this->OrderWeek(),
-            'notifications' => Notification::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->limit(6)->get(),
+
             'conversations' => $this->conversations(),
             'schedules' =>  $this->servicesCommandesTermines(),
             "percentTransaction" => $this->pourcentageChangementMoisPrecedent(),

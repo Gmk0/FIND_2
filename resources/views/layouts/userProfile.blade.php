@@ -13,7 +13,7 @@ $overflow="overflow-y-auto";
 
 
 <body x-data="setup()" x-init="$refs.loading.classList.add('hidden');" @resize.window="watchScreen()"
-    class="flex flex-col justify-between overflow-x-hidden overflow-y-hidden bg-gray-100 custom-scrollbar dark:text-gray-100 dark:bg-gray-900">
+    class="antialiased text-gray-900 bg-white dark:text-gray-100">
     <x-notifications z-index="z-50" position='top-left' />
 
     <div class="flex h-screen overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar">
