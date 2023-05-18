@@ -53,7 +53,7 @@ class ConversationComponent extends Component
         $this->emitTo('freelance.conversations.send-message-f', 'updateSendMessage', $this->selectedConversation, $receiverId);
 
         Message::where('conversation_id', $this->selectedConversation->id)
-            ->where('receiver_id', auth()->user()->id)->update(['is_read' => 1]);
+            ->where('sender_id', $this->user_id)->update(['is_read' => 1]);
     }
     public function render()
     {
