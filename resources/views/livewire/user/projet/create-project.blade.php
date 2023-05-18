@@ -3,9 +3,9 @@
 
     <div x-data="project()" x-on:success.window="step = 1" class="container flex px-2 py-3 ">
 
-        <div class="hidden w-6/12 lg:block">
+        <div class="hidden w-6/12 p-4 lg:block">
 
-            <h1>Lala</h1>
+            <img src="/images/services/projet.jpg" class="object-cover w-full h-full rounded-md " alt="">
         </div>
         <div class="flex flex-col lg:w-6/12 ">
             <div x-cloak x-show.transition="step==1" class="flex flex-col w-full gap-4 px-2 ">
