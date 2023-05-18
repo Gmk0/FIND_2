@@ -188,7 +188,7 @@
 
             </div>
 
-            <div class="slide-container swiper">
+            <div wire:ignore class="slide-container swiper">
                 <div class="slide-content">
                     <div class="card-wrapper swiper-wrapper">
 
@@ -269,7 +269,8 @@
                 @forelse ($services as $service)
 
 
-                <div x-data="{linkHover: false}" @mouseover="linkHover = true" @mouseleave="linkHover = false"
+                <div wire:ignore x-data="{linkHover: false}" @mouseover="linkHover = true"
+                    @mouseleave="linkHover = false"
                     class="overflow-hidden bg-white rounded-lg shadow-md dark:text-gray-200 dark:bg-gray-900">
                     <div class="flex flex-row lg:flex-col">
 
@@ -299,7 +300,7 @@
                             </div>
                         </div>
 
-                        <div class="max-h-[14rem] w-[50%] flex flex-col justify-between p-2 dark:text-gray-200 md:p-6">
+                        <div class="max-h-[14rem] flex flex-col justify-between p-2 dark:text-gray-200 md:p-6">
                             <div>
                                 <a href="{{route('ServicesViewOne',['id'=>$service->id,'category'=>$service->category->name])}}"
                                     class="mb-2 text-sm font-semibold md:text-base "

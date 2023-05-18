@@ -120,7 +120,7 @@
 
 <div>
     <div
-        class=" w-full p-4 overflow-y-auto lg:h-[400px] h-[500px]  bg-[#DAD3CC] dark:bg-gray-700  messages custom-scrollbar">
+        class=" w-full p-4 overflow-y-auto lg:h-[400px] h-[500px] 2xl:h-[450px] bg-[#DAD3CC] dark:bg-gray-700  messages custom-scrollbar">
 
         @if($selectedConversation)
 
@@ -169,7 +169,7 @@
                 </div>
                 <div class="chat-header">
 
-                    <time class="text-xs  dark:text-gray-300 opacity-50">{{ $message->created_at->format('m: i a')
+                    <time class="text-xs opacity-50 dark:text-gray-300">{{ $message->created_at->format('m: i a')
                         }}</time>
                 </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Freelance\Conversations;
 use App\Models\Conversation;
 use App\Models\Message;
 use Livewire\Component;
+use App\Events\MessageSent;
 
 class ConversationComponent extends Component
 {
@@ -17,7 +18,20 @@ class ConversationComponent extends Component
     public $freelancerId;
     public $user_id;
 
-    protected $listeners = ['chatUserSelected'];
+    public function  getListeners()
+    {
+
+        $auth_id = auth()->user()->id;
+        return [
+
+            "echo-private:chat.{$auth_id},MessageSent" => '$refresh',
+            'ServiceOrdered' => '$refresh',
+            'chatUserSelected',
+
+
+        ];
+    }
+
 
     public function mount()
     {

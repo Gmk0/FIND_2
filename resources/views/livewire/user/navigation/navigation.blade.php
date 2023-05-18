@@ -8,7 +8,7 @@ $fixed="";
 }
 @endphp
 
-<header x-data="{isSearchBoxOpen:false,search:false}" class="w-full bg-skin-fill z-[80]">
+<header x-data="{isSearchBoxOpen:false,search:false}" class="w-full bg-skin-fill z-[45]">
 
 
     <nav class="z-[80] w-full bg-skin-fill dark:bg-gray-800">
@@ -25,7 +25,7 @@ $fixed="";
 
             </div>
             <nav class="hidden lg:flex">
-                <ul class="flex items-center justify-center font-semibold">
+                <ul wire:ignore class="flex items-center justify-center font-semibold">
                     <li class="relative px-3 py-2 ">
                         <a href="{{url("/")}}"
                             class="flex flex-row items-center px-3 py-2 font-medium text-white border-b border-gray-100 rounded-md dark:border-amber-800 text-md focus:outline-none focus:text-white focus:bg-gray-700">

@@ -57,8 +57,8 @@
                                       isOpen: false,
                                   },
                               ]
-                          }" class="relative z-20 overflow-hidden bg-white pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
-    <div class="container mx-auto px-4">
+                          }" class="relative z-20 overflow-hidden bg-gray-100 pt-8 pb-12  lg:pb-[90px]">
+    <div class="container px-4 mx-auto">
         <div class="flex flex-wrap -mx-4">
             <div class="w-full px-4">
                 <div class="mx-auto mb-[60px] max-w-[520px] text-center lg:mb-20">

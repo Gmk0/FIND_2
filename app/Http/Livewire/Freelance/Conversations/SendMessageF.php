@@ -80,6 +80,8 @@ class SendMessageF extends  Component implements Forms\Contracts\HasForms
                         'type' => "image",
 
                     ]);
+
+                    $this->createdMessage->notifyUser();
                     $this->selectedConversation->last_time_message = $this->createdMessage->created_at;
                     $this->selectedConversation->save();
                     $this->attachment = null;
@@ -130,6 +132,8 @@ class SendMessageF extends  Component implements Forms\Contracts\HasForms
             'type' => "text",
 
         ]);
+
+        $this->createdMessage->notifyUser();
 
         $this->selectedConversation->last_time_message = $this->createdMessage->created_at;
         $this->selectedConversation->save();

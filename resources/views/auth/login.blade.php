@@ -124,7 +124,8 @@
     <main class="mt-0 transition-all duration-200 ease-soft-in-out">
 
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" x-data="{ submitting: false }"
+            x-on:submit="submitting = true">
             @csrf
             <div class="relative flex items-center p-0 overflow-hidden bg-center bg-cover min-h-75-screen">
                 <div class="container z-10">
@@ -230,8 +231,13 @@
                                         </div>
 
                                         <div class="text-center">
-                                            <button type="submit"
-                                                class="inline-block w-full px-6 py-3 mt-6 mb-0 text-xs font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer shadow-soft-md bg-x-25 bg-150 leading-pro ease-soft-in tracking-tight-soft gradient hover:scale-102 hover:shadow-soft-xs active:opacity-85">{{__('messages.SignIn')}}</button>
+                                            <button type="submit" :disabled="submitting"
+                                                class="inline-block w-full px-6 py-3 mt-6 mb-0 text-xs font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer shadow-soft-md bg-x-25 bg-150 leading-pro ease-soft-in tracking-tight-soft gradient hover:scale-102 hover:shadow-soft-xs active:opacity-85">
+
+                                                <span x-show="!submitting">{{__('messages.SignIn')}}</span>
+                                                <span x-cloak x-show="submitting">Connexion...</span>
+
+                                            </button>
                                         </div>
                                     </form>
                                 </div>

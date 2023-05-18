@@ -10,7 +10,7 @@
 
         }" x-init="$refs.loading.classList.add('hidden')">
 
-    <x-notifications z-index="z-90" position='top-right' />
+    <x-notifications position='top-left' />
 
 
     <div x-ref="loading"

@@ -15,6 +15,19 @@ class CardComponent extends Component
 
 
 
+    public function updateQty($id, $qty)
+    {
+
+
+
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new cart($oldCart);
+        $cart->updateQty($id, $qty);
+        Session::put('cart', $cart);
+
+        $this->emit('refreshCheckout');
+    }
+
 
     public function remove($id)
     {
@@ -23,8 +36,11 @@ class CardComponent extends Component
         $cart->removeItem($id);
         if (count($cart->items) > 0) {
             Session::put('cart', $cart);
+            $this->emit('refreshComponent');
         } else {
             Session::forget('cart');
+
+            $this->emit('refreshComponent');
         }
     }
     public function render()

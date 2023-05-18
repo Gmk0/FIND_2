@@ -41,6 +41,10 @@ class Checkout extends Component
         'cardCvc' => '',
     ];
 
+    protected $listeners = ['refreshComponent' => '$refresh', 'refreshCheckout' => '$refresh'];
+
+
+
     public function mount()
     {
     }
@@ -49,7 +53,21 @@ class Checkout extends Component
     {
         $priceTotal = Session::has('cart') ? Session::get('cart') : null;
 
-        return $priceTotal->totalPrice * 100;
+        return $priceTotal?->totalPrice * 100;
+    }
+
+    public function updateQty($id, $qty)
+    {
+
+
+
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new cart($oldCart);
+
+
+        $cart->updateQty($id, $qty);
+
+        Session::put('cart', $cart);
     }
 
     public function remove($id)
@@ -116,8 +134,6 @@ class Checkout extends Component
                 $orderToUpdate->status = 'completed';
                 $orderToUpdate->transaction_id = $payment->id; // Lier la commande au paiement effectué
                 $orderToUpdate->save();
-
-                event(new ServiceOrdered($order));
             }
 
             // Valider et terminer la transaction de base de données

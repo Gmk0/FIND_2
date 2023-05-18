@@ -95,7 +95,7 @@ class DashbordUser extends Component implements Tables\Contracts\HasTable
             Panel::make([
                 Stack::make([
                     Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('md'),
-                    Tables\Columns\TextColumn::make('user.name')->description('client'),
+                    Tables\Columns\TextColumn::make('service.freelance.user.name')->description('client'),
                     Tables\Columns\TextColumn::make('created_at')->description('date'),
 
                 ]),

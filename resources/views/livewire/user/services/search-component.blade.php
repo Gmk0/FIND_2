@@ -1,4 +1,5 @@
-<div x-show="isSearch" x-cloak @click.away="isSearch = false" class="z-50 flex gap-4 p-2 pt-8 mx-8 bg-skin-fill">
+<div x-show="isSearch" x-cloak @click.away="isSearch = false"
+    class="z-50 flex gap-4 p-2 pt-8 mx-8 dark:bg-gray-800 bg-skin-fill">
 
     <div class="w-full md:w-3/4">
         <div class="relative">
@@ -34,7 +35,7 @@
         </div>
     </div>
     <div class="hidden w-1/3 md:flex">
-        <x-button label="Deposer un Projet" />
+        <x-button href="{{route('createProject')}}" label="Deposer un Projet" />
     </div>
 
 </div>

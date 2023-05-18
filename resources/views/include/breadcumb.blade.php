@@ -17,7 +17,7 @@
                 <path d="M32 30.031h-32l16-28.061z"></path>
             </svg>
             <a rel="noopener noreferrer" href="{{route('categories')}}"
-                class="flex items-center px-1 text-sm capitalize hover:underline">category</a>
+                class="flex items-center px-1 text-sm capitalize hover:underline">Categories</a>
         </li>
         @endif
         @if(isset($categoryName))

@@ -52,14 +52,14 @@
                     </div>
                     <div class="overflow-hidden leading-normal tab-content">
                         <ul class="flex flex-col w-full p-0 text-left list-none text-gray-50">
-                            <li><a href="{{url('/policy')}}"
+                            <li><a href="{{route('policy.show')}}"
                                     class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">Privacy
                                     Policy</a></li>
                             <li><a href="{{url('/contact')}}"
                                     class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100 ">Contact</a>
                             </li>
 
-                            <li><a href="{{url('/terms-of-service')}}"
+                            <li><a href="{{route('terms.show')}}"
                                     class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">Terms
                                     of
                                     Service</a></li>

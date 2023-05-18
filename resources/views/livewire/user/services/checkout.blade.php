@@ -6,7 +6,7 @@
                 @include('include.breadcumb',['serviceAll'=>'services','checkout'=>'checkout'])
             </div>
             <div class="mb-2">
-                <h1 class="text-3xl font-bold text-gray-600 md:text-5xl dark:text-gray-200">Checkout.</h1>
+                <h1 class="text-5xl font-bold text-gray-600 md:text-2xl dark:text-gray-200">Panier</h1>
             </div>
 
         </div>
@@ -79,15 +79,16 @@
                                                 <p class="text-sm dark:text-gray-400">Basic</p>
                                             </div>
                                             @php
-                                            $price = $item['basic_price'];
+                                            $price = $item['basic_price'] *$item['quantity'];
 
-                                            $reduction=$item['basic_price'] +35;
+                                            $reduction=$price +35;
 
                                             @endphp
                                             <div class="text-right">
-                                                <p class="text-lg font-semibold">{{$item['basic_price']}}€</p>
+                                                <p class="text-lg font-semibold">${{$item['basic_price'] *
+                                                    $item['quantity'] }}</p>
                                                 <p class="text-sm line-through dark:text-gray-600">
-                                                    {{$reduction}}€</p>
+                                                    ${{$reduction}}</p>
                                             </div>
                                         </div>
                                         <div class="flex text-sm divide-x">
@@ -108,34 +109,31 @@
                                                 <span>Remove</span>
                                             </button>
 
-                                            <div x-data="{like:false}" class="flex items-center">
-                                                <button class="flex mr-2" wire:click="addFavorites({{$item['id']}})"
-                                                    @click="like=!like">
-                                                    <template x-if="!like">
-                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                                        </svg>
-                                                    </template>
-                                                    <template x-if="like">
-                                                        <svg class="w-5 h-5 text-red-500"
-                                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                            viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                                        </svg>
-                                                    </template>
-                                                    <span>Add to favorites</span>
 
-
-                                                </button>
-
-                                            </div>
                                             <div>
 
+                                                <div x-data="{ productQuantity: @json($item['quantity']) }">
+                                                    <label for="Quantity" class="sr-only"> Quantity </label>
+
+                                                    <div class="flex items-center gap-1">
+                                                        <button type="button" x-on:click="productQuantity--"
+                                                            :disabled="productQuantity === 0"
+                                                            @click="$wire.updateQty({{$item['id']}},productQuantity)"
+                                                            class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75">
+                                                            &minus;
+                                                        </button>
+
+                                                        <input type="number" id="Quantity" x-model="productQuantity"
+                                                            x-on:change="$wire.updateQty(2,productQuantity)"
+                                                            class="h-10 w-16 rounded border-gray-200 dark:bg-gray-700 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none" />
+
+                                                        <button type="button" x-on:click="productQuantity++"
+                                                            @click="$wire.updateQty({{$item['id']}},productQuantity)"
+                                                            class="w-10 h-10 leading-10 text-gray-600 transition hover:opacity-75">
+                                                            &plus;
+                                                        </button>
+                                                    </div>
+                                                </div>
 
                                             </div>
 
@@ -363,13 +361,24 @@
                 </div>
             </div>
         </div>
+
+        @else
+
+        <div class="flex flex-col items-center justify-center gap-4 py-8">
+
+            <h1 class="text-2xl">Votre panier est vide</h1>
+
+            <x-button label="service" href="{{url('/categories')}}" positive></x-button>
+
+
+        </div>
+
+        @endif
     </div>
 
 
 
-    @else
 
-    @endif
 
 </div>
 {{-- Because she competes with no one, no one can compete with her. --}}
@@ -385,6 +394,10 @@
 
 
 <script>
+    function update(product)
+    {
+        alert(product);
+    }
     window.addEventListener('success', event=> {
     Swal.fire({
     // position: 'top-end',

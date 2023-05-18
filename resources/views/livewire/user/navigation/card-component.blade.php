@@ -42,8 +42,27 @@
                     <div class="flex-1">
                         <h3 class="font-semibold text-gray-800 dark:text-gray-100">{{$item['title']}}</h3>
                         <p class="text-gray-500 dark:text-gray-100">{{$item['basic_price']}} $</p>
+                        <div class="mt-4" x-data="{ productQuantity: @json($item['quantity']) }">
+                            <label for="Quantity" class="sr-only"> Quantity </label>
 
-                        <p class="text-gray-500 dark:text-gray-100">qty: {{$item['quantity']}}</p>
+                            <div class="flex items-center gap-1">
+                                <button type="button" x-on:click="productQuantity--" :disabled="productQuantity === 0"
+                                    @click="$wire.updateQty({{$item['id']}},productQuantity)"
+                                    class="w-8 h-8 leading-10 text-gray-600 transition hover:opacity-75">
+                                    &minus;
+                                </button>
+
+                                <input type="number" id="Quantity" x-model="productQuantity"
+                                    x-on:change="$wire.updateQty(2,productQuantity)"
+                                    class="h-8 w-10 rounded border-gray-200 dark:bg-gray-700 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none" />
+
+                                <button type="button" x-on:click="productQuantity++"
+                                    @click="$wire.updateQty({{$item['id']}},productQuantity)"
+                                    class="w-8 h-8 leading-10 text-gray-600 transition hover:opacity-75">
+                                    &plus;
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <button wire:click="remove({{$item['id']}})"
                         class="text-gray-500 hover:text-gray-600 focus:outline-none">

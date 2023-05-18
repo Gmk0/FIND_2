@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\MessageNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,18 @@ class Message extends Model
         'is_read',
         'type',
     ];
+
+
+
+    public function notifyUser()
+    {
+
+        $user = $this->receiverUser;
+
+
+
+        $user->notify(new MessageNotification($this));
+    }
 
     /**
      * The attributes that should be cast to native types.

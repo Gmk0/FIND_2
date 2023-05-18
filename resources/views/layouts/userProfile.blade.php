@@ -130,8 +130,8 @@ $overflow="overflow-y-auto";
                     </section>
                 </div>
             </div>
-            <div class="flex h-full flex-col flex-1">
-                <x-headerUserTest />
+            <div class="flex flex-col flex-1 h-full">
+                @livewire('user.navigation.header-user')
 
                 <main id="main" class="h-full p-2 overflow-y-auto md:mt-0 custom-scrollbar">
                     <!-- Main -->
