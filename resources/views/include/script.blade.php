@@ -4,8 +4,6 @@
 
 
 
-
-@vite(['resources/js/app.js'])
 @livewireScripts
 
 
@@ -35,6 +33,8 @@
 </script>
 
 
+
+<script src="/build/assets/app.js" defer></script>
 
 
 
