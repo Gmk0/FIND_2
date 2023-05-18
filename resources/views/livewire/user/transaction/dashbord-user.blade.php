@@ -139,7 +139,7 @@
             </a>
             <a class="px-6 py-6 bg-white rounded-lg shadow-xl cursor-pointer">
                 <div class="flex items-center justify-between">
-                    <span class="text-sm font-bold text-gray-800">Project en attente</span>
+                    <span class="text-sm font-bold text-gray-800">Mission en attente</span>
                     <span
                         class="px-2 py-1 text-xs text-gray-500 transition duration-200 bg-gray-200 rounded-lg cursor-default dark:text-gray-900 hover:bg-gray-500 hover:text-gray-200">30
                         days</span>
@@ -189,16 +189,16 @@
 
         <div x-show="isLoading">
 
-            <div class="flex flex-col gap-4 p-8 overflow-y-hidden">
-                <div class="grid grid-cols-1 gap-4 mt-6 lg:grid-cols-4">
-                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
-                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
-                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
-                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
+            <div class="flex flex-col gap-4 p-6 overflow-y-hidden">
+                <div class="grid grid-cols-1 gap-4 lg:grid-cols-4">
+                    <div class="h-48 bg-gray-300 rounded-md dark:bg-gray-600 animate-pulse"></div>
+                    <div class="h-48 bg-gray-300 rounded-md dark:bg-gray-600 animate-pulse"></div>
+                    <div class="h-48 bg-gray-300 rounded-md dark:bg-gray-600 animate-pulse"></div>
+                    <div class="h-48 bg-gray-300 rounded-md dark:bg-gray-600 animate-pulse"></div>
                 </div>
 
                 <div
-                    class="flex-1 w-full min-h-screen p-4 mb-2 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
+                    class="flex-1 w-full min-h-screen p-4 mb-2 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md dark:bg-gray-600 animate-pulse custom-scrollbar">
 
 
 

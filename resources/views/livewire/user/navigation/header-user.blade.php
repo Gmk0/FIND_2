@@ -16,7 +16,7 @@
 
 
             <!-- Search input -->
-            <div class="flex justify-center flex-1 lg:mr-32">
+            <div class="flex justify-center flex-1 lg:mr-8">
                 <a class="flex md:hidden" href="{{url('/')}}">
                     <img class="w-20" src="/images/logo/find_02.png" alt="" />
                 </a>
