@@ -133,16 +133,19 @@ class SendMessageF extends  Component implements Forms\Contracts\HasForms
 
         ]);
 
-        $this->createdMessage->notifyUser();
 
         $this->selectedConversation->last_time_message = $this->createdMessage->created_at;
         $this->selectedConversation->save();
         $this->emitTo('user.conversation.body-message', 'pushMessage', $this->createdMessage->id);
 
+        $this->emitTo('freelance.conversations.conversation-component', 'refresh');
 
         //reshresh coversation list
         $this->emitTo('user.conversation.body-message', 'refresh');
         $this->reset('body');
+
+        $this->createdMessage->notifyUser();
+
 
 
         $this->emitSelf('dispatchMessageSent');

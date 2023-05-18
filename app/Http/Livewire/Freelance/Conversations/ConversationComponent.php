@@ -24,9 +24,10 @@ class ConversationComponent extends Component
         $auth_id = auth()->user()->id;
         return [
 
-            "echo-private:chat.{$auth_id},MessageSent" => '$refresh',
-            'ServiceOrdered' => '$refresh',
+            //"echo-private:chat.{$auth_id},MessageSent" => '$refresh',
+
             'chatUserSelected',
+            'refresh' => '$refresh'
 
 
         ];

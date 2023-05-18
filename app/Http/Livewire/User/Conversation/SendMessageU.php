@@ -201,7 +201,7 @@ class SendMessageU extends Component implements Forms\Contracts\HasForms
 
             ]);
 
-            $this->createdMessage->notifyUser();
+
 
             $this->selectedConversation->last_time_message = $this->createdMessage->created_at;
             $this->selectedConversation->save();
@@ -212,6 +212,8 @@ class SendMessageU extends Component implements Forms\Contracts\HasForms
             $this->emitTo('user.conversation.conversation-component', 'refresh');
             $this->reset('body', 'attachment');
             $this->emitSelf('dispatchMessageSent');
+
+            $this->createdMessage->notifyUser();
         } catch (Exception $e) {
 
             dd($e->getMessage());
