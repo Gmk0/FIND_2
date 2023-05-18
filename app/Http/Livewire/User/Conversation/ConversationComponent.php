@@ -28,10 +28,21 @@ class ConversationComponent extends Component
     public $query = '';
     public $freelance;
 
-    protected $listeners = ['loadConversation', 'refresh' => '$refresh'];
 
 
 
+
+    public function  getListeners()
+    {
+
+        $auth_id = auth()->user()->id;
+        return [
+            "echo-private:chat.{$auth_id},MessageSent" => '$refresh',
+            "echo-private:chat.{$auth_id},MessageRead" => 'broadcastedMessageRead',
+            'refresh' => '$refresh',
+            'loadConversation', 'pushMessage', 'loadmore', 'updateHeight', 'broadcastMessageRead', 'resetComponent'
+        ];
+    }
 
 
     public function mount()
