@@ -5,7 +5,7 @@
 
 
 
-{{--@vite(['resources/js/app.js'])--}}
+@vite(['resources/js/app.js'])
 @livewireScripts
 
 

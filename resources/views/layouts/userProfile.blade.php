@@ -16,7 +16,7 @@ $overflow="overflow-y-auto";
     class="flex flex-col justify-between overflow-x-hidden overflow-y-hidden bg-gray-100 custom-scrollbar dark:text-gray-100 dark:bg-gray-900">
     <x-notifications z-index="z-50" position='top-left' />
     <div>
-        <div class="flex h-screen overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar">
+        <div class="flex min-h-screen overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar">
             <!-- Loading screen -->
 
             <div x-ref="loading"
