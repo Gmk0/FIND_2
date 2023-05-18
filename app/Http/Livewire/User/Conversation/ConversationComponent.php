@@ -8,6 +8,7 @@ use App\Models\Conversation;
 use App\Models\Message;
 use Exception;
 use WireUi\Traits\Actions;
+use App\Events\MessageSent;
 
 class ConversationComponent extends Component
 {
@@ -38,7 +39,6 @@ class ConversationComponent extends Component
         $auth_id = auth()->user()->id;
         return [
             "echo-private:chat.{$auth_id},MessageSent" => '$refresh',
-            "echo-private:chat.{$auth_id},MessageRead" => 'broadcastedMessageRead',
             'refresh' => '$refresh',
             'loadConversation', 'pushMessage', 'loadmore', 'updateHeight', 'broadcastMessageRead', 'resetComponent'
         ];

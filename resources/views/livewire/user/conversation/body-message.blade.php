@@ -128,7 +128,8 @@
 
             @forelse ($messages as $message)
 
-            <div class="chat  {{auth()->id() == $message->sender_id ? 'chat-end':'chat-start'}}  ">
+            <div x-data="{chat:false}"
+                class="chat  {{auth()->id() == $message->sender_id ? 'chat-end':'chat-start'}}  ">
                 <div class="chat-image avatar">
 
                     @if(auth()->id() == $message->sender_id)
@@ -167,7 +168,7 @@
 
                     @endif
                 </div>
-                <div class="chat-header">
+                <div x-show="chat" class="chat-header">
 
                     <time class="text-xs opacity-50 dark:text-gray-300">{{ $message->created_at->format('m: i a')
                         }}</time>
