@@ -177,7 +177,7 @@ class ServicesViewOne extends Component
             $title = "le Service a ete ajouté dans le panier",
 
         );
-        $this->notify2();
+
 
 
 
@@ -188,19 +188,7 @@ class ServicesViewOne extends Component
     }
 
 
-    public function notify2()
-    {
 
-        try {
-
-            $user = User::find(3);
-
-            $user->notify(new testNotify());
-        } catch (\Exception $e) {
-
-            dd($e->getMessage());
-        }
-    }
 
     public function notifications()
     {
