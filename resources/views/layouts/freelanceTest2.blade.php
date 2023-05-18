@@ -29,6 +29,8 @@
             <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll custom-scrollbar">
                 <!-- Main content header -->
 
+
+
                 @yield('content')
 
             </main>

@@ -1,10 +1,10 @@
 @extends('layouts.user')
 
 @section('content')
-<div class="min-h-screen pt-20 px-4 md:px-8">
+<div class="min-h-screen px-4 pt-8 md:px-8">
 
     <div class="mx-2">
-        @include('include.breadcumb',['category'=>'cagegory'])
+        @include('include.breadcumb',['category'=>'category'])
     </div>
 
 
