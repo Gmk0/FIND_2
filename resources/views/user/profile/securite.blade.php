@@ -3,13 +3,13 @@
 
 @section('content')
 
-<div class="min-h-screen  ">
+<div class="min-h-screen mb-4 ">
 
 
 
 
-    <div class="container mx-auto px-3 lg:px-8">
-        <h2 class="text-xl text-indigo-600 mb-8 font-semibold tracking-wide uppercase">Securite</h2>
+    <div class="container px-3 mx-auto lg:px-8">
+        <h2 class="mb-8 text-xl font-semibold tracking-wide text-indigo-600 uppercase">Securite</h2>
 
 
 

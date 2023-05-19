@@ -39,7 +39,8 @@
 
 
 <script src="/js/script.js"></script>
-
+<script src="/service-worker.js"></script>
+<script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="/js/intlTelInput.js"></script>
@@ -48,7 +49,7 @@
     integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-tooltip@1.x.x/dist/cdn.min.js" defer></script>
 
-<script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
 
 

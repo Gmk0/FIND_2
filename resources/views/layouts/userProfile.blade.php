@@ -133,29 +133,32 @@ $overflow="overflow-y-auto";
         <div class="flex flex-col flex-1 min-h-screen">
             @livewire('user.navigation.header-user')
 
-            <main id="main" class="h-full p-2 overflow-y-auto md:mt-0 custom-scrollbar">
+            <main id="main" class="min-h-screen p-2 overflow-y-auto md:mt-0 custom-scrollbar">
                 <!-- Main -->
                 @yield('content')
 
-
-                @if(request()->routeIs('MessageUser'))
-
-
-
-                @else
-
-                <footer class="bottom-0 text-center text-white bg-gray-300 dark:bg-gray-800" style="">
-
-
-                    <!--Copyright section-->
-                    <div class="p-2 text-center text-gray-800">
-                        © 2023 Copyright:
-                        <a class="text-white" href="{{url('/')}}">FIND</a>
-                    </div>
-                </footer>
-
-                @endif
             </main>
+
+
+
+
+            @if(request()->routeIs('MessageUser'))
+
+
+
+            @else
+
+            <footer class="bottom-0 text-center text-white bg-gray-300 dark:bg-gray-800" style="">
+
+
+                <!--Copyright section-->
+                <div class="p-2 text-center text-gray-800">
+                    © 2023 Copyright:
+                    <a class="text-white" href="{{url('/')}}">FIND</a>
+                </div>
+            </footer>
+
+            @endif
 
 
 

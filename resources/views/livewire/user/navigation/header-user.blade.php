@@ -1,7 +1,7 @@
 <div class="">
 
     <header
-        class="sticky z-50 flex-shrink-0 w-full py-4 mx-auto bg-white shadow-md lg:relative borde-b dark:bg-gray-800">
+        class="sticky flex-shrink-0 w-full py-4 mx-auto bg-white shadow-md lg:z-50 lg:relative borde-b dark:bg-gray-800">
         <div class="container flex items-center justify-between h-full px-6 mx-auto text-amber-600 dark:text-amber-300">
             <!-- Mobile hamburger -->
             <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-amber"

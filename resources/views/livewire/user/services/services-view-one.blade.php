@@ -244,10 +244,10 @@
                                 </section>
                             </div>
                         </div>
-                        <div class="sticky hidden gap-1 p-6 bg-white rounded-lg md:flex dark:bg-gray-800">
+                        <div class="sticky gap-1 p-6 bg-white rounded-lg md:flex dark:bg-gray-800">
                             <div>
                                 <x-button wire:ignore positive x-on:click="isOpen=true" wire:click="contacter"
-                                    label="Contacter le Seller" success />
+                                    label="Mesage" success />
 
                             </div>
 

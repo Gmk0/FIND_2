@@ -3,7 +3,7 @@
     <div>
         @include('include.breadcumbUser',['transation'=>'transation'])
     </div>
-    <div class="px-6 py-4 mx-auto max-w-7xl lg:px-8">
+    <div class="px-2 py-4 mx-auto max-w-7xl lg:px-8">
 
 
         <div class="max-w-3xl mb-8">

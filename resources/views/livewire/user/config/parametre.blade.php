@@ -19,6 +19,13 @@
             <div class="p-4 mb-6">
                 <h2 class="mb-2 text-lg font-medium">Paramètres de notification</h2>
                 <div class="space-y-4">
+
+                    <div class="px-4 py-3 overflow-hidden bg-white sm:rounded-lg" x-data="beamsData()">
+                        <x-jet-button @click="enableNotifications">
+                            Enable push notifications
+                        </x-jet-button>
+                    </div>
+
                     <div class="flex items-center">
                         <x-checkbox wire:model="enableEmail" wire:change="toogle()" label=" Recevoir des notifications
                             par e-mail" />
@@ -66,3 +73,24 @@
 
 
     </div>
+
+    @push('script')
+
+    <script>
+        function beamsData() {
+        return {
+        beamsClient: new PusherPushNotifications.Client({
+        instanceId: '3a7c226c-b409-40f9-add8-ace345844730',
+        }),
+        enableNotifications() {
+        this.beamsClient.start()
+        .then(() => console.log('Successfully registered in pusher beams!'))
+        .then(() => this.beamsClient.addDeviceInterest('App.Models.User.{{ auth()->id() }}'))
+        .catch(console.error)
+        },
+        }
+        }
+
+    </script>
+
+    @endpush

@@ -22,10 +22,10 @@
                     alt="Photo de profil">
 
                 @endif
-                <h1 class="mt-4  lg:text-lg xl:text-xl text-lg 2xl:text-3xl font-bold text-gray-800">
+                <h1 class="mt-4 text-lg font-bold text-gray-800 lg:text-lg xl:text-xl 2xl:text-3xl">
                     {{$freelance->prenom}}
                     {{$freelance->nom}}</h1>
-                <h2 class="mt-2 text-lg font-medium flex gap-2 text-gray-500 dark:text-gray-200">
+                <h2 class="flex gap-2 mt-2 text-lg font-medium text-gray-500 dark:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -33,7 +33,7 @@
                     </svg>
                     <span class="text-base">{{$freelance->category->name}}</span>
                 </h2>
-                <h2 class="mt-4 flex gap-1   text-base  font-medium text-gray-800">
+                <h2 class="flex gap-1 mt-4 text-base font-medium text-gray-800">
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -45,7 +45,7 @@
                         $freelance->localisation['ville']:''}}</span>
                 </h2>
 
-                <h2 class="mt-2 text-lg font-medium flex gap-2 text-gray-500 dark:text-gray-200"><svg
+                <h2 class="flex gap-2 mt-2 text-lg font-medium text-gray-500 dark:text-gray-200"><svg
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </aside>
-        <main class="w-full p-6  rounded lg:w-3/4">
+        <main class="w-full p-6 rounded lg:w-3/4">
 
             <div class="hidden lg:flex">
                 @include('include.breadcumbUser',['findFreelance'=>'findFreelance'])
@@ -72,12 +72,12 @@
                 <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div class="max-w-3xl mx-auto ">
                         <h2
-                            class="xl:text-3xl  text-lg  md:text-xl font-bold text-center text-gray-800 dark:text-gray-200">
+                            class="text-lg font-bold text-center text-gray-800 xl:text-3xl md:text-xl dark:text-gray-200">
                             General
                             information</h2>
                         <p class="mt-4 text-gray-500 dark:text-gray-300">Apropos de Moi</p>
 
-                        <div class="text-gray-500 mb-4 text-base font-thin break-words dark:text-gray-500 max-w-4xl">
+                        <div class="max-w-4xl mb-4 text-base font-thin text-gray-500 break-words dark:text-gray-300">
                             {{$freelance->description}}
 
                         </div>
@@ -105,7 +105,7 @@
 
 
                     </div>
-                    <div class=" hidden max-w-3xl mx-auto  justify-around">
+                    <div class="justify-around hidden max-w-3xl mx-auto ">
                         <div>
                             <p class="mt-4 text-gray-500 dark:text-gray-200">Education</p>
 
@@ -120,10 +120,10 @@
                     </div>
             </section>
 
-            <section class="bg-gray-100  dark:bg-gray-900">
+            <section class="bg-gray-100 dark:bg-gray-900">
                 <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div class="max-w-3xl mx-auto text-center">
-                        <h2 class="xl:text-3xl text-lg font-bold text-gray-800 dark:text-gray-200">Mes Compétences</h2>
+                        <h2 class="text-lg font-bold text-gray-800 xl:text-3xl dark:text-gray-200">Mes Compétences</h2>
                         <p class="mt-4 text-gray-500 dark:text-gray-200">Voici quelques-unes des compétences que je
                             maîtrise
                             :</p>
@@ -245,7 +245,7 @@
                 </div>
             </section>
 
-            <section class="bg-gray-200 hidden dark:bg-gray-900">
+            <section class="hidden bg-gray-200 dark:bg-gray-900">
                 <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div class="max-w-3xl mx-auto text-center">
                         <h2 class="text-3xl font-bold text-gray-800">Mes Projets</h2>
@@ -288,12 +288,12 @@
                 </div>
             </section>
 
-            <section class=" hidden bg-gray-100">
+            <section class="hidden bg-gray-100 ">
                 <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div class="max-w-3xl mx-auto text-center">
                         <h2 class="text-3xl font-bold text-gray-900">Témoignages</h2>
                         <p class="mt-4 text-gray-500">Voici ce que mes clients satisfaits ont à dire :</p>
-                        <div class=" hidden grid-cols-1 gap-4 mt-8 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="hidden grid-cols-1 gap-4 mt-8 sm:grid-cols-2 lg:grid-cols-3">
                             <div class="overflow-hidden bg-white rounded-lg shadow-lg">
                                 <div class="p-6">
                                     <p class="mt-2 text-gray-500">"Prénom a été un développeur incroyable pour

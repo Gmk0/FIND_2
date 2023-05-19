@@ -40,7 +40,7 @@ class ConversationComponent extends Component
         return [
             "echo-private:chat.{$auth_id},MessageSent" => '$refresh',
             'refresh' => '$refresh',
-            'loadConversation', 'pushMessage', 'loadmore', 'updateHeight', 'broadcastMessageRead', 'resetComponent'
+            'loadConversation',
         ];
     }
 

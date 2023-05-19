@@ -190,49 +190,7 @@ class ServicesViewOne extends Component
 
 
 
-    public function notifications()
-    {
 
-        try {
-
-            $beamsClient = new PushNotifications(array(
-                "instanceId" => config('services.pusher.beams_instance_id'),
-                "secretKey" => config('services.pusher.beams_secret_key'),
-            ));
-
-
-            $userId = $this->service->freelance->user->id;
-            $userSendingNotification = auth()->user(); // L'utilisateur qui envoie la notification
-            $userReceivingNotification = User::find($userId);
-
-            // L'utilisateur qui reçoit la notification
-
-            $interests = "App.Models.User.3";
-
-            // Créer une liste d'intérêts basée sur l'ID de l'utilisateur
-
-            $data = array(
-                "web" => array(
-                    "notification" => array(
-                        "title" => "Test",
-                        "body" => "Vous avez une nouvelle notification",
-                        "deep_link" => "https://example.com/notification",
-                        "icon" => "https://example.com/icon.png",
-                        "data" => array(
-                            "foo" => "bar",
-                            "baz" => "qux",
-                        ),
-                    ),
-                ),
-            );
-            // Les données de la notification
-
-            $beamsClient->publishToInterests(array($interests), $data);
-        } catch (\Exception $e) {
-
-            dd($e->getMessage());
-        }
-    }
 
     public function render()
     {

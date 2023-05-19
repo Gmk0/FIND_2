@@ -11,4 +11,10 @@
    .then(() => beamsClient.addDeviceInterest('App.Models.User.{{ auth()->id() }}'))
     .then(() => console.log('Successfully registered and subscribed!'))
     .catch(console.error);
+
+
+
+
+
+
 </script>

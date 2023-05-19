@@ -21,6 +21,8 @@
 
         <div class="mt-10">
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2">
+
+
                 <div class="overflow-hidden bg-white rounded-lg shadow">
                     <div class="px-4 py-5 sm:p-6">
                         <div class="flex items-center justify-between">
@@ -109,7 +111,21 @@
 
             </div>
             <div class="grid grid-cols-2 mt-10">
+                <div class="w-full p-4 mb-4 font-semibold bg-white border border-gray-200 rounded-md">
+                    <div>
+                        <h1>Address de Facturation / Livraison</h1>
 
+                    </div>
+                    <div class="flex flex-col gap-2">
+
+                        <x-input placeholder="Rue" />
+                        <x-input placeholder="Quartier" />
+                        <x-input placeholder="Commune" />
+                        <x-input placeholder="Ville" />
+
+                    </div>
+
+                </div>
             </div>
 
 

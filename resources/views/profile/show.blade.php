@@ -3,14 +3,14 @@
 
 @section('content')
 
-<div class="h-full custom-scrollbar">
+<div class=" custom-scrollbar">
 
     <div>
         @include('include.breadcumbUser',['profile'=>'profile'])
     </div>
 
 
-    <div class="container w-full h-screen px-3 py-8 mx-auto max-w-7xl lg:px-8">
+    <div class="container w-full px-3 py-8 mx-auto max-w-7xl lg:px-8">
         <h2 class="mb-8 text-xl font-semibold tracking-wide text-indigo-600 uppercase">Profile</h2>
         @if (Auth::user()->freelance()->exists())
         <div class="mb-4">

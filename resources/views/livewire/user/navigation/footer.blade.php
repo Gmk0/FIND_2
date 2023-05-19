@@ -86,13 +86,13 @@
                         <ul class="flex flex-col w-full p-0 font-thin text-left list-none text-gray-50">
 
 
-                            <li><a href="{{url('/faq')}}"
+                            <li><a href="{{route('faq')}}"
                                     class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">FAQ</a>
                             </li>
-                            <li><a href="{{url('/faq')}}"
+                            <li><a href="{{route('faq')}}"
                                     class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">Tutorial</a>
                             </li>
-                            <li><a href="{{url('/faq')}}"
+                            <li><a href="{{route('faq')}}"
                                     class="inline-block py-2 pl-3 pr-5 text-white hover:text-gray-800 dark:hover:text-gray-100">Support</a>
                             </li>
                         </ul>

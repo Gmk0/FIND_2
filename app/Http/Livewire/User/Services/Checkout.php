@@ -232,9 +232,9 @@ class Checkout extends Component
             'Telephone' => $telephone,
             'Language' => 'fr',
             "Reference" => $reference,
-            "SuccessURL" =>  "https://83-229-67-85.cloud-xip.com/checkout/status",
-            "FailureURL" =>  "https://83-229-67-85.cloud-xip.com/checkout/status",
-            "CancelURL" =>  "https://83-229-67-85.cloud-xip.com/commande",
+            "SuccessURL" =>  env('SuccessURL'),
+            "FailureURL" =>  env('FailureURL'),
+            "CancelURL" =>  env('CancelURL'),
 
 
             // Ajouter d'autres données de requête nécessaires
