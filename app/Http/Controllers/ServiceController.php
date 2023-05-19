@@ -110,7 +110,7 @@ class ServiceController extends Controller
                     $orderToUpdate->transaction_id = $payment->id; // Lier la commande au paiement effectué
                     $orderToUpdate->save();
 
-                    event(new ServiceOrdered($order));
+                    $orderToUpdate->notifyUser();
                 }
 
                 // Valider et terminer la transaction de base de données
@@ -119,7 +119,7 @@ class ServiceController extends Controller
                 // Retourner une réponse de succès
                 Session::forget('cart');
                 // return view('status.success', ['order' => $payment->transaction_numero]);
-                return redirect()->route('status_payement')->with('order', $payment);
+                return redirect()->route('status_payement', $payment->transaction_numero);
                 //return response()->json(['success' => 'Paiement traité avec succès']);
             } catch (\Exception $e) {
                 // En cas d'erreur, annuler la transaction de base de données

@@ -130,17 +130,16 @@ $overflow="overflow-y-auto";
                 </section>
             </div>
         </div>
-        <div class="flex flex-col flex-1 min-h-screen">
+        <div class="flex flex-col flex-1 h-full">
             @livewire('user.navigation.header-user')
 
-            <main id="main" class="min-h-screen p-2 overflow-y-auto md:mt-0 custom-scrollbar">
+            <main id="main" class="flex flex-col h-full p-2 overflow-y-auto justify-beetwen md:mt-0 custom-scrollbar">
                 <!-- Main -->
                 @yield('content')
 
+
+
             </main>
-
-
-
 
             @if(request()->routeIs('MessageUser'))
 
@@ -152,14 +151,13 @@ $overflow="overflow-y-auto";
 
 
                 <!--Copyright section-->
-                <div class="p-2 text-center text-gray-800">
+                <div class="p-1 text-sm text-center text-gray-800">
                     © 2023 Copyright:
                     <a class="text-white" href="{{url('/')}}">FIND</a>
                 </div>
             </footer>
 
             @endif
-
 
 
 
