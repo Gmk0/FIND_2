@@ -129,6 +129,9 @@
                     <!-- Main -->
                     @yield('content')
                 </main>
+
+
+
             </div>
         </div>
 

@@ -1,6 +1,9 @@
 <div x-data="{ isOpen:false,isLoading: true,showFilters: false,showSearch: false }"
-    x-init="setTimeout(() => { isLoading = false }, 3000) " class="flex flex-col min-h-screen px-4 pt-8">
+    x-init="setTimeout(() => { isLoading = false }, 3000)" class="flex flex-col min-h-screen px-4 pt-4">
 
+    <div>
+        @include('include.breadcumbFreelance',['transaction'=>'Transaction'])
+    </div>
     <div class="mx-4 mb-4">
         <h1 class='text-2xl font-semibold text-gray-800 font-inter'>Transaction</h1>
     </div>
@@ -9,9 +12,9 @@
 
         <div class="flex flex-col gap-4 p-8 overflow-y-hidden">
             <div class="grid grid-cols-1 gap-4 mt-6 md:grid-cols-3">
-                <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
-                <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
-                <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
+                <div class="h-32 bg-gray-300 rounded-md animate-pulse"></div>
+                <div class="h-32 bg-gray-300 rounded-md animate-pulse"></div>
+                <div class="h-32 bg-gray-300 rounded-md animate-pulse"></div>
             </div>
 
             <div

@@ -28,6 +28,11 @@ class CommandeDetails extends Component
     public function mount()
     {
         $this->publier = $this->order->feedback->is_publish ? $this->order->feedback->is_publish : 0;
+
+        $this->progress = $this->order->progress;
+        $this->status = $this->order->feedback?->etat;
+
+        $this->jour = $this->order->feedback?->delai_livraison_estimee;
     }
 
 
@@ -61,31 +66,46 @@ class CommandeDetails extends Component
                 'jour' => 'required',
             ]);
 
-            $id = $this->order->id;
 
-            $data = FeedbackService::where('order_id', $id)->first();
+            if ($this->order->progress > $this->progress) {
 
-            //dd($data);
-
-            $data->etat = $this->status;
-            $data->delai_livraison_estimee = $this->jour;
-            $data->update();
-
-            $this->order->progress = $this->progress;
-            $this->order->update();
-            if ($data) {
-
-                $this->notification()->success(
+                $this->notification()->error(
                     $title = "Gestion commande",
-                    $description = "Vos Modifications ont ete envoyer avec success",
+                    $description = "La progression ne doit etre inferieur a l'ancienne progression qui etait de " . $this->order->progress . "%",
                 );
+
+                $this->emitSelf('refresh');
+
+                $this->progress = $this->order->progress;
+            } else {
+                $id = $this->order->id;
+
+                $data = FeedbackService::where('order_id', $id)->first();
+
+                //dd($data);
+
+                $data->etat = $this->status;
+                $data->delai_livraison_estimee = $this->jour;
+                $data->update();
+
+
+                $this->order->progress = $this->progress;
+                $this->order->update();
+
+
+                $data->notifyUser();
+                if ($data) {
+
+                    $this->notification()->success(
+                        $title = "Gestion commande",
+                        $description = "Vos Modifications ont ete envoyer avec success",
+                    );
+                }
+                $this->reset('progress', 'jour', 'status');
+
+                $this->emitSelf('refresh');
             }
-            $this->reset('progress', 'jour', 'status');
-
-            $this->emitSelf('refresh');
-
-            broadcast(new notificationOrder($this->order->user));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             dd($e->getMessage());
         }
 
@@ -119,7 +139,7 @@ class CommandeDetails extends Component
 
         $this->reset('description');
 
-        broadcast(new notificationOrder($this->order->user));
+        //broadcast(new notificationOrder($this->order->user));
         $this->emitSelf('refresh');
     }
 

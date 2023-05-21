@@ -1,6 +1,10 @@
 <div x-data="{ isOpen:false,isLoading: true,showFilters: false,showSearch: false }"
     x-init="setTimeout(() => { isLoading = false }, 3000) " class="flex flex-col min-h-screen px-4 pt-8">
 
+
+    <div>
+        @include('include.breadcumbFreelance',['Commande'=>'Commande'])
+    </div>
     <div class="mx-4 mb-4">
         <h1 class='text-2xl text-gray-800'>Commande</h1>
     </div>
