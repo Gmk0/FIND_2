@@ -34,6 +34,25 @@
                 @yield('content')
 
             </main>
+
+
+            @if(request()->routeIs('freelance.messages'))
+
+
+
+            @else
+
+            <footer class="bottom-0 text-center text-white bg-gray-300 dark:bg-gray-800" style="">
+
+
+                <!--Copyright section-->
+                <div class="p-1 text-sm text-center text-gray-800">
+                    © 2023 Copyright:
+                    <a class="text-white" href="{{url('/')}}">FIND</a>
+                </div>
+            </footer>
+
+            @endif
             <!-- Main footer -->
 
         </div>
