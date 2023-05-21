@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ApiFreelanceGet;
 use App\Http\Controllers\Api\ServicesApi;
 use App\Http\Controllers\BeamsAuthenticationController;
+use App\Http\Controllers\CommandeControler;
 use App\Http\Controllers\FacebookAuth;
 use App\Http\Controllers\FreelanceController;
 use App\Http\Controllers\GoogleAuth;
@@ -27,14 +28,10 @@ use Illuminate\Support\Facades\DB;
 
 Route::controller(home::class)->group(function () {
     Route::get('/', 'home')->name('home');
-    // Route::get('/category', 'category')->name('category');
-    //Route::get('/category/{category}', 'categoryRresult')->where('category', '(.*)')->name('category_result');
-
-    //Route::view('/categorys', 'user.serviceView')->name('categoryOne');
     Route::view('/registration', 'user.beginner')->name('register.begin');
     Route::view('/registration/info', 'user.register_info')->name('register.etape.1');
     Route::view('/apropos', 'user.about')->name('about');
-    Route::view('/faq', 'user.faq')->name('faq');
+    Route::view('/faq', 'user.faqs')->name('faq');
     Route::view('/contact', 'user.contact')->name('contact');
     Route::view('/test', 'test.test')->name('test');
 });
@@ -64,7 +61,7 @@ Route::middleware([
 
     //Services
     Route::get('/services/checkout', App\Http\Livewire\User\Services\Checkout::class)->name('checkout');
-    Route::get('/categories/{category}/{id}', App\Http\Livewire\User\Services\ServicesViewOne::class)->where('category', '(.*)')->name('ServicesViewOne');
+    Route::get('/categories/{category}/{service_numero}', [ServiceController::class, 'viewService'])->where('service_numero', '(.*)')->name('ServicesViewOne');
 
     //registration
 
@@ -79,10 +76,12 @@ Route::middleware([
     Route::view('/user/securite', 'user.profile.securite')->name('securiteUser');
 
     //transation
+    Route::get('/user/transaction/{transaction_numero}', [CommandeControler::class, 'TransactionUser'])->name('transactionOneUser');
+
     Route::get('/user/transaction', App\Http\Livewire\User\Transaction\TransactionUser::class)->name('transactionUser');
 
     //commande
-    Route::get('/user/commandes/{id}', App\Http\Livewire\User\Commande\CommandeOneView::class)->name('commandeOneView');
+    Route::get('/user/commandes/{order_numero}', [CommandeControler::class, 'commandeUser'])->name('commandeOneView');
 
     Route::get('/user/commandes', App\Http\Livewire\User\Commande\CommandeUser::class)->name('commandeUser');
 

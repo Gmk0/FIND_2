@@ -1,4 +1,4 @@
-<div class="w-full bg-gray-800 ">
+<div class="w-full bg-base-200 ">
 
     <div class="text-white border-t border-gray-800 md:hidden">
 
@@ -104,7 +104,7 @@
                     <div class="relative label">
                         <label class="block px-3 py-2 text-lg font-medium cursor-pointer text-gray-50"
                             for="tab-multi-four">
-                            Explore
+                            Freelance
                         </label>
                         <div class="absolute inset-0 flex items-center justify-end w-full pointer-events-none flex-end">
                             <svg class="w-8 icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -193,7 +193,7 @@
                 <p>FIND Ltd.<br />Providing reliable tech since 2020</p>
             </div>
             <div>
-                <span class="footer-title">Services</span>
+                <span class="footer-title">Categories</span>
                 <div class="grid grid-cols-2 gap-4">
 
                     @foreach($categories as $category)

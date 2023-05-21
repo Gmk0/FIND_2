@@ -31,14 +31,14 @@ Route::group(['prefix' => "freelance"], function () {
         });
         Route::group(['prefix' => "commande"], function () {
             Route::get('/', \App\Http\Livewire\Freelance\Commande\ListCommande::class)->name('freelance.commande.list');
-            Route::get('/view/{id}', [CommandeControler::class, 'commandeOne'])->name('freelance.Order.view');
+            Route::get('/{order_numero}', [CommandeControler::class, 'commandeOne'])->name('freelance.Order.view');
 
             // Route::get('/view/{CMD}', \App\Http\Livewire\Freelance\Services\ServicesCreate::class)->name('freelance.service.create');
             // Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
         });
         Route::group(['prefix' => "transaction"], function () {
             Route::get('/', \App\Http\Livewire\Freelance\Transaction\TransactionFreelance::class)->name('freelance.transaction.list');
-            // Route::get('/create', \App\Http\Livewire\Freelance\Services\ServicesCreate::class)->name('freelance.service.create');
+            Route::get('/{transaction_numero}', [CommandeControler::class, 'TransactionOneFreelance'])->name('freelance.transaction.view');
             //Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
         });
 

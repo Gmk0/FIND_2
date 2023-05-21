@@ -80,7 +80,7 @@ class TransactionUser extends Component implements Tables\Contracts\HasTable
             Panel::make([
                 Stack::make([
                     Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('md'),
-                    Tables\Columns\TextColumn::make('user.name')->description('client'),
+
                     Tables\Columns\TextColumn::make('created_at')->description('date'),
 
                 ]),
@@ -118,10 +118,16 @@ class TransactionUser extends Component implements Tables\Contracts\HasTable
         return [
             // ...
             Action::make('Voir')
-                ->url(fn (Order $record): string => route('freelance.Order.view', $record->id))
+                ->url(fn (Order $record): string => route('transactionOneUser', $record->transaction->transaction_numero))
                 ->openUrlInNewTab()
                 ->tooltip('Voir transaction')
                 ->icon('heroicon-s-pencil'),
+            Action::make('Facture')
+                // Vérifie si la transaction est non nulle
+                ->url(fn (Order $record): string => isset($record->transaction) ? route('facturation', $record->transaction->transaction_numero) : url('/services'))
+                ->openUrlInNewTab()
+                ->icon('heroicon-s-printer')
+                ->tooltip('Voir les services'),
 
 
 

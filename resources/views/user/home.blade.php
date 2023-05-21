@@ -3,7 +3,7 @@
 @section('content')
 
 <section
-    class="relative grid min-h-screen grid-cols-1 gap-8 px-4 overflow-hidden text-neutral-50 2xl:px-60 lg:grid-cols-12 bg-skin-fill dark:bg-gray-800">
+    class="relative grid grid-cols-1 gap-8 px-4 py-16 overflow-hidden lg:py-0 lg:min-h-screen text-neutral-50 2xl:px-60 lg:grid-cols-12 bg-skin-fill dark:bg-gray-800">
     <div
         class="[mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] absolute bottom-[-100px] md:w-[800px] md:h-[800px] lg:top-[120px] lg:right-[-100px] xl:right-0 w-[500px] h-[500px] 2xl:w-[1026px] 2xl:h-[1026px]">
         <svg viewBox="0 0 1026 1026" fill="none" aria-hidden="true"
@@ -252,10 +252,10 @@
 
 <section x-show="loading" x-cloak id="monde2" class="min-h-screen bg-gray-50 dark:bg-gray-900">
 
-    <div class="py-16">
+    <div class="py-16 ">
         <div class="px-6 m-auto text-gray-600 xl:container md:px-12 xl:px-16">
             <div
-                class="flex-row-reverse justify-center space-y-6 bg-gray-100 rounded-lg dark:bg-gray-800 lg:p-16 md:flex md:gap-6 md:space-y-0 lg:items-center">
+                class="flex-row-reverse justify-center p-4 space-y-6 bg-gray-100 rounded-lg dark:bg-gray-800 lg:p-16 md:flex md:gap-6 md:space-y-0 lg:items-center">
                 <div data-aos="flip-left" data-aos-duration="800" class="md:5/12 lg:w-1/2">
                     <img src="/images/services/presentation3.png" alt="image"
                         class="rounded-lg dark:bg-gray-800 bg-skin-fill" loading="lazy" width="" height="" />

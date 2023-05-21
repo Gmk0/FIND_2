@@ -7,13 +7,14 @@ use App\Models\FeedbackService;
 use Livewire\Component;
 use App\Models\Order;
 use WireUi\Traits\Actions;
-use App\Events\notificationOrder;
+use App\Events\ProgressOrderEvent;
 use App\Models\Conversation;
 use App\Models\Message;
 
 class CommandeOneView extends Component
 {
     use Actions;
+    public Order $Order;
     public $order_id;
     public $modal = false;
     public $feedback;
@@ -24,24 +25,25 @@ class CommandeOneView extends Component
     public $messages;
     public $body;
     public $modalC;
+    public $confirmModal;
 
     public function  getListeners()
     {
 
         $auth_id = auth()->user()->id;
         return [
-            "echo-private:notify.{$auth_id},notificationOrder" => 'broadcastedMessageNotificationOrder',
-            "echo-private:notify.{$auth_id},notificationOrder" => '$refresh', //
+
+            "echo-private:notify.{$auth_id},ProgressOrderEvent" => '$refresh', //
             'ServiceOrdered' => '$refresh',
 
 
         ];
     }
-    public function mount($id)
+    public function mount()
     {
-        $this->order_id = $id;
+        $this->order_id = $this->Order->id;
 
-        $this->freelance_id = Order::find($id)->service->freelance->id;
+        $this->freelance_id = $this->Order->service->freelance->id;
     }
 
 
@@ -131,6 +133,7 @@ class CommandeOneView extends Component
 
             ]);
 
+            $createdMessage->notifyUser();
             $this->messages = Message::where('conversation_id', $conversation->id)->get();
         }
         $this->openMessage = true;
@@ -163,6 +166,8 @@ class CommandeOneView extends Component
 
             ]);
 
+            $createdMessage->notifyUser();
+
             $this->body = null;
 
 
@@ -181,10 +186,19 @@ class CommandeOneView extends Component
         # code...
     }
 
+
+    public function AnnulerCommande()
+    {
+        $this->confirmModal = false;
+
+        $this->notification()->error(
+            $title = "Impossible d'annuler la commande pour l'instant",
+
+        );
+    }
+
     public function render()
     {
-        return view('livewire.user.commande.commande-one-view', [
-            'Order' => Order::findOrFail($this->order_id)
-        ])->extends('layouts.userProfile')->section('content');
+        return view('livewire.user.commande.commande-one-view')->extends('layouts.userProfile')->section('content');
     }
 }

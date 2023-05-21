@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use Ramsey\Uuid\Uuid;
+
 class Transaction extends Model
 {
     use HasFactory;
@@ -29,7 +31,8 @@ class Transaction extends Model
         parent::boot();
 
         static::creating(function ($transaction) {
-            $transaction->transaction_numero = 'TX' . date('YmdH')
+            //$transaction->id = Uuid::uuid4()->toString();
+            $transaction->transaction_numero = 'TC' . date('YmdH')
                 . rand(10, 99);
         });
     }
@@ -40,9 +43,9 @@ class Transaction extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+
         'user_id' => 'integer',
-        'order_id' => 'integer',
+
         'amount' => 'decimal:2',
     ];
 

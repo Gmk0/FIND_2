@@ -15,6 +15,7 @@ return new class extends Migration
 
         Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->string('service_numero')->unique();
             $table->string('title');
             $table->text('description');
             $table->decimal('basic_price', 8, 2);

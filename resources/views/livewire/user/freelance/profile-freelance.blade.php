@@ -33,6 +33,7 @@
                     </svg>
                     <span class="text-base">{{$freelance->category->name}}</span>
                 </h2>
+                @if(isset($freelance->localisation['ville']))
                 <h2 class="flex gap-1 mt-4 text-base font-medium text-gray-800">
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -44,6 +45,7 @@
                     <span class="text-base">{{$freelance->localisation['ville']?
                         $freelance->localisation['ville']:''}}</span>
                 </h2>
+                @endif
 
                 <h2 class="flex gap-2 mt-2 text-lg font-medium text-gray-500 dark:text-gray-200"><svg
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

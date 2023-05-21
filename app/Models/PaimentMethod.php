@@ -16,7 +16,7 @@ class PaimentMethod extends Model
      * @var array
      */
 
-    protected $fillable = ['mobile', 'carte', 'virement'];
+    protected $fillable = ['mobile', 'carte', 'virement', 'addresse'];
 
 
 
@@ -32,6 +32,7 @@ class PaimentMethod extends Model
         'id' => 'integer',
         'user_id' => 'integer',
         'mobile' => AsArrayObject::class,
+        'addresse' => AsArrayObject::class,
 
     ];
 }

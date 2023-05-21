@@ -78,13 +78,14 @@ class ViewCommande extends Component
 
             $data->etat = $this->status;
             $data->delai_livraison_estimee = $this->jour;
+            $data->notifyUser();
             $data->update();
 
             $this->Order->progress = $this->progress;
             $this->Order->update();
 
             $this->render();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             dd($e->getMessage());
         }
 

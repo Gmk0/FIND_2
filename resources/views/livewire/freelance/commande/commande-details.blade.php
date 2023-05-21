@@ -107,8 +107,22 @@
 
                         </div>
                         <div>
-                            <x-inputs.number max="100" wire:model.defer='progress' label='Progression'>
-                                </x-input>
+
+                            <x-select wire:model.defer="progress" label="Progression {{$progress}} %">
+
+                                @for ($i=0; $i
+                                <=10; $i++) <x-select.option label="{{$i*10}}%" value="{{$i*10}}" />
+
+                                @endfor
+
+
+
+
+                            </x-select>
+
+
+
+
                         </div>
                         <div class="">
 

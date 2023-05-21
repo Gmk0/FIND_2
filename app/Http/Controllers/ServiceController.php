@@ -12,6 +12,7 @@ use App\Models\Order;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class ServiceController extends Controller
 {
@@ -181,5 +182,32 @@ class ServiceController extends Controller
 
             // return response()->json(['error' => $e->getMessage()], 500);
         };
+    }
+
+
+    public function viewService($category, $service_numero)
+    {
+        $validatedData = Validator::make(['service_numero' => $service_numero], [
+            'service_numero' => 'string',
+
+        ]);
+
+
+
+
+
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData);
+        }
+
+        $data = Service::where('service_numero', $service_numero)->first();
+
+        if ($data != null) {
+
+            return view('user.service.serviceViewOne', ['service' => $data]);
+        } else {
+
+            return redirect()->back()->withErrors($validatedData);
+        }
     }
 }

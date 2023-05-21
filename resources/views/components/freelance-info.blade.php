@@ -35,6 +35,13 @@
             {{ __('Manage Account') }}
         </div>
 
+        <div class="flex flex-col px-4 py-2 text-xs text-gray-400">
+            {{ Auth::user()->name }}
+            <span>
+                {{ Auth::user()->freelance->category->name }}
+            </span>
+        </div>
+
         <x-dropdown-link href="{{ url('/user') }}">
             <ion-icon name="person-outline" class="w-4 h-4"></ion-icon>
             <span class="ml-2">{{__('Profile User')}}</span>

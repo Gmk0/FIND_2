@@ -23,13 +23,7 @@
 
                 <div class="flex">
 
-                    <div class="ml-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-                        </svg>
-                    </div>
+
                     <div class="ml-4">
 
                         <x-dropdown>
@@ -52,21 +46,21 @@
                 </div>
             </div>
             <div class="mx-3 my-3">
-                {{--<div class="relative text-gray-600">
+                <div class="relative text-gray-600">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6 text-gray-300">
                             <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </span>
-                    <input type="search" class="block w-full py-2 pl-10 bg-gray-100 rounded outline-none" name="search"
-                        placeholder="Search" required />
-                </div>--}}
-                <x-select label="" wire:model="freelance" x-on:selected="sidebarOpen=true"
-                    placeholder="Select some user" :async-data="route('api.freelance.users')" :template="[
-            'name'   => 'user-option',
-            'config' => ['src' => 'profile_photo_url']
-        ]" option-label="name" option-value="id" option-description="category_name" />
+
+                    <input type="search" wire:model.debounce.500ms='query'
+                        class="block w-full py-2 pl-10 bg-gray-100 rounded outline-none dark:bg-gray-800 dark:text-gray-300"
+                        name="search" placeholder="Recherche" required />
+
+
+                </div>
+
             </div>
 
             <ul class="overflow-auto h-[32rem]">

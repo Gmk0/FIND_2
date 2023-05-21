@@ -28,7 +28,6 @@ class Service extends Model
         'premium_support',
         'premium_revision',
         'premium_delivery_time',
-
         'extra_price',
         'extra_support',
         'extra_revision',
@@ -44,6 +43,16 @@ class Service extends Model
         'freelance_id',
         'category_id',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($service) {
+            // $commande->id = Uuid::uuid4()->toString();
+            $service->service_numero = 'SV' . date('YmdH');
+        });
+    }
 
     /**
      * The attributes that should be cast to native types.

@@ -23,15 +23,15 @@ class ServicesViewOne extends Component
 {
 
     use Actions;
-    public $service;
+    public Service $service;
     public $images;
     public $products;
     public $servicesOther = null;
     public $commentaires = null;
-    public function mount($id)
+    public function mount()
     {
 
-        $this->service = Service::find($id);
+
         // dd($this->service->averageFeedback());
         $this->images = $this->images();
         // dd($this->images);
@@ -197,7 +197,6 @@ class ServicesViewOne extends Component
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $this->products = $cart->items;
-        return view('livewire.user.services.services-view-one')
-            ->extends('layouts.user')->section('content');
+        return view('livewire.user.services.services-view-one');
     }
 }

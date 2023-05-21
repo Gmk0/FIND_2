@@ -4,7 +4,7 @@
 
     <div class="px-4 py-4 md:px-6 lg:px-12 xl:px-20">
         <div>
-            @include('include.breadcumbFreelance',['Order'=>'Order','OrderID'=>$Order->id])
+            @include('include.breadcumbFreelance',['Order'=>'Order','OrderID'=>$Order->transaction->transaction_numero])
         </div>
         <div class="mx-auto md:max-w-5xl">
 

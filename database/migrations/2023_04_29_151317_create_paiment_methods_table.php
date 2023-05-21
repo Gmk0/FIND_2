@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('mobile', 2000)->nullable();
             $table->string('carte', 2000)->nullable();
             $table->string('virement', 2000)->nullable();
+            $table->string('addresse', 2000)->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();

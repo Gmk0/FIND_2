@@ -47,7 +47,7 @@
                         </div>
                         <div class="mt-4 divide-y ">
 
-                            @empty(!$methodePaiment)
+                            @empty(!$methodePaiment->mobile)
                             @forelse ($methodePaiment->mobile as $key => $value)
                             <div x-data="{linkHover:false}" class="flex justify-between gap-4">
 
@@ -118,10 +118,17 @@
                     </div>
                     <div class="flex flex-col gap-2">
 
-                        <x-input placeholder="Rue" />
-                        <x-input placeholder="Quartier" />
-                        <x-input placeholder="Commune" />
-                        <x-input placeholder="Ville" />
+                        <x-input wire:model.defer="address.rue" placeholder="18 em Rue" />
+                        <x-input wire:model.defer="address.quartier" placeholder="Quartier" />
+                        <x-input wire:model.defer="address.commune" placeholder="Commune" />
+                        <x-input wire:model.defer="address.ville" placeholder="Ville" />
+                        <x-input wire:model.defer="address.bp" placeholder="code postal" />
+
+                        <div>
+
+                            <x-button wire:click="AddAdrees()" spinner="AddAdrees" positive label="Ajouter ou Modifier">
+                            </x-button>
+                        </div>
 
                     </div>
 

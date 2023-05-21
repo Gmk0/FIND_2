@@ -17,6 +17,7 @@ class ConversationComponent extends Component
     public $receiverInstance;
     public $freelancerId;
     public $user_id;
+    public $query;
 
     public function  getListeners()
     {
@@ -59,6 +60,14 @@ class ConversationComponent extends Component
     public function render()
     {
         $this->conversations = Conversation::where('freelance_id', $this->freelancerId)->orderBy('last_time_message', 'DESC')->get();
+
+        $this->conversations = Conversation::where('freelance_id', $this->freelancerId)
+            ->when($this->query, function ($q) {
+                $q->whereHas('user', function ($query) {
+                    $query->where('name', 'LIKE', "%" . $this->query . "%");
+                });
+            })
+            ->orderBy('last_time_message', 'DESC')->get();
         return view('livewire.freelance.conversations.conversation-component')->extends('layouts.freelanceTest2')->section('content');
     }
 }

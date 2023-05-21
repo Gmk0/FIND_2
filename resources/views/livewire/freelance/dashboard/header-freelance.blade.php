@@ -179,9 +179,9 @@
     </header>
 
     <div wire:offline>
-        <div class="p-4 text-orange-700 bg-orange-100 border-l-4 border-orange-500" role="alert">
-            <p class="font-bold">Be Warned</p>
-            <p>Something not ideal might be happening.</p>
+        <div class="w-full p-4 text-orange-700 bg-orange-100 border-l-4 border-orange-500" role="alert">
+            <p class="font-bold">Deconnexion</p>
+            <p>Vous etes hors ligne.</p>
         </div>
         Titled
     </div>

@@ -14,7 +14,7 @@ $overflow="overflow-y-auto";
 
 <body x-data="setup()" x-init="$refs.loading.classList.add('hidden');" @resize.window="watchScreen()"
     class="antialiased text-gray-900 bg-white dark:text-gray-100">
-    <x-notifications z-index="z-50" position='top-left' />
+    <x-notifications z-index="z-60" position='bottom-right' />
 
     <div class="flex h-screen overflow-x-hidden bg-gray-100 dark:bg-gray-900 custom-scrollbar">
         <!-- Loading screen -->
@@ -23,6 +23,11 @@ $overflow="overflow-y-auto";
             class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-50"
             style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
             Chargement.....
+
+
+
+
+
         </div>
 
         <!-- Sidebar -->
@@ -171,6 +176,7 @@ $overflow="overflow-y-auto";
 
 
         </div>
+
     </div>
 
     <!-- Panels -->

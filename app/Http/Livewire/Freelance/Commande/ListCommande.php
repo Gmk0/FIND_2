@@ -101,7 +101,7 @@ class ListCommande extends Component implements Tables\Contracts\HasTable
         return [
             // ...
             Action::make('Voir')
-                ->url(fn (Order $record): string => route('freelance.Order.view', $record->id))
+                ->url(fn (Order $record): string => route('freelance.Order.view', $record->order_numero))
                 // ->openUrlInNewTab()
                 ->icon('heroicon-s-pencil')
                 ->tooltip('Voir les services'),

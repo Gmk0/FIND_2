@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+use Ramsey\Uuid\Uuid;
+
 class Order extends Model
 {
     use HasFactory;
@@ -35,6 +37,7 @@ class Order extends Model
         parent::boot();
 
         static::creating(function ($commande) {
+            // $commande->id = Uuid::uuid4()->toString();
             $commande->order_numero = 'CMD' . date('YmdH') . rand(10, 99);
         });
     }
@@ -44,7 +47,7 @@ class Order extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+
         'user_id' => 'integer',
         'freelance_id' => 'integer',
         'service_id' => 'integer',

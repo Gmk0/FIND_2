@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Events\ProgressOrderEvent;
+
+use App\Notifications\ProgressOrder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,6 +26,30 @@ class FeedbackService extends Model
         'actions_correctives',
         'is_publish',
     ];
+
+
+    protected $dispatchesEvents = [
+
+        'updated' => ProgressOrderEvent::class,
+        'created' => ProgressOrderEvent::class,
+    ];
+
+
+    public function notifyUser()
+    {
+        $order = $this->order;
+
+
+
+        if ($order) {
+            $user = $order->user;
+
+            if ($user) {
+
+                $user->notify(new ProgressOrder($this));
+            }
+        }
+    }
 
 
     public function order(): BelongsTo

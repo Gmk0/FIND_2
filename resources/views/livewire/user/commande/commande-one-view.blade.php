@@ -1,9 +1,9 @@
 <div class="min-h-screen" x-data="{message:@entangle('openMessage')}">
 
     <!-- Exemple de section pour afficher les détails d'une commande avec options supplémentaires -->
-    <section class="px-2 py-6 md:px-6 lg:px-8 xl:px-20">
+    <section class="px-2 py-6 dark:text-gray-400 md:px-6 lg:px-8 xl:px-20">
         <div>
-            @include('include.breadcumbUser',['commande'=>'commande','commandeID'=>'1'])
+            @include('include.breadcumbUser',['commande'=>'commande','commandeID'=>$Order->order_numero])
         </div>
         <div class="max-w-6xl mx-auto">
 
@@ -24,7 +24,7 @@
                     </p>
                     <p class="mb-4 text-base text-gray-600 md:mb-2 dark:text-gray-300">Délai de livraison :
                         {{$Order->feedback->delai_livraison_estimee ? $Order->feedback->delai_livraison_estimee:'Pas
-                        disponible'}} jour
+                        disponible'}}
                     </p>
 
                     <p class="mb-4 text-base text-gray-600 md:mb-2 dark:text-gray-300">Paiement :
@@ -73,22 +73,26 @@
                 </div>
 
                 <!-- Freelance lié à la commande -->
-                <div x-data="{open:false}" class="px-6 py-4 border-t border-gray-200">
+                <div class="px-6 py-4 border-t border-gray-300">
 
-                    <h1 @click="open = !open" class="flex items-start gap-2 text-xl font-bold cursor-pointer">
+                    <h1 class="flex items-start gap-2 text-lg font-bold cursor-pointer lg:text-xl">
                         Freelance lié
-                        <button @click="open = !open">
-                            <svg :class="{ 'rotate-180': open }" class="w-6 h-6 fill-current"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path
-                                    d="M14.707 7.293a1 1 0 0 0-1.414 0L10 10.586 6.707 7.293a1 1 0 0 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0 0-1.414z" />
-                            </svg>
-                        </button>
+
                     </h1>
 
-                    <div x-cloak x-show="open" x-collapse class="flex items-center mt-4">
-                        <img src="https://via.placeholder.com/48" alt="Avatar du freelance"
-                            class="w-12 h-12 rounded-full">
+                    <div class="flex items-center mt-4">
+                        @if (!empty($Order->service->freelance->user->profile_photo_path))
+                        <img class="w-12 h-12 rounded-full"
+                            src="{{Storage::disk('local')->url('profiles-photos/'.$Order->service->freelance->user->profile_photo_path) }}"
+                            alt="">
+                        @else
+                        <img class="w-12 h-12 rounded-full"
+                            src="{{ $Order->service->freelance->user->profile_photo_url }}" alt="">
+                        @endif
+
+
+
+
                         <div class="ml-4">
                             <p class="text-sm text-gray-600 dark:text-gray-300">{{$Order->service->freelance->nom}}
                             </p>
@@ -101,7 +105,8 @@
                 <div x-data="{open:false}" class="px-6 py-4 border-t border-gray-200">
 
 
-                    <h1 @click="open = !open" class="flex items-start gap-2 text-xl font-bold cursor-pointer">
+                    <h1 @click="open = !open"
+                        class="flex items-start gap-2 text-lg font-bold cursor-pointer lg:text-xl">
                         Rapport Envoyer
                         <button @click="open = !open">
                             <svg :class="{ 'rotate-180': open }" class="w-6 h-6 fill-current"
@@ -174,7 +179,8 @@
                         </div>
 
                         <div>
-                            <x-button negative label="Annuler la commande"></x-button>
+                            <x-button wire:click="$toggle('confirmModal')" negative label="Annuler la commande">
+                            </x-button>
 
 
                         </div>
@@ -213,8 +219,8 @@
                         <div x-cloak x-show="open" x-collapse>
                             <p class="text-sm text-gray-600 dark:text-gray-300">Numéro de transaction :
                                 #{{$Order->transaction->id}}</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Méthode de paiement : Carte de
-                                crédit</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">Méthode de paiement :
+                                {{$Order->transaction->payment_method}}</p>
                             <p class="text-sm text-gray-600 dark:text-gray-300">Montant payé :
                                 {{$Order->total_amount}}
                             </p>
@@ -316,11 +322,7 @@
 
             </x-modal>
 
-            <x-jet-modal wire:model.defer="confirmModal">
 
-
-
-            </x-jet-modal>
 
             <div class="fixed bottom-0 right-0 z-10 mb-4 mr-4">
 
@@ -398,6 +400,30 @@
                 </div>
             </div>
     </section>
+
+    <x-confirmation-modal wire:model.defer="confirmModal">
+
+        <x-slot name="title">
+            Annuler la commande
+
+        </x-slot>
+
+        <x-slot name="content">
+            Voulez-vous annuler cette commande ?
+
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$toggle('confirmModal')" wire:loading.attr="disabled">
+                {{ __('Annuler') }}
+            </x-secondary-button>
+
+            <x-danger-button class="ml-3" wire:click="AnnulerCommande()" wire:loading.attr="disabled">
+                {{ __('Annuler la commande') }}
+            </x-danger-button>
+        </x-slot>
+
+    </x-confirmation-modal>
     {{-- The Master doesn't talk, he acts. --}}
 </div>
 

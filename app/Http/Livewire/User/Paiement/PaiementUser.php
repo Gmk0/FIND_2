@@ -24,6 +24,51 @@ class PaiementUser extends Component
     public  $idMobile;
     public $pays;
     protected $listeners = ['refresh' => '$refresh'];
+    public $address = [
+        'rue' => '',
+        'commune' => '',
+        'quartier' => '',
+        'ville' => '',
+        'bp' => '',
+    ];
+
+    public function AddAdrees()
+    {
+        $this->validate(['address.rue' => 'required', 'address.commune' => 'required', 'address.quartier' => 'required', 'address.ville' => 'required',]);
+
+
+
+
+        $data = PaimentMethod::where('user_id', auth()->id())->exists();
+
+
+
+
+
+        if ($data) {
+
+            $newData = PaimentMethod::where('user_id', auth()->id())->first();
+            $NewDonnee = $this->address;
+            $newData->addresse = $NewDonnee;
+            $newData->update();
+        } else {
+
+
+
+            $NewData = new PaimentMethod();
+
+
+
+            $NewData->addresse = $this->address;
+            $NewData->save();
+        }
+
+        $this->emitSelf('refresh');
+        $this->notification()->success(
+            $title = "l'addresse de facturation a ete modifier",
+
+        );
+    }
 
     public function openModalMobile()
     {
@@ -33,11 +78,25 @@ class PaiementUser extends Component
 
     public function mount()
     {
-        $this->methodePaiment
-            = PaimentMethod::where('user_id', auth()->id())->first();
+        $this->methodePaiment = PaimentMethod::where('user_id', auth()->id())->first();
 
-        $response = Http::get('https://restcountries.com/v3.1/all?fields=name,idd');
-        $this->pays = $response->json();
+        if (isset($this->methodePaiment->addresse) && $this->methodePaiment->addresse != null) {
+
+            $this->address = [
+                'rue' => $this->methodePaiment->addresse['rue'],
+                'commune' =>
+                $this->methodePaiment->addresse['commune'],
+                'quartier' =>
+                $this->methodePaiment->addresse['quartier'],
+                'ville' =>
+                $this->methodePaiment->addresse['ville'],
+                'bp' =>
+                $this->methodePaiment->addresse['bp'],
+            ];
+        }
+
+        // $response = Http::get('https://restcountries.com/v3.1/all?fields=name,idd');
+        //$this->pays = $response->json();
     }
 
     public function removeMobile(int $id)
@@ -146,23 +205,7 @@ class PaiementUser extends Component
     }
 
 
-    public function sendNotification()
-    {
 
-
-
-
-        try {
-            $user = Auth::user();
-
-
-            $notification = new ServicePaid();
-            $data = $user->notify($notification);
-        } catch (Exception $e) {
-
-            dd($e->getMessage());
-        }
-    }
 
 
     public function openModalVirement()

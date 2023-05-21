@@ -128,7 +128,7 @@
 
             @forelse ($messages as $message)
 
-            <div x-data="{chat:false}"
+            <div x-data="{chat:false}" @mouse.enter="chat=true" @mouse.leave="chat=false"
                 class="chat  {{auth()->id() == $message->sender_id ? 'chat-end':'chat-start'}}  ">
                 <div class="chat-image avatar">
 

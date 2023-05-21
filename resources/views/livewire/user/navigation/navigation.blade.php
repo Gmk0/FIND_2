@@ -8,7 +8,7 @@ $fixed="";
 }
 @endphp
 
-<header x-data="{isSearchBoxOpen:false,search:false}" class="w-full bg-skin-fill z-[45]">
+<header x-data="{isSearchBoxOpen:false,search:false}" class="w-full dark:bg-gray-800 bg-skin-fill z-[45]">
 
 
     <nav class="z-[80] w-full bg-skin-fill dark:bg-gray-800">

@@ -22,7 +22,7 @@
         x-init="setTimeout(() => { isLoading = false }, 3000)">
 
         <div class="px-2">
-            @include('include.breadcumb',['category'=>'cagegory','categoryName'=>$service->category->name,'ServiceId'=>$service->id])
+            @include('include.breadcumb',['category'=>'cagegory','categoryName'=>$service->category->name,'ServiceId'=>$service->service_numero])
         </div>
 
         <div>

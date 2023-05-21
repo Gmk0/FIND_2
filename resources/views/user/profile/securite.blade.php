@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="min-h-screen mb-4 ">
+<div class="min-h-screen pb-8 mb-4 ">
 
 
 

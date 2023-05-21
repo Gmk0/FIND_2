@@ -194,13 +194,33 @@
 
                         @foreach ($freelances as $freelance)
                         <div class="card swiper-slide">
-                            <div class="image-content">
-                                <span class="overlay"></span>
 
-                                <div class="card-image">
-                                    <img src="{{$freelance->user->profile_photo_url}}" alt="" class="card-img">
+                            <div class=" dark:bg-gray-800 dark:rounded-md image-content">
+                                <span
+                                    class="overlay after:dark:bg-gray-800 before:dark:bg-gray-800 dark:rounded-lg dark:bg-gray-800"></span>
+
+
+                                <div class="card-image ">
+                                    @if (!empty($freelance->user->profile_photo_path))
+                                    <img src="{{Storage::disk('local')->url('profiles-photos/'.$freelance->user->profile_photo_path) }}"
+                                        alt=""
+                                        class="border-2 {{$freelance->isOnline() ? 'border-green-600':'border-gray-600'}}  card-img">
+
+                                    @else
+                                    <img class="border-2 {{$freelance->isOnline() ? 'border-green-600':'border-gray-600'}}  card-img"
+                                        src="{{$freelance->user->profile_photo_url }}" alt="">
+                                    @endif
+
+
+
+
                                 </div>
+
+
+
+
                             </div>
+
 
                             <div class="p-4 ">
                                 <div class="flex justify-between">

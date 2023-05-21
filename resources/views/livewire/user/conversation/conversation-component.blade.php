@@ -4,6 +4,7 @@
      isPanelOpen:false,
      theme:false,
      attachement:false,
+
     }" class="container mx-auto overflow-y-auto custom-scrollbar">
     <div
         class="h-screen min-w-full overflow-y-hidden border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
@@ -26,11 +27,16 @@
                 <div class="flex">
 
                     <div class="ml-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-                        </svg>
+                        <a href="{{route('find_freelance')}}">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                            </svg>
+
+                        </a>
+
                     </div>
                     <div class="ml-4">
 
@@ -61,8 +67,12 @@
                             <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </span>
-                    <input type="search" class="block w-full py-2 pl-10 bg-gray-100 rounded outline-none" name="search"
-                        placeholder="Search" required />
+
+                    <input type="search" wire:model.debounce.500ms='query'
+                        class="block w-full py-2 pl-10 bg-gray-100 rounded outline-none dark:bg-gray-800 dark:text-gray-300"
+                        name="search" placeholder="Recherche" required />
+
+
                 </div>
 
             </div>
@@ -72,7 +82,7 @@
 
                 <li>
                     @if (count($conversations) > 0)
-                    @foreach ($conversations as $conversation)
+                    @forelse ($conversations as $conversation)
                     <a wire:key='{{$conversation->id}}' href="#" @click="sidebarOpen=!sidebarOpen"
                         wire:click="chatUserSelected({{$conversation}},{{$conversation->freelance_id }})"
                         class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-500 cursor-pointer dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none">
@@ -129,12 +139,24 @@
                         </div>
                     </a>
 
-                    @endforeach
+                    @empty
 
+
+                    @endforelse
+
+                    @else
+
+                    <div class="px-4">
+                        <h1>
+                            Pas de freelance trouver
+                        </h1>
+                    </div>
 
                     @endif
                 </li>
             </ul>
+
+
         </div>
         <div x-bind:class="{'md:block': sidebarOpen, ' hidden md:block ': !sidebarOpen}"
             class=" lg:col-span-2 lg:block">
@@ -344,55 +366,7 @@
     </div>
 
 
-    {{--<div @click.away="theme = false" x-cloak x-show="theme" class="fixed inset-0 z-50 overflow-y-auto"
-        id="theme-modal">
-        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-            </div>
 
-            <div class="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
-                role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                <div>
-                    <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-headline">
-                        Choisir le thème du composant conversation
-                    </h3>
-                    <div class="mt-4">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <input type="radio" id="theme-light" name="theme" value="light"
-                                    class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                                <label for="theme-light" class="block ml-3 text-sm font-medium text-gray-700">
-                                    Clair
-                                </label>
-                            </div>
-                            <div class="w-4 h-4 bg-gray-200 rounded-full"></div>
-                        </div>
-                        <div class="mt-4">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <input type="radio" id="theme-dark" name="theme" value="dark"
-                                        class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                                    <label for="theme-dark" class="block ml-3 text-sm font-medium text-gray-700">
-                                        Foncé
-                                    </label>
-                                </div>
-                                <div class="w-4 h-4 bg-gray-800 rounded-full"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-5 sm:mt-6">
-                    <button type="button"
-                        class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-                        onclick="saveTheme()">
-                        Enregistrer
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    --}}
 
 
 

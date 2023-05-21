@@ -67,7 +67,7 @@ implements Tables\Contracts\HasTable
         return [
 
             Split::make([
-                Tables\Columns\TextColumn::make('order_numero')->description('commande id'),
+
                 Tables\Columns\TextColumn::make('transaction.transaction_numero')->description('Transaction'),
                 Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('lg'),
                 Tables\Columns\TextColumn::make('total_amount')->description('Montant'),
@@ -114,9 +114,9 @@ implements Tables\Contracts\HasTable
         return [
             SelectFilter::make('status')
                 ->options([
-                    'completed' => 'completed',
-                    'pending' => 'pending',
-                    'rejeted' => 'rejeted',
+                    'completed' => 'Payer',
+                    'pending' => 'en Attente',
+                    'rejeted' => 'Rejecter',
                 ])
                 ->attribute('status'),
 
@@ -132,8 +132,8 @@ implements Tables\Contracts\HasTable
         return [
             // ...
             Action::make('Voir')
-                ->url(fn (Order $record): string => route('freelance.Order.view', $record->id))
-                ->openUrlInNewTab()
+                ->url(fn (Order $record): string => route('freelance.transaction.view', $record->transaction->transaction_numero))
+
                 ->tooltip('Voir transaction')
                 ->icon('heroicon-s-pencil'),
 

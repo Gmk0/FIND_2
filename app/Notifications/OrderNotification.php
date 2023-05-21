@@ -23,7 +23,7 @@ class OrderNotification extends Notification implements ShouldQueue
 
     public function via($notifiable)
     {
-        return [PusherChannel::class, "database"];
+        return [PusherChannel::class, "database", "mail"];
     }
 
     public function toDatabase($notifiable)
@@ -34,34 +34,16 @@ class OrderNotification extends Notification implements ShouldQueue
             'icon' => '/img/notification-icon.png',
         ];
     }
-    /*
-  public function toPushNotification($notifiable)
+
+
+    public function toMail(object $notifiable): MailMessage
     {
-        $beamsClient = new PushNotifications(array(
-            "instanceId" => config('services.pusher.beams_instance_id'),
-            "secretKey" => config('services.pusher.beams_secret_key'),
-        ));
-
-
-        $interests = "App.Models.User.{$notifiable->id}";
-        $data = array(
-            "web" => array(
-                "notification" => array(
-                    "title" => "Nouvelle commande !",
-                    "body" => 'Vous avez une nouvelle commande de ' . $this->order->total_amount . ' pour le service ' . $this->order->service->title . '.',
-                    "deep_link" => '/freelance/commande/view' . $this->order->id,
-                    "icon" => "/images/logo/find_01.png",
-                    "data" => array(
-                        "client" => "bar",
-                        "service" => "qux",
-                    ),
-                ),
-            ),
-        );
-
-        $beamsClient->publishToInterests(array($interests), $data);
+        return (new MailMessage)
+            ->line('Nouvelle Commande de.')
+            ->action('Notification Action', url('/orders/' . $this->order->id))
+            ->line('Thank you for using our application!');
     }
-*/
+
     public function toPushNotification($notifiable)
     {
         $beamsClient = new PushNotifications(array(

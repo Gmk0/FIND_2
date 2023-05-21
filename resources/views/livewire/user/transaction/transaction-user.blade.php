@@ -13,14 +13,10 @@
         <div x-show="isLoading">
 
             <div class="flex flex-col gap-4 p-8 overflow-y-hidden">
-                <div class="grid grid-cols-1 gap-4 mt-6 md:grid-cols-3">
-                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
-                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
-                    <div class="h-48 bg-gray-300 rounded-md animate-pulse"></div>
-                </div>
+
 
                 <div
-                    class="flex-1 w-full min-h-screen p-4 mb-2 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
+                    class="flex-1 w-full min-h-screen p-4 mb-2 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md dark:bg-gray-500 animate-pulse custom-scrollbar">
 
 
 
