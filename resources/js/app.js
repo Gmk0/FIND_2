@@ -1,5 +1,6 @@
 import './bootstrap';
 
+import 'flowbite';
 import AOS from 'aos';
 // You can also use <link> for styles
 // ..

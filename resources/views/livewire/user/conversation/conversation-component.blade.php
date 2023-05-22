@@ -7,8 +7,8 @@
 
     }" class="container mx-auto overflow-y-auto custom-scrollbar">
     <div
-        class="h-screen min-w-full overflow-y-hidden border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
-        <div x-bind:class="{'md:block hidden': sidebarOpen, 'md:block ': !sidebarOpen}"
+        class="min-w-full min-h-screen overflow-y-hidden border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
+        <div x-bind:class="{'lg:block hidden': sidebarOpen, 'lg:block ': !sidebarOpen}"
             class="border border-gray-500 dark:border-gray-600 lg:col-span-1">
 
             <div
@@ -160,7 +160,7 @@
         </div>
         <div x-bind:class="{'md:block': sidebarOpen, ' hidden md:block ': !sidebarOpen}"
             class=" lg:col-span-2 lg:block">
-            <div class="w-full h-full ">
+            <div class="w-full min-h-full ">
 
 
                 <div class="flex flex-row items-center justify-between px-3 py-2 bg-grey-lighter">
@@ -263,7 +263,7 @@
                     @livewire('user.conversation.body-message')
                 </div>
 
-                <div class="h-16">
+                <div class="">
                     @livewire('user.conversation.send-message-u')
 
                 </div>
@@ -384,7 +384,8 @@
     function resetPosition() {
 
 
-        var div = document.getElementById("main");
+        alert('ok');
+        var div = document.getElementById("body");
 
         var parent = document.getElementById('parent');
 

@@ -29,6 +29,7 @@ module.exports = {
         './vendor/wireui/wireui/ts/**/*.ts',
         './vendor/wireui/wireui/src/View/**/*.php',
         './vendor/filament/**/*.blade.php',
+        "./node_modules/flowbite/**/*.js"
     ],
 
     theme: {
@@ -70,6 +71,7 @@ module.exports = {
     },
 
     plugins: [require('@tailwindcss/typography'),
+    require('flowbite/plugin'),
     require('@tailwindcss/forms')({
         strategy: 'class',
     }),

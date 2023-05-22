@@ -198,6 +198,6 @@ class ConversationComponent extends Component
                 });
             })
             ->orderBy('last_time_message', 'DESC')->get();
-        return view('livewire.user.conversation.conversation-component')->extends('layouts.userProfile')->section('content');
+        return view('livewire.user.conversation.conversation-component')->extends('layouts.freelanceTest')->section('content');
     }
 }

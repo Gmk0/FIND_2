@@ -1,4 +1,4 @@
-<div x-data="{ isOpen:false,isLoading: true }" x-init="setTimeout(() => { isLoading = false }, 2000)" class="p-2">
+<div x-data="{ isOpen:false,isLoading: true }" x-init="setTimeout(() => { isLoading = false }, 2000)" class="p-2 pt-16">
     <div
         class="flex flex-col min-h-screen gap-6 mx-auto bg-gray-100 md:p-6 md:max-w-7xl md:container px-auto dark:bg-gray-900">
         <!-- start::Stats -->

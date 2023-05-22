@@ -276,6 +276,6 @@ class DashbordUser extends Component implements Tables\Contracts\HasTable
 
             "percentTransaction" => $this->pourcentageChangementMoisPrecedent(),
             'orderEvolution' => $this->calculateTransactionsEvolution(),
-        ])->extends('layouts.userProfile')->section('content');
+        ])->extends('layouts.freelanceTest')->section('content');
     }
 }

@@ -34,7 +34,7 @@
 
 
 
-<script src="/build/assets/app.js" defer></script>
+{{--<script src="/build/assets/app.js" defer></script>--}}
 
 
 
