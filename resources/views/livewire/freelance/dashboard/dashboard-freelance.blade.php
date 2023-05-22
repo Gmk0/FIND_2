@@ -184,7 +184,7 @@
         <div class="flex flex-col gap-4 my-16 space-y-4 lg:flex-row lg:space-y-0 lg:space-x-4">
             <!-- start::Schedule -->
             <div class="w-full space-y-1 bg-white rounded-lg shadow-xl lg:w-2/3">
-                <h4 class="m-6 text-xl font-semibold text-gray-800 capitalize">Schedule</h4>
+                <h4 class="m-6 text-xl font-semibold text-gray-800 capitalize">Commande</h4>
                 <!-- start::Task in calendar -->
                 <!-- Vue pour afficher les éléments du calendrier ou de l'agenda -->
                 @forelse ($schedules as $schedule)
@@ -195,19 +195,13 @@
                         <span class="text-xs text-gray-200 lg:text-sm">{{ $schedule->created_at->format('h:i A')
                             }}</span>
                     </div>
-                    <div class="flex justify-between w-full p-4 transition duration-200 bg-gray-100 hover:bg-gray-200">
+                    <div
+                        class="flex justify-between w-full p-4 transition duration-200 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200">
                         <div class="flex flex-col justify-center">
                             <span class="xl:text-lg">Commande à terminer</span>
                             <span class="flex items-start">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                    </path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                                <span class="text-xs lg:text-sm">
+
+                                <span class="text-xs dark:text-gray-300 lg:text-sm">
                                     {{ $schedule->service->title }}
                                 </span>
                             </span>
@@ -215,7 +209,7 @@
 
                         <div class="flex items-center">
                             <!-- Calculer et afficher le temps restant en heures -->
-                            <span class="p-2 text-xs text-center bg-gray-300 rounded-lg lg:text-sm">
+                            <span class="p-2 text-xs text-center bg-gray-300 rounded-lg dark:text-gray-300 lg:text-sm">
                                 {{ $schedule->service->basic_delivery_time -
                                 Carbon\Carbon::now()->diffInHours(Carbon\Carbon::parse($schedule->created_at)->addDays($schedule->service->basic_delivery_time))
                                 }}

@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('order_numero')->unique();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('service_id')->constrained();
+            $table->foreignId('service_id')->nullable()->constrained();
             $table->foreignId('freelance_id')->nullable()->constrained();
-            $table->enum('type', ["freelance", "service"])->nullable();
+            $table->foreignId('project_id')->nullable()->constrained();
+            $table->enum('type', ["freelance", "service", "Mission"])->nullable();
 
             $table->decimal('total_amount', 8, 2);
             $table->integer('quantity')->nullable();

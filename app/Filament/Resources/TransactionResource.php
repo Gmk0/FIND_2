@@ -19,6 +19,10 @@ class TransactionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationGroup = 'Commande';
+
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -44,14 +48,14 @@ class TransactionResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -60,5 +64,5 @@ class TransactionResource extends Resource
             'view' => Pages\ViewTransaction::route('/{record}'),
             'edit' => Pages\EditTransaction::route('/{record}/edit'),
         ];
-    }    
+    }
 }

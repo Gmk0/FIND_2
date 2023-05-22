@@ -11,7 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
@@ -55,10 +55,6 @@ class User extends Authenticatable implements FilamentUser
         'last_activity' => 'datetime',
     ];
 
-    public function canAccessFilament(): bool
-    {
-        return str_ends_with($this->email, '@findAdmin.com');
-    }
 
 
 

@@ -17,7 +17,8 @@ class FreelanceResource extends Resource
 {
     protected static ?string $model = Freelance::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationGroup = 'Utilisateur';
 
     public static function form(Form $form): Form
     {

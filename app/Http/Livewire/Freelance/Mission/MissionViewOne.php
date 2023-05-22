@@ -15,6 +15,7 @@ class MissionViewOne extends Component
     public $content;
     public $amount;
     public $modal = false;
+    public $modalEdit = false;
     public $response = null;
     public $delai;
     protected $listeners = ['refresh' => '$refresh'];
@@ -36,41 +37,71 @@ class MissionViewOne extends Component
     public function sendResponse()
     {
 
+        try {
 
-        $this->validate([
-            'content' => 'required',
+            $this->validate([
+                'content' => 'required',
 
-        ]);
+            ]);
 
-
-        $data = ProjectResponse::create([
-            'project_id' => $this->projet->id,
-            'freelance_id' => auth()->user()->getIdFreelance(),
-            'content' => $this->content,
-            'bid_amount' => $this->amount ? $this->amount : $this->projet->bid_amount,
-        ]);
-
-        $Project = Project::where('id', $data->project_id)->first();
+            if (empty($this->response)) {
 
 
-        $this->reset('content', 'amount');
 
-        $this->modal = false;
+                $data = ProjectResponse::create([
+                    'project_id' => $this->projet->id,
+                    'freelance_id' => auth()->user()->getIdFreelance(),
+                    'content' => $this->content,
+                    'bid_amount' => $this->amount ? $this->amount : $this->projet->bid_amount,
+                ]);
 
-        if ($data) {
+                $data->notifyUser();
+
+                $Project = Project::where('id', $data->project_id)->first();
+            }
+
+            $this->reset('content', 'amount');
+
+            $this->modal = false;
+
+            if ($data) {
 
 
-            $this->notification()->success(
-                $title = "Proposition",
-                $description = "Votre proposition a ete envoyer avec success vous recevrez des notifications sur l'etat de votre proposition",
-            );
+                $this->notification()->success(
+                    $title = "Proposition",
+                    $description = "Votre proposition a ete envoyer avec success vous recevrez des notifications sur l'etat de votre proposition",
+                );
 
-            event(new ProjectResponseFreelance($data));
 
-            $this->emitSelf('refresh');
+
+                $this->emitSelf('refresh');
+            }
+        } catch (\Exception $e) {
+
+            $this->dispatchBrowserEvent('error', [
+                'message' => $e->getMessage()
+            ]);
         }
     }
 
+    public function modalEdit()
+    {
+
+        $this->content = $this->response->content;
+        $this->amount = $this->response->bid_amount;
+
+        $this->dispatchBrowserEvent('open');
+
+        $this->modalEdit = true;
+        $this->modal = true;
+    }
+
+
+    public function editResponse()
+    {
+
+        dd('lolo');
+    }
 
     public function render()
     {

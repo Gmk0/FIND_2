@@ -2,21 +2,32 @@
 
 namespace App\Notifications;
 
+use App\Models\ProjectResponse;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ProjetStatus extends Notification
+
+
+use NotificationChannels\PusherPushNotifications\PusherChannel;
+use Pusher\PushNotifications\PushNotifications;
+use NotificationChannels\PusherPushNotifications\PusherMessage;
+
+class ProjetStatus extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+
+    public $projectResponse;
+    public function __construct(ProjectResponse $projectResponse)
     {
         //
+
+        $this->projectResponse = $projectResponse;
     }
 
     /**
@@ -24,31 +35,57 @@ class ProjetStatus extends Notification
      *
      * @return array<int, string>
      */
-    public function via(object $notifiable): array
+
+
+
+    public function via($notifiable)
     {
-        return ['mail'];
+        return [PusherChannel::class, "database", "mail"];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
+    public function toDatabase($notifiable)
+    {
+        return [
+            'message' => 'Nouvelle proposition de votre mission ' . $this->projectResponse->project->title,
+            'url' => '/user/list_project/' . $this->projectResponse->project->id,
+            'icon' => '/img/notification-icon.png',
+        ];
+    }
+
+
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('Nouvelle proposition de votre mission ' . $this->projectResponse->project->title)
+            ->action('Notification Action', url('/user/list_project/' . $this->projectResponse->project->id))
+            ->line('Merci d\'utiliser notre Application!');
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(object $notifiable): array
+    public function toPushNotification($notifiable)
     {
-        return [
-            //
-        ];
+        $beamsClient = new PushNotifications(array(
+            "instanceId" => config('services.pusher.beams_instance_id'),
+            "secretKey" => config('services.pusher.beams_secret_key'),
+        ));
+
+        $interests = "App.Models.User.{$notifiable->id}";
+
+        $data = array(
+            "web" => array(
+                "notification" => array(
+                    "title" => "Nouvelle proposition !",
+                    "body" =>
+                    'Nouvelle proposition de votre mission ' . $this->projectResponse->project->title,
+                    "deep_link" => 'https://find-freelance/user/list_project/' . $this->projectResponse->project->id,
+                    "icon" => "http://localhost:8000/images/logo/find_01.png",
+                    "data" => array(
+                        "foo" => "bar",
+                        "baz" => "qux",
+                    ),
+                ),
+            ),
+        );
+
+        $beamsClient->publishToInterests(array($interests), $data);
     }
 }

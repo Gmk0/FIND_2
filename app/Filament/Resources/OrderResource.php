@@ -19,6 +19,8 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationGroup = 'Commande';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -32,6 +34,11 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\TextColumn::make('order_numero'),
+                Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\TextColumn::make('service.freelance.nom'),
+                Tables\Columns\TextColumn::make('total_amount')
+
             ])
             ->filters([
                 //
@@ -39,19 +46,16 @@ class OrderResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -60,5 +64,5 @@ class OrderResource extends Resource
             'view' => Pages\ViewOrder::route('/{record}'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
-    }    
+    }
 }

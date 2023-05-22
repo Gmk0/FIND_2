@@ -114,7 +114,7 @@
 
                     </div>
 
-                    <div class="grid gap-6 p-2 lg:grid-cols-2">
+                    <div class="grid w-full p-2 lg:gap-6 lg:grid-cols-2">
                         <x-datetime-picker label=" Date Debut" wire:model.defer='dateD'
                             parse-format="YYYY-MM-DD HH:mm:ss" placeholder="Date Debut" />
 

@@ -19,6 +19,8 @@ class SubCategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationGroup = 'Category';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -55,11 +57,11 @@ class SubCategoryResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageSubCategories::route('/'),
         ];
-    }    
+    }
 }

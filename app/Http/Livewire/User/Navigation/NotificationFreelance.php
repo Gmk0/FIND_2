@@ -20,7 +20,7 @@ class NotificationFreelance extends Component
 
         $auth_id = auth()->user()->id;
         return [
-            "echo-private:notify.{$auth_id},ProjectResponse" => 'brse AppoadcastedMessageReceived',
+            "echo-private:notify.{$auth_id},ProjectResponse" => ['$refresh', 'broadcastedMessageReceived'],
             "echo-private:chat.{$auth_id},MessageSent" => '$refresh',
             "echo-private:notify.{$auth_id},OrderCreated" => 'broadcastedMessageReceived',
             'ServiceOrdered' => '$refresh',

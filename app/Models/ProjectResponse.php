@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Events\ProjectResponse as EventsProjectResponse;
+use App\Notifications\ProjetStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,7 +24,22 @@ class ProjectResponse extends Model
         'content',
         'bid_amount',
         'status',
+
     ];
+
+    protected $dispatchesEvents = [
+        'created' => EventsProjectResponse::class,
+    ];
+
+    public function notifyUser()
+    {
+        $user = $this->project->user;
+
+        if ($user) {
+
+            $user->notify(new ProjetStatus($this));
+        }
+    }
 
     /**
      * The attributes that should be cast to native types.
