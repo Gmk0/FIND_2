@@ -107,8 +107,8 @@
                         <input type="checkbox" class="w-5 h-5 text-indigo-500 form-radio"="type" id="type2"
                             x-model="isOther" @click="isCard=false">
 
-                        <img src="{{asset('/images/icon/maxicash.png')}}" class="h-6 ml-3">
-                        <span>MaxiCash</span>
+                        <img src="/images/icon/maxicash.png" class="h-6 ml-3">
+
 
                     </label>
                 </div>
