@@ -77,6 +77,6 @@ class FavorisService extends Component
     {
         return view('livewire.user.favoris.favoris-service', [
             'favoris' => $this->getFavorites(),
-        ])->extends('layouts.userProfile')->section("content");
+        ])->layout('layouts.user-profile2');
     }
 }

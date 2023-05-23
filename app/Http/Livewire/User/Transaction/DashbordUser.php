@@ -8,29 +8,27 @@ use App\Models\Project;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Livewire\Component;
-use Filament\Tables;
-use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Tables\Columns\Layout\Split;
-use Filament\Tables\Columns\Layout\Panel;
-use Filament\Tables\Columns\{ToggleColumn, BadgeColumn, TextColumn};
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Columns\Layout\Stack;
-use Filament\Forms;
-use Filament\Tables\Filters\Filter;
 
-use Filament\Tables\Actions\{BulkAction, Action};
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
-class DashbordUser extends Component implements Tables\Contracts\HasTable
+class DashbordUser extends Component
 {
 
-    use Tables\Concerns\InteractsWithTable;
+
     public $service;
     public $orders;
     public $transaction;
     public $user_id;
+    public $transactions;
+    public $pending;
+    public $successfull;
+    public $failed;
+    public $period = 'last7days';
+    public $endDate;
+    public $startDate;
+    protected $listeners = ['startDateUpdated'];
+
 
 
 
@@ -39,117 +37,94 @@ class DashbordUser extends Component implements Tables\Contracts\HasTable
     public function mount()
     {
         $this->user_id = auth()->user()->id;
+
+
         // $donne =
-        // dd($donne);
+
     }
 
-    public function getTransac()
+
+    public function formatDate($date)
     {
-
-
-        $order = Transaction::whereHas('orders', function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        })->get();
+        $carbonDate = Carbon::createFromFormat('m/d/Y', $date);
+        return $carbonDate->format('Y-m-d H:i:s');
     }
-
-    protected function getTableQuery(): Builder
+    public function startDateUpdated($startDate, $endDate)
     {
+        $this->startDate = $startDate;
 
-        // $freelance = freelance::where('user_id', Auth::user()->id)->first();
-
-
-        $order = Order::query();
-        // Créer une requête pour la table "Service"
-        $order->where('user_id', auth()->user()->id)
-
-            ->orderBy('created_at', 'DESC')
-            ->get();
-
-
-        // Ajouter une condition pour l'utilisateur connecté
-
-        // Retourner la requête
-        return $order;
+        $this->endDate = $endDate;
     }
 
-    protected function getTableColumns(): array
+    public function cancel()
     {
-        return [
+        $this->startDate = null;
 
-            Split::make([
-                Tables\Columns\TextColumn::make('transaction.transaction_numero')->description('Transaction'),
-                Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('lg'),
-                Tables\Columns\TextColumn::make('total_amount')->description('Montant'),
-                BadgeColumn::make('status')
-                    ->enum([
-                        'completed' => 'Payer',
-                        'pending' => 'en Attente',
-                        'rejeted' => 'Rejeter',
-                    ])->colors([
-
-                        'warning' => static fn ($state): bool => $state === 'pending',
-                        'success' => static fn ($state): bool => $state === 'completed',
-                        'danger' => static fn ($state): bool => $state === 'rejeted',
-                    ]),
-            ]),
-            Panel::make([
-                Stack::make([
-                    Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('md'),
-                    Tables\Columns\TextColumn::make('service.freelance.user.name')->description('client'),
-                    Tables\Columns\TextColumn::make('created_at')->description('date'),
-
-                ]),
-            ])->collapsible(),
-
-
-
-
-
-        ];
+        $this->endDate = null;
     }
 
 
 
-    protected function getTableFilters(): array
+
+    function getTransaction()
     {
-        return [
-            SelectFilter::make('status')
-                ->options([
-                    'completed' => 'completed',
-                    'pending' => 'pending',
-                    'rejeted' => 'rejeted',
-                ])
-                ->attribute('status'),
+        $user = auth()->id();
+        $transactions = Transaction::whereHas('orders', function ($q) {
+            $q->where('user_id', auth()->id());
+        });
 
-        ];
+        $statusFilters = [];
+
+        if ($this->pending) {
+            $statusFilters[] = 'pending';
+        }
+
+        if ($this->failed) {
+            $statusFilters[] = 'failed';
+        }
+
+        if ($this->successfull) {
+            $statusFilters[] = 'successfull';
+        }
+
+        if (!empty($statusFilters)) {
+            $transactions->whereIn('status', $statusFilters);
+        }
+
+        if ($this->period === 'last7days') {
+            $transactions->where('created_at', '>=', now()->subDays(7));
+        } elseif ($this->period === 'last30days') {
+            $transactions->where('created_at', '>=', now()->subMonths(1));
+        } elseif ($this->period === 'last3months') {
+            $transactions->where('created_at', '>=', now()->subMonths(3));
+        } elseif ($this->period === 'last90days') {
+            $transactions->where('created_at', '>=', now()->subMonths(9));
+        } elseif ($this->period === 'today') {
+            $transactions->where('created_at', '>=', now());
+        }
+
+
+
+        if ($this->startDate && $this->endDate) {
+
+
+
+            $transactions->whereBetween('created_at', [$this->formatDate($this->startDate), $this->formatDate($this->endDate)]);
+        }
+
+
+
+
+
+        $transactions = $transactions->orderBy('created_at', 'desc')->get();
+
+
+
+        return $transactions;
     }
-    public function isTableSearchable(): bool
-    {
-        return true;
-    }
-
-    protected function getTableActions(): array
-    {
-        return [
-            // ...
-            Action::make('Voir')
-                ->url(fn (Order $record): string => route('commandeOneView', $record->id))
-                ->openUrlInNewTab()
-                ->tooltip('Voir transaction')
-                ->icon('heroicon-s-pencil'),
 
 
 
-
-
-
-        ];
-    }
-
-    protected function getTableRecordsPerPageSelectOptions(): array
-    {
-        return [5, 15, 25, 100];
-    }
 
 
     public function total()
@@ -267,6 +242,8 @@ class DashbordUser extends Component implements Tables\Contracts\HasTable
 
     public function render()
     {
+
+        $this->transactions = $this->getTransaction();
         return view('livewire.user.transaction.dashbord-user', [
             'amount' => $this->total(),
             'order' => Order::where('user_id', $this->user_id)->paginate(10),
@@ -276,6 +253,7 @@ class DashbordUser extends Component implements Tables\Contracts\HasTable
 
             "percentTransaction" => $this->pourcentageChangementMoisPrecedent(),
             'orderEvolution' => $this->calculateTransactionsEvolution(),
+
         ])->layout('layouts.user-profile2');
     }
 }

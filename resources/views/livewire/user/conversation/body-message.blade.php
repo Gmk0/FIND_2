@@ -239,7 +239,7 @@
 
 
         @else
-        <div class="flex items-center px-6 py-8 my-auto ">
+        <div class="flex justify-center items-center px-6 py-auto my-auto ">
             <h1 wire:loading.remove wire:target='selectedConversation' class="text-xl text-gray-800">Pas de Conversation
                 Selectionnées</h1>
 

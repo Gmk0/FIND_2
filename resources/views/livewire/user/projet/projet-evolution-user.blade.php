@@ -1,41 +1,47 @@
-<div class="min-h-screen" x-data="{message:@entangle('openMessage')}">
+<div class="min-h-screen">
 
     <!-- Exemple de section pour afficher les détails d'une commande avec options supplémentaires -->
     <section class="px-2 py-6 dark:text-gray-400 md:px-6 lg:px-8 xl:px-20">
         <div>
-            @include('include.breadcumbUser',['commande'=>'commande','commandeID'=>$Order->order_numero])
+
         </div>
         <div class="max-w-6xl mx-auto">
 
             <!-- Titre de la section -->
-            <h2 class="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-300">Détails de la commande</h2>
+            <h2 class="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-300">Détails de la Mission</h2>
 
             <!-- Contenu de la section -->
             <div class="overflow-hidden bg-white rounded-lg shadow-md">
                 <!-- Informations sur la commande -->
                 <div class="grid grid-cols-1 px-6 py-4 lg:grid-cols-2">
                     <p class="mb-4 font-sans text-lg text-gray-800 dark:text-gray-300">Commande
-                        <span class="font-bold font-inter ">{{$Order->order_numero}}</span>
+                        <span class="font-bold font-inter ">{{$response->project->id}}</span>
                     </p>
-                    <p class="mb-4 text-lg text-gray-800 md:mb-2 dark:text-gray-300">Service : <span>
-                            {{$Order->service->title}}</span> </p>
-                    <p class="mb-4 text-base text-gray-600 dark:text-gray-400 md:mb-2">Date de commande :
-                        <span>{{$Order->created_at}}</span>
+                    <p class="mb-4 text-lg text-gray-800 md:mb-2 dark:text-gray-300">Mission : <span>
+                            {{$response->project->title}}</span> </p>
+                    <p class="mb-4 text-base text-gray-600 dark:text-gray-400 md:mb-2">Date de creation :
+                        <span>{{$response->project->created_at}}</span>
                     </p>
-                    <p class="mb-4 text-base text-gray-600 md:mb-2 dark:text-gray-300">Délai de livraison :
-                        {{$Order->feedback->delai_livraison_estimee ? $Order->feedback->delai_livraison_estimee:'Pas
-                        disponible'}}
+                    <p class="mb-4 text-base font-medium text-gray-600 md:mb-2 dark:text-gray-300">Délai d'echance :
+                        Du {{$response->project->begin_project->format('d F, Y')}} au
+                        {{$response->project->end_project->format('d F, Y')}}
                     </p>
 
+                    <p class="mb-4 text-base text-gray-600 md:mb-2 dark:text-gray-300">Budjet :
+                        <span class="font-bold">{{$response->project->bid_amount}}$</span>
+
+
+
+                    </p>
+                    <p class="mb-4 text-base text-gray-600 md:mb-2 dark:text-gray-300">Proposition :
+                        <span class="font-bold">{{$response->bid_amount}}$</span>
+
+
+
+                    </p>
                     <p class="mb-4 text-base text-gray-600 md:mb-2 dark:text-gray-300">Paiement :
 
-                        @if($Order->status =="pending")
-                        <span class="text-red-300 px-1.5 py-0.5 rounded-lg ">en Attente</span>
-                        @elseif ($Order->status =="completed")
-                        <span class="text-green-500 px-1.5 py-0.5 rounded-lg ">Payé</span>
-                        @else
-                        <span class="bg-red-500 px-1.5 py-0.5 rounded-lg ">Rejeter</span>
-                        @endif
+
 
 
                     </p>
@@ -43,16 +49,7 @@
 
 
 
-                        @if($Order->feedback->etat =="En attente de traitement")
-                        <span class="text-red-300 px-1.5 py-0.5 rounded-lg ">En attente de traitement</span>
-                        @elseif ($Order->feedback->etat =="Livré")
-                        <span class="text-green-500 px-1.5 py-0.5 rounded-lg ">Livré</span>
 
-                        @elseif ($Order->feedback->etat =="En cours de préparation")
-                        <span class="text-red-200 px-1.5 py-0.5 rounded-lg ">En cours de préparation</span>
-                        @else
-                        <span class="bg-red-500 px-1.5 py-0.5 rounded-lg ">En transit</span>
-                        @endif
 
 
 
@@ -65,10 +62,10 @@
                     <div class="flex items-center">
                         <div class="flex-1">
                             <div class="w-full h-3 bg-gray-300 rounded-lg">
-                                <div class="h-3 bg-green-500 rounded-lg" style="width: {{$Order->progress}}%;"></div>
+                                <div class="h-3 bg-green-500 rounded-lg" style="width: %;"></div>
                             </div>
                         </div>
-                        <p class="ml-2 text-sm text-gray-600 dark:text-gray-300">{{$Order->progress}}%</p>
+                        <p class="ml-2 text-sm text-gray-600 dark:text-gray-300">%</p>
                     </div>
                 </div>
 
@@ -81,23 +78,22 @@
                     </h1>
 
                     <div class="flex items-center mt-4">
-                        @if (!empty($Order->service->freelance->user->profile_photo_path))
+                        @if (!empty($response->freelance->user->profile_photo_path))
                         <img class="w-12 h-12 rounded-full"
-                            src="{{Storage::disk('local')->url('profiles-photos/'.$Order->service->freelance->user->profile_photo_path) }}"
+                            src="{{Storage::disk('local')->url('profiles-photos/'.$response->freelance->user->profile_photo_path) }}"
                             alt="">
                         @else
-                        <img class="w-12 h-12 rounded-full"
-                            src="{{ $Order->service->freelance->user->profile_photo_url }}" alt="">
+                        <img class="w-12 h-12 rounded-full" src="{{ $response->user->profile_photo_url }}" alt="">
                         @endif
 
 
 
 
                         <div class="ml-4">
-                            <p class="text-sm text-gray-600 dark:text-gray-300">{{$Order->service->freelance->nom}}
+                            <p class="text-sm text-gray-600 dark:text-gray-300">{{$response->freelance->nom}}
                             </p>
                             <p class="text-sm text-gray-600 dark:text-gray-300">
-                                {{$Order->service->freelance->user->email}}</p>
+                                {{$response->freelance->user->email}}</p>
                         </div>
                     </div>
                 </div>
@@ -120,20 +116,6 @@
 
                     <div x-cloak x-show="open" x-collapse class="">
 
-                        @forelse ($Order->rapports as $rappors)
-                        <div>
-                            <p class="text-base text-gray-600 dark:text-gray-300">{{$rappors->description}}</p>
-                            <Span class="mt-4 text-sm text-gray-500">{{$rappors->created_at->formatLocalized('%e
-                                %B')}}</Span>
-
-                        </div>
-
-                        @empty
-                        <div>
-                            <p class="text-base text-gray-600 dark:text-gray-300">Pas de raport</p>
-                        </div>
-
-                        @endforelse
 
 
                     </div>
@@ -147,39 +129,25 @@
                 <div class="px-6 py-4 border-t border-gray-200">
                     <p class="mb-2 text-lg text-gray-800">Options supplémentaires</p>
                     <div class="flex flex-col justify-end gap-4 md:flex-row">
-                        @if (empty($Order->transaction))
+                        @if (empty($response->project->transaction))
                         <div>
 
                             <x-button primary label="Proceder Au
-                                                        Paiement"> </x-button>
+                                                                Paiement"> </x-button>
 
                         </div>
 
                         @endif
 
-                        @if($Order->feedback->etat=="Livré")
 
-                        @if(empty($Order->feedback->satisfaction) || empty($Order->feedback->commentaires))
-                        <div class="w-full">
-                            <x-button wire:click='openModal()' positive class="mr-2" label='Evaluer' />
 
-                        </div>
 
-                        @else
-
-                        <div class="w-full">
-                            <x-button wire:click='openModal()' positive class="mr-2" label='REvaluer' />
-
-                        </div>
-                        @endif
-
-                        @endif
                         <div>
                             <x-button wire:click="conversation()" spinner="conversation()" label="contacter"></x-button>
                         </div>
 
                         <div>
-                            <x-button wire:click="$toggle('confirmModal')" negative label="Annuler la commande">
+                            <x-button wire:click="$toggle('confirmModal')" negative label="Annuler la mission">
                             </x-button>
 
 
@@ -213,7 +181,7 @@
 
 
 
-                        @if (!empty($Order->transaction))
+                        @if (!empty($reponse->project->transaction))
 
 
                         <div x-cloak x-show="open" x-collapse>
@@ -398,27 +366,6 @@
 
                                 <div class="flex flex-col space-y-2">
 
-                                    @if($freelance_id !== null)
-                                    @if($messages !== null)
-
-                                    @foreach($messages as $message)
-                                    <!-- message de l'expéditeur -->
-                                    <div
-                                        class="flex items-start {{auth()->id() == $message->sender_id ? 'justify-end':''}}">
-                                        <div
-                                            class="px-4 py-2 bg-blue-600 {{auth()->id() == $message->sender_id ? 'bg-gray-200':'bg-blue-600'}} rounded-lg text-white max-w-xs">
-                                            <p class="text-sm text-gray-700">{{$message->body}}</p>
-                                        </div>
-                                    </div>
-                                    <!-- message du récepteur -->
-
-                                    @endforeach
-                                    @else
-                                    <p>Ecrivez lui un message</p>
-                                    @endif
-                                    @else
-                                    <p>Chargement de messages</p>
-                                    @endif
 
                                 </div>
                             </div>
@@ -477,34 +424,5 @@
         </x-slot>
 
     </x-confirmation-modal>
-    {{-- The Master doesn't talk, he acts. --}}
+    {{-- If your happiness depends on money, you will never be happy with yourself. --}}
 </div>
-
-@push('script')
-
-
-<script>
-    window.addEventListener('rowChatToBottom', event => {
-
-            $('.messages').scrollTop($('.messages')[0].scrollHeight);
-
-        });
-</script>
-
-<script>
-    function updateRating(rating) {
-      document.getElementById('rating').value = rating;
-
-      for (let i = 1; i <= 5; i++) {
-        const star = document.getElementById('star' + i);
-        if (i <= rating) {
-          star.classList.add('text-yellow-400');
-        } else {
-          star.classList.remove('text-yellow-400');
-        }
-      }
-      @this.satisfaction=rating;
-    }
-</script>
-
-@endpush

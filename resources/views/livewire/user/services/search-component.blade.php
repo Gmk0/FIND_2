@@ -17,7 +17,8 @@
                 class="absolute w-full mt-1 overflow-y-auto bg-white border divide-y rounded-lg shadow z-60 custom-scrollbar max-h-72">
                 @forelse($results as $index => $result)
                 {{-- <a class="block p-2 hover:bg-indigo-50" href="#">Tailwind</a>--}}
-                <a href="{{route('ServicesViewOne',['id'=>$result->id,'category'=>$result->category->name])}}" wire:key="{{
+                <a href="{{route('ServicesViewOne',['service_numero'=>$result->service_numero,'category'=>$result->category->name])}}"
+                    wire:key="{{
                     $index }}"
                     class="block p-2 text-sm cursor-pointer md:text-base hover:bg-amber-700 hover:text-white">{{
                     $result->title

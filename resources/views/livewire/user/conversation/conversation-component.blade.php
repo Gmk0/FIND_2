@@ -5,11 +5,38 @@
      theme:false,
      attachement:false,
 
-    }" class="container mx-auto overflow-y-auto custom-scrollbar">
-    <div
+    }" x-init="setTimeout(() => { isLoading = false }, 3000)"
+    class="container mx-auto overflow-y-auto custom-scrollbar">
+
+    <div x-show="isLoading">
+
+        <div class="flex flex-row flex-1 h-screen px-2 overflow-y-hidden">
+            <div
+                class="order-first hidden w-1/3 h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse custom-scrollbar md:flex ">
+                <div>
+
+                </div>
+            </div>
+            <div
+                class="flex-1 h-screen p-4 w-2/3 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
+                <div class="h-8 mb-2 bg-gray-300 rounded-md animate-pulse">
+
+                </div>
+                <div class="grid grid-cols-1 gap-4 mt-6 ">
+                    <div class="h-full bg-gray-300 rounded-md animate-pulse"></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div x-cloak x-show="!isLoading"
         class="min-w-full min-h-screen overflow-y-hidden border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
+
+
+
         <div x-bind:class="{'lg:block hidden': sidebarOpen, 'lg:block ': !sidebarOpen}"
-            class="border border-gray-500 dark:border-gray-600 lg:col-span-1">
+            class="border border-gray-300 dark:border-gray-600 lg:col-span-1">
 
             <div
                 class="flex flex-row items-center justify-between px-3 py-2 border dark:border-gray-500 bg-grey-lighter">
@@ -85,7 +112,7 @@
                     @forelse ($conversations as $conversation)
                     <a wire:key='{{$conversation->id}}' href="#" @click="sidebarOpen=!sidebarOpen"
                         wire:click="chatUserSelected({{$conversation}},{{$conversation->freelance_id }})"
-                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-500 cursor-pointer dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none">
+                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none">
 
                         @if (!empty($conversation->freelance->user->profile_photo_path))
                         <img class="object-cover w-10 h-10 rounded-full"
@@ -384,18 +411,17 @@
     function resetPosition() {
 
 
-        alert('ok');
+       var isMobile = window.innerWidth < 768;
+
+        if (isMobile) {
+
+
         var div = document.getElementById("body");
-
         var parent = document.getElementById('parent');
-
-        const body= document.getElementById("body");
-
-        const header= document.getElementById("header");
-
+        const body = document.getElementById("body");
+        const header = document.getElementById("header");
 
         div.scrollTop = 0;
-
 
         window.scrollTo({
         top: 0,
@@ -403,6 +429,8 @@
         behavior: 'smooth'
         });
 
+        // Ramener la scrollbar au haut de la div
+        }
 
         // Ramener la scrollbar au haut de la div
 

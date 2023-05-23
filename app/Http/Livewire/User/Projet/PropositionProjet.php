@@ -56,6 +56,6 @@ class PropositionProjet extends Component
     public function render()
     {
         $this->proposition = ProjectResponse::where('project_id', $this->proposition_id)->get();
-        return view('livewire.user.projet.proposition-projet')->extends('layouts.userProfile')->section('content');
+        return view('livewire.user.projet.proposition-projet')->layout('layouts.user-profile2');
     }
 }

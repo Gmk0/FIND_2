@@ -45,6 +45,7 @@ class Transaction extends Model
     protected $casts = [
 
         'user_id' => 'integer',
+        'payment_method' => 'array',
 
         'amount' => 'decimal:2',
     ];

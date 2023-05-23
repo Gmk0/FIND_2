@@ -1,4 +1,4 @@
-<div>
+<div class="min-h-screen">
 
     <div class="rounded-lg shadow-lg p-6">
         <h2 class="text-xl font-bold mb-4">Mes favoris</h2>

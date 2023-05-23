@@ -65,6 +65,7 @@ class TransactionUser extends Component implements Tables\Contracts\HasTable
                 Tables\Columns\TextColumn::make('transaction.transaction_numero')->description('Transaction'),
                 Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('lg'),
                 Tables\Columns\TextColumn::make('total_amount')->description('Montant'),
+
                 BadgeColumn::make('status')
                     ->enum([
                         'completed' => 'Payer',
@@ -119,7 +120,7 @@ class TransactionUser extends Component implements Tables\Contracts\HasTable
             // ...
             Action::make('Voir')
                 ->url(fn (Order $record): string => route('transactionOneUser', $record->transaction->transaction_numero))
-                ->openUrlInNewTab()
+                //->openUrlInNewTab()
                 ->tooltip('Voir transaction')
                 ->icon('heroicon-s-pencil'),
             Action::make('Facture')
@@ -147,6 +148,6 @@ class TransactionUser extends Component implements Tables\Contracts\HasTable
     {
         return view(
             'livewire.user.transaction.transaction-user'
-        )->extends('layouts.userProfile')->section('content');
+        )->layout('layouts.user-profile2');
     }
 }

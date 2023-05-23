@@ -1,15 +1,15 @@
-<div class="p-6">
+<div class="min-h-screen">
 
     <div>
         @include('include.breadcumbUser',['projet'=>'Projet'])
     </div>
-    <div class="container mx-auto">
+    <div class="container mx-6">
 
 
         <h2 class="mb-8 text-xl font-semibold tracking-wide text-indigo-600 uppercase">Mes Projet</h2>
         <div class="my-4">
 
-            <x-button href="{{route('createProject')}}" label="Soumettre"></x-button>
+            <x-button href="{{route('createProject')}}" positive label="Soumettre"></x-button>
         </div>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 
@@ -71,6 +71,18 @@
                 </div>
             </div>
             @empty
+
+            <div class="col-span-2 items-center justify-center font-semibold text-xl">
+                <div class="text-gray-800">
+                    <p>Si vous avez besoin d'un service particulier, n'hésitez pas à
+                        soumettre
+                        votre projet et
+                        notre communauté de freelances
+                        talentueux sera ravie de vous aider</p>
+                </div>
+
+
+            </div>
             @endforelse
 
             <!-- Ajouter d'autres projets ici -->

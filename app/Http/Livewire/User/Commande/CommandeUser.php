@@ -161,6 +161,6 @@ class CommandeUser extends Component implements Tables\Contracts\HasTable
                     $q->where('status', $this->status);
                 })
                 ->get(),
-        ])->extends('layouts.userProfile')->section('content');
+        ])->layout('layouts.user-profile2');
     }
 }

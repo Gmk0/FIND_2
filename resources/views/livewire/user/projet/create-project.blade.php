@@ -1,11 +1,11 @@
-<div class="min-h-screen pt-24 border-t border-gray-100 bg-gray-50 dark:bg-gray-900">
+<div class="min-h-screen  border-t border-gray-100 bg-gray-50 dark:bg-gray-900">
     {{-- Success is as dangerous as failure. --}}
 
     <div x-data="project()" x-on:success.window="step = 1" class="container flex px-2 py-3 ">
 
         <div class="hidden w-6/12 p-4 lg:block">
 
-            <img src="/images/services/projet.jpg" class="object-cover w-full h-full rounded-md " alt="">
+            <img src="/images/services/projet.jpg" class="object-cover w-full h-full  rounded-md " alt="">
         </div>
         <div class="flex flex-col lg:w-6/12 ">
             <div x-cloak x-show.transition="step==1" class="flex flex-col w-full gap-4 px-2 ">
@@ -107,14 +107,14 @@
             <div x-cloak x-show.transition="step==2" class="flex flex-col w-full gap-4 px-2 ">
 
                 <div>
-                    <div>
-                        <h1 class="mb-4 text-xl text-gray-800 dark:text-gray-200">Date
 
-                        </h1>
+                    <h1 class="mb-4 text-xl text-gray-800 dark:text-gray-200">Date
 
-                    </div>
+                    </h1>
 
-                    <div class="grid w-full p-2 lg:gap-6 lg:grid-cols-2">
+
+
+                    <div class="flex flex-row gap-2 w-full ">
                         <x-datetime-picker label=" Date Debut" wire:model.defer='dateD'
                             parse-format="YYYY-MM-DD HH:mm:ss" placeholder="Date Debut" />
 
@@ -128,14 +128,13 @@
 
                 </div>
                 <div>
-                    <div class="p-2">
 
-                        <p class="text-sm text-gray-600 dark:text-gray-200">
-                            Budget
-                        </p>
-                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-200">
+                        Budget
+                    </p>
 
-                    <div class="grid gap-4 p-2 lg:grid-cols-2">
+
+                    <div class="grid ">
 
 
                         <x-inputs.currency placeholder="Budget" icon="currency-dollar" thousands="." decimal=","
@@ -156,10 +155,10 @@
 
 
             <div class="flex justify-between p-3 mt-auto">
-                <div class="w-1/2">
+                <div class="lg:w-1/2">
                     <x-button md x-show="step > 1" x-cloak amber label="retour" x-on:click="returnStep()" />
                 </div>
-                <div class="w-1/2 text-right">
+                <div class="lg:w-1/2 text-right">
                     <x-button x-show="!show" md amber label="continuer" x-on:click="setStep()" />
 
                     <x-button x-cloak label="Envoyer" spinner="register" wire:click="register()" positive

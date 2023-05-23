@@ -9,6 +9,7 @@ use App\Http\Controllers\FreelanceController;
 use App\Http\Controllers\GoogleAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home;
+use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ToolsController;
 use Illuminate\Support\Facades\DB;
@@ -71,8 +72,12 @@ Route::middleware([
     //projet
 
     Route::get('/user/create_project', App\Http\Livewire\User\Projet\CreateProject::class)->name('createProject');
-    Route::get('/user/list_project', App\Http\Livewire\User\Projet\ListProject::class)->name('listProjet');
-    Route::get('/user/list_project/{id}', App\Http\Livewire\User\Projet\PropositionProjet::class)->name('PropostionProjet');
+    Route::get('/user/list_projet', App\Http\Livewire\User\Projet\ListProject::class)->name('listProjet');
+
+    Route::get('/user/list_projet/{id}/{idP}', [ProjetController::class, 'ProjetEvolution'])->name('projetEvolution');
+    Route::get('/user/list_projet/{id}', App\Http\Livewire\User\Projet\PropositionProjet::class)->name('PropostionProjet');
+
+
     Route::view('/user/securite', 'user.profile.securite')->name('securiteUser');
 
     //transation

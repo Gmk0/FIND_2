@@ -123,6 +123,6 @@ class ListProject extends Component
     {
         return view('livewire.user.projet.list-project', [
             'projets' => Project::where('user_id', auth()->user()->id)->paginate(10),
-        ])->extends('layouts.userProfile')->section('content');
+        ])->layout('layouts.user-profile2');
     }
 }

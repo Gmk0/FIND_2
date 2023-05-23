@@ -3,9 +3,12 @@
 
 
     <div class="min-h-screen">
-        <div>
+
+        <div class="mb-4">
             @include('include.breadcumbUser',['commande'=>'commande'])
+
         </div>
+
 
         <div class="px-4  mx-auto max-w-7xl lg:px-8">
             <div class="max-w-3xl mb-8">

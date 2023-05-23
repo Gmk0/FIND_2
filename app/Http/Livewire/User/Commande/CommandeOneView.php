@@ -43,6 +43,8 @@ class CommandeOneView extends Component
     {
         $this->order_id = $this->Order->id;
 
+
+
         $this->freelance_id = $this->Order->service->freelance->id;
     }
 
@@ -199,6 +201,6 @@ class CommandeOneView extends Component
 
     public function render()
     {
-        return view('livewire.user.commande.commande-one-view')->extends('layouts.userProfile')->section('content');
+        return view('livewire.user.commande.commande-one-view');
     }
 }

@@ -1,11 +1,8 @@
-@extends('layouts.userProfile')
+<x-user-profile2>
+    <div>
 
-@section('content')
+        @livewire('user.commande.commande-one-view',['Order'=>$Order]);
 
-<div>
+    </div>
 
-    @livewire('user.commande.commande-one-view',['Order'=>$Order]);
-
-</div>
-
-@endsection
+</x-user-profile2>

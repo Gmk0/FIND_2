@@ -19,8 +19,9 @@ use Illuminate\Support\Facades\Http;
 use Stripe\Stripe;
 use Stripe\Token;
 use Stripe\charge;
-
-
+use Stripe\Customer;
+use Stripe\PaymentIntent;
+use Stripe\PaymentMethod;
 
 
 class Checkout extends Component
@@ -35,6 +36,7 @@ class Checkout extends Component
     public $errorMessage;
     public $methodePaiment;
     public $priceTotal = null;
+    public $identityPayment = null;
     public $address = [
         'rue' => '',
         'commune' => '',
@@ -68,8 +70,7 @@ class Checkout extends Component
                 $this->methodePaiment->addresse['quartier'],
                 'ville' =>
                 $this->methodePaiment->addresse['ville'],
-                'bp' =>
-                $this->methodePaiment->addresse['bp'],
+
             ];
         }
     }
@@ -263,6 +264,7 @@ class Checkout extends Component
         ]);
 
 
+        $addesse = $this->addAddress();
 
 
 
@@ -272,30 +274,82 @@ class Checkout extends Component
 
         try {
 
+
             Stripe::setApiKey(env('STRIPE_KEY_SECRET'));
 
-            $token = $this->createToken();
 
-            $charge = Charge::create([
-                'amount' => $this->totalPrice(),
-                'currency' => 'usd',
-                'description' => 'Paiment Service',
-                'source' => $token,
-                'statement_descriptor' => 'Libellé de relevé',
+            $existingCustomers = Customer::all(['email' => auth()->user()->email]);
 
+            if ($existingCustomers->count() === 0) {
+                $customer = Customer::create([
+                    'email' => auth()->user()->email,
+                    'name' => auth()->user()->name,
+                    'phone' => auth()->user()->phone,
+                    // Autres détails du client
+                ]);
+                $customerId = $customer->id;
+            } else {
+                $customerId = $existingCustomers->data[0]->id;
+            }
 
+            $existingPaymentMethods = PaymentMethod::all([
+                'customer' => $customerId,
+                'type' => 'card',
             ]);
 
+            $desiredPaymentMethod = $this->card['cardNumber']; // ou toute autre valeur pour identifier la méthode de paiement souhaitée
 
+            $paymentMethodExists = false;
+            $paymentMethodId = '';
 
+            foreach ($existingPaymentMethods->data as $paymentMethod) {
+                if ($paymentMethod->card->last4 === $desiredPaymentMethod) {
+                    $paymentMethodExists = true;
+                    $paymentMethodId = $paymentMethod->id;
+                    break;
+                }
+            }
 
+            if ($paymentMethodExists) {
+
+                // La méthode de paiement existe déjà
+            } else {
+                // La méthode de paiement n'existe pas encore
+                // Vous pouvez créer une nouvelle méthode de paiement et l'attacher au client
+                $paymentMethod = PaymentMethod::create([
+                    'type' => 'card',
+                    'card' => [
+                        'number' => $this->card['cardNumber'],
+                        'exp_month' => $this->card['cardExpiryMonth'],
+                        'exp_year' => $this->card['cardExpiryYear'],
+                        'cvc' => $this->card['cardCvc'],
+                    ],
+                ]);
+                $paymentMethod->attach(['customer' => $customerId]);
+                $paymentMethodId = $paymentMethod->id;
+            }
+
+            $paymentIntent = PaymentIntent::create([
+                'amount' => $this->totalPrice(),
+                'currency' => 'usd',
+                'description' => 'Paiement de service',
+                'payment_method' => $paymentMethodId,
+                'customer' => $customerId,
+            ]);
+
+            $paymentIntent->confirm();
+            $paymentMethod = PaymentMethod::retrieve($paymentMethodId);
+            $lastFour = $paymentMethod->card->last4;
+            $brand = $paymentMethod->card->brand;
+
+            $this->identityPayment = ['last4' => $lastFour, 'brand' => $brand];
             $datas = $this->saveService();
 
             // Enregistrer les informations de paiement dans la table "paiements"
             $payment = new transaction();
             $payment->amount = $this->totalPrice();
-            $payment->payment_method = "CC";
-            $payment->payment_token = $charge->id;
+            $payment->payment_method = $this->identityPayment;
+            $payment->payment_token = $paymentIntent->id;
             $payment->status = 'successfull';
             // $payment->transaction_id = 'mmmmmmmmmmm';
 
@@ -379,6 +433,19 @@ class Checkout extends Component
             $this->dispatchBrowserEvent('error', [
                 'message' => $e->getMessage()
             ]);
+        }
+    }
+
+    public function addAddress()
+    {
+
+        if (isset($this->methodePaiment->addresse) && $this->methodePaiment->addresse != null) {
+        } else {
+
+            $NewData = new PaimentMethod();
+
+            $NewData->addresse = $this->address;
+            $NewData->save();
         }
     }
 }
