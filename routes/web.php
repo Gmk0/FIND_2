@@ -74,6 +74,8 @@ Route::middleware([
     Route::get('/user/create_project', App\Http\Livewire\User\Projet\CreateProject::class)->name('createProject');
     Route::get('/user/list_projet', App\Http\Livewire\User\Projet\ListProject::class)->name('listProjet');
 
+    Route::get('/user/list_projet/{id}/{idP}/checkout', [ProjetController::class, 'ProjetCheckout'])->name('ProjetCheckout');
+
     Route::get('/user/list_projet/{id}/{idP}', [ProjetController::class, 'ProjetEvolution'])->name('projetEvolution');
     Route::get('/user/list_projet/{id}', App\Http\Livewire\User\Projet\PropositionProjet::class)->name('PropostionProjet');
 

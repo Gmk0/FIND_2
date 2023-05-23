@@ -132,7 +132,7 @@
                         @if (empty($response->project->transaction))
                         <div>
 
-                            <x-button primary label="Proceder Au
+                            <x-button href="{{route('checkoutProjet')}}" primary label="Proceder Au
                                                                 Paiement"> </x-button>
 
                         </div>
