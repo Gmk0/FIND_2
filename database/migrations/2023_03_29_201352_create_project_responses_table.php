@@ -20,6 +20,8 @@ return new class extends Migration
             $table->text('content');
             $table->decimal('bid_amount', 8, 2)->nullable();
             $table->enum('status', ["accepter", "en attente", "rejecter"])->default('en attente');
+            $table->enum('is_paid', ["payer", "en attente", "rejecter"])->default('en attente');
+
             $table->timestamps();
         });
 

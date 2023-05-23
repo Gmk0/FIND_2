@@ -3,6 +3,7 @@
 @section('content')
 
 
+
 @livewire('user.projet.checkout-projet')
 
 @endsection

@@ -27,6 +27,7 @@ class Project extends Model
         'begin_project',
         'end_project',
         'status',
+        'is_paid',
     ];
 
     public static function boot()
@@ -47,7 +48,7 @@ class Project extends Model
         'category_id' => 'integer',
         'sub_category' => 'array',
         'files' => 'array',
-        'bid_amount' => 'decimal:2',
+        'budget' => 'decimal:2',
         'begin_project' => 'datetime',
         'end_project' => 'datetime',
     ];
