@@ -33,24 +33,29 @@
                             </div>
                             <div class="flex flex-col mt-2 sm:justify-between">
                                 <div class="flex justify-between">
-                                    <p class="flex items-center text-sm text-gray-500">
-                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M2 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm2 2v8l2.5-1.5L8 14l5-5-1.5-1.5L10 11l-3.5-3.5L4 10z" />
-                                        </svg>
-                                        {{$proposition->freelance->prenom}}
+                                    <p class="flex items-center  gap-2 text-sm text-gray-500">
+
+                                        @if (!empty($proposition->freelance->user->profile_photo_path))
+                                        <img class="object-cover w-10 h-10 rounded-full"
+                                            src="{{Storage::disk('local')->url('public/profiles-photos/'.$proposition->freelance->user->profile_photo_path) }}"
+                                            alt="">
+                                        @else
+                                        <img class="object-cover w-10 h-10 rounded-full"
+                                            src="{{$proposition->freelance->user->profile_photo_url }}" alt="">
+                                        @endif
+                                        {{$proposition->freelance->user->name}}
                                     </p>
-                                    <p class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                    <p
+                                        class="flex items-center mt-2 text-base font-semibold text-gray-500 sm:mt-0 sm:ml-6">
                                         <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
                                                 d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0 1a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9zm1-5a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V5a1 1 0 0 1 1-1z" />
                                         </svg>
-                                        Prix : {{$proposition->bid_amount}}
+                                        Prix : {{$proposition->bid_amount}} $
                                     </p>
                                 </div>
-                                <div class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">
+                                <div class="flex hidden items-center mt-2 text-sm text-gray-500 sm:mt-0">
                                     <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd"
@@ -73,7 +78,8 @@
                                 <h1 class="text-gray-800">Vous avez accepter cette proposiotion </h1>
                             </div>
                             <div>
-                                <x-button href="" sm primary label="l'evolution" />
+                                <x-button href="{{route('projetEvolution',['idP'=>$proposition->id,'id'=>
+                                    $proposition->project->id])}}" sm primary label="l'evolution" />
 
                             </div>
 
