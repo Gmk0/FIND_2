@@ -52,7 +52,7 @@
         @endif
 
         <button
-            class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+            class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 text-gray-800 dark:hover:text-gray-200"
             @click="linkActive=!linkActive" aria-haspopup="true">
             <span class="inline-flex items-center">
 
@@ -187,7 +187,7 @@
         <span class="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg bg-amber-600" aria-hidden="true"></span>
         @endif
         <button
-            class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+            class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 dark:text-gray-200 hover:text-gray-800 dark:hover:text-gray-200"
             @click="linkActive=!linkActive" aria-haspopup="true">
             <span class="inline-flex items-center">
                 <ion-icon name="person-outline" class="w-6 h-6"></ion-icon>
