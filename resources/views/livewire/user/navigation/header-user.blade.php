@@ -557,23 +557,23 @@
                                 </svg>
                                 <div class="text-sm text-gray-900 dark:text-white">Facturation</div>
                             </a>
-                            <form method="POST" action="{{ url('/logout') }}" x-data>
-                                @csrf
-                                <a href="{{ url('/logout') }}" @click.prevent="$root.submit();" class=" block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600
+
+                            @csrf
+                            <a href="{{ url('/logout') }}" @click.prevent="$root.submit();" class=" block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600
                                         group">
-                                    <svg aria-hidden="true"
-                                        class="mx-auto mb-1 text-gray-400 w-7 h-7 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
-                                        </path>
-                                    </svg>
+                                <svg aria-hidden="true"
+                                    class="mx-auto mb-1 text-gray-400 w-7 h-7 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
+                                    </path>
+                                </svg>
 
 
 
-                                    <div class="text-sm text-gray-900 dark:text-white">Logout</div>
-                                </a>
+                                <div class="text-sm text-gray-900 dark:text-white">Logout</div>
+                            </a>
 
                         </div>
                     </div>
