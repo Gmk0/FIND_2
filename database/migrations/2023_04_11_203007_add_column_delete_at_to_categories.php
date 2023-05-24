@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::table('categories', function (Blueprint $table) {
-            $table->timestamp('deleted_at')->nullable(); // Ajouter cette ligne pour ajouter la colonne deleted_at
+            //$table->timestamp('deleted_at')->nullable(); // Ajouter cette ligne pour ajouter la colonne deleted_at
         });
     }
 
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->dropColumn('deleted_at'); // Si vous souhaitez également pouvoir annuler cette migration et supprimer la colonne
+            // $table->dropColumn('deleted_at'); // Si vous souhaitez également pouvoir annuler cette migration et supprimer la colonne
         });
     }
 };
