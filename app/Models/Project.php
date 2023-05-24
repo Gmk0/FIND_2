@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Ramsey\Uuid\Uuid;
 
 class Project extends Model
 {
@@ -17,6 +18,7 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'title',
         //'user_id',
         'category_id',
@@ -28,12 +30,14 @@ class Project extends Model
         'end_project',
         'status',
         'is_paid',
+        ''
     ];
 
     public static function boot()
     {
         parent::boot();
         static::creating(function ($model) {
+            $model->id = Uuid::uuid4()->toString();
             $model->user_id = auth()->user()->id;
         });
     }
@@ -43,12 +47,12 @@ class Project extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+        'id' => 'string',
         'user_id' => 'integer',
         'category_id' => 'integer',
         'sub_category' => 'array',
         'files' => 'array',
-        'budget' => 'decimal:2',
+        'bid_amount' => 'decimal:2',
         'begin_project' => 'datetime',
         'end_project' => 'datetime',
     ];
@@ -83,6 +87,12 @@ class Project extends Model
         $project = $this->projectResponses->count();
 
         return $project;
+    }
+
+    public function transaction(): BelongsTo
+    {
+
+        return $this->belongsTo(Transaction::class);
     }
 
 

@@ -8,6 +8,7 @@ class HeaderUser extends Component
 {
 
     protected $listeners = ['refreshComponent' => '$refresh'];
+
     public function render()
     {
         return view('livewire.user.navigation.header-user');
