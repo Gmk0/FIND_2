@@ -53,6 +53,7 @@ class Proposition extends Component implements Tables\Contracts\HasTable
                 ->where('status', 'accepter');
         })->get();
 
+
         // Ajouter une condition pour l'utilisateur connecté
 
         // Retourner la requête
@@ -64,10 +65,10 @@ class Proposition extends Component implements Tables\Contracts\HasTable
         return [
 
             Split::make([
-                Tables\Columns\TextColumn::make('id')->description(' id'),
+                //Tables\Columns\TextColumn::make('id')->description(' id'),
                 Tables\Columns\TextColumn::make('user.name')->description('client'),
                 Tables\Columns\TextColumn::make('title')->description('service'),
-                Tables\Columns\TextColumn::make('bid_amount')->description('budjet'),
+                Tables\Columns\TextColumn::make('project.')->description('budjet'),
                 BadgeColumn::make('status')
                     ->enum([
                         'completed' => 'Finis',

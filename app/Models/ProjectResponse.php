@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Ramsey\Uuid\Uuid;
 
 class ProjectResponse extends Model
 {
@@ -19,6 +20,7 @@ class ProjectResponse extends Model
      * @var array
      */
     protected $fillable = [
+        "id",
         'freelance_id',
         'project_id',
         'content',
@@ -27,6 +29,14 @@ class ProjectResponse extends Model
 
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->id = Uuid::uuid4()->toString();
+        });
+    }
+
     protected $dispatchesEvents = [
         'created' => EventsProjectResponse::class,
     ];
@@ -34,6 +44,8 @@ class ProjectResponse extends Model
     public function notifyUser()
     {
         $user = $this->project->user;
+
+
 
         if ($user) {
 
@@ -47,11 +59,17 @@ class ProjectResponse extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+        'id' => 'string',
         'freelance_id' => 'integer',
-        'project_id' => 'integer',
+        'project_id' => 'string',
         'bid_amount' => 'decimal:2',
     ];
+
+    public function getBudget()
+    {
+
+        return $this->bid_amount * 100;
+    }
 
     public function project(): BelongsTo
     {

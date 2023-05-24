@@ -69,9 +69,8 @@ class DashbordUser extends Component
     function getTransaction()
     {
         $user = auth()->id();
-        $transactions = Transaction::whereHas('orders', function ($q) {
-            $q->where('user_id', auth()->id());
-        });
+        $transactions = Transaction::where('user_id', auth()->id());
+
 
         $statusFilters = [];
 

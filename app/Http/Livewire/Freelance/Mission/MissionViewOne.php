@@ -11,7 +11,8 @@ use WireUi\Traits\Actions;
 class MissionViewOne extends Component
 {
     use Actions;
-    public $projet;
+    public Project $projet;
+
     public $content;
     public $amount;
     public $modal = false;
@@ -20,11 +21,11 @@ class MissionViewOne extends Component
     public $delai;
     protected $listeners = ['refresh' => '$refresh'];
 
-    public function mount($id)
+    public function mount()
     {
         //dd(auth()->user()->getIdFreelance());
-        $this->projet = Project::find($id);
-        $this->response = ProjectResponse::where('project_id', $id)->where('freelance_id', auth()->user()->getIdFreelance())->first();
+
+        $this->response = ProjectResponse::where('project_id', $this->projet->id)->where('freelance_id', auth()->user()->getIdFreelance())->first();
         //dd($this->response);
     }
 
@@ -55,14 +56,16 @@ class MissionViewOne extends Component
                     'bid_amount' => $this->amount ? $this->amount : $this->projet->bid_amount,
                 ]);
 
-                $data->notifyUser();
+                //$data->notifyUser();
 
-                $Project = Project::where('id', $data->project_id)->first();
+
             }
 
             $this->reset('content', 'amount');
 
             $this->modal = false;
+
+
 
             if ($data) {
 
@@ -71,11 +74,9 @@ class MissionViewOne extends Component
                     $title = "Proposition",
                     $description = "Votre proposition a ete envoyer avec success vous recevrez des notifications sur l'etat de votre proposition",
                 );
-
-
-
-                $this->emitSelf('refresh');
             }
+
+            $this->emitSelf('refresh');
         } catch (\Exception $e) {
 
             $this->dispatchBrowserEvent('error', [
@@ -100,7 +101,41 @@ class MissionViewOne extends Component
     public function editResponse()
     {
 
-        dd('lolo');
+        try {
+
+            $this->validate([
+                'content' => 'required',
+
+            ]);
+
+            if (!empty($this->response)) {
+
+
+                $this->response->content = $this->content;
+                $this->response->content = $this->amount ? $this->amount : $this->projet->bid_amount;
+
+                $$this->response->update();
+                $data->notifyUser();
+            }
+
+            $this->reset('content', 'amount');
+
+            $this->modal = false;
+
+
+
+
+            $this->notification()->success(
+                $title = "Proposition",
+                $description = "Votre proposition a ete envoyer avec success vous recevrez des notifications sur l'etat de votre proposition",
+            );
+            $this->emitSelf('refresh');
+        } catch (\Exception $e) {
+
+            $this->dispatchBrowserEvent('error', [
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 
     public function render()

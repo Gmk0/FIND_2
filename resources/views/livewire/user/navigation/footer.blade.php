@@ -1,6 +1,6 @@
-<div class="w-full bg-base-200 ">
+<div class="w-full bg-base-200  ">
 
-    <div class="text-white border-t border-gray-800 md:hidden">
+    <div class="text-white border-t dark:bg-gray-900 border-gray-800 md:hidden">
 
         <!-- Footer Middle -->
         <div class="container flex flex-col p-4 mx-auto overflow-hidden lg:flex-row">

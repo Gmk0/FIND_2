@@ -16,7 +16,7 @@ class CreateProject extends  Component implements Forms\Contracts\HasForms
 {
     use WithFileUploads;
 
-    public $project;
+    public $project = ['title' => '', 'description' => ''];
     public $files = [];
     public $category;
     public $currency;
@@ -74,6 +74,8 @@ class CreateProject extends  Component implements Forms\Contracts\HasForms
 
         $this->resetAll();
 
+        $this->reset('project');
+
         if ($results) {
 
             $this->dispatchBrowserEvent('success', [
@@ -85,9 +87,9 @@ class CreateProject extends  Component implements Forms\Contracts\HasForms
         }
     }
 
-    function resetAll()
+    public function resetAll()
     {
-        $this->project = [];
+        $this->project = ['title' => '', 'description' => ''];
         $this->files = null;
         $this->category = null;
         $this->currency = null;

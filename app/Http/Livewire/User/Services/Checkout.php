@@ -266,6 +266,8 @@ class Checkout extends Component
 
         $addesse = $this->addAddress();
 
+        $priceTotal = Session::has('cart') ? Session::get('cart') : null;
+
 
 
 
@@ -347,7 +349,7 @@ class Checkout extends Component
 
             // Enregistrer les informations de paiement dans la table "paiements"
             $payment = new transaction();
-            $payment->amount = $this->totalPrice();
+            $payment->amount = $priceTotal;
             $payment->payment_method = $this->identityPayment;
             $payment->payment_token = $paymentIntent->id;
             $payment->status = 'successfull';

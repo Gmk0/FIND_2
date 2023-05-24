@@ -1,4 +1,4 @@
-<div class="min-h-screen">
+<div class="min-h-screen" x-data="{message:@entangle('openMessage')}">
 
     <!-- Exemple de section pour afficher les détails d'une commande avec options supplémentaires -->
     <section class="px-2 py-6 dark:text-gray-400 md:px-6 lg:px-8 xl:px-20">
@@ -14,21 +14,21 @@
             <div class="overflow-hidden bg-white rounded-lg shadow-md">
                 <!-- Informations sur la commande -->
                 <div class="grid grid-cols-1 px-6 py-4 lg:grid-cols-2">
-                    <p class="mb-4 font-sans text-lg text-gray-800 dark:text-gray-300">Commande
-                        <span class="font-bold font-inter ">{{$response->project->id}}</span>
+                    <p class="mb-4 font-sans text-lg text-gray-800 dark:text-gray-300">Mission
+                        <span class="font-bold font-inter ">{{$projet->id}}</span>
                     </p>
                     <p class="mb-4 text-lg text-gray-800 md:mb-2 dark:text-gray-300">Mission : <span>
-                            {{$response->project->title}}</span> </p>
+                            {{$projet->title}}</span> </p>
                     <p class="mb-4 text-base text-gray-600 dark:text-gray-400 md:mb-2">Date de creation :
-                        <span>{{$response->project->created_at}}</span>
+                        <span>{{$projet->created_at}}</span>
                     </p>
                     <p class="mb-4 text-base font-medium text-gray-600 md:mb-2 dark:text-gray-300">Délai d'echance :
-                        Du {{$response->project->begin_project->format('d F, Y')}} au
-                        {{$response->project->end_project->format('d F, Y')}}
+                        Du {{$projet->begin_project->format('d F, Y')}} au
+                        {{$projet->end_project->format('d F, Y')}}
                     </p>
 
                     <p class="mb-4 text-base text-gray-600 md:mb-2 dark:text-gray-300">Budjet :
-                        <span class="font-bold">{{$response->project->bid_amount}}$</span>
+                        <span class="font-bold">{{$projet->bid_amount}}$</span>
 
 
 
@@ -41,7 +41,16 @@
                     </p>
                     <p class="mb-4 text-base text-gray-600 md:mb-2 dark:text-gray-300">Paiement :
 
+                        @if ($response->is_paid=='payer')
 
+                        <span
+                            class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">Payer</span>
+
+                        @else
+                        <span
+                            class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">en
+                            Attente</span>
+                        @endif
 
 
                     </p>
@@ -57,20 +66,20 @@
                 </div>
 
                 <!-- Avancement de la commande -->
-                <div class="px-6 py-4 border-t border-gray-200">
+                <div class="px-6 py-4 bprojet-t bprojet-gray-200">
                     <p class="mb-2 text-lg text-gray-800">Avancement</p>
                     <div class="flex items-center">
                         <div class="flex-1">
                             <div class="w-full h-3 bg-gray-300 rounded-lg">
-                                <div class="h-3 bg-green-500 rounded-lg" style="width: %;"></div>
+                                <div class="h-3 bg-green-500 rounded-lg" style="width:{{$projet->progress}}%;"></div>
                             </div>
                         </div>
-                        <p class="ml-2 text-sm text-gray-600 dark:text-gray-300">%</p>
+                        <p class="ml-2 text-sm text-gray-600 dark:text-gray-300">{{$projet->progress}}%</p>
                     </div>
                 </div>
 
                 <!-- Freelance lié à la commande -->
-                <div class="px-6 py-4 border-t border-gray-300">
+                <div class="px-6 py-4 bprojet-t bprojet-gray-300">
 
                     <h1 class="flex items-start gap-2 text-lg font-bold cursor-pointer lg:text-xl">
                         Freelance lié
@@ -98,7 +107,7 @@
                     </div>
                 </div>
 
-                <div x-data="{open:false}" class="px-6 py-4 border-t border-gray-200">
+                <div x-data="{open:false}" class="px-6 py-4 bprojet-t bprojet-gray-200">
 
 
                     <h1 @click="open = !open"
@@ -126,13 +135,14 @@
 
 
                 <!-- Options supplémentaires -->
-                <div class="px-6 py-4 border-t border-gray-200">
+                <div class="px-6 py-4 bprojet-t bprojet-gray-200">
                     <p class="mb-2 text-lg text-gray-800">Options supplémentaires</p>
                     <div class="flex flex-col justify-end gap-4 md:flex-row">
-                        @if (empty($response->project->transaction))
+                        @if (empty($projet->transaction))
                         <div>
 
-                            <x-button href="{{route('checkoutProjet')}}" primary label="Proceder Au
+                            <x-button href="{{route('ProjetCheckout',['idP'=>$response->id,'id'=>
+                                    $response->project->id])}}" primary label="Proceder Au
                                                                 Paiement"> </x-button>
 
                         </div>
@@ -165,7 +175,7 @@
                     <!-- Transaction de paiement liée -->
 
 
-                    <div x-data="{open:false}" class="px-6 py-4 border-t border-gray-200">
+                    <div x-data="{open:false}" class="px-6 py-4 bprojet-t bprojet-gray-200">
 
                         <h1 @click="open = !open" class="flex items-start gap-2 text-xl font-bold cursor-pointer">
                             Transaction de paiement liée
@@ -181,17 +191,17 @@
 
 
 
-                        @if (!empty($reponse->project->transaction))
+                        @if (!empty($projet->transaction))
 
 
                         <div x-cloak x-show="open" x-collapse>
                             <p class="text-sm text-gray-600 dark:text-gray-300">Numéro de transaction :
-                                #{{$Order->transaction->transaction_numero}}</p>
+                                #{{$projet->transaction->transaction_numero}}</p>
                             <p class="text-sm text-gray-600 dark:text-gray-300">Méthode de paiement :
 
-                                @if(isset($Order->transaction->payment_method['brand']) )
+                                @if(isset($projet->transaction->payment_method['brand']) )
 
-                                @switch($Order->transaction->payment_method['brand'])
+                                @switch($projet->transaction->payment_method['brand'])
                                 @case("visa")
                                 <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 256 83">
@@ -239,11 +249,11 @@
 
 
 
-                                <span>••• {{$Order->transaction->payment_method['last4']}}</span>
+                                <span>••• {{$projet->transaction->payment_method['last4']}}</span>
                                 @endif
                             </p>
                             <p class="text-sm text-gray-600 dark:text-gray-300">Montant payé :
-                                {{$Order->total_amount}}
+                                {{$projet->transaction->amount}}
                             </p>
                             <button class="px-4 py-2 mt-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">Voir
                                 transaction</button>
@@ -255,9 +265,7 @@
                             <p class="text-sm text-gray-600 dark:text-gray-300">Numéro de transaction :
                                 Pas de transaction en cours</p>
 
-                            <x-button label="Proceder au Paiment ">
 
-                            </x-button>
 
 
                         </div>
@@ -366,6 +374,27 @@
 
                                 <div class="flex flex-col space-y-2">
 
+                                    @if($freelance_id !== null)
+                                    @if($messages !== null)
+
+                                    @foreach($messages as $message)
+                                    <!-- message de l'expéditeur -->
+                                    <div
+                                        class="flex items-start {{auth()->id() == $message->sender_id ? 'justify-end':''}}">
+                                        <div
+                                            class="px-4 py-2 bg-blue-600 {{auth()->id() == $message->sender_id ? 'bg-gray-200':'bg-blue-600'}} rounded-lg text-white max-w-xs">
+                                            <p class="text-sm text-gray-700">{{$message->body}}</p>
+                                        </div>
+                                    </div>
+                                    <!-- message du récepteur -->
+
+                                    @endforeach
+                                    @else
+                                    <p>Ecrivez lui un message</p>
+                                    @endif
+                                    @else
+                                    <p>Chargement de messages</p>
+                                    @endif
 
                                 </div>
                             </div>

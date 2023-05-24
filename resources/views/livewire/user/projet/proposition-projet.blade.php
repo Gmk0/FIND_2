@@ -1,4 +1,4 @@
-<div class="p-6">
+<div class="p-6 min-h-screen">
 
 
     <div>
@@ -11,7 +11,7 @@
         <div class="my-8">
             <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Propositions de freelances pour
                 votre projet</h3>
-            <ul class="grid gap-4 mt-4 md:grid-cols-2 xl:grid-cols-3">
+            <ul class="grid gap-4 mt-4 lg:grid-cols-2 xl:grid-cols-3">
 
                 @forelse($proposition as $proposition)
                 <li>
@@ -22,11 +22,11 @@
                                 <div class="flex flex-shrink-0 ml-2 ">
                                     @if($proposition->freelance->isOnline())
                                     <span
-                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Disponible</span>
+                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-gray-800 bg-green-100 rounded-full">Disponible</span>
 
                                     @else
                                     <span
-                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-gray-300 bg-green-100 rounded-full">No
+                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-gray-800 bg-green-100 rounded-full">No
                                         Disponible</span>
                                     @endif
                                 </div>
@@ -74,12 +74,12 @@
                         </div>
                         @if($proposition->status=="accepter")
                         <div class="flex gap-4 px-4 py-4 bg-gray-50 dark:bg-gray-700">
-                            <div>
+                            <div class="p-2">
                                 <h1 class="text-gray-800">Vous avez accepter cette proposiotion </h1>
                             </div>
                             <div>
                                 <x-button href="{{route('projetEvolution',['idP'=>$proposition->id,'id'=>
-                                    $proposition->project->id])}}" sm primary label="l'evolution" />
+                                    $proposition->project->id])}}" sm positive label="l'evolution" />
 
                             </div>
 
@@ -88,8 +88,8 @@
 
 
                         <div class="flex gap-4 px-4 py-4 dark:bg-gray-800 bg-gray-50">
-                            <x-button wire:click="refuser({{$proposition->id}})" sm danger label="Rejeter" />
-                            <x-button wire:click="accepter({{$proposition->id}})" sm primary label="Accepter" />
+                            <x-button wire:click="refuser('{{$proposition->id}}')" sm danger label="Rejeter" />
+                            <x-button wire:click="accepter('{{$proposition->id}}')" sm primary label="Accepter" />
                         </div>
                         @endif
                     </a>

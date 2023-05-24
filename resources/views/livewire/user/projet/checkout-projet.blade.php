@@ -8,10 +8,10 @@
                         <ul class="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
                             <li @click="stepP=1; localStorage.setItem('stepP', stepP)"
                                 class="flex items-center space-x-3 text-left sm:space-x-4">
-                                <a :class="{'ring ring-gray-600 ring-offset-2 bg-gray-600': stepP==1}"
+                                <a :class="{'ring ring-gray-600 ring-offset-2 bg-gray-600 dark:text-gray-100': stepP==1}"
                                     class="flex h-6 w-6 items-center justify-center rounded-full  bg-gray-400 text-xs font-semibold text-white "
                                     href="#">1</a>
-                                <span class="font-semibold text-gray-900">Info</span>
+                                <span class="font-semibold text-gray-800">Info</span>
                             </li>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -19,10 +19,10 @@
                             </svg>
                             <li @click="stepP=2 ; localStorage.setItem('stepP', stepP)"
                                 class="flex cursor-pointer items-center space-x-3 text-left sm:space-x-4">
-                                <a :class="{'ring ring-gray-600 ring-offset-2 bg-gray-600': stepP==2}"
+                                <a :class="{'ring ring-gray-600 ring-offset-2 dark:text-gray-100 bg-gray-600': stepP==2}"
                                     class="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white"
                                     href="#">2</a>
-                                <span class="font-semibold text-gray-900">Mission</span>
+                                <span class="font-semibold text-gray-800">Mission</span>
                             </li>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -30,10 +30,10 @@
                             </svg>
                             <li @click="stepP=3 ; localStorage.setItem('stepP', stepP)"
                                 class="flex items-center space-x-3 text-left sm:space-x-4">
-                                <a :class="{'ring ring-gray-600 ring-offset-2 bg-gray-600': stepP==3}"
+                                <a :class="{'ring ring-gray-600  dark:text-gray-100 ring-offset-2 bg-gray-600': stepP==3}"
                                     class="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white"
                                     href="#">3</a>
-                                <span class="font-semibold text-gray-500">Paiement</span>
+                                <span class="font-semibold text-gray-800">Paiement</span>
                             </li>
                         </ul>
                     </div>
@@ -42,21 +42,21 @@
 
         </div>
 
-        <section x-show.transition.duration.100ms="stepP == 1" class=" bg-gray-100 py-8">
+        <section x-show.transition.duration.100ms="stepP == 1" class=" bg-gray-100 dark:bg-gray-800 py-8">
             <div class="container mx-auto">
                 <div class="max-w-6xl mx-auto">
                     <h2 class="text-3xl font-bold text-center mb-4">Paiement pour la mission
                     </h2>
 
                     <div class="bg-white rounded-lg shadow-lg p-8">
-                        <p class="text-gray-700 text-lg">
+                        <p class="text-gray-700 dark:text-gray-200 text-lg">
                             Cher client,<br>
                             Nous souhaitons vous informer qu'il est maintenant temps de procéder au paiement pour votre
                             mission
                             auprès du freelance. Nous apprécions votre confiance en notre plateforme de mise en relation
                             et
                             nous
-                            sommes impatients de vous voir progresser avec succès dans votre projet.<br><br>
+                            sommes impatients de vo-us voir progresser avec succès dans votre projet.<br><br>
 
                             Avant de passer au paiement, nous aimerions vous rappeler quelques points importants :
                         <ul class="list-disc list-inside pl-4">
@@ -89,22 +89,37 @@
         <div x-show.transition.duration.100ms="stepP == 2" class="px-3 ">
 
             <div class="rounded-lg">
-                <section class="bg-gray-100 py-8">
+                <section class="bg-gray-100 dark:bg-gray-800 py-8">
                     <div class="max-w-7xl lg:mx-auto px-4 sm:px-2 lg:px-8">
                         <div class="bg-white shadow-lg rounded-lg">
                             <div class="lg:p-6 p-3">
                                 <h2 class="text-2xl font-bold mb-4 text-gray-800">Récapitulation de la mission</h2>
                                 <!-- Informations de la mission -->
-                                <p class="mb-2"><span class="font-semibold">Titre :</span> Mission XYZ</p>
-                                <p class="mb-2"><span class="font-semibold">Description :</span> Lorem ipsum dolor sit
-                                    amet...</p>
-                                <p class="mb-2"><span class="font-semibold">Budget :</span> $1000</p>
+                                <p class="mb-2"><span class="font-semibold">Titre :</span>
+                                    {{$project->title}}
+                                </p>
+                                <p class="mb-2"><span class="font-semibold">Description :</span>
+                                    {{$project->description}}</p>
+                                <p class="mb-2"><span class="font-semibold">Budget :</span>
+                                    {{$project->bidAmount()}}</p>
+
+
+                                <p class="mb-4 text-base font-medium text-gray-600 md:mb-2 dark:text-gray-300">Délai
+                                    d'echance :
+                                    Du {{$project->begin_project->format('d F, Y')}} au
+                                    {{$project->end_project->format('d F, Y')}}
+                                </p>
                                 <!-- Proposition acceptée -->
                                 <h2 class="text-2xl font-bold mt-8 mb-4">Proposition acceptée</h2>
-                                <div class="bg-blue-100 p-4 rounded-lg">
-                                    <p class="text-blue-600 font-semibold">Freelance XYZ</p>
-                                    <p class="mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed est
-                                        nunc.</p>
+                                <div class="bg-blue-100 dark:bg-gray-900 p-4 rounded-lg">
+                                    <p class="text-gray-800 font-semibold">{{$response->freelance->user->name}} /
+                                        {{$response->freelance->user->email}}</p>
+                                    <p class="mt-2">
+                                        {{$response->content}}
+                                    </p>
+
+                                    <p class="mb-2"><span class="font-bold">Budget propososer :</span>
+                                        $ {{$response->bid_amount}} </p>
                                 </div>
                             </div>
                         </div>
@@ -191,7 +206,18 @@
 
                             </div>
 
-                            <div>
+                            <div class="flex-1 bg-white rounded-lg p-2 m-2">
+
+                                <div class="flex items-center mb-4">
+                                    <input type="checkbox" name="payment-method" id="3d-secure"
+                                        class="form-radio text-indigo-500 h-4 w-4">
+                                    <label for="3d-secure" class="ml-2">3D Secure</label>
+                                </div>
+                                <p class="text-gray-600">Veuillez être redirigé vers la page de vérification 3D Secure
+                                    de votre banque.</p>
+                            </div>
+
+                            <div class="mt-4">
                                 <button wire:click="pay()" wire:loading.attr='disabled'
                                     class="block w-full max-w-xs px-3 py-2 mx-auto font-semibold text-white bg-indigo-500 rounded-lg hover:bg-indigo-700 focus:bg-indigo-700"><i
                                         class="mr-1 mdi mdi-lock-outline"></i> <span wire:loading.remove>PAYER

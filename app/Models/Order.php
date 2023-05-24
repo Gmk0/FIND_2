@@ -24,7 +24,7 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'service_id',
-        'freelance_id',
+        // 'freelance_id',
         'status',
         'quantity',
         'type',
@@ -37,7 +37,8 @@ class Order extends Model
         parent::boot();
 
         static::creating(function ($commande) {
-            // $commande->id = Uuid::uuid4()->toString();
+            $commande->id = Uuid::uuid4()->toString();
+            $commande->user_id = auth()->user()->id;
             $commande->order_numero = 'CMD' . date('YmdH') . rand(10, 99);
         });
     }
@@ -48,6 +49,7 @@ class Order extends Model
      */
     protected $casts = [
 
+        'id' => 'string',
         'user_id' => 'integer',
         'freelance_id' => 'integer',
         'service_id' => 'integer',

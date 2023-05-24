@@ -76,8 +76,12 @@ Route::middleware([
 
     Route::get('/user/list_projet/{id}/{idP}/checkout', [ProjetController::class, 'ProjetCheckout'])->name('ProjetCheckout');
 
+    Route::get('/user/list_projet/checkout/{idP}/{transaction_numero}/status', [ProjetController::class, 'ProjetCheckoutStatus'])->name('ProjetCheckoutStatus');
+
     Route::get('/user/list_projet/{id}/{idP}', [ProjetController::class, 'ProjetEvolution'])->name('projetEvolution');
-    Route::get('/user/list_projet/{id}', App\Http\Livewire\User\Projet\PropositionProjet::class)->name('PropostionProjet');
+    Route::get('/user/list_projet/{id}', [ProjetController::class, 'ProjeProposition'])->where('id', '(.*)')->name('PropostionProjet');
+
+    Route::get('/list_projetM/checkout/status', [ProjetController::class, 'ProjetCheckoutMaxiCash'])->name('ProjetCheckoutMaxiCash');
 
 
     Route::view('/user/securite', 'user.profile.securite')->name('securiteUser');

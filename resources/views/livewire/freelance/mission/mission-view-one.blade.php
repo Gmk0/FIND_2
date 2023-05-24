@@ -8,29 +8,29 @@
             Détails de la mission</h1>
         <div class="p-6 bg-white rounded-lg shadow-md">
             <h2 class="mb-4 text-lg font-bold text-gray-800 lg:text-xl">{{$projet->title}}</h2>
-            <p class="mb-4 text-gray-600 dark:text-gray-500">Description de la mission :</p>
+            <p class="mb-4 text-gray-600 dark:text-gray-100">Description de la mission :</p>
             <p class="mb-4 leading-loose text-gray-800">
                 {{$projet->description}}
             </p>
-            <p class="mb-4 text-gray-600 dark:text-gray-500">Détails du projet :</p>
+            <p class="mb-4 text-gray-600 dark:text-gray-100">Détails du projet :</p>
             <ul class="mb-4 list-disc list-inside">
                 <li class="text-gray-800 ">Durée du de la mission : Du <span
-                        class="font-bold">{{$projet->begin_project}}</span> au
+                        class="font-bold">{{$projet->begin_project->format('d F, Y')}}</span> au
                     <span class="font-bold">
-                        {{$projet->end_project}}
+                        {{$projet->end_project->format('d F, Y')}}
                     </span>
 
                 </li>
-                <li class="mt-4 text-gray-800 dark:text-gray-500">Budget : <span
-                        class="text-lg font-bold text-gray-800">{{$projet->bid_amount}} $</span>
+                <li class="mt-4 text-gray-800 dark:text-gray-100">Budget : <span
+                        class="text-lg font-bold text-gray-800">{{$projet->bidAmount()}}</span>
                 </li>
 
             </ul>
-            <p class="mb-4 text-gray-600 dark:text-gray-500">Exigences de la mission :</p>
+            <p class="mb-4 text-gray-600 dark:text-gray-100">Exigences de la mission :</p>
             <ul class="mb-4 list-disc list-inside">
 
             </ul>
-            <p class="mb-4 text-gray-600 dark:text-gray-500">Fichier Inclus :</p>
+            <p class="mb-4 text-gray-600 dark:text-gray-100">Fichier Inclus :</p>
 
 
 
@@ -85,7 +85,8 @@
                             <x-button flat label='fermer' x-on:click='close' />
 
                             @if($modalEdit)
-                            <x-button wire:click="editResponse()" flat primary label='envoyer' spinner='editResponse' />
+                            <x-button wire:click="editResponse()" flat primary label='modifier'
+                                spinner='editResponse' />
 
                             @else
                             <x-button wire:click="sendResponse()" flat primary label='envoyer' spinner='sendResponse' />

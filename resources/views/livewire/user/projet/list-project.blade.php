@@ -11,7 +11,7 @@
 
             <x-button href="{{route('createProject')}}" positive label="Soumettre"></x-button>
         </div>
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
 
             @forelse($projets as $projet)
             <div class="p-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -23,7 +23,7 @@
                         class="font-bold">{{$projet->bid_amount}}</span></p>
                 <div class="flex justify-between">
                     <span class="text-gray-500 "></span>
-                    @if($projet->active=="active")
+                    @if($projet->status == "active")
                     <span class="font-bold text-green-500 ">En cours</span>
                     @elseif($projet->status=="en attente")
 
@@ -31,10 +31,9 @@
                     @endif
                 </div>
                 <div class="mt-4 flex gap-4">
-                    @if($projet->active=="active")
+                    @if($projet->status=="active")
                     <div>
-                        <x-button href="{{route('PropostionProjet',[$projet->id])}}" primary
-                            label="propositions {{$projet->projectRepsonsesCount()}}" />
+                        <x-button href="{{route('PropostionProjet',[$projet->id])}}" positive label="Evolution" />
                     </div>
 
 
@@ -46,12 +45,12 @@
 
                     </div>
                     <div>
-                        <x-button wire:click="openModalEdit({{$projet->id}})" label="Modifier">
+                        <x-button wire:click="openModalEdit('{{$projet->id}}')" label="Modifier">
                         </x-button>
                     </div>
 
                     <div>
-                        <x-button.circle wire:click="openModal({{$projet->id}})" icon="trash">
+                        <x-button.circle wire:click="openModal('{{$projet->id}}')" icon="trash">
 
                             </x-button>
 

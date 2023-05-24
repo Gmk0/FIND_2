@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::create('projects', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('title');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamp('begin_project')->nullable();
             $table->timestamp('end_project')->nullable();
             $table->integer('progress')->default(0);
-            $table->foreignId('transaction_id')->nullable()->constrained();
+            $table->foreignUuid('transaction_id')->nullable()->constrained();
             $table->enum('status', ["active", "en attente", "completed"])->default('en attente');
             $table->enum('is_paid', ["en attente", "payer"])->default('en attente');
             $table->boolean('visible')->default(true);

@@ -12,14 +12,13 @@ use WireUi\Traits\Actions;
 class PropositionProjet extends Component
 {
     use Actions;
+    public Project $projet;
     public $proposition;
     public $proposition_id;
 
+    protected $listeners = ['refresh', '$refresh'];
 
-    public function mount($id)
-    {
-        $this->proposition_id = $id;
-    }
+
 
     public function accepter($id)
     {
@@ -29,6 +28,8 @@ class PropositionProjet extends Component
         $Response->status = 'accepter';
 
         $Response->update();
+        $projet = Project::findOrFail($Response->project_id)->update(['status' => 'active', 'visible' => 0]);
+
 
 
         $this->notification()->success(
@@ -37,6 +38,8 @@ class PropositionProjet extends Component
         );
 
         event(new Response($Response));
+
+        $this->emitSelf('refresh');
     }
 
     public function refuser($id)
@@ -55,7 +58,7 @@ class PropositionProjet extends Component
 
     public function render()
     {
-        $this->proposition = ProjectResponse::where('project_id', $this->proposition_id)->get();
+        $this->proposition = ProjectResponse::where('project_id', $this->projet->id)->get();
         return view('livewire.user.projet.proposition-projet')->layout('layouts.user-profile2');
     }
 }

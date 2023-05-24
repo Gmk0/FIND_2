@@ -25,7 +25,7 @@ class Notification extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+
         'data' => 'array',
         'user_id' => 'integer',
 

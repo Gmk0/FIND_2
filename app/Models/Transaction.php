@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Ramsey\Uuid\Uuid;
 
 class Transaction extends Model
@@ -18,7 +18,7 @@ class Transaction extends Model
      * @var array
      */
     protected $fillable = [
-        //'user_id',
+        'user_id',
         // 'order_id',
         'amount',
         'payment_method',
@@ -31,7 +31,8 @@ class Transaction extends Model
         parent::boot();
 
         static::creating(function ($transaction) {
-            //$transaction->id = Uuid::uuid4()->toString();
+            $transaction->id = Uuid::uuid4()->toString();
+            $transaction->user_id = auth()->user()->id;
             $transaction->transaction_numero = 'TC' . date('YmdH')
                 . rand(10, 99);
         });
@@ -43,7 +44,7 @@ class Transaction extends Model
      * @var array
      */
     protected $casts = [
-
+        'id' => 'string',
         'user_id' => 'integer',
         'payment_method' => 'array',
 
@@ -62,5 +63,11 @@ class Transaction extends Model
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function project(): HasOne
+    {
+
+        return $this->hasOne(Project::class);
     }
 }

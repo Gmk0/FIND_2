@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::create('project_responses', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignId('freelance_id')->constrained();
-            $table->foreignId('project_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('project_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->text('content');
             $table->decimal('bid_amount', 8, 2)->nullable();
             $table->enum('status', ["accepter", "en attente", "rejecter"])->default('en attente');

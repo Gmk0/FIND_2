@@ -355,9 +355,10 @@
                                     </thead>
                                     <tbody class="bg-white dark:bg-gray-800">
 
+
                                         @forelse ($transactions as $transaction)
 
-                                        <tr>
+                                        <tr wire:loading.class='hidden'>
                                             <td
                                                 class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{$transaction->transaction_numero}} <span class="font-semibold"></span>
@@ -379,6 +380,7 @@
 
                                                 @endforelse
 
+                                                {{$transaction->project?->title}}
                                             </td>
                                             <td
                                                 class="inline-flex items-center p-4 space-x-2 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
@@ -445,7 +447,14 @@
 
                                         @empty
 
+                                        <div class="flex items-center   justify-between text-lg">
+
+                                            <h1 class="text-gray-800">Aucun element trouve</h1>
+                                        </div>
+
                                         @endforelse
+
+
 
                                     </tbody>
                                 </table>

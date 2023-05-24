@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthenticatedSessionController;
 use App\Http\Controllers\CommandeControler;
+use App\Http\Controllers\ProjetController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -58,7 +59,7 @@ Route::group(['prefix' => "freelance"], function () {
 
             Route::get('/mission_accepted', \App\Http\Livewire\Freelance\Mission\Proposition::class)->name('freelance.proposition');
             Route::get('/mission_accepted/{id}', \App\Http\Livewire\Freelance\Mission\MissionWork::class)->name('freelance.proposition.accepted');
-            Route::get('/view/{id}', \App\Http\Livewire\Freelance\Mission\MissionViewOne::class)->name('freelance.projet.view');
+            Route::get('/{id}', [ProjetController::class, 'ProjeViewFreelance'])->name('freelance.projet.view');
         });
         /* Route::view('/', 'freelancer.dashboard');
         Route::get('/profil', \App\Http\Livewire\Freelancer\Profil\ProfileFreelance::class)->name('freelance.profile');

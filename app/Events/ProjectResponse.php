@@ -37,6 +37,6 @@ class ProjectResponse implements ShouldBroadcast
         error_log($this->response);
         //  error_log($this->receiver);
 
-        return new PrivateChannel('notify.' . $this->response->id);
+        return new PrivateChannel('notify.' . $this->response->project->user->id);
     }
 }
