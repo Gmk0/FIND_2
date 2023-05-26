@@ -207,7 +207,7 @@
                                             </div>
 
                                             <div class="px-4 py-2 mt-2 max-h-[14rem] md:max-h-[14rem] md:mt-2">
-                                                <a href="{{route('ServicesViewOne',['id'=>$service->id,'category'=>$service->category->name])}}"
+                                                <a href="{{route('ServicesViewOne',['service_numero'=>$service->service_numero,'category'=>$service->category->name])}}"
                                                     class="mb-2 text-sm font-semibold md:text-base "
                                                     :class="linkHover ? 'text-amber-600' : 'text-gray-800 dark:text-gray-200'">{{$service->title}}
                                                 </a>

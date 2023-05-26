@@ -28,6 +28,7 @@ class PropositionProjet extends Component
         $Response->status = 'accepter';
 
         $Response->update();
+        $Response->notifyFreelance();
         $projet = Project::findOrFail($Response->project_id)->update(['status' => 'active', 'visible' => 0]);
 
 
@@ -48,11 +49,14 @@ class PropositionProjet extends Component
         $Response = ProjectResponse::findOrfail($id);
         $Response->status = 'rejected';
         $Response->update();
+        $Response->notifyFreelance();
 
         $this->notification()->success(
             $title = "Proposition",
             $description = "Vous avez rejeter la proposition",
         );
+
+
         event(new Response($Response));
     }
 

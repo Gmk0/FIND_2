@@ -38,7 +38,7 @@ class ProgressOrder extends Notification
         return [
             'message' => 'Nouvelle progression de ' . $this->feedback->order->progress . ' pour le service ' . $this->feedback->order->service->title,
             'url' => '/feedbacks/' . $this->feedback->id,
-            'icon' => '/img/notification-icon.png',
+            'icon' => '/images/notification/arrows.png',
         ];
     }
 

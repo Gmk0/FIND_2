@@ -1,6 +1,4 @@
-@extends('layouts.freelanceTest2')
+<x-freelance-profile>
+    @livewire('freelance.dashboard.dashboard-freelance')
 
-
-@section('content')
-@livewire('freelance.dashboard.dashboard-freelance')
-@endsection
+</x-freelance-profile>

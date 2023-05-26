@@ -3,23 +3,41 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use App\Models\ProjectResponse;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+
+
 use NotificationChannels\PusherPushNotifications\PusherChannel;
 use Pusher\PushNotifications\PushNotifications;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
 
-class OrderNotification extends Notification implements ShouldQueue
+class ProjetConfirmation extends Notification
+
+implements ShouldQueue
 {
     use Queueable;
 
-    protected $order;
+    /**
+     * Create a new notification instance.
+     */
 
-    public function __construct($order)
+    public $projectResponse;
+    public function __construct(ProjectResponse $projectResponse)
     {
-        $this->order = $order;
+        //
+
+        $this->projectResponse = $projectResponse;
     }
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @return array<int, string>
+     */
+
+
 
     public function via($notifiable)
     {
@@ -29,9 +47,9 @@ class OrderNotification extends Notification implements ShouldQueue
     public function toDatabase($notifiable)
     {
         return [
-            'message' => 'Nouvelle commande de ' . $this->order->total_amount . ' pour le service ' . $this->order->service->title . ' a été passée.',
-            'url' => '/orders/' . $this->order->id,
-            'icon' => '/images/notification/order.png',
+            'message' => 'Nouvelle statu de votre proposition pour la mission ' . $this->projectResponse->project->title,
+            'url' => '/freelance/mission/' . $this->projectResponse->project->id,
+            'icon' => '/img/notification-icon.png',
         ];
     }
 
@@ -39,9 +57,9 @@ class OrderNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('Nouvelle Commande de.')
-            ->action('Notification Action', url('/orders/' . $this->order->id))
-            ->line('Thank you for using our application!');
+            ->line('Nouvelle statu de votre proposition pour la mission ' . $this->projectResponse->project->title)
+            ->action('Notification Action', url('/user/list_project/' . $this->projectResponse->project->id))
+            ->line('Merci d\'utiliser notre Application!');
     }
 
     public function toPushNotification($notifiable)
@@ -52,15 +70,14 @@ class OrderNotification extends Notification implements ShouldQueue
         ));
 
         $interests = "App.Models.User.{$notifiable->id}";
-        $url = 'http://localhost:8000/freelance/commande/view/' . $this->order;
 
         $data = array(
             "web" => array(
                 "notification" => array(
-                    "title" => "Nouvelle commande !",
+                    "title" => "Reponse a votre proposition !",
                     "body" =>
-                    'Vous avez une nouvelle commande de ' . $this->order->total_amount . ' pour le service ' . $this->order->service->title . '.',
-                    "deep_link" => "http://localhost:8000/freelance/commande",
+                    'Nouvelle status de votre proposition pour la mission ' . $this->projectResponse->project->title,
+                    "deep_link" => 'https://find-freelance/user/list_project/' . $this->projectResponse->project->id,
                     "icon" => "http://localhost:8000/images/logo/find_01.png",
                     "data" => array(
                         "foo" => "bar",

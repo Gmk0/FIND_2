@@ -4,6 +4,4 @@
 
 
 
-@livewire('user.projet.checkout-projet')
-
 @endsection

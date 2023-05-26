@@ -3,7 +3,19 @@
 
 @include('include.head')
 
-<body class="antialiased">
+<body class="antialiased"
+    x-data="{navOpen: false,notificationActive: false, loading: true,linkActive: false, scrolledFromTop: false}" :class="{
+            'overflow-hidden': navOpen,
+            'overflow-scroll': !navOpen
+
+        }" x-init="$refs.loading.classList.add('hidden')">>
+
+
+    <div x-ref="loading"
+        class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-50"
+        style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
+        Chargement.....
+    </div>
     <div class="min-h-screen custom-scrollbar">
         @livewire('user.navigation.navigation-two')
 

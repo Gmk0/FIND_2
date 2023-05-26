@@ -273,6 +273,6 @@ class ServicesCreate extends Component implements Forms\Contracts\HasForms
 
     public function render()
     {
-        return view('livewire.freelance.services.services-create')->extends('layouts.freelanceTest2')->section('content');
+        return view('livewire.freelance.services.services-create')->layout('layouts.freelance-profile');
     }
 }

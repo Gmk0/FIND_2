@@ -35,6 +35,13 @@ class FeedbackService extends Model
     ];
 
 
+    protected $casts = [
+
+        'id' => 'integer',
+        'order_id' => 'string',
+
+    ];
+
     public function notifyUser()
     {
         $order = $this->order;

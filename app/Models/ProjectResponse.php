@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\ProjectResponse as EventsProjectResponse;
+use App\Notifications\ProjetConfirmation;
 use App\Notifications\ProjetStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,10 @@ use Ramsey\Uuid\Uuid;
 class ProjectResponse extends Model
 {
     use HasFactory;
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+
 
     /**
      * The attributes that are mass assignable.
@@ -50,6 +55,18 @@ class ProjectResponse extends Model
         if ($user) {
 
             $user->notify(new ProjetStatus($this));
+        }
+    }
+
+    public function notifyFreelance()
+    {
+        $user = $this->freelance->user;
+
+
+
+        if ($user) {
+
+            $user->notify(new ProjetConfirmation($this));
         }
     }
 

@@ -119,6 +119,6 @@ class ServiceList extends Component implements Tables\Contracts\HasTable
     }
     public function render()
     {
-        return view('livewire.freelance.services.service-list')->extends('layouts.freelanceTest2')->section('content');
+        return view('livewire.freelance.services.service-list')->layout('layouts.freelance-profile');
     }
 }

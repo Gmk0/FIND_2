@@ -13,15 +13,14 @@
 
     <x-notifications z-index="z-60" position='bottom-right' />
 
-    <div x-ref="loading" class="fixed inset-0 z-[200] flex s-center justify-center text-white bg-black bg-opacity-50"
+    <div x-ref="loading"
+        class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-50"
         style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
         Chargement.....
 
 
-
-
-
     </div>
+
     @if ($errors->any())
 
 
@@ -73,25 +72,9 @@
         {{ $slot }}
     </main>
 
-    <footer class="px-4 py-6 md:flex md:s-center md:justify-between 2xl:px-0 md:py-10">
-        <p class="mb-4 text-sm text-center text-gray-500 md:mb-0">
-            &copy; 2022 <a href="" class="hover:underline" target="_blank">FIND</a>. All rights reserved.
-        </p>
-        <ul class="flex flex-wrap s-center justify-center">
-            <li><a href="{{url('/terms-of-service')}}"
-                    class="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6 dark:text-gray-400">Terms</a>
-            </li>
-            <li><a href="{{url('/policy')}}"
-                    class="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6 dark:text-gray-400">Policy</a>
-            </li>
-            <li><a href="#"
-                    class="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6 dark:text-gray-400">Cookie
-                    Policy</a></li>
-            <li><a href="{{url('/contact')}}"
-                    class="text-sm font-normal text-gray-500 hover:underline dark:text-gray-400">Contact</a>
-            </li>
-        </ul>
-    </footer>
+    <x-footerProfile />
+
+
 
 
     <script>

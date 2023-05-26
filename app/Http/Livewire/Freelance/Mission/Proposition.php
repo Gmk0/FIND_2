@@ -138,6 +138,6 @@ class Proposition extends Component implements Tables\Contracts\HasTable
 
     public function render()
     {
-        return view('livewire.freelance.mission.proposition')->extends('layouts.freelanceTest2')->section('content');
+        return view('livewire.freelance.mission.proposition')->layout('layouts.freelance-profile');
     }
 }

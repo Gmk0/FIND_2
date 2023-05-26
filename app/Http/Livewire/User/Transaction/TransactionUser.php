@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Transaction;
 use App\Models\Order;
 use App\Models\service;
-
+use Carbon\Carbon;
 use Filament\Tables;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -28,124 +28,99 @@ class TransactionUser extends Component implements Tables\Contracts\HasTable
     use Tables\Concerns\InteractsWithTable;
     public $transaction;
 
+    public $transactions;
+    public $pending;
+    public $successfull;
+    public $failed;
+    public $period = 'last7days';
+    public $endDate;
+    public $startDate;
+    protected $listeners = ['startDateUpdated'];
 
-    public function getTransac()
+
+
+    public function formatDate($date)
     {
+        $carbonDate = Carbon::createFromFormat('m/d/Y', $date);
+        return $carbonDate->format('Y-m-d H:i:s');
+    }
+    public function startDateUpdated($startDate, $endDate)
+    {
+        $this->startDate = $startDate;
 
-
-        $order = Transaction::whereHas('orders', function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        })->get();
+        $this->endDate = $endDate;
     }
 
-    protected function getTableQuery(): Builder
+    public function cancel()
     {
+        $this->startDate = null;
 
-        // $freelance = freelance::where('user_id', Auth::user()->id)->first();
-
-
-        $order = Order::query();
-        // Créer une requête pour la table "Service"
-        $order->where('user_id', auth()->user()->id)
-
-            ->get();
-
-
-        // Ajouter une condition pour l'utilisateur connecté
-
-        // Retourner la requête
-        return $order;
-    }
-
-    protected function getTableColumns(): array
-    {
-        return [
-
-            Split::make([
-                Tables\Columns\TextColumn::make('transaction.transaction_numero')->description('Transaction'),
-                Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('lg'),
-                Tables\Columns\TextColumn::make('total_amount')->description('Montant'),
-
-                BadgeColumn::make('status')
-                    ->enum([
-                        'completed' => 'Payer',
-                        'pending' => 'en Attente',
-                        'rejeted' => 'Rejeter',
-                    ])->colors([
-
-                        'warning' => static fn ($state): bool => $state === 'pending',
-                        'success' => static fn ($state): bool => $state === 'completed',
-                        'danger' => static fn ($state): bool => $state === 'rejeted',
-                    ]),
-            ]),
-            Panel::make([
-                Stack::make([
-                    Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('md'),
-
-                    Tables\Columns\TextColumn::make('created_at')->description('date'),
-
-                ]),
-            ])->collapsible(),
-
-
-
-
-
-        ];
+        $this->endDate = null;
     }
 
 
 
-    protected function getTableFilters(): array
+
+    function getTransaction()
     {
-        return [
-            SelectFilter::make('status')
-                ->options([
-                    'completed' => 'completed',
-                    'pending' => 'pending',
-                    'rejeted' => 'rejeted',
-                ])
-                ->attribute('status'),
-
-        ];
-    }
-    public function isTableSearchable(): bool
-    {
-        return true;
-    }
-
-    protected function getTableActions(): array
-    {
-        return [
-            // ...
-            Action::make('Voir')
-                ->url(fn (Order $record): string => route('transactionOneUser', $record->transaction->transaction_numero))
-                //->openUrlInNewTab()
-                ->tooltip('Voir transaction')
-                ->icon('heroicon-s-pencil'),
-            Action::make('Facture')
-                // Vérifie si la transaction est non nulle
-                ->url(fn (Order $record): string => isset($record->transaction) ? route('facturation', $record->transaction->transaction_numero) : url('/services'))
-                ->openUrlInNewTab()
-                ->icon('heroicon-s-printer')
-                ->tooltip('Voir les services'),
+        $user = auth()->id();
+        $transactions = Transaction::where('user_id', auth()->id());
 
 
+        $statusFilters = [];
+
+        if ($this->pending) {
+            $statusFilters[] = 'pending';
+        }
+
+        if ($this->failed) {
+            $statusFilters[] = 'failed';
+        }
+
+        if ($this->successfull) {
+            $statusFilters[] = 'successfull';
+        }
+
+        if (!empty($statusFilters)) {
+            $transactions->whereIn('status', $statusFilters);
+        }
+
+        if ($this->period === 'last7days') {
+            $transactions->where('created_at', '>=', now()->subDays(7));
+        } elseif ($this->period === 'last30days') {
+            $transactions->where('created_at', '>=', now()->subMonths(1));
+        } elseif ($this->period === 'last3months') {
+            $transactions->where('created_at', '>=', now()->subMonths(3));
+        } elseif ($this->period === 'last90days') {
+            $transactions->where('created_at', '>=', now()->subMonths(9));
+        } elseif ($this->period === 'today') {
+            $transactions->where('created_at', '>=', now());
+        }
+
+
+
+        if ($this->startDate && $this->endDate) {
+
+
+
+            $transactions->whereBetween('created_at', [$this->formatDate($this->startDate), $this->formatDate($this->endDate)]);
+        }
 
 
 
 
-        ];
-    }
 
-    protected function getTableRecordsPerPageSelectOptions(): array
-    {
-        return [5, 15, 25, 100];
+        $transactions = $transactions->orderBy('created_at', 'desc')->get();
+
+
+
+        return $transactions;
     }
 
 
     public function render()
     {
+        $this->transactions = $this->getTransaction();
         return view(
             'livewire.user.transaction.transaction-user'
         )->layout('layouts.user-profile2');

@@ -38,6 +38,7 @@
 
 
 
+
     <link rel="stylesheet" href="/build/assets/app.css">
 
 
@@ -48,25 +49,6 @@
     <style>
         [x-cloak] {
             display: none !important;
-        }
-
-
-        @media (min-width: 640px) {
-            #table {
-                display: inline-table !important;
-            }
-
-            #table thead tr:not(:first-child) {
-                display: none;
-            }
-        }
-
-        #table td:not(:last-child) {
-            border-bottom: 0;
-        }
-
-        #table th:not(:last-child) {
-            border-bottom: 2px solid rgba(0, 0, 0, .1);
         }
     </style>
 
@@ -83,8 +65,6 @@
 
 
 
-
-    {{--@vite(['resources/css/app.css','resources/js/app.js'])--}}
 
 
 

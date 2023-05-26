@@ -12,9 +12,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 use Ramsey\Uuid\Uuid;
 
+use Illuminate\Support\Str;
+
 class Order extends Model
 {
     use HasFactory;
+
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -22,9 +27,13 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
+
+        // 'id',
         'user_id',
         'service_id',
+        'order_numero',
         // 'freelance_id',
+        'transaction_id',
         'status',
         'quantity',
         'type',
@@ -36,10 +45,15 @@ class Order extends Model
     {
         parent::boot();
 
-        static::creating(function ($commande) {
-            $commande->id = Uuid::uuid4()->toString();
-            $commande->user_id = auth()->user()->id;
-            $commande->order_numero = 'CMD' . date('YmdH') . rand(10, 99);
+        static::creating(function ($order) {
+            $order->id = Str::uuid()->toString();
+            // $order->user_id = auth()->user()->id;
+            $order->order_numero = 'CMD' . date('YmdH') . rand(10, 99);
+        });
+
+        static::created(function ($order) {
+
+            FeedbackService::create(['order_id' => $order->id]);
         });
     }
     /**
@@ -52,8 +66,10 @@ class Order extends Model
         'id' => 'string',
         'user_id' => 'integer',
         'freelance_id' => 'integer',
+        'quantity' => 'integer',
         'service_id' => 'integer',
         'total_amount' => 'decimal:2',
+        'transaction_id' => 'string',
     ];
 
     protected $dispatchesEvents = [

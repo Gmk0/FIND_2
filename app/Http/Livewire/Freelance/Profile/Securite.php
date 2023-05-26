@@ -8,6 +8,6 @@ class Securite extends Component
 {
     public function render()
     {
-        return view('livewire.freelance.profile.securite')->extends('layouts.freelanceTest2')->section('content');
+        return view('livewire.freelance.profile.securite')->layout('layouts.freelance-profile');
     }
 }

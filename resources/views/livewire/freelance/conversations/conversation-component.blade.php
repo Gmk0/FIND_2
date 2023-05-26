@@ -4,10 +4,38 @@
      isPanelOpen:false,
      theme:false,
      attachement:false,
-    }" class="container mx-auto overflow-y-auto custom-scrollbar">
-    <div class="h-screen min-w-full overflow-y-hidden border rounded lg:h-fit custom-scrollbar lg:grid lg:grid-cols-3">
-        <div x-bind:class="{'md:block hidden': sidebarOpen, 'md:block ': !sidebarOpen}"
-            class="border-r border-gray-500 dark:border-gray-600 lg:col-span-1">
+    }" x-init="setTimeout(() => { isLoading = false }, 3000)"
+    class="container mx-auto overflow-y-auto custom-scrollbar">
+
+    <div x-show="isLoading">
+
+        <div class="flex flex-row flex-1 h-screen px-2 overflow-y-hidden">
+            <div
+                class="order-first hidden w-1/3 h-screen p-2 px-2 mx-2 overflow-y-auto dark:bg-gray-600 bg-gray-300 rounded-md animate-pulse custom-scrollbar md:flex ">
+                <div>
+
+                </div>
+            </div>
+            <div
+                class="flex-1 h-screen p-4 w-2/3 overflow-y-auto text-xs dark:bg-gray-600 bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
+                <div class="h-8 mb-2   dark:bg-gray-600 bg-gray-300 rounded-md animate-pulse">
+
+                </div>
+                <div class="grid grid-cols-1 gap-4 mt-6 ">
+                    <div class="h-full dark:bg-gray-600 bg-gray-300 rounded-md animate-pulse"></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div x-cloak x-show="!isLoading"
+        class="min-w-full min-h-screen overflow-y-hidden border rounded lg:h-screen custom-scrollbar lg:grid lg:grid-cols-3">
+
+
+        <div x-bind:class="{'lg:block hidden': sidebarOpen, 'lg:block ': !sidebarOpen}"
+            class="border-r border-gray-300 dark:border-gray-600 lg:col-span-1">
 
             <div class="flex flex-row items-center justify-between px-3 py-2 bg-grey-lighter">
                 <div>
@@ -55,7 +83,7 @@
                     </span>
 
                     <input type="search" wire:model.debounce.500ms='query'
-                        class="block w-full py-2 pl-10 bg-gray-100 rounded outline-none dark:bg-gray-800 dark:text-gray-300"
+                        class="block w-full py-2 pl-10  bg-gray-100 rounded outline-none dark:bg-gray-800 dark:text-gray-300"
                         name="search" placeholder="Recherche" required />
 
 
@@ -71,7 +99,7 @@
                     @foreach ($conversations as $conversation)
                     <a wire:key='{{$conversation->id}}' href="#" @click="sidebarOpen=!sidebarOpen"
                         wire:click="chatUserSelected({{$conversation}},{{$conversation->user_id }})"
-                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-500 cursor-pointer dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none">
+                        class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none">
 
                         @if (!empty($conversation->user->profile_photo_path))
                         <img class="object-cover w-10 h-10 rounded-full"
@@ -134,7 +162,7 @@
         </div>
         <div x-bind:class="{'md:block': sidebarOpen, ' hidden md:block ': !sidebarOpen}"
             class=" lg:col-span-2 lg:block">
-            <div class="w-full h-full ">
+            <div class="w-full min-h-full ">
 
 
                 <div class="flex flex-row items-center justify-between px-3 py-2 bg-grey-lighter">
@@ -235,8 +263,12 @@
 
                     @livewire('user.conversation.body-message')
                 </div>
+                <div>
 
-                @livewire('freelance.conversations.send-message-f')
+                    @livewire('freelance.conversations.send-message-f')
+                </div>
+
+
 
 
 

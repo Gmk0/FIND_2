@@ -12,18 +12,18 @@
 
         <div class="flex flex-row flex-1 h-screen px-2 overflow-y-hidden">
             <div
-                class="order-first hidden w-1/3 h-screen p-2 px-2 mx-2 overflow-y-auto bg-gray-300 rounded-md animate-pulse custom-scrollbar md:flex ">
+                class="order-first hidden w-1/3 h-screen p-2 px-2 mx-2 overflow-y-auto dark:bg-gray-600 bg-gray-300 rounded-md animate-pulse custom-scrollbar md:flex ">
                 <div>
 
                 </div>
             </div>
             <div
-                class="flex-1 h-screen p-4 w-2/3 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
-                <div class="h-8 mb-2 bg-gray-300 rounded-md animate-pulse">
+                class="flex-1 h-screen p-4 w-2/3 overflow-y-auto text-xs dark:bg-gray-600 bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
+                <div class="h-8 mb-2   dark:bg-gray-600 bg-gray-300 rounded-md animate-pulse">
 
                 </div>
                 <div class="grid grid-cols-1 gap-4 mt-6 ">
-                    <div class="h-full bg-gray-300 rounded-md animate-pulse"></div>
+                    <div class="h-full dark:bg-gray-600 bg-gray-300 rounded-md animate-pulse"></div>
 
                 </div>
 

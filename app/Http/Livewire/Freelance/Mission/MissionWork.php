@@ -18,6 +18,6 @@ class MissionWork extends Component
 
     public function render()
     {
-        return view('livewire.freelance.mission.mission-work')->extends('layouts.freelanceTest2')->section('content');
+        return view('livewire.freelance.mission.mission-work')->layout('layouts.freelance-profile');
     }
 }

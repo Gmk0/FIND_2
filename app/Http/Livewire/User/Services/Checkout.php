@@ -133,6 +133,7 @@ class Checkout extends Component
         try {
 
             foreach ($cart->items as $key => $value) {
+
                 $data = [
                     'service_id' => $key,
                     'user_id' => auth()->user()->id,
@@ -141,14 +142,22 @@ class Checkout extends Component
                     'type' => 'service',
 
                 ];
+
+                //dd($data);
+
+
+
+
+
                 $datas[] = Order::create($data);
             }
 
-            foreach ($datas as $order) {
-                $feedback = FeedbackService::create(['order_id' => $order->id]);
-            }
+
+            // dd($datas);
 
             DB::commit();
+
+
 
             return $datas;
         } catch (\Exception $e) {
@@ -272,6 +281,10 @@ class Checkout extends Component
 
 
 
+
+
+
+
         DB::beginTransaction();
 
         try {
@@ -348,14 +361,20 @@ class Checkout extends Component
             $datas = $this->saveService();
 
             // Enregistrer les informations de paiement dans la table "paiements"
-            $payment = new transaction();
-            $payment->amount = $priceTotal;
+            $payment = new Transaction();
+            $payment->amount = $priceTotal?->totalPrice;
             $payment->payment_method = $this->identityPayment;
             $payment->payment_token = $paymentIntent->id;
             $payment->status = 'successfull';
             // $payment->transaction_id = 'mmmmmmmmmmm';
 
             $payment->save();
+
+
+            // dd($payment);
+
+
+
 
             // Parcourir toutes les commandes pour les mettre à jour
             foreach ($datas as $order) {
@@ -365,7 +384,7 @@ class Checkout extends Component
                 $orderToUpdate->status = 'completed';
                 $orderToUpdate->transaction_id = $payment->id;
                 // Lier la commande au paiement effectué
-                $orderToUpdate->save();
+                $orderToUpdate->update();
                 $orderToUpdate->notifyUser();
 
 

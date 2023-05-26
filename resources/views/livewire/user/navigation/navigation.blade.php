@@ -349,7 +349,7 @@ $fixed="";
     setTimeout(function() {
 
     document.querySelector("header").classList.remove("sticky", "top-0", "animate-slide-down", "animate-slide-up");
-    }, 500); // Délai de 300 millisecondes pour l'animation
+    }, 1000); // Délai de 300 millisecondes pour l'animation
     }
     prevScrollpos = currentScrollPos;
     }

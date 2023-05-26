@@ -68,6 +68,6 @@ class ConversationComponent extends Component
                 });
             })
             ->orderBy('last_time_message', 'DESC')->get();
-        return view('livewire.freelance.conversations.conversation-component')->extends('layouts.freelanceTest2')->section('content');
+        return view('livewire.freelance.conversations.conversation-component')->layout('layouts.freelance-profile');
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthenticatedSessionController;
 use App\Http\Controllers\CommandeControler;
+use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ProjetController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,15 @@ Route::group(['prefix' => "freelance"], function () {
             Route::get('/securite', \App\Http\Livewire\Freelance\Profile\Securite::class)->name('freelance.securite');
             //Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
         });
+
+
+        Route::group(['prefix' => "paiement"], function () {
+            Route::get('/', \App\Http\Livewire\Freelance\Transaction\PaimentFreelance::class)->name('freelance.PaiementInfo');
+            Route::get('/securite', \App\Http\Livewire\Freelance\Profile\Securite::class)->name('freelance.securite');
+            //Route::get('/edit/{id}', \App\Http\Livewire\Freelance\Services\EditService::class)->name('freelance.service.edit');
+        });
+
+
 
         Route::group(['prefix' => "mission"], function () {
             Route::get('/', \App\Http\Livewire\Freelance\Mission\MissionList::class)->name('freelance.projet.list');

@@ -29,6 +29,25 @@
     }
 }
 
+
+ @media (min-width: 640px) {
+     #table {
+         display: inline-table !important;
+     }
+
+     #table thead tr:not(:first-child) {
+         display: none;
+     }
+ }
+
+ #table td:not(:last-child) {
+     border-bottom: 0;
+ }
+
+ #table th:not(:last-child) {
+     border-bottom: 2px solid rgba(0, 0, 0, .1);
+ }
+
 .dark .bg-gray-400{
     --tw-text-opacity: 1;
         color: rgb(55 65 81 / var(--tw-text-opacity));

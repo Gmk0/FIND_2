@@ -32,9 +32,7 @@ class EventServiceProvider extends ServiceProvider
         FeedbackSend::class => [
             FeedbackNotifaction::class,
         ],
-        ProjectResponse::class => [
-            ProjetStatus::class,
-        ],
+
         ProjectResponseFreelance::class => [
             SendNotificationProject::class,
         ],

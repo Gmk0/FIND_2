@@ -30,10 +30,11 @@ class MessageNotification extends Notification implements ShouldQueue
     {
         return [
             'message' =>
-            'Vous avez un nouveau message de ' . $this->message->senderUser->name,
+            'Vous avez un nouveau message de <br> ' . $this->message->senderUser->name . ' </br> -' . $this->message->body,
             'url' => '/user/messages' . $this->message->id,
-            'icon' => '/img/notification-icon.png',
-            'user'
+            'icon' => '/images/notification/chat.png',
+
+
         ];
     }
 

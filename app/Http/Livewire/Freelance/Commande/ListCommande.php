@@ -163,6 +163,6 @@ class ListCommande extends Component implements Tables\Contracts\HasTable
             'rejeted' => Order::whereHas('service', function ($query) {
                 $query->where('freelance_id', auth()->user()->freelance->id);
             })->where('status', 'rejeted')->count(),
-        ])->extends('layouts.freelanceTest2')->section('content');
+        ])->layout('layouts.freelance-profile');
     }
 }

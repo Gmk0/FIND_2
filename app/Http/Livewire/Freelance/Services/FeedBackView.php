@@ -8,6 +8,6 @@ class FeedBackView extends Component
 {
     public function render()
     {
-        return view('livewire.freelance.services.feed-back-view');
+        return view('livewire.freelance.services.feed-back-view')->layout('layouts.freelance-profile');
     }
 }

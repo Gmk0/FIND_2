@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('feedback_services', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('order_id');
+            $table->foreignUuid('order_id');
             $table->enum('etat', ['En attente de traitement', 'En cours de préparation', 'En transit', 'Livré'])->default('En attente de traitement');
             $table->datetime('delai_livraison_estimee')->nullable();
             $table->text('commentaires')->nullable();

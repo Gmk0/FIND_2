@@ -10,6 +10,8 @@ class HeaderFreelance extends Component
 
 {
 
+
+
     public function  getListeners()
     {
 
@@ -19,6 +21,7 @@ class HeaderFreelance extends Component
             'ServiceOrdered' => '$refresh',
             "echo-private:chat.{$auth_id},MessageSent" => '$refresh',
             'refreshComponent' => '$refresh',
+            'refreshNotifications' => '$refresh',
 
 
         ];
@@ -26,6 +29,7 @@ class HeaderFreelance extends Component
 
     public function render()
     {
+
         return view('livewire.freelance.dashboard.header-freelance');
     }
 }

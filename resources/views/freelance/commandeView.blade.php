@@ -1,6 +1,5 @@
-@extends('layouts.freelanceTest2')
+<x-freelance-profile>
 
+    @livewire('freelance.commande.commande-details',['order'=>$commande])
 
-@section('content')
-@livewire('freelance.commande.commande-details',['order'=>$commande])
-@endsection
+</x-freelance-profile>

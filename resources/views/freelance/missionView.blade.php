@@ -1,6 +1,4 @@
-@extends('layouts.freelanceTest2')
+<x-freelance-profile>
+    @livewire('freelance.mission.mission-view-one',['projet'=>$data])
 
-
-@section('content')
-@livewire('freelance.mission.mission-view-one',['projet'=>$data])
-@endsection
+</x-freelance-profile>
