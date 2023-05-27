@@ -49,7 +49,7 @@
     class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full custom-scrollbar bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
     aria-label="Sidebar">
     <div :class="{'lg:justify-center': !isSidebarOpen}"
-        class="h-full px-3 pb-4 justify-between  overflow-y-auto custom-scrollbar bg-white dark:bg-gray-800">
+        class="lg:h-full h-screen px-3 pb-4 justify-between  overflow-y-auto custom-scrollbar bg-white dark:bg-gray-800">
 
         <ul class="p-2 overflow-hidden custom-scrollbar">
             <li>
@@ -75,7 +75,7 @@
 
 
                 <a data-tooltip-target="tooltip-Service" @click="linkActive=!linkActive" href="#"
-                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
+                    class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
                     :class="{'lg:justify-center': !isSidebarOpen}">
                     <span>
                         <ion-icon name="albums-outline" class="w-6 h-6 text-gray-400"></ion-icon>
@@ -141,7 +141,7 @@
             <li data-tooltip-target="tooltip-Commande" x-data="{ linkHover: false, linkActive: false }" class="">
 
                 <a @click="linkActive=!linkActive" href="#"
-                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
+                    class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
                         <ion-icon name="cart-outline" class="w-6 h-6 text-gray-400"></ion-icon>
@@ -180,7 +180,7 @@
 
             <li data-tooltip-target="tooltip-Transaction">
                 <a href="{{route('freelance.transaction.list')}}"
-                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
+                    class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
                         <ion-icon name="cash-outline" class="w-6 h-6 text-gray-400"></ion-icon>
@@ -197,7 +197,7 @@
             <li x-data="{ linkHover: false, linkActive: false }" class="">
 
                 <a data-tooltip-target="tooltip-Mission" @click="linkActive=!linkActive" href="#"
-                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
+                    class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
 
@@ -265,7 +265,7 @@
             <li data-tooltip-target="tooltip-Messages" x-data="{ linkHover: false, linkActive: false }" class="">
 
                 <a @click="linkActive=!linkActive" href="#"
-                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
+                    class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
                         <ion-icon name="mail-outline" class="w-6 h-6 text-gray-400"></ion-icon>
@@ -308,7 +308,8 @@
             </li>
 
             <li data-tooltip-target="tooltip-Portefolio">
-                <a href="#" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
+                <a href="#"
+                    class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
                         <ion-icon class="w-6 h-6 text-gray-400" name="person-circle-outline"></ion-icon>
@@ -324,7 +325,7 @@
             </li>
             <li data-tooltip-target="tooltip-Paiement">
                 <a href="{{route('freelance.PaiementInfo')}}"
-                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
+                    class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
                         <ion-icon class="w-6 h-6 text-gray-400" name="wallet-outline">
@@ -344,7 +345,7 @@
             <li x-data="{ linkHover: false, linkActive: false }" class="">
 
                 <a data-tooltip-target="tooltip-Profile" @click="linkActive=!linkActive" href="#"
-                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
+                    class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
