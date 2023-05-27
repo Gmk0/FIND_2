@@ -38,8 +38,8 @@
 
 
 
-    {{--
-    <link rel="stylesheet" href="/build/assets/app.css">--}}
+
+    <link rel="stylesheet" href="/build/assets/app.css">
 
 
 
@@ -66,7 +66,7 @@
 
 
 
-    @vite(['resources/css/app.css','resources/js/app.js'])
+    {{-- @vite(['resources/css/app.css','resources/js/app.js'])--}}
 
 
 
