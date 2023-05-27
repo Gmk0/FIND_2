@@ -29,9 +29,6 @@ class EventServiceProvider extends ServiceProvider
         ServiceOrdered::class => [
             SendNotificationToFreelancer::class,
         ],
-        FeedbackSend::class => [
-            FeedbackNotifaction::class,
-        ],
 
         ProjectResponseFreelance::class => [
             SendNotificationProject::class,

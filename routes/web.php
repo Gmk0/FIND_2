@@ -35,6 +35,7 @@ Route::controller(home::class)->group(function () {
     Route::view('/faq', 'user.faqs')->name('faq');
     Route::view('/contact', 'user.contact')->name('contact');
     Route::view('/test', 'test.test')->name('test');
+    Route::view('/error-500', 'test.500Error')->name('500Error');
 });
 Route::get('/beams-auth', BeamsAuthenticationController::class)->middleware('auth:sanctum')->name('beams-auth');
 

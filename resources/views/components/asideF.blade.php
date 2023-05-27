@@ -42,18 +42,20 @@
     </div>
 </aside>--}}
 
-<aside id="logo-sidebar" x-bind:class="isSidebarOpen ? '' : '-translate-x-full lg:translate-x-0 lg:hidden'"
+<aside id="logo-sidebar" x-bind:class="isSidebarOpen ? '' : '-translate-x-full lg:translate-x-0 lg:w-20'"
     x-transition:enter="transition ease-in-out duration-500 transform" x-transition:enter-start="-translate-x-full"
     x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-500 transform"
     x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
     class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full custom-scrollbar bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
     aria-label="Sidebar">
-    <div class="h-full px-3 pb-4 overflow-y-auto custom-scrollbar bg-white dark:bg-gray-800">
+    <div :class="{'lg:justify-center': !isSidebarOpen}"
+        class="h-full px-3 pb-4 justify-between  overflow-y-auto custom-scrollbar bg-white dark:bg-gray-800">
 
         <ul class="p-2 overflow-hidden custom-scrollbar">
             <li>
-                <a href="{{url('/freelance/dashboard')}}" {{route('freelance.dashboard')}}"
-                    class="flex items-center p-2 space-x-2 rounded-md w-full hover:bg-gray-100  dark:hover:bg-gray-900">
+                <a :class="{'lg:justify-center': !isSidebarOpen}" href="{{url('/freelance/dashboard')}}"
+                    {{route('freelance.dashboard')}}"
+                    class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900">
                     <span>
                         <svg class="w-6 h-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
@@ -61,8 +63,9 @@
                                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                         </svg>
                     </span>
-                    <span class="text-gray-800">Dashboard</span>
+                    <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Dashboard</span>
                 </a>
+
             </li>
 
 
@@ -71,9 +74,9 @@
 
 
 
-                <a @click="linkActive=!linkActive" href="#"
+                <a data-tooltip-target="tooltip-Service" @click="linkActive=!linkActive" href="#"
                     class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
-                    :class="{'justify-center': !isSidebarOpen}">
+                    :class="{'lg:justify-center': !isSidebarOpen}">
                     <span>
                         <ion-icon name="albums-outline" class="w-6 h-6 text-gray-400"></ion-icon>
                     </span>
@@ -87,8 +90,8 @@
                         class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
                         aria-label="submenu">
 
-                        <li
-                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                        <li data-tooltip-target="tooltip-services" :class="{ 'px-2': isSidebarOpen }"
+                            class=" py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 
                             <a class="flex w-full gap-2" x-on:click="linkActive=false"
                                 href="{{route('freelance.service.list')}}">
@@ -102,9 +105,15 @@
                                 <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Mes
                                     services</span>
                             </a>
+
+                            <div id="tooltip-services" role="tooltip"
+                                class="absolute z-[60] invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                                liste services
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
                         </li>
-                        <li
-                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                        <li data-tooltip-target="tooltip-creer" :class="{ 'px-2': isSidebarOpen }"
+                            class=" py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
                             <a class="flex w-full gap-2" x-on:click="linkActive=false"
                                 href="{{route('freelance.service.create')}}">
                                 <span>
@@ -112,13 +121,24 @@
                                 </span>
                                 <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Creer</span>
                             </a>
+
+                            <div id="tooltip-creer" role="tooltip"
+                                class="absolute z-[60] invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                                creer services
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
                         </li>
 
                     </ul>
                 </div>
+                <div id="tooltip-Service" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                    Service
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
             </li>
 
-            <li x-data="{ linkHover: false, linkActive: false }" class="">
+            <li data-tooltip-target="tooltip-Commande" x-data="{ linkHover: false, linkActive: false }" class="">
 
                 <a @click="linkActive=!linkActive" href="#"
                     class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
@@ -136,8 +156,8 @@
                         class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
                         aria-label="submenu">
 
-                        <li
-                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                        <li :class="{ 'px-2': isSidebarOpen }"
+                            class="py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 
                             <a class="flex w-full gap-2" x-on:click="linkActive=false"
                                 href="{{route('freelance.commande.list')}}">
@@ -151,9 +171,14 @@
 
                     </ul>
                 </div>
+                <div id="tooltip-Commande" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                    Commande
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
             </li>
 
-            <li>
+            <li data-tooltip-target="tooltip-Transaction">
                 <a href="{{route('freelance.transaction.list')}}"
                     class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
                     :class="{'justify-center': !isSidebarOpen}">
@@ -162,11 +187,16 @@
                     </span>
                     <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Transaction</span>
                 </a>
+                <div id="tooltip-Transaction" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                    Transaction
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
             </li>
 
             <li x-data="{ linkHover: false, linkActive: false }" class="">
 
-                <a @click="linkActive=!linkActive" href="#"
+                <a data-tooltip-target="tooltip-Mission" @click="linkActive=!linkActive" href="#"
                     class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
@@ -183,8 +213,8 @@
                         class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
                         aria-label="submenu">
 
-                        <li
-                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                        <li data-tooltip-target="tooltip-MissionListe" :class="{ 'px-2': isSidebarOpen }"
+                            class="py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 
                             <a class="flex w-full gap-2" x-on:click="linkActive=false"
                                 href="{{route('freelance.projet.list')}}">
@@ -197,9 +227,14 @@
                                 </span>
                                 <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Mission</span>
                             </a>
+                            <div id="tooltip-MissionListe" role="tooltip"
+                                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                                Liste de Mission
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
                         </li>
-                        <li
-                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                        <li data-tooltip-target="tooltip-MissionAccepter" :class="{ 'px-2': isSidebarOpen }"
+                            class="py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
                             <a class="flex w-full gap-2" x-on:click="linkActive=false"
                                 href="{{route('freelance.proposition')}}">
                                 <span>
@@ -212,12 +247,22 @@
                                 <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Mission
                                     accepter</span>
                             </a>
+                            <div id="tooltip-MissionAccepter" role="tooltip"
+                                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                                Mission Accepter
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
                         </li>
 
                     </ul>
                 </div>
+                <div id="tooltip-Mission" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                    Transaction
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
             </li>
-            <li x-data="{ linkHover: false, linkActive: false }" class="">
+            <li data-tooltip-target="tooltip-Messages" x-data="{ linkHover: false, linkActive: false }" class="">
 
                 <a @click="linkActive=!linkActive" href="#"
                     class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
@@ -255,9 +300,14 @@
 
                     </ul>
                 </div>
+                <div id="tooltip-Messages" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                    Transaction
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
             </li>
 
-            <li>
+            <li data-tooltip-target="tooltip-Portefolio">
                 <a href="#" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
@@ -265,8 +315,14 @@
                     </span>
                     <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Portefolio</span>
                 </a>
+
+                <div id="tooltip-Portefolio" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                    Portefolio
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
             </li>
-            <li>
+            <li data-tooltip-target="tooltip-Paiement">
                 <a href="{{route('freelance.PaiementInfo')}}"
                     class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
                     :class="{'justify-center': !isSidebarOpen}">
@@ -277,11 +333,17 @@
                     </span>
                     <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Paiement</span>
                 </a>
+
+                <div id="tooltip-Paiement" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                    Paiement
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
             </li>
 
             <li x-data="{ linkHover: false, linkActive: false }" class="">
 
-                <a @click="linkActive=!linkActive" href="#"
+                <a data-tooltip-target="tooltip-Profile" @click="linkActive=!linkActive" href="#"
                     class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
@@ -301,29 +363,46 @@
                         class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
                         aria-label="submenu">
 
-                        <li
-                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                        <li data-tooltip-target="tooltip-ProfileP" :class="{ 'px-2': isSidebarOpen }"
+                            class="py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 
                             <a class="flex w-full gap-2" x-on:click="linkActive=false"
                                 href="{{route('freelance.profile')}}">
                                 <span>
-                                    <ion-icon name="person-outline" class="w-6 h-6 text-gray-400"></ion-icon>
+                                    <ion-icon name="person-outline" class="w-4 h-4 text-gray-400"></ion-icon>
                                 </span>
                                 <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Profile</span>
                             </a>
+
+                            <div id="tooltip-ProfileP" role="tooltip"
+                                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                                Profile freelance
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
                         </li>
-                        <li
-                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                        <li data-tooltip-target="tooltip-securite" :class="{ 'px-2': isSidebarOpen }"
+                            class="py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
                             <a class="flex w-full gap-2" x-on:click="linkActive=false"
                                 href="{{route('freelance.securite')}}">
                                 <span>
-                                    <ion-icon name="lock-closed-outline" class="w-6 h-6 text-gray-400"></ion-icon>
+                                    <ion-icon name="lock-closed-outline" class="w-4 h-4 text-gray-400"></ion-icon>
                                 </span>
                                 <span :class="{ 'lg:hidden': !isSidebarOpen }" class="text-gray-800">Securite</span>
                             </a>
+
+                            <div id="tooltip-securite" role="tooltip"
+                                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                                securite freelance
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
                         </li>
 
                     </ul>
+                </div>
+                <div id="tooltip-Profile" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                    Profile
+                    <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
             </li>
             <!-- Sidebar Links... -->

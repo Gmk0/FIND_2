@@ -438,7 +438,7 @@
         </nav>
 
 
-        <div x-show="isSidebarOpen" @click="isSidebarOpen = false"
+        <div x-cloak x-show="isSidebarOpen" @click="isSidebarOpen = false"
             class="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden">
         </div>
         <div x-show="isSidebarOpen" class="fixed inset-y-0 z-10 w-16 bg-white"></div>

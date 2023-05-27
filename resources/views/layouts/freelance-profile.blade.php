@@ -27,7 +27,7 @@
 
 
 
-    <div x-bind:class="isSidebarOpen? ' lg:ml-64':'lg:-translate-x-full'" class="p-4">
+    <div x-bind:class="isSidebarOpen? ' lg:ml-64':'lg:ml-20'" class="p-4">
 
 
         <main class="mt-14">

@@ -12,7 +12,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class FeedbackSend
+class FeedbackSend implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $feedback;
@@ -23,6 +23,8 @@ class FeedbackSend
     public function __construct(FeedbackService $feedback)
     {
         $this->feedback = $feedback;
+
+
         //
     }
 
@@ -31,10 +33,11 @@ class FeedbackSend
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn()
     {
-        return [
-            new PrivateChannel('channel-name'),
-        ];
+
+        $id = $this->feedback->order->service->freelance->user->id;
+
+        return new PrivateChannel('notify.' . $id);
     }
 }

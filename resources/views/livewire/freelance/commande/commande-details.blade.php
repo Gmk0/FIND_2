@@ -65,13 +65,15 @@
                         <div>
                             <h1>Le Feedback du client</h1>
                         </div>
-                        <div>
+                        <div class="flex flex-col gap-4">
 
-                            <h1>Satifisfation: {{$order->feedback->satisfaction}}/5</h1>
+                            <h1 class="text-base text-gray-900 dark:text-white">Satifisfation:
+                                {{$order->feedback->satisfaction}}/5</h1>
 
-                            <h1>Commentaires</h1>
+                            <h1 class="text-base text-gray-900 dark:text-white">Commentaires</h1>
 
-                            <p>{{$order->feedback->commentaires? $order->feedback->commentaires:'pas de commentaire'}}
+                            <p class="text-base text-gray-900 dark:text-white">{{$order->feedback->commentaires?
+                                $order->feedback->commentaires:'pas de commentaire'}}
                             </p>
 
                             <div>
