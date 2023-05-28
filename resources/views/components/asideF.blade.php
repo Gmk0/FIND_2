@@ -138,11 +138,12 @@
                 </div>
             </li>
 
+
             <li data-tooltip-target="tooltip-Commande" x-data="{ linkHover: false, linkActive: false }" class="">
 
                 <a @click="linkActive=!linkActive" href="#"
                     class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
-                    :class="{'justify-center': !isSidebarOpen}">
+                    :class="{'lg:justify-center': !isSidebarOpen}">
                     <span>
                         <ion-icon name="cart-outline" class="w-6 h-6 text-gray-400"></ion-icon>
                     </span>
@@ -180,8 +181,8 @@
 
             <li data-tooltip-target="tooltip-Transaction">
                 <a href="{{route('freelance.transaction.list')}}"
-                    class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
-                    :class="{'justify-center': !isSidebarOpen}">
+                    class="flex items-center p-2 space-x-2 rounded-md w-full hover:bg-gray-100  dark:hover:bg-gray-900"
+                    :class="{'lg:justify-center': !isSidebarOpen}">
                     <span>
                         <ion-icon name="cash-outline" class="w-6 h-6 text-gray-400"></ion-icon>
                     </span>
@@ -198,7 +199,7 @@
 
                 <a data-tooltip-target="tooltip-Mission" @click="linkActive=!linkActive" href="#"
                     class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
-                    :class="{'justify-center': !isSidebarOpen}">
+                    :class="{'lg:justify-center': !isSidebarOpen}">
                     <span>
 
                         <ion-icon name="file-tray-outline" class="w-6 h-6 text-gray-400"></ion-icon>
@@ -266,7 +267,7 @@
 
                 <a @click="linkActive=!linkActive" href="#"
                     class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
-                    :class="{'justify-center': !isSidebarOpen}">
+                    :class="{'lg:justify-center': !isSidebarOpen}">
                     <span>
                         <ion-icon name="mail-outline" class="w-6 h-6 text-gray-400"></ion-icon>
                     </span>
@@ -310,7 +311,7 @@
             <li data-tooltip-target="tooltip-Portefolio">
                 <a href="#"
                     class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
-                    :class="{'justify-center': !isSidebarOpen}">
+                    :class="{'lg:justify-center': !isSidebarOpen}">
                     <span>
                         <ion-icon class="w-6 h-6 text-gray-400" name="person-circle-outline"></ion-icon>
                     </span>
@@ -326,7 +327,7 @@
             <li data-tooltip-target="tooltip-Paiement">
                 <a href="{{route('freelance.PaiementInfo')}}"
                     class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
-                    :class="{'justify-center': !isSidebarOpen}">
+                    :class="{'lg:justify-center': !isSidebarOpen}">
                     <span>
                         <ion-icon class="w-6 h-6 text-gray-400" name="wallet-outline">
                         </ion-icon>
@@ -346,7 +347,7 @@
 
                 <a data-tooltip-target="tooltip-Profile" @click="linkActive=!linkActive" href="#"
                     class="flex items-center p-2 space-x-2 rounded-md sm:w-full hover:bg-gray-100  dark:hover:bg-gray-900"
-                    :class="{'justify-center': !isSidebarOpen}">
+                    :class="{'lg:justify-center': !isSidebarOpen}">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6 text-gray-400">
