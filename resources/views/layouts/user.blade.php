@@ -31,7 +31,7 @@
 
 
 
-    <main class="">
+    <main class="pt-16">
         @yield('content')
     </main>
 
