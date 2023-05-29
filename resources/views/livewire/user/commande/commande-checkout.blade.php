@@ -272,7 +272,7 @@
                                                 class="block w-full max-w-xs px-3 py-2 mx-auto font-semibold text-white bg-indigo-500 rounded-lg hover:bg-indigo-700 focus:bg-indigo-700"><i
                                                     class="mr-1 mdi mdi-lock-outline"></i> <span
                                                     wire:loading.remove>PAYER
-                                                    ($)</span>
+                                                    </span>
                                                 <span wire:loading wire:target='pay'>PAIEMENT...</span>
                                             </button>
 
