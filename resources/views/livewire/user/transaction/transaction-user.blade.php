@@ -142,7 +142,7 @@
 
                             @empty(!$startDate)
 
-                            <x-button wire:click="cancel()" icon="X"></x-button>
+                            <x-button wire:click="cancel()" icon="x"></x-button>
 
                             @endempty
                         </div>
