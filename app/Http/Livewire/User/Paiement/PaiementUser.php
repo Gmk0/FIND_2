@@ -228,6 +228,6 @@ class PaiementUser extends Component
     }
     public function render()
     {
-        return view('livewire.user.paiement.paiement-user')->extends('layouts.userProfile')->section('content');
+        return view('livewire.user.paiement.paiement-user')->layout('layouts.user-profile2');
     }
 }
