@@ -67,11 +67,10 @@
                         FAQ
                     </span>
                     <h2 class="mb-4 text-3xl font-bold text-dark sm:text-4xl md:text-[40px]">
-                        Any Questions? Look Here
+                        Des questions ? Regardez ici !
                     </h2>
                     <p class="text-base text-body-color">
-                        There are many variations of passages of Lorem Ipsum available but
-                        the majority have suffered alteration in some form.
+                        Réponses aux questions fréquemment posées : Tout ce que vous devez savoir !
                     </p>
                 </div>
             </div>

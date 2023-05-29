@@ -90,8 +90,7 @@ class PaiementUser extends Component
                 $this->methodePaiment->addresse['quartier'],
                 'ville' =>
                 $this->methodePaiment->addresse['ville'],
-                'bp' =>
-                $this->methodePaiment->addresse['bp'],
+
             ];
         }
 
