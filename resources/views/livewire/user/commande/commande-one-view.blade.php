@@ -150,8 +150,9 @@
                         @if (empty($Order->transaction))
                         <div>
 
-                            <x-button primary label="Proceder Au
-                                                        Paiement"> </x-button>
+                            <x-button href="{{route('commandeRepaye',['order_numero'=>$Order->order_numero])}}" primary
+                                label="Proceder Au
+                                                                                Paiement"> </x-button>
 
                         </div>
 

@@ -10,7 +10,7 @@
 
         }" x-init="$refs.loading.classList.add('hidden')">
 
-    <x-notifications position='top-left' />
+    <x-notifications position='bottom-left' />
 
 
     <div x-ref="loading"
@@ -31,7 +31,7 @@
 
 
 
-    <main class="pt-16">
+    <main class="lg:pt-16 pt-20">
         @yield('content')
     </main>
 

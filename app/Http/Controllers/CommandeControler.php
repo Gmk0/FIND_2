@@ -58,6 +58,28 @@ class CommandeControler extends Controller
         }
     }
 
+
+    public function commandeRepaye($order_numero)
+    {
+        $validatedData = Validator::make(['order_numero' => $order_numero], [
+            'order_numero' => 'string',
+        ]);
+
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData);
+        }
+
+        $data = Order::where('order_numero', $order_numero)->where('status', 'pending')->Orwhere('status', 'rejeted')->first();
+
+        if (!empty($data)) {
+            // Retourner la vue avec les données $data
+            return  view('user.commande.commandePending', ['order' => $data]);
+        } else {
+            // Rediriger en arrière si les données sont inexistantes
+            return redirect()->back();
+        }
+    }
+
     public function TransactionUser($transaction_numero)
     {
         $validatedData = Validator::make(['order_numero' => $transaction_numero], [

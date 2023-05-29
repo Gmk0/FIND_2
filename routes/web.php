@@ -93,6 +93,9 @@ Route::middleware([
     Route::get('/user/transaction', App\Http\Livewire\User\Transaction\TransactionUser::class)->name('transactionUser');
 
     //commande
+
+    Route::get('/user/commandes/{order_numero}/checkout', [CommandeControler::class, 'commandeRepaye'])->name('commandeRepaye');
+
     Route::get('/user/commandes/{order_numero}', [CommandeControler::class, 'commandeUser'])->name('commandeOneView');
 
     Route::get('/user/commandes', App\Http\Livewire\User\Commande\CommandeUser::class)->name('commandeUser');
