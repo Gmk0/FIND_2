@@ -347,3 +347,53 @@
     </div>
     {{-- Nothing in the world is as soft and yielding as water. --}}
 </div>
+
+
+@push('script')
+
+
+
+
+<script>
+    function update(product)
+    {
+        alert(product);
+    }
+    window.addEventListener('success', event=> {
+    Swal.fire({
+    // position: 'top-end',
+    icon:'success',
+    //toast: true,
+    title:"operation reussie",
+    text:event.detail.message,
+    showConfirmButton: true,
+   // footer: '<a class="text-green-600" href="">liste des proposition</a>',
+    //timer:5000
+
+    })
+
+    });
+
+    window.addEventListener('error', event=> {
+    Swal.fire({
+    // position: 'top-end',
+    icon:'error',
+    //toast: true,
+    title:"operation echoue",
+    text:event.detail.message,
+    showConfirmButton: true,
+    //timer:5000
+    })
+
+    });
+
+
+    function app() {
+        return {
+            isOther: false,
+            isCard: false,
+
+        }
+    }
+</script>
+@endpush
