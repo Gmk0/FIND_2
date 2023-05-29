@@ -34,7 +34,7 @@ class ProfileFreelance extends Component
         $conversation->status = 'pending';
         $conversation->save();
 
-        $this->emitTo('user.conversation.body-message', 'loadConversation', $conversation, $freelance->id);
+        $this->emitTo('user.conversation.body-message', 'loadConversation', $conversation, $this->freelance->id);
 
 
         return redirect()->route('MessageUser');
