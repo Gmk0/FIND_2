@@ -8,6 +8,7 @@ use App\Models\feedback;
 use App\Models\rapport;
 use WireUi\Traits\Actions;
 use App\Events\notificationOrder;
+use App\Events\ProgressOrderEvent;
 use App\Models\FeedbackService;
 
 class CommandeDetails extends Component
@@ -91,9 +92,11 @@ class CommandeDetails extends Component
 
                 $this->order->progress = $this->progress;
                 $this->order->update();
-
-
                 $data->notifyUser();
+
+                broadcast(new ProgressOrderEvent($data));
+
+
                 if ($data) {
 
                     $this->notification()->success(
@@ -101,7 +104,7 @@ class CommandeDetails extends Component
                         $description = "Vos Modifications ont ete envoyer avec success",
                     );
                 }
-                $this->reset('progress', 'jour', 'status');
+                // $this->reset('progress', 'jour', 'status');
 
                 $this->emitSelf('refresh');
             }

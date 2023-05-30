@@ -24,6 +24,7 @@ class ProgressOrderEvent implements ShouldBroadcast
     public function __construct(FeedbackService $feedback)
     {
         $this->feedback = $feedback;
+
         //
     }
 

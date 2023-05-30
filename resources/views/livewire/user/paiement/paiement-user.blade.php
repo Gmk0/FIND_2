@@ -110,7 +110,7 @@
 
 
             </div>
-            <div class="grid grid-cols-2 mt-10">
+            <div class="grid lg:grid-cols-2 mt-10">
                 <div class="w-full p-4 mb-4 font-semibold bg-white border border-gray-200 rounded-md">
                     <div>
                         <h1>Address de Facturation / Livraison</h1>

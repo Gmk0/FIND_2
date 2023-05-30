@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Events\ProgressOrderEvent;
-
+use App\Notifications\feedbackNotification;
 use App\Notifications\ProgressOrder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -55,6 +55,20 @@ class FeedbackService extends Model
 
                 $user->notify(new ProgressOrder($this));
             }
+        }
+    }
+
+    public function notifyFreelance()
+    {
+        $user = $this->order->service->freelance->user;
+
+
+
+
+
+        if ($user) {
+
+            $user->notify(new feedbackNotification($this));
         }
     }
 

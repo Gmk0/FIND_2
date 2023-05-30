@@ -2,13 +2,13 @@
 
     <div class="px-4 py-4 md:px-6 lg:px-12 xl:px-20">
 
-        <div class="mx-auto md:max-w-7xl">
+        <div class="mx-auto md:max-w-8xl">
 
             <!-- Titre de la section -->
             <h2 class="mb-4 text-3xl font-semibold text-gray-800 dark:text-gray-200">Détails de la order</h2>
 
             <!-- Contenu de la section -->
-            <div class="overflow-hidden bg-white rounded-lg shadow-md">
+            <div class="overflow-hidden bg-white relative rounded-lg shadow-md">
                 <!-- Informations sur la order -->
                 <div class="grid grid-cols-1 px-6 py-4 md:grid-cols-2 ">
                     <p class="mb-2 text-lg text-gray-800 font-inter dark:text-gray-200">Commande
@@ -43,8 +43,13 @@
                 <div class="px-6 py-4 border-t border-gray-200">
                     <p class="mb-2 text-lg text-gray-800">Client </p>
                     <div class="flex items-center">
-                        <img src="https://via.placeholder.com/48" alt="Avatar du freelance"
-                            class="w-12 h-12 rounded-full">
+                        @if (!empty($order->user->profile_photo_path))
+                        <img class="w-12 h-12 rounded-full"
+                            src="{{Storage::disk('local')->url('profiles-photos/'.$order->user->profile_photo_path) }}"
+                            alt="">
+                        @else
+                        <img class="w-12 h-12 rounded-full" src="{{ $order->user->profile_photo_url }}" alt="">
+                        @endif
                         <div class="ml-4">
                             <p class="text-sm text-gray-600 dark:text-gray-300">{{$order->user->name}}</p>
                             <p class="text-sm text-gray-600 dark:text-gray-300">
@@ -60,10 +65,10 @@
                     @if($order->feedback->etat=="Livré")
 
                     <div>
-                        <h1>Vous avez deja livrer(realiser) la commande</h1>
+                        <h1 class="text-dark-800 mb-4">Vous avez deja livrer(realiser) la commande</h1>
 
-                        <div>
-                            <h1>Le Feedback du client</h1>
+                        <div class="mb-4">
+                            <h1 class="text-dark-800">Le Feedback du client</h1>
                         </div>
                         <div class="flex flex-col gap-4">
 
@@ -128,7 +133,7 @@
                         </div>
                         <div class="">
 
-                            <x-button wire:click="modLivre()" spinner="modLivre" label="Modifier"></x-button>
+                            <x-button wire:click="modLivre()" primary spinner="modLivre" label="Appliquer"></x-button>
                         </div>
 
                     </div>

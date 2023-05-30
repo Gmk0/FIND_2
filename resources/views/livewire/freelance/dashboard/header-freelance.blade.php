@@ -1,6 +1,6 @@
 <div>
     <header>
-        <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <nav class="fixed top-0 z-[45] w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center justify-start">
@@ -79,20 +79,7 @@
                             </svg>
                         </button>
                         <!-- Notifications -->
-                        <button type="button" data-dropdown-toggle="notification-dropdown"
-                            class="p-2 text-gray-500 rounded-lg hover:text-gray-900 flex hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700">
-                            <span class="sr-only">View notifications</span>
-                            <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                            </svg>
-                            <sub>
-                                <span class="bg-red-600 text-gray-100 px-1.5 py-0.5 rounded-full -ml-1 animate-pulse">
-                                    {{count(Auth::user()->unReadNotifications)}}
-                                </span>
-                            </sub>
-                        </button>
+
                         <!-- Dropdown menu -->
                         @livewire('user.navigation.notifications-component')
                         <!-- Apps -->

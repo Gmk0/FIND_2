@@ -78,6 +78,17 @@ class ListCommande extends Component implements Tables\Contracts\HasTable
                         'success' => static fn ($state): bool => $state === 'completed',
                         'danger' => static fn ($state): bool => $state === 'rejeted',
                     ]),
+                BadgeColumn::make('feedback.etat')
+                    ->enum([
+                        'En attente de traitement' => 'En attente de traitement',
+                        'Livré' => 'Livré',
+                        'En cours de préparation' => 'En cours de préparation',
+                    ])->colors([
+
+                        'warning' => static fn ($state): bool => $state === 'En attente de traitement',
+                        'success' => static fn ($state): bool => $state === 'Livré',
+                        'warning' => static fn ($state): bool => $state === 'En cours de préparation',
+                    ])->visible('md'),
             ]),
             Panel::make([
                 Stack::make([

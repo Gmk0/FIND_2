@@ -57,7 +57,7 @@ class ToolsController extends Controller
         $dompdf = new Dompdf();
 
         // Charger la vue Blade avec les données
-        $view = view('facture.facture', [
+        $view = view('Report.facture', [
             'order' => $order,
         ]);
 
@@ -89,5 +89,49 @@ class ToolsController extends Controller
         }
 
         return view('status.success', ['transaction' => $transaction]);
+    }
+
+
+    public function Report()
+    {
+
+
+
+        // dd($facture);
+        $transaction = Transaction::where('user_id', auth()->id())->get();
+
+
+
+
+
+
+        if (!$transaction) {
+            return redirect()->back()->withErrors(['message' => 'Une erreur s\'est produite.']);
+        }
+
+        // Créer une nouvelle instance de Dompdf
+        $dompdf = new Dompdf();
+
+        // Charger la vue Blade avec les données
+        $view = view('Report.transactionReport', [
+            'transactionsUser' => $transaction,
+        ]);
+
+        // Rendre la vue en HTML
+        $html = $view->render();
+
+        // Charger le contenu HTML dans Dompdf
+        $dompdf->loadHtml($html);
+
+        // Générer le PDF
+        $dompdf->render();
+
+        // Récupérer le contenu du PDF généré
+        $pdfContent = $dompdf->output();
+
+        // Retourner le PDF dans une réponse HTTP
+        return response($pdfContent, 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="transaction.pdf"');
     }
 }

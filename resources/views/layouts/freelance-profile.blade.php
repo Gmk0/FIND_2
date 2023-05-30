@@ -9,7 +9,7 @@
 
 
 <body x-data="setup()" id="body" class="bg-gray-100 dark:bg-gray-900 custom-scrollbar" x-init="$refs.loading.classList.add('hidden');
-    setTimeout(() => { isSidebarOpen = false }, 3000)">
+    setTimeout(() => { isSidebarOpen = false }, 1000); ">
 
     <x-notifications position='top-right' />
     <!-- Loading screen -->
@@ -65,7 +65,7 @@
                   isSearchBoxOpen: false,
                 }
               };
-        
+
               function scrollToReveal() {
             return {
                     sticky: false,

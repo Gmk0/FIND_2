@@ -77,6 +77,7 @@ class CommandeOneView extends Component
         $data->commentaires = $this->feedback['description'];
 
         $data->update();
+        $data->notifyFreelance();
 
 
         $this->modal = false;

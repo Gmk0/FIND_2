@@ -19,7 +19,7 @@
             </div>
 
             <div
-                class="flex-1 h-48 p-4 mb-2 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
+                class="flex-1 w-full h-80 p-4 mb-2 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
 
 
 

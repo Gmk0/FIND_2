@@ -215,8 +215,8 @@
             </div>
             <div>
                 <span class="footer-title">Legal</span>
-                <a href="{{url('/terms-of-services')}}" class="link link-hover">Terms of use</a>
-                <a href="{{url('/policy')}}" class="link link-hover">Privacy policy</a>
+                <a href="{{route('terms.show')}}" class="link link-hover">Terms of use</a>
+                <a href="{{route('policy.show')}}" class="link link-hover">Privacy policy</a>
 
                 <a class='link link-hover' href="#" onclick="Livewire.emit('openModal', 'cookie-consent-edit')">
                     {{ __('Cookie policy') }}

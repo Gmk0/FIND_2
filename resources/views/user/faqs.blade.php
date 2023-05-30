@@ -33,12 +33,12 @@
                                   },
                                   {
                                       question: 'Comment puis-je signaler un comportement inapproprié sur FIND?',
-                                      answer: 'Il est essentiel d’effectuer un paiement avant la prestation du service pour certifier votre dévouement, ce qui garantit que le freelance ne travaillera pas en vain. De plus, le freelance ne recevra votre argent qu’après réception de votre commande, ce qui garantit la sécurité des deux parties.',
+                                      answer: 'Pour signaler un comportement inapproprié sur FIND, connectez-vous à votre compte, recherchez l’option Aide dans le menu principal, accédez au formulaire de signalement en cliquant sur (Signaler un comportement inapproprié), remplissez le formulaire avec les détails pertinents, soumettez-le et restez en contact avec  l’équipe de support pour obtenir des mises à jour.',
                                       isOpen: false,
                                   },
                                   {
                                       question: 'Comment puis-je modifier mes informations de profil sur FIND?',
-                                      answer: 'Il est essentiel d’effectuer un paiement avant la prestation du service pour certifier votre dévouement, ce qui garantit que le freelance ne travaillera pas en vain. De plus, le freelance ne recevra votre argent qu’après réception de votre commande, ce qui garantit la sécurité des deux parties.',
+                                      answer: 'Pour modifier vos informations de profil sur FIND, connectez-vous à votre compte, recherchez l’option Profil dans le menu principal, apportez les modifications nécessaires dans les différentes sections (comme vos coordonnées), sauvegardez vos changements et vérifiez que votre profil a été mis à jour avec succès.',
                                       isOpen: false,
                                   },
                                   {
@@ -48,12 +48,12 @@
                                   },
                                   {
                                       question: 'Comment puis-je postuler pour un travail en tant que freelance sur FIND?',
-                                      answer: 'Il est essentiel d’effectuer un paiement avant la prestation du service pour certifier votre dévouement, ce qui garantit que le freelance ne travaillera pas en vain. De plus, le freelance ne recevra votre argent qu’après réception de votre commande, ce qui garantit la sécurité des deux parties.',
+                                      answer: 'Pour postuler pour un travail sur FIND Vous devez creer un compte freelance',
                                       isOpen: false,
                                   },
                                   {
                                       question: 'Est-ce que FIND prend une commission sur les transactions effectuées sur la plateforme?',
-                                      answer: 'Il est essentiel d’effectuer un paiement avant la prestation du service pour certifier votre dévouement, ce qui garantit que le freelance ne travaillera pas en vain. De plus, le freelance ne recevra votre argent qu’après réception de votre commande, ce qui garantit la sécurité des deux parties.',
+                                      answer: 'Oui, FIND prend une commission sur les transactions effectuées sur la plateforme. La commission est généralement calculée en pourcentage du montant total de la transaction. Les détails spécifiques sur les commissions et les frais peuvent varier en fonction des accords et des politiques de FIND. Il est recommandé de consulter les conditions d’utilisation ou de contacter le support de FIND pour obtenir des informations précises sur les commissions appliquées sur la plateforme.',
                                       isOpen: false,
                                   },
                               ]

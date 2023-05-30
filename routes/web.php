@@ -124,6 +124,7 @@ Route::middleware([
     Route::get('/status_payement/{transaction_numero}', [ToolsController::class, 'paiment_status'])->where('transaction_numero', '(.*)')->name('status_payement');
 
     Route::get('facturaction/{facture}', [ToolsController::class, 'facture'])->where('facture', '(.*)')->name('facturation');
+    Route::get('transaction/report', [ToolsController::class, 'Report'])->name('transactionReport');
 });
 
 
