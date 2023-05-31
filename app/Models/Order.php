@@ -125,7 +125,7 @@ class Order extends Model
 
     public function feedback(): HasOne
     {
-        return $this->hasOne(FeedbackService::class);
+        return $this->hasOne(FeedbackService::class, 'order_id');
     }
     public function notification()
     {

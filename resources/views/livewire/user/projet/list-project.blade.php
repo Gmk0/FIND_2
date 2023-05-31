@@ -20,7 +20,7 @@
                 <p class="mb-2 text-gray-700 dark:text-gray-400">Date: {{$projet->begin_project}}</p>
 
                 <p class="mb-2 text-gray-700 dark:text-gray-400">Budget: <span
-                        class="font-bold">{{$projet->bid_amount}}</span></p>
+                        class="font-bold">{{$projet->bidAmount()}}</span></p>
                 <div class="flex justify-between">
                     <span class="text-gray-500 "></span>
                     @if($projet->status == "active")

@@ -23,7 +23,7 @@ class ProjetController extends Controller
 
         // Vérifier si la validation a échoué
         if ($validatedData->fails()) {
-            return redirect()->back()->withErrors($validatedData);
+            return redirect()->back()->withErrors(['requete' => "erreur de requete"]);
         }
 
         // Récupérer l'objet Order correspondant à l'ID
@@ -66,7 +66,7 @@ class ProjetController extends Controller
 
         // Vérifier si la validation a échoué
         if ($validatedData->fails()) {
-            return redirect()->back()->withErrors($validatedData);
+            return redirect()->back()->withErrors(['requete' => "erreur de requete"]);
         }
 
         $projet = Project::find($id);
@@ -95,7 +95,7 @@ class ProjetController extends Controller
 
 
         if ($validatedData->fails()) {
-            return redirect()->back()->withErrors($validatedData);
+            return redirect()->back()->withErrors(['requete' => "erreur de requete"]);
         }
 
         $projet = Project::find($id);
@@ -105,7 +105,7 @@ class ProjetController extends Controller
             return view('user.projet.Projetproposition', ['data' => $projet]);
         } else {
 
-            return redirect()->back()->withErrors('la requete envoyer n\'est pas valide');
+            return redirect()->back()->withErrors(['requete' => "erreur de requete"]);
         }
     }
 
@@ -118,7 +118,7 @@ class ProjetController extends Controller
 
 
         if ($validatedData->fails()) {
-            return redirect()->back()->withErrors($validatedData);
+            return redirect()->back()->withErrors(['requete' => "erreur de requete"]);
         }
 
         $projet = Project::find($id);
@@ -128,7 +128,7 @@ class ProjetController extends Controller
             return view('freelance.missionView', ['data' => $projet]);
         } else {
 
-            return redirect()->back()->withErrors('la requete envoyer n\'est pas valide');
+            return redirect()->back()->withErrors(['requete' => "erreur de requete"]);
         }
     }
     public function ProjetCheckoutStatus($idP, $transation_numero)
@@ -141,7 +141,7 @@ class ProjetController extends Controller
 
 
         if ($validatedData->fails()) {
-            return redirect()->back()->withErrors($validatedData);
+            return redirect()->back()->withErrors(['requete' => "erreur de requete"]);
         }
 
         $transaction = Transaction::where('transaction_numero', $transation_numero)->first();
@@ -164,10 +164,10 @@ class ProjetController extends Controller
 
             $projet->update();
 
-            return view('user.projet.statusPaiement', ['data' => $response]);
+            return view('user.projet.statusPaiement', ['response' => $response]);
         } else {
 
-            return redirect('/user')->withErrors('la requete envoyer n\'est pas valide');
+            return redirect('/user')->withErrors(['requete' => "erreur de requete"]);
         }
     }
 
@@ -191,6 +191,34 @@ class ProjetController extends Controller
 
             return redirect()->route('checkout')->withErrors(['message' => 'Une erreur s\'est produite.']);
         } else if ($status === "success") {
+        }
+    }
+
+
+    public function ProjeViewFreealance($id)
+    {
+        $validatedData = Validator::make(['id' => $id], [
+
+            'id' => 'string',
+        ]);
+
+
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors(['requete' => "erreur de requete"]);
+        }
+
+        $projectResponse = ProjectResponse::find($id);
+
+        $projet = Project::where('id', $projectResponse->project_id)->first();
+
+
+
+        if (!empty($projectResponse) &&  !empty($projet)) {
+
+            return view('freelance.ProjetWork', ['projectResponse' => $projectResponse, 'projet' => $projet]);
+        } else {
+
+            return redirect()->back()->withErrors(['requete' => "erreur de requete"]);
         }
     }
 }

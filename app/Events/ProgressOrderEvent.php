@@ -38,7 +38,8 @@ class ProgressOrderEvent implements ShouldBroadcast
     {
 
 
-        $id = $this->feedback->order->user_id;
+        $id = $this->feedback->order ? $this->feedback->order->user_id :
+            $this->feedback->project->user_id;
         error_log($id);
 
         return new PrivateChannel('notify.' . $id);

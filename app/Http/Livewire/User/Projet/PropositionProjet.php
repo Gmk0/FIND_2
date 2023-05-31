@@ -16,31 +16,38 @@ class PropositionProjet extends Component
     public $proposition;
     public $proposition_id;
 
-    protected $listeners = ['refresh', '$refresh'];
+    protected $listeners = ['refresh' => '$refresh'];
 
 
 
     public function accepter($id)
     {
 
-        // $Response = ProjectResponse::find($id)->update(['status' => 'approved']);
-        $Response = ProjectResponse::find($id);
-        $Response->status = 'accepter';
-
-        $Response->update();
-        $Response->notifyFreelance();
-        $projet = Project::findOrFail($Response->project_id)->update(['status' => 'active', 'visible' => 0]);
+        try {
 
 
 
-        $this->notification()->success(
-            $title = "Proposition",
-            $description = "Vous avez approuver la proposition",
-        );
+            // $Response = ProjectResponse::find($id)->update(['status' => 'approved']);
+            $Response = ProjectResponse::find($id);
+            $Response->status = 'accepter';
 
-        event(new Response($Response));
+            $Response->update();
+            $Response->notifyFreelance();
+            $projet = Project::findOrFail($Response->project_id)->update(['status' => 'active', 'visible' => 0]);
 
-        $this->emitSelf('refresh');
+
+
+
+            $this->notification()->success(
+                $title = "Proposition",
+                $description = "Vous avez approuver la proposition",
+            );
+
+            event(new Response($Response));
+
+            $this->emitSelf('refresh');
+        } catch (\Exception $e) {
+        }
     }
 
     public function refuser($id)

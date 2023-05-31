@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Favori;
 use App\Models\Service;
 use App\Models\Transaction;
@@ -133,5 +134,41 @@ class ToolsController extends Controller
         return response($pdfContent, 200)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'attachment; filename="transaction.pdf"');
+    }
+
+
+    public function saveContact(Request $request)
+    {
+
+
+
+
+        // Valider les données de la requête si nécessaire
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'message' => 'required'
+        ]);
+
+
+
+        // Créer une nouvelle instance du modèle "Contact"
+        $contact = new Contact();
+
+        // Attribuer les valeurs des champs à partir de la requête
+        $contact->nom = $validatedData['name'];
+        $contact->email = $validatedData['email'];
+        $contact->message = $validatedData['message'];
+
+        // Enregistrer le contact dans la base de données
+        $contact->save();
+
+
+
+
+        // Autres actions ou redirections si nécessaire
+
+        // Retourner une réponse à l'utilisateur
+        return redirect()->back()->with(['success_message' => "Contact enregistré avec succès"]);
     }
 }

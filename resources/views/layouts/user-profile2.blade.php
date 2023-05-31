@@ -9,7 +9,7 @@
 
 
 <body x-data="setup()" x-init="$refs.loading.classList.add('hidden');" @resize.window="watchScreen()" id="body"
-    class="bg-white dark:bg-gray-900 custom-scrollbar">
+    class="bg-white dark:bg-gray-900 custom-scrollbar overflow-x-hidden">
 
     <x-notifications z-index="z-60" position='bottom-right' />
 

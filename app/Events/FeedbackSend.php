@@ -16,13 +16,15 @@ class FeedbackSend implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $feedback;
+    public $freelance_id;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(FeedbackService $feedback)
+    public function __construct(FeedbackService $feedback, $id)
     {
         $this->feedback = $feedback;
+        $this->freelance_id = $id;
 
 
         //
@@ -36,7 +38,7 @@ class FeedbackSend implements ShouldBroadcast
     public function broadcastOn()
     {
 
-        $id = $this->feedback->order->service->freelance->user->id;
+        $id = $this->freelance_id;
 
         return new PrivateChannel('notify.' . $id);
     }

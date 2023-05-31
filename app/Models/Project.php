@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Ramsey\Uuid\Uuid;
 
 class Project extends Model
 {
     use HasFactory;
+
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -39,6 +43,16 @@ class Project extends Model
         static::creating(function ($model) {
             $model->id = Uuid::uuid4()->toString();
             $model->user_id = auth()->user()->id;
+        });
+
+        static::created(function ($model) {
+
+            FeedbackService::create(['project_id' => $model->id]);
+        });
+
+        static::deleted(function ($model) {
+
+            FeedbackService::where('project_id', $model->id)->delete();
         });
     }
     /**
@@ -93,6 +107,12 @@ class Project extends Model
     {
 
         return $this->belongsTo(Transaction::class);
+    }
+
+    public function feedbackProjet(): HasOne
+    {
+
+        return $this->hasOne(FeedbackService::class, 'project_id');
     }
 
 

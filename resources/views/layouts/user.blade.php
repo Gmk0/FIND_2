@@ -48,6 +48,22 @@
     @include('include.script')
 
     <script>
+        window.addEventListener('error', event=> {
+        Swal.fire({
+        // position: 'top-end',
+        icon:'error',
+        //toast: true,
+        title:"operation echoueé",
+        text:event.detail.message,
+        showConfirmButton: true,
+
+        timer:5000
+
+        })
+
+        });
+
+
         const setup = () => {
             return {
             loading: true,

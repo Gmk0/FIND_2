@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\freelance;
 use App\Models\Order;
 use App\Models\service;
-
+use App\Models\Transaction;
 use Filament\Tables;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -40,6 +40,10 @@ implements Tables\Contracts\HasTable
     }
 
 
+    public function mount()
+    {
+    }
+
 
 
     protected function getTableQuery(): Builder
@@ -48,18 +52,22 @@ implements Tables\Contracts\HasTable
         // $freelance = freelance::where('user_id', Auth::user()->id)->first();
         $freelance = auth()->user()->freelance->id;
 
-        $order = Order::query();
+        $transaction = Transaction::query();
         // Créer une requête pour la table "Service"
-        $order->whereHas('service', function ($query) use ($freelance) {
+        $transaction = Transaction::query();
+        // Créer une requête pour la table "Service"
+        $transaction->whereHas('orders.service', function ($query) use ($freelance) {
             $query->where('freelance_id', $freelance);
-        })->where('status', 'completed')
+        })->OrwhereHas('project.projectResponses', function ($query) use ($freelance) {
+            $query->where('freelance_id', $freelance)
+                ->where('is_paid', 'payer');
+        })
             ->get();
-
 
         // Ajouter une condition pour l'utilisateur connecté
 
         // Retourner la requête
-        return $order;
+        return $transaction;
     }
 
     protected function getTableColumns(): array
@@ -68,24 +76,24 @@ implements Tables\Contracts\HasTable
 
             Split::make([
 
-                Tables\Columns\TextColumn::make('transaction.transaction_numero')->description('Transaction'),
-                Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('lg'),
-                Tables\Columns\TextColumn::make('total_amount')->description('Montant'),
+                Tables\Columns\TextColumn::make('transaction_numero')->description('Transaction'),
+                Tables\Columns\TextColumn::make('payment_token')->description('payment_token')->visibleFrom('lg'),
+                Tables\Columns\TextColumn::make('amount')->description('Montant'),
                 BadgeColumn::make('status')
                     ->enum([
-                        'completed' => 'Payer',
+                        'successfull' => 'Payer',
                         'pending' => 'en Attente',
-                        'rejeted' => 'Rejeter',
+                        'failed' => 'failed',
                     ])->colors([
 
                         'warning' => static fn ($state): bool => $state === 'pending',
-                        'success' => static fn ($state): bool => $state === 'completed',
-                        'danger' => static fn ($state): bool => $state === 'rejeted',
+                        'success' => static fn ($state): bool => $state === 'successfull',
+                        'danger' => static fn ($state): bool => $state === 'failed',
                     ]),
             ]),
             Panel::make([
                 Stack::make([
-                    Tables\Columns\TextColumn::make('service.title')->description('service')->visibleFrom('md'),
+                    Tables\Columns\TextColumn::make('payment_token')->description('payment_token')->visibleFrom('md'),
                     Tables\Columns\TextColumn::make('user.name')->description('client'),
                     Tables\Columns\TextColumn::make('created_at')->description('date'),
 
@@ -101,9 +109,14 @@ implements Tables\Contracts\HasTable
 
     public function totalAmount()
     {
-        $transactions = Order::whereHas('service', function ($query) {
-            $query->where('freelance_id', auth()->user()->freelance->id);
-        })->where('status', 'completed')->sum('total_amount');
+        $freelance = auth()->user()->freelance->id;
+        $transactions = Transaction::whereHas('orders.service', function ($query) use ($freelance) {
+            $query->where('freelance_id', $freelance);
+        })->OrwhereHas('project.projectResponses', function ($query) use ($freelance) {
+            $query->where('freelance_id', $freelance)
+                ->where('is_paid', 'payer');
+        })
+            ->sum('amount');
         // Calculer le total de tous les montants des transactions trouvées
         $total = '$' . number_format($transactions, 2, ',', ' ');
         return $total;
@@ -114,9 +127,9 @@ implements Tables\Contracts\HasTable
         return [
             SelectFilter::make('status')
                 ->options([
-                    'completed' => 'Payer',
+                    'successfull' => 'Payer',
                     'pending' => 'en Attente',
-                    'rejeted' => 'Rejecter',
+                    'failed' => 'Rejecter',
                 ])
                 ->attribute('status'),
 
@@ -132,9 +145,9 @@ implements Tables\Contracts\HasTable
         return [
             // ...
             Action::make('Voir')
-                ->url(fn (Order $record): string => route('freelance.transaction.view', $record->transaction->transaction_numero))
+                ->url(fn (transaction $record): string => route('freelance.transaction.view', $record->transaction_numero))
 
-                ->tooltip('Voir transaction')
+
                 ->icon('heroicon-s-pencil'),
 
 

@@ -19,8 +19,8 @@
                         </p>
                     </div>
 
-                    <div class="p-2" x-data="{ message: '' }">
-                        <x-textarea x-model="message" placeholder="Tapez votre texte ici..."
+                    <div class="p-2" x-data="{ message: '' }" x-on:success.window="message=''">
+                        <x-textarea x-model=" message" placeholder="Tapez votre texte ici..."
                             x-on:keyup="validateTextarea" wire:model.defer="project.title">
                         </x-textarea>
 
@@ -50,9 +50,9 @@
                         </p>
                     </div>
 
-                    <div class="p-2" x-data="{ message: '' }">
+                    <div class="p-2" x-data="{ message: '' }" x-on:success.window="message=''">
 
-                        <x-textarea x-model="message" placeholder="Tapez votre texte ici..."
+                        <x-textarea x-model=" message" placeholder="Tapez votre texte ici..."
                             x-on:keyup="validateTextarea" wire:model.defer="project.description">
                         </x-textarea>
                         <div class="mt-4 text-sm italic text-gray-700 dark:text-gray-100" x-show="message.length < 150">
@@ -106,27 +106,27 @@
             </div>
             <div x-cloak x-show.transition="step==2" class="flex flex-col w-full gap-4 px-2 ">
 
-                <div>
-
-                    <h1 class="mb-4 text-xl text-gray-800 dark:text-gray-200">Date
-
-                    </h1>
 
 
+                <h1 class="mb-4 text-xl text-gray-800 dark:text-gray-200">Date
 
-                    <div class="flex flex-row gap-2 w-full ">
-                        <x-datetime-picker label=" Date Debut" wire:model.defer='dateD'
-                            parse-format="YYYY-MM-DD HH:mm:ss" placeholder="Date Debut" />
-
-                        <x-datetime-picker label=" Date Fin" without wire:model.defer='dateF'
-                            parse-format="YYYY-MM-DD HH:mm:ss" placeholder="Date Fin" />
+                </h1>
 
 
 
-                    </div>
+                <div class="flex flex-row gap-2 w-full ">
+                    <x-datetime-picker :min="now()" label=" Date Debut" wire:model.defer='dateD'
+                        parse-format="YYYY-MM-DD HH:mm:ss" without-timezone placeholder="Date Debut" />
+
+                    <x-datetime-picker :min="now()" label=" Date Fin" without-timezone wire:model.defer='dateF'
+                        parse-format="YYYY-MM-DD HH:mm:ss" placeholder="Date Fin" />
+
 
 
                 </div>
+
+
+
                 <div>
 
                     <p class="text-sm text-gray-600 dark:text-gray-200">
@@ -186,7 +186,7 @@
     title:"operation reussie",
     text:event.detail.message,
     showConfirmButton: true,
-    footer: '<a class="text-green-600" href="">liste des proposition</a>',
+    footer: '<a class="text-green-600" href="/user/list_projet">liste des proposition</a>',
     //timer:5000
 
     })

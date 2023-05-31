@@ -1,11 +1,8 @@
 <div class="min-h-screen">
-    <div class="flex justify-between">
 
-
-
-        @include('include.breadcumbFreelance',['serviceName'=>'service'])
-    </div>
     <div class="px-2 py-4 mx-auto max-w-7xl lg:px-8">
+
+        @include('include.breadcumbFreelance',['serviceName'=>'service','serviceCreate'=>'Creation'])
 
 
         <div class="max-w-3xl ">

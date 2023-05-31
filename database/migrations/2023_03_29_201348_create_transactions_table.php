@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('transaction_numero');
             $table->foreignId('user_id')->constrained();
 
+            // $table->foreignId('freelance_id')->constrained();
+
             $table->decimal('amount', 8, 2);
             $table->string('payment_method');
             $table->string('payment_token', 40)->nullable();

@@ -57,7 +57,16 @@
                     <p class="mb-4 text-base text-gray-600 md:mb-2 dark:text-gray-300">statut :
 
 
+                        @if($response->project->feedbackProjet->etat =="En attente de traitement")
+                        <span class="text-red-300 px-1.5 py-0.5 rounded-lg ">En attente de traitement</span>
+                        @elseif ($response->project->feedbackProjet->etat =="Livré")
+                        <span class="text-green-500 px-1.5 py-0.5 rounded-lg ">Livré</span>
 
+                        @elseif ($response->project->feedbackProjet->etat =="En cours de préparation")
+                        <span class="text-red-200 px-1.5 py-0.5 rounded-lg ">En cours de préparation</span>
+                        @else
+                        <span class="bg-red-500 px-1.5 py-0.5 rounded-lg ">En transit</span>
+                        @endif
 
 
 
@@ -137,29 +146,53 @@
                 <!-- Options supplémentaires -->
                 <div class="px-6 py-4 bprojet-t bprojet-gray-200">
                     <p class="mb-2 text-lg text-gray-800">Options supplémentaires</p>
-                    <div class="flex flex-col justify-end gap-4 md:flex-row">
-                        @if (empty($projet->transaction))
-                        <div>
+                    <div class="flex flex-col justify-end gap-2 md:flex-row">
 
-                            <x-button href="{{route('ProjetCheckout',['idP'=>$response->id,'id'=>
+                        <div class="flex gap-2 lg:flex-row">
+
+
+                            @empty($projet->transaction)
+                            <div class="lg:w-1/2">
+
+                                <x-button href="{{route('ProjetCheckout',['idP'=>$response->id,'id'=>
                                     $response->project->id])}}" primary label="Proceder Au
                                                                 Paiement"> </x-button>
 
-                        </div>
+                            </div>
 
-                        @endif
-
-
+                            @endempty
 
 
-                        <div>
-                            <x-button wire:click="conversation()" spinner="conversation()" label="contacter"></x-button>
-                        </div>
+                            @if($projet->feedbackProjet->etat=="Livré")
 
-                        <div>
-                            <x-button wire:click="$toggle('confirmModal')" negative label="Annuler la mission">
-                            </x-button>
+                            @if(empty($projet->feedbackProjet->satisfaction) ||
+                            empty($projet->feedbackProjet->commentaires))
+                            <div class="lg:w-1/2">
+                                <x-button wire:click='openModal()' positive class="mr-2" label='Evaluer' />
 
+                            </div>
+
+                            @else
+
+                            <div class="lg:w-1/2">
+                                <x-button wire:click='openModal()' positive class="mr-2" label='REvaluer' />
+
+                            </div>
+                            @endif
+
+                            @endif
+
+                            <div class="lg:w-1/2">
+                                <x-button wire:click="conversation()" spinner="conversation()" label="contacter">
+                                </x-button>
+                            </div>
+
+                            <div class="lg:w-full">
+                                <x-button wire:click="$toggle('confirmModal')" negative label="Annuler la mission">
+                                </x-button>
+
+
+                            </div>
 
                         </div>
 
@@ -187,6 +220,7 @@
                                 </svg>
                             </button>
                         </h1>
+
 
 
 
@@ -455,3 +489,32 @@
     </x-confirmation-modal>
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
 </div>
+
+@push('script')
+
+
+<script>
+    window.addEventListener('rowChatToBottom', event => {
+
+            $('.messages').scrollTop($('.messages')[0].scrollHeight);
+
+        });
+</script>
+
+<script>
+    function updateRating(rating) {
+      document.getElementById('rating').value = rating;
+
+      for (let i = 1; i <= 5; i++) {
+        const star = document.getElementById('star' + i);
+        if (i <= rating) {
+          star.classList.add('text-yellow-400');
+        } else {
+          star.classList.remove('text-yellow-400');
+        }
+      }
+      @this.satisfaction=rating;
+    }
+</script>
+
+@endpush

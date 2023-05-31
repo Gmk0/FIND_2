@@ -1,11 +1,15 @@
 <div>
 
-    <div class="min-h-screen ">
+    <div class="min-h-screen pt-8 ">
 
 
 
 
         <div class="container px-4 mx-auto lg:px-8">
+
+            <div>
+                @include('include.breadcumbFreelance',['securite'=>'securite'])
+            </div>
             <h2 class="mb-8 text-xl font-semibold tracking-wide text-indigo-600 uppercase">Securite</h2>
 
 

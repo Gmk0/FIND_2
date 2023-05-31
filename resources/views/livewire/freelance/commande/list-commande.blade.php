@@ -3,7 +3,7 @@
 
 
     <div>
-        @include('include.breadcumbFreelance',['Commande'=>'Commande'])
+        @include('include.breadcumbFreelance',['commande'=>'Commande'])
     </div>
     <div class="mx-4 mb-4">
         <h1 class='text-2xl text-gray-800'>Commande</h1>
@@ -19,7 +19,7 @@
             </div>
 
             <div
-                class="flex-1 w-full h-80 p-4 mb-2 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md animate-pulse custom-scrollbar">
+                class="flex-1 w-full p-4 mb-2 overflow-y-auto text-xs bg-gray-200 border-r border-indigo-300 rounded-md h-80 animate-pulse custom-scrollbar">
 
 
 

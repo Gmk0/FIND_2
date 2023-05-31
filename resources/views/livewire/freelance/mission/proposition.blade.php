@@ -5,8 +5,12 @@
         x-init="setTimeout(() => { isLoading = false }, 3000) "
         class="flex flex-col min-h-screen px-4 pt-8 mx-auto max-w-7xl">
 
+        <div>
+            @include('include.breadcumbFreelance',['missionAccepter'=>'mission'])
+        </div>
+
         <div class="mx-4 mb-4">
-            <h1 class='text-2xl text-gray-800'>Mission Accepter</h1>
+            <h1 class='text-2xl text-gray-800'>Mission Traiter</h1>
         </div>
 
         <div x-show="isLoading">

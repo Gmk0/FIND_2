@@ -5,8 +5,7 @@ namespace App\Http\Livewire\Freelance\Mission;
 use Livewire\Component;
 use App\Models\freelance;
 use App\Models\Project;
-
-
+use App\Models\ProjectResponse;
 use Filament\Tables;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -38,27 +37,29 @@ class Proposition extends Component implements Tables\Contracts\HasTable
     }
 
 
+    public function mount()
+    {
+    }
+
 
 
     protected function getTableQuery(): Builder
     {
-
-        // $freelance = freelance::where('user_id', Auth::user()->id)->first();
         $freelance = auth()->user()->getIdFreelance();
 
-        $project = Project::query();
-        // Créer une requête pour la table "Service"
-        $project->whereHas('projectResponses', function ($query) use ($freelance) {
-            $query->where('freelance_id', $freelance)
-                ->where('status', 'accepter');
-        })->get();
+        $ProjectResponse = ProjectResponse::query();
 
+        $ProjectResponse->where('freelance_id', $freelance)->where('status', 'accepter')->get();
 
-        // Ajouter une condition pour l'utilisateur connecté
+        // Créer une requête pour la table "Project"
+
 
         // Retourner la requête
-        return $project;
+
+
+        return $ProjectResponse;
     }
+
 
     protected function getTableColumns(): array
     {
@@ -66,10 +67,10 @@ class Proposition extends Component implements Tables\Contracts\HasTable
 
             Split::make([
                 //Tables\Columns\TextColumn::make('id')->description(' id'),
-                Tables\Columns\TextColumn::make('user.name')->description('client'),
-                Tables\Columns\TextColumn::make('title')->description('service'),
-                Tables\Columns\TextColumn::make('project.')->description('budjet'),
-                BadgeColumn::make('status')
+                Tables\Columns\TextColumn::make('project.user.name')->description('client'),
+                Tables\Columns\TextColumn::make('project.title')->description('service'),
+                Tables\Columns\TextColumn::make('bid_amount')->description('budget'),
+                BadgeColumn::make('project.status')
                     ->enum([
                         'completed' => 'Finis',
                         'active' => 'en cours',
@@ -80,12 +81,23 @@ class Proposition extends Component implements Tables\Contracts\HasTable
                         'success' => static fn ($state): bool => $state === 'completed',
                         'danger' => static fn ($state): bool => $state === 'inactive',
                     ]),
+                BadgeColumn::make('is_paid')
+                    ->enum([
+                        'payer' => 'payer',
+                        'rejecter' => 'en attente',
+                        'rejecter' => 'rejecter',
+                    ])->colors([
+
+                        'warning' => static fn ($state): bool => $state === 'en attente',
+                        'success' => static fn ($state): bool => $state === 'payer',
+                        'danger' => static fn ($state): bool => $state === 'rejecter',
+                    ])->description('Paiment'),
             ]),
             Panel::make([
                 Stack::make([
 
-                    Tables\Columns\TextColumn::make('end_project'),
-                    Tables\Columns\TextColumn::make('description'),
+                    Tables\Columns\TextColumn::make('project.end_project'),
+                    Tables\Columns\TextColumn::make('project.description'),
 
                 ]),
             ])->collapsible(),
@@ -102,7 +114,7 @@ class Proposition extends Component implements Tables\Contracts\HasTable
         return [
             // ...
             Action::make('Voir')
-                ->url(fn (Project $record): string => route('freelance.proposition.accepted', $record->id))
+                ->url(fn (ProjectResponse $record): string => route('freelance.proposition.accepted', $record->id))
                 // ->openUrlInNewTab()
                 ->icon('heroicon-s-pencil')
                 ->tooltip('Voir les services'),

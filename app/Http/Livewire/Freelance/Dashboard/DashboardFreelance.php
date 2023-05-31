@@ -12,6 +12,7 @@ use App\Models\Notification;
 use Carbon\Carbon;
 use WireUi\Traits\Actions;
 use App\Events\OrderCreated;
+use App\Models\ProjectResponse;
 
 class DashboardFreelance extends Component
 {
@@ -62,6 +63,8 @@ class DashboardFreelance extends Component
         })->where('status', 'completed')->whereBetween('created_at', [$dateDebut, $dateFin])
             ->sum('total_amount');
 
+        $projet = ProjectResponse::where('freelance_id', $freelance_id)->where('is_paid', 'payer')->sum('bid_amount');
+
         // Calculer le total de tous les montants des transactions trouvées
         /* $transactions = $transactions->map(function ($transaction) {
             $transaction->total_amount = $transaction->total_amount;
@@ -69,7 +72,7 @@ class DashboardFreelance extends Component
         }); */
 
         // Calculer le total de tous les montants des transactions trouvées
-        $total = '$' . number_format($transactions, 2, ',', ' ');
+        $total = '$' . number_format($transactions + $projet, 2, ',', ' ');
         return $total;
     }
 

@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('order_numero')->unique();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('service_id')->nullable()->constrained();
+            $table->foreignId('user_id');
+            $table->foreignId('service_id')->nullable();
             //$table->foreignId('freelance_id')->nullable()->constrained();
             //$table->foreignId('project_id')->nullable()->constrained();
             $table->enum('type', ["freelance", "service", "Mission"])->nullable();

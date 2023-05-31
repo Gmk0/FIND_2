@@ -91,7 +91,7 @@
     <li x-data="{ linkHover: false, linkActive: false }" class="relative px-6 py-3">
 
         <button
-            class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+            class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 text-gray-800 dark:hover:text-gray-200"
             @click="linkActive=!linkActive" aria-haspopup="true">
             <span class="inline-flex items-center">
                 <ion-icon name="mail-outline" class="w-6 h-6"></ion-icon>

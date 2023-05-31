@@ -79,6 +79,37 @@
     </script>
 
 
+    @if($errors->has('requete'))
+    <script>
+        setTimeout(function() {
+        Swal.fire({
+      title: "Erreur de validation",
+    text: "La requête envoyée n\'est pas valide",
+    icon: "error"
+        });
+        }, 2000); // Temps
+    </script>
+    @endif
+
+
+    <script>
+        window.addEventListener('error', event=> {
+        Swal.fire({
+        // position: 'top-end',
+        icon:'error',
+        //toast: true,
+        title:"operation echoueé",
+        text:event.detail.message,
+        showConfirmButton: true,
+
+        timer:5000
+
+        })
+
+        });
+    </script>
+
+
     @livewire('livewire-ui-spotlight')
 
 

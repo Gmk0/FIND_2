@@ -68,7 +68,7 @@ Route::group(['prefix' => "freelance"], function () {
             Route::get('/', \App\Http\Livewire\Freelance\Mission\MissionList::class)->name('freelance.projet.list');
 
             Route::get('/mission_accepted', \App\Http\Livewire\Freelance\Mission\Proposition::class)->name('freelance.proposition');
-            Route::get('/mission_accepted/{id}', \App\Http\Livewire\Freelance\Mission\MissionWork::class)->name('freelance.proposition.accepted');
+            Route::get('/mission_accepted/{id}', [ProjetController::class, 'ProjeViewFreealance'])->name('freelance.proposition.accepted');
             Route::get('/{id}', [ProjetController::class, 'ProjeViewFreelance'])->name('freelance.projet.view');
         });
         /* Route::view('/', 'freelancer.dashboard');

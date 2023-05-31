@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire\User\Projet;
 
+use App\Events\FeedbackSend;
 use App\Models\Project;
 use App\Models\ProjectResponse;
 use Livewire\Component;
 use App\Models\Conversation;
 use App\Models\Message;
+use App\Events\ProgressOrderEvent;
+use App\Models\FeedbackService;
 
 class ProjetEvolutionUser extends Component
 {
@@ -26,6 +29,20 @@ class ProjetEvolutionUser extends Component
     public $confirmModal;
 
 
+    public function  getListeners()
+    {
+
+        $auth_id = auth()->user()->id;
+        return [
+
+            "echo-private:notify.{$auth_id},ProgressOrderEvent" => '$refresh', //
+
+
+
+        ];
+    }
+
+
     public function AnnulerCommande()
     {
         $this->confirmModal = false;
@@ -41,6 +58,40 @@ class ProjetEvolutionUser extends Component
         $this->freelance_id
             = $this->response->freelance_id;
     }
+
+    public function openModal()
+    {
+        $this->modal = true;
+    }
+
+    public function sendFeedback()
+    {
+
+
+        $data = FeedbackService::where('project_id', $this->response->project->id)->first();
+        $data->satisfaction = $this->satisfaction ? $this->satisfaction : 2;
+        $data->commentaires = $this->feedback['description'];
+
+        $user = $this->response->freelance->user;
+        $data->update();
+        $data->notifyFreelanceProjet($user);
+
+
+        $this->modal = false;
+        $this->reset('satisfaction', 'feedback');
+
+        $this->notification()->success(
+            $title = "Feedback envoyer ",
+            $description = 'Votre notes a ete envoyer avec success',
+        );
+
+        $id = $this->response->freelance->user->id;
+
+
+        event(new FeedbackSend($data, $user->id));
+        // dd($this->feedback, $this->satisfaction);
+    }
+
 
     public function conversation()
     {

@@ -1,6 +1,3 @@
-@extends('layouts.freelanceTest2')
+<x-freelance-profile>
 
-
-@section('content')
-
-@endsection
+</x-freelance-profile>

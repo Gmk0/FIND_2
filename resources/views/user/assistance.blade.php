@@ -46,6 +46,25 @@
                                 en ligne</a>
                         </div>
                     </div>
+                    <div class="w-full h-48 px-4 mt-4 mb-8 lg:w-1/2">
+                        <div class="p-6 bg-white rounded-lg shadow-lg">
+                            <h3 class="mb-4 text-xl font-semibold text-gray-800">Comportement inapproprié </h3>
+                            <p class="mb-4 text-gray-700 dark:text-gray-300">Si vous souhaitez signaler un comportement
+                                inapproprié, veuillez cliquer sur le bouton ci-dessous pour être redirigé
+                                vers notre support via WhatsApp. Notre équipe sera là pour vous assister et recueillir
+                                les informations nécessaires
+                                concernant le problème que vous avez rencontré. Nous vous remercions de nous aider à
+                                maintenir un environnement sûr et
+                                respectueux pour tous nos utilisateurs..</p>
+
+                            <a href="https://wa.me/+243844720350" target="_blank" rel="noopener noreferrer"
+                                class="flex items-center justify-center hover:bg-green-600">
+
+
+                                Accéder au support via WhatsApp
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

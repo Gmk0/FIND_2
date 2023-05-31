@@ -15,7 +15,7 @@
 
                 @forelse($proposition as $proposition)
                 <li>
-                    <a href="#" class="block bg-white ">
+                    <a href="#" class="block bg-gray-200 dark:bg-gray-800 ">
                         <div class="px-4 py-4 sm:px-6">
                             <div class="flex items-center justify-between">
                                 <p class="text-sm font-medium text-indigo-600 truncate">Titre de la proposition</p>
@@ -26,7 +26,7 @@
 
                                     @else
                                     <span
-                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-gray-800 bg-green-100 rounded-full">No
+                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-gray-800 dark:text-gray-700 bg-green-100 rounded-full">No
                                         Disponible</span>
                                     @endif
                                 </div>
@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="px-4 py-4 bg-gray-50 dark:bg-gray-800 sm:px-4">
+                        <div class="px-4 py-4 bg-gray-200 dark:bg-gray-800 sm:px-4">
                             <div class="text-sm font-medium text-indigo-600 truncate">Description de la proposition
                             </div>
                             <div class="mt-2 text-sm text-gray-500">
@@ -73,9 +73,9 @@
                             </div>
                         </div>
                         @if($proposition->status=="accepter")
-                        <div class="flex gap-4 px-4 py-4 bg-gray-50 dark:bg-gray-700">
+                        <div class="flex gap-4 px-4 py-4 bg-gray-200 dark:bg-gray-800">
                             <div class="p-2">
-                                <h1 class="text-gray-800">Vous avez accepter cette proposiotion </h1>
+                                <h1 class="text-gray-800">Vous avez accepter cette proposition </h1>
                             </div>
                             <div>
                                 <x-button href="{{route('projetEvolution',['idP'=>$proposition->id,'id'=>
@@ -87,9 +87,11 @@
                         @else
 
 
-                        <div class="flex gap-4 px-4 py-4 dark:bg-gray-800 bg-gray-50">
-                            <x-button wire:click="refuser('{{$proposition->id}}')" sm danger label="Rejeter" />
-                            <x-button wire:click="accepter('{{$proposition->id}}')" sm primary label="Accepter" />
+                        <div class="flex gap-4 px-4 py-4 dark:bg-gray-800 bg-gray-200">
+                            <x-button spinner="refuser" negative wire:click="refuser('{{$proposition->id}}')" sm danger
+                                label="Rejeter" />
+                            <x-button spinner="accepter" wire:click="accepter('{{$proposition->id}}')" sm primary
+                                label="Accepter" />
                         </div>
                         @endif
                     </a>

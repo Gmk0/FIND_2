@@ -137,6 +137,7 @@ Route::get('/service_api', ServicesApi::class)->name('api.services');
 Route::get('/freelance_api', ApiFreelanceGet::class)->name('api.freelance.users');
 
 Route::post('/like', [ToolsController::class, 'like'])->middleware('auth');
+Route::post('/saveContact', [ToolsController::class, 'saveContact'])->name('saveContact');
 
 
 Route::controller(GoogleAuth::class)->group(function () {
