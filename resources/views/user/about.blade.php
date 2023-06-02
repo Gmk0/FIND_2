@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section class="py-24 bg-gray-100 dark:bg-gray-900">
+<section class="pt-8 bg-gray-100 dark:bg-gray-900">
     <div class="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
         <div class="lg:text-center">
             <h2 class="text-base font-semibold tracking-wide text-indigo-600 uppercase">À Propos de FIND</h2>
