@@ -47,7 +47,7 @@
                         </div>
                         <div class="mt-4 divide-y ">
 
-                            @empty(!$methodePaiment->mobile)
+                            @if( isset($methodePaiment->mobile) && !empty($methodePaiment->mobile))
                             @forelse ($methodePaiment->mobile as $key => $value)
                             <div x-data="{linkHover:false}" class="flex justify-between gap-4">
 
@@ -68,7 +68,7 @@
 
                             @endforelse
 
-                            @endempty
+                            @endif
 
 
 
@@ -110,7 +110,7 @@
 
 
             </div>
-            <div class="grid lg:grid-cols-2 mt-10">
+            <div class="grid mt-10 lg:grid-cols-2">
                 <div class="w-full p-4 mb-4 font-semibold bg-white border border-gray-200 rounded-md">
                     <div>
                         <h1>Address de Facturation / Livraison</h1>

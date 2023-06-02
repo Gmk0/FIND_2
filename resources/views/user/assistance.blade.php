@@ -46,7 +46,7 @@
                                 en ligne</a>
                         </div>
                     </div>
-                    <div class="w-full h-48 px-4 mt-4 mb-8 lg:w-1/2">
+                    <div class="w-full px-4 mt-4 mb-8 lg:h-48 lg:w-1/2">
                         <div class="p-6 bg-white rounded-lg shadow-lg">
                             <h3 class="mb-4 text-xl font-semibold text-gray-800">Comportement inapproprié </h3>
                             <p class="mb-4 text-gray-700 dark:text-gray-300">Si vous souhaitez signaler un comportement
