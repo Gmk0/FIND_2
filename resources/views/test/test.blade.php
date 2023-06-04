@@ -1,7 +1,7 @@
-@extends('layouts.freelanceTest')
-
-@section('content')
+<x-user-profile2>
 
 
 
-@endsection
+    @livewire('tools.view-all-notification')
+
+</x-user-profile2>

@@ -171,4 +171,27 @@ class ToolsController extends Controller
         // Retourner une réponse à l'utilisateur
         return redirect()->back()->with(['success_message' => "Contact enregistré avec succès"]);
     }
+
+    public  function redirectActionNotification()
+    {
+    }
+
+    public function voirNotification()
+    {
+        $routeActuelle = request()->route()->getName();
+
+        // Vérifiez si la route actuelle contient le mot "freelance"
+        if (strpos($routeActuelle, 'freelance') !== false) {
+            // Redirigez vers le tableau de bord freelance
+            return redirect()->route('freelance.dashboard');
+        } else {
+            return redirect('/user');
+        }
+
+        // Vérifiez si un utilisateur est connecté
+
+
+        // Autres actions à effectuer si les conditions précédentes ne sont pas remplies
+        // ...
+    }
 }

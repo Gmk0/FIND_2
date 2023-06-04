@@ -139,6 +139,8 @@ Route::get('/freelance_api', ApiFreelanceGet::class)->name('api.freelance.users'
 Route::post('/like', [ToolsController::class, 'like'])->middleware('auth');
 Route::post('/saveContact', [ToolsController::class, 'saveContact'])->name('saveContact');
 
+Route::get('/voir-notification', [ToolsController::class, 'voirNotification'])->name('voirNotification');
+
 
 Route::controller(GoogleAuth::class)->group(function () {
     Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
