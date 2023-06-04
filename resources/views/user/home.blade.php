@@ -2,7 +2,40 @@
 
 @section('content')
 
-<section
+
+<section class="relative dark:bg-gray-800">
+
+
+
+
+    <div class="relative z-10 min-h-screen mx-auto overflow-hidden bg-skin-fill">
+        <img class="absolute inset-0 object-cover w-full h-full " src="images/hero/background2.webp"
+            alt="Find - Freelancer" />
+        <div
+            class="absolute inset-0 transition-colors bg-gradient-to-bl from-skin-hue via-skin-hue to-transparent dark:from-gray-800 dark:via-gray-800">
+        </div>
+
+        <div class="relative max-w-2xl px-4 py-16 mx-auto text-center sm:py-20 sm:px-6 lg:px-8">
+            <h1
+                class="mb-8  font-extrabold md:mb-0 text-skin-base  leading-snug text-4xl lg:text-[40px] xl:text-[42px]">
+                <span class="block">{{ __('messages.title') }}</span>
+
+            </h1>
+
+
+            @livewire('tools.search-home')
+        </div>
+        <div>
+
+
+        </div>
+    </div>
+
+
+
+</section>
+
+{{--<section
     class="relative grid grid-cols-1 gap-8 px-4 py-16 overflow-hidden lg:py-0 lg:min-h-screen text-neutral-50 2xl:px-60 lg:grid-cols-12 bg-skin-fill dark:bg-gray-800">
     <div
         class="[mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] absolute bottom-[-100px] md:w-[800px] md:h-[800px] lg:top-[120px] lg:right-[-100px] xl:right-0 w-[500px] h-[500px] 2xl:w-[1026px] 2xl:h-[1026px]">
@@ -93,7 +126,7 @@
 
 
     </div>
-</section>
+</section>--}}
 
 
 
